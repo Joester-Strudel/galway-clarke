@@ -1,0 +1,38 @@
+{% extends 'admin/base.html' %} {% load i18n dashboard_stats %}
+
+<!-- Title -->
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{
+site_title|default:_('Django site admin') }}{% endblock %}
+<!-- End Title -->
+
+<!-- Branding -->
+{% block branding %} {% include "unfold/helpers/site_branding.html" %} {% endblock %}
+<!-- End Branding -->
+
+<!-- Content -->
+{% block content %} {% non_staff_user_count as non_staff_count %}
+
+<div class="flex flex-col gap-6">
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div
+      class="rounded-xl border border-base-200 p-5 shadow-sm dark:border-base-800 dark:bg-base-900"
+    >
+      <p class="text-sm font-medium text-base-500 dark:text-base-400">
+        {% trans "Organizations" %}
+      </p>
+      <p class="mt-2 text-3xl font-semibold text-primary-600 dark:text-primary-500">
+        {{ non_staff_count }}
+      </p>
+    </div>
+    <div
+      class="rounded-xl border border-base-200 p-5 shadow-sm dark:border-base-800 dark:bg-base-900"
+    >
+      <p class="text-sm font-medium text-base-500 dark:text-base-400">{% trans "Users" %}</p>
+      <p class="mt-2 text-3xl font-semibold text-primary-600 dark:text-primary-500">
+        {{ non_staff_count }}
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+<!-- End Content -->

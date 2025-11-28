@@ -1,0 +1,110 @@
+/* Additional Tailwind-like utilities for Unfold.
+   Extend this file with any classes you need that are missing from Unfold's compiled CSS. */
+
+.grid {
+    display: grid;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .xl\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.p-5 {
+    padding: 1.25rem;
+}
+
+.rounded-xl {
+    border-radius: 0.75rem;
+}
+
+.border {
+    border-width: 1px;
+}
+
+.border-base-200 {
+    border-color: var(--color-base-200, #e5e7eb);
+}
+
+.dark .dark\:border-base-800 {
+    border-color: var(--color-base-800, #1f2937);
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.dark .dark\:bg-base-900 {
+    background-color: var(--color-base-900, #111827);
+}
+
+.shadow-sm {
+    box-shadow:
+        0 1px 2px 0 rgb(0 0 0 / 0.05),
+        0 1px 3px 0 rgb(0 0 0 / 0.05);
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.text-base-500 {
+    color: var(--color-base-500, #6b7280);
+}
+
+.dark .dark\:text-base-400 {
+    color: var(--color-base-400, #9ca3af);
+}
+
+.text-primary-600 {
+    color: var(--color-primary-600, #7c3aed);
+}
+
+.dark .dark\:text-primary-500 {
+    color: var(--color-primary-500, #8b5cf6);
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.gap-6 {
+    gap: 1.5rem;
+}
