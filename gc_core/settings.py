@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # First-Party Apps (placed first so their templates override defaults)
+    # First-Party Apps (templates override below)
     "gc_dashboard",
     "gc_users",
     # Third-Party Apps
@@ -119,7 +119,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# Set server time to Eastern US (New York)
+TIME_ZONE = "America/New_York"
 
 USE_I18N = True
 
@@ -174,6 +175,16 @@ UNFOLD = {
                         "title": "Groups",
                         "icon": "group",
                         "link": "/admin/auth/group/",
+                    },
+                    {
+                        "title": "API Keys",
+                        "icon": "key",
+                        "link": "/admin/gc_users/apikey/",
+                    },
+                    {
+                        "title": "API Logs",
+                        "icon": "list_alt",
+                        "link": "/admin/gc_users/apilog/",
                     },
                 ],
             },

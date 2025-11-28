@@ -14,7 +14,6 @@ from simple_history.admin import SimpleHistoryAdmin
 from ..models import ApiKey
 
 
-
 @admin.register(ApiKey)
 class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
@@ -51,7 +50,9 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
 
     # Custom method to display a masked API key for security
     def masked_key(self, obj):
-        return format_html("<code>{}********</code>", obj.key[:8]) if obj.key else "No Key"
+        return (
+            format_html("<code>{}********</code>", obj.key[:8]) if obj.key else "No Key"
+        )
 
     masked_key.short_description = "API Key"
 
@@ -101,10 +102,10 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                 {
                     "value": obj.name,
                     "size": "large",
-                }
+                },
             )
         )
-    
+
     @display(description="Start Date", ordering="start_date")
     def formatted_start_date(self, obj):
         return mark_safe(
@@ -113,10 +114,10 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                 {
                     "value": obj.start_date,
                     "size": "small",
-                }
+                },
             )
         )
-    
+
     @display(description="End Date", ordering="end_date")
     def formatted_end_date(self, obj):
         return mark_safe(
@@ -125,7 +126,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                 {
                     "value": obj.end_date,
                     "size": "small",
-                }
+                },
             )
         )
 
@@ -141,10 +142,12 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "label": "Inactive",
                 "icon": "radio_button_unchecked",
                 "color": "red",
-            }        
+            },
         }
 
-        option = display_options.get(obj.active, display_options[False])  # Default to "Inactive"
+        option = display_options.get(
+            obj.active, display_options[False]
+        )  # Default to "Inactive"
 
         return mark_safe(
             render_to_string(
@@ -152,11 +155,11 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                 {
                     "label": option["label"],
                     "icon": option["icon"],
-                    "color": option["color"]
-                }
+                    "color": option["color"],
+                },
             )
         )
-    
+
     @display(description="IP Address", ordering="ip_address")
     def formatted_ip_address(self, obj):
         return mark_safe(
@@ -165,10 +168,10 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                 {
                     "value": obj.ip_address,
                     "size": "small",
-                }
+                },
             )
         )
-    
+
     @display(description="Routes")
     def formatted_route_count(self, obj):
         route_count = obj.routes.count()
@@ -191,6 +194,6 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                     "label": label,
                     "icon": "route",
                     "color": color,
-                }
+                },
             )
         )

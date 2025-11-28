@@ -108,3 +108,8 @@
 .gap-6 {
     gap: 1.5rem;
 }
+
+/* Custom color utilities */
+.bg-fuchsia-800 {
+    background-color: #86198f;
+}

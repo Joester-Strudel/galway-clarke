@@ -37,7 +37,6 @@ class ApiLogAdmin(SimpleHistoryAdmin, ModelAdmin):
         "ip_address__icontains",
         "message__icontains",
     ]
-    date_hierarchy = "created_at"
     empty_value_display = "-"
     show_facets = True
 
@@ -206,11 +205,17 @@ class ApiLogAdmin(SimpleHistoryAdmin, ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request)
 
-    def message_user(self, request, message, level=None, extra_tags="", fail_silently=False):
+    def message_user(
+        self, request, message, level=None, extra_tags="", fail_silently=False
+    ):
         super().message_user(request, message, level, extra_tags, fail_silently)
 
-    def get_paginator(self, request, queryset, per_page, orphans=0, allow_empty_first_page=True):
-        return super().get_paginator(request, queryset, per_page, orphans, allow_empty_first_page)
+    def get_paginator(
+        self, request, queryset, per_page, orphans=0, allow_empty_first_page=True
+    ):
+        return super().get_paginator(
+            request, queryset, per_page, orphans, allow_empty_first_page
+        )
 
     def response_add(self, request, obj, post_url_continue=None):
         return super().response_add(request, obj, post_url_continue)
@@ -264,23 +269,29 @@ class ApiLogAdmin(SimpleHistoryAdmin, ModelAdmin):
         404: {"name": _("Not Found"), "icon": "travel_explore", "color": "orange"},
         500: {"name": _("Internal Server Error"), "icon": "error", "color": "red"},
         502: {"name": _("Bad Gateway"), "icon": "exchange", "color": "red"},
-        503: {"name": _("Service Unavailable"), "icon": "hourglass-half", "color": "red"},
+        503: {
+            "name": _("Service Unavailable"),
+            "icon": "hourglass-half",
+            "color": "red",
+        },
     }
 
     @display(description=_("Status"), ordering="status_code")
     def formatted_status_code(self, obj):
         """Render the formatted case status as a styled badge."""
         status_info = self.STATUS_CHOICES.get(
-            obj.status_code,
-            {"name": _("Unknown"), "icon": "circle", "color": "gray"}
+            obj.status_code, {"name": _("Unknown"), "icon": "circle", "color": "gray"}
         )
 
         return mark_safe(
-            render_to_string("admin/widgets/badge.html", {
-                "label": status_info["name"],
-                "icon": status_info["icon"],
-                "color": status_info["color"],
-            })
+            render_to_string(
+                "admin/widgets/badge.html",
+                {
+                    "label": status_info["name"],
+                    "icon": status_info["icon"],
+                    "color": status_info["color"],
+                },
+            )
         )
 
     # 7. Media Assets

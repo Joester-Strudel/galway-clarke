@@ -1,6 +1,5 @@
-"""
-Admin module that pulls in admin definitions from the dedicated model_admins
-package so Django's autodiscovery picks them up.
-"""
+# Django Imports
+from django.contrib import admin  # noqa: F401
 
-
+# First-Party Imports
+from . import model_admins  # noqa: F401

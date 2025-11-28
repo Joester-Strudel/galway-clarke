@@ -33,16 +33,13 @@ class GlobalAuth(HttpBearer):
         # 1) Fetch the ApiKey (with prefetch) or fail 401
         # --------------------------
         try:
-            api_key = (
-                ApiKey.objects
-                .prefetch_related("routes")
-                .get(key=token)
-            )
+            api_key = ApiKey.objects.prefetch_related("routes").get(key=token)
         except ApiKey.DoesNotExist:
             request_ip = self._get_request_ip(request)
             logger.warning(
                 "GlobalAuth: API key not found; request_ip=%s; path=%s",
-                request_ip, request.path
+                request_ip,
+                request.path,
             )
             raise HttpError(401, "Authentication failed: API key does not exist.")
 
@@ -85,7 +82,6 @@ class GlobalAuth(HttpBearer):
         request.api_key = api_key
         return api_key
 
-
     def _get_request_ip(self, request):
         """
         Return the “client” IP we’re checking, preferring X-Forwarded-For if present.
@@ -95,15 +91,17 @@ class GlobalAuth(HttpBearer):
             return xff.split(",")[0].strip()
         return request.META.get("REMOTE_ADDR")
 
-
     def _check_active(self, api_key, request):
         """
         Return (True, "", 200) if active. Otherwise, (False, message, 403).
         """
         if not api_key.active:
-            return False, f"Authentication failed: API key '{api_key.name}' is inactive.", 403
+            return (
+                False,
+                f"Authentication failed: API key '{api_key.name}' is inactive.",
+                403,
+            )
         return True, "", 200
-
 
     def _check_date_range(self, api_key, request):
         """
@@ -112,11 +110,18 @@ class GlobalAuth(HttpBearer):
         """
         current_time = now()
         if api_key.start_date and api_key.start_date > current_time:
-            return False, f"Authentication failed: API key '{api_key.name}' not yet valid.", 403
+            return (
+                False,
+                f"Authentication failed: API key '{api_key.name}' not yet valid.",
+                403,
+            )
         if api_key.end_date and api_key.end_date < current_time:
-            return False, f"Authentication failed: API key '{api_key.name}' has expired.", 403
+            return (
+                False,
+                f"Authentication failed: API key '{api_key.name}' has expired.",
+                403,
+            )
         return True, "", 200
-
 
     def _check_route(self, api_key, request):
         """
@@ -127,7 +132,11 @@ class GlobalAuth(HttpBearer):
         permitted = list(api_key.routes.values_list("name", flat=True))
 
         if not permitted:
-            return False, "Authentication failed: No routes permitted for this key.", 403
+            return (
+                False,
+                "Authentication failed: No routes permitted for this key.",
+                403,
+            )
 
         for route_name in permitted:
             if route_name in full_path:
@@ -135,27 +144,29 @@ class GlobalAuth(HttpBearer):
 
         return False, "Authentication failed: No permitted route found.", 403
 
-
     def _check_ip(self, api_key, request):
         """
         If api_key.ip_address is set, require request_ip == api_key.ip_address.
         Otherwise skip the IP‐check.
         """
         xff = request.META.get("HTTP_X_FORWARDED_FOR")
-        request_ip = xff.split(",")[0].strip() if xff else request.META.get("REMOTE_ADDR")
+        request_ip = (
+            xff.split(",")[0].strip() if xff else request.META.get("REMOTE_ADDR")
+        )
 
         if api_key.ip_address and api_key.ip_address != request_ip:
             return False, f"Authentication failed: IP mismatch (got {request_ip}).", 403
 
         return True, "", 200
 
-
     def _log_attempt(self, api_key, message, request, status_code):
         """
         Write a record into your ApiLog table, then emit a Python log line.
         """
         xff = request.META.get("HTTP_X_FORWARDED_FOR")
-        request_ip = xff.split(",")[0].strip() if xff else request.META.get("REMOTE_ADDR")
+        request_ip = (
+            xff.split(",")[0].strip() if xff else request.META.get("REMOTE_ADDR")
+        )
 
         ApiLog.objects.create(
             api_key=api_key,
