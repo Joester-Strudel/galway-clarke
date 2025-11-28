@@ -16,9 +16,9 @@ class GcUserAdmin(SimpleHistoryAdmin, ModelAdmin):
 
     # 1. Basic Configuration
     list_display = [
-        "email",
         "first_name",
         "last_name",
+        "email",
         "is_staff",
         "is_active",
         "date_joined",
@@ -45,10 +45,9 @@ class GcUserAdmin(SimpleHistoryAdmin, ModelAdmin):
             {
                 "classes": ["tab"],
                 "fields": [
-                    "email",
-                    "password",
                     "first_name",
                     "last_name",
+                    "email",
                     "date_joined",
                 ],
             },
