@@ -10,4 +10,4 @@ admin.site.site_title = "Galway Clarke"
 admin.site.index_title = "Galway Clarke"
 
 # Ensure admin classes are registered
-from .model_admins.user_model_admin import GcUserAdmin
+from .model_admins.gc_user_admin import GcUserAdmin

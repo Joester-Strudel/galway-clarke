@@ -141,6 +141,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 UNFOLD = {
     "SITE_TITLE": "Galway Clarke",
     "SITE_HEADER": "Galway Clarke",
+    "COLORS": {
+        "primary": {
+            "50": "#ecfdf3",
+            "100": "#d1fae4",
+            "200": "#a7f3c8",
+            "300": "#6ee7a0",
+            "400": "#34d57c",
+            "500": "#16c066",
+            "600": "#109256",
+            "700": "#0b6c45",
+            "800": "#0a5a3a",
+            "900": "#094c31",
+            "950": "#042c1c",
+        },
+    },
     "STYLES": [
         "/static/gc_dashboard/dashboard.css",
     ],
