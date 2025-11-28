@@ -1,22 +1,11 @@
-# Python Imports
-import uuid
-
 # Django Imports
 from django.db import models
 
-# Third-Party Imports
-from simple_history.models import HistoricalRecords
+# First-Party Imports
+from gc_core.models.simple_base_model import SimpleBaseModel
 
 
-class ApiRoute(models.Model):
-    # Fields
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        null=False,
-        blank=False,
-        editable=False,
-    )
+class ApiRoute(SimpleBaseModel):
     name = models.CharField(
         max_length=255,
         unique=True,
@@ -24,19 +13,6 @@ class ApiRoute(models.Model):
         null=False,
         verbose_name="Name",
         help_text="A human-readable name for this API key.",
-    )
-
-    # Metadata
-    history = HistoricalRecords()
-    created = models.DateTimeField(
-        auto_now_add=True,
-        editable=False,
-        verbose_name="Created",
-    )
-    last_updated = models.DateTimeField(
-        auto_now=True,
-        editable=False,
-        verbose_name="Last Updated",
     )
 
     # Model Methods

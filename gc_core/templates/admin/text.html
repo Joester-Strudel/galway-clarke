@@ -1,0 +1,11 @@
+{% if value %} {% if size == "small" %}
+<span class="inline-block w-[200px] overflow-hidden whitespace-nowrap"> {{ value }} </span>
+{% elif size == "medium" %}
+<span class="inline-block w-[300px] overflow-hidden whitespace-nowrap"> {{ value }} </span>
+{% elif size == "large" %}
+<span class="inline-block w-[400px] overflow-hidden whitespace-nowrap"> {{ value }} </span>
+{% else %}
+<span class="inline-block w-[200px] overflow-hidden whitespace-nowrap"> {{ value }} </span>
+{% endif %} {% else %}
+<span class="inline-block w-[200px] overflow-hidden whitespace-nowrap"> -- </span>
+{% endif %}

@@ -1,23 +1,14 @@
 # Python Imports
-import uuid
 import secrets
 
 # Django Imports
 from django.db import models
 
-# Third-Party Imports
-from simple_history.models import HistoricalRecords
+# First-Party Imports
+from gc_core.models import HistoryBaseModel
 
 
-class ApiKey(models.Model):
-    # Fields
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        null=False,
-        blank=False,
-        editable=False,
-    )
+class ApiKey(HistoryBaseModel):
     name = models.CharField(
         max_length=255,
         blank=False,
@@ -32,12 +23,6 @@ class ApiKey(models.Model):
         null=False,
         verbose_name="API Key",
         help_text="The unique API key used for authentication.",
-    )
-    tenants = models.ManyToManyField(
-        "ri_tenants.Tenant",
-        blank=True,
-        verbose_name="Tenants",
-        help_text="The tenants associated with this API key.",
     )
     ip_address = models.GenericIPAddressField(
         blank=True,
@@ -63,22 +48,9 @@ class ApiKey(models.Model):
         help_text="Indicates whether this API key is currently active.",
     )
     routes = models.ManyToManyField(
-        "ri_users.ApiRoute",
+        "gc_users.ApiRoute",
         blank=True,
         verbose_name="Allowed Routes",
-    )
-
-    # Metadata
-    history = HistoricalRecords()
-    created = models.DateTimeField(
-        auto_now_add=True,
-        editable=False,
-        verbose_name="Created",
-    )
-    last_updated = models.DateTimeField(
-        auto_now=True,
-        editable=False,
-        verbose_name="Last Updated",
     )
 
     # Model Methods
@@ -86,18 +58,14 @@ class ApiKey(models.Model):
         return self.name
 
     def regenerate_keys(self):
-        """
-        Regenerate both the API key and secret key.
-        """
+        """Regenerate the API key."""
         self.key = secrets.token_urlsafe(48)
         self.save()
 
     def save(self, *args, **kwargs):
-        """
-        Ensure key and secret are generated on creation.
-        """
+        """Generate API key on creation."""
         if not self.key:
-            self.key = secrets.token_urlsafe(48)  # Generates a secure 64-character API key
+            self.key = secrets.token_urlsafe(48)
         super().save(*args, **kwargs)
 
     class Meta:

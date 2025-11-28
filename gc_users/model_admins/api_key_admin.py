@@ -5,12 +5,17 @@ from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from django.db import models
 from django.forms import CheckboxSelectMultiple
+from django.contrib import admin
 
 # Third-Party Imports
 from unfold.admin import ModelAdmin, display
 from simple_history.admin import SimpleHistoryAdmin
 
+from ..models import ApiKey
 
+
+
+@admin.register(ApiKey)
 class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
     list_display = [
@@ -22,22 +27,25 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
         "formatted_ip_address",
     ]
     list_filter = [
+        "active",
         "start_date",
         "end_date",
-        "created",
+        "created_at",
     ]
     search_fields = [
         "name",
         "key",
+        "ip_address",
     ]
     ordering = [
-        "-created",
+        "-created_at",
     ]
     readonly_fields = [
         "id",
         "key",
-        "created",
-        "last_updated",
+        "created_at",
+        "last_updated_at",
+        "created_by",
         "masked_key",
     ]
 
@@ -60,8 +68,8 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                     "active",
                     "start_date",
                     "end_date",
-                    "tenants",
                     "routes",
+                    "masked_key",
                 ],
             },
         ),
@@ -71,8 +79,9 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "classes": ["tab"],
                 "fields": [
                     "id",
-                    "created",
-                    "last_updated",
+                    "created_at",
+                    "last_updated_at",
+                    "created_by",
                 ],
             },
         ),
@@ -100,7 +109,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_start_date(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/widgets/text.html",
+                "gc_core/admin/widgets/text.html",
                 {
                     "value": obj.start_date,
                     "size": "small",
@@ -112,7 +121,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_end_date(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/widgets/text.html",
+                "gc_core/admin/widgets/text.html",
                 {
                     "value": obj.end_date,
                     "size": "small",
@@ -139,7 +148,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
 
         return mark_safe(
             render_to_string(
-                "admin/widgets/badge.html",
+                "gc_core/admin/widgets/badge.html",
                 {
                     "label": option["label"],
                     "icon": option["icon"],
@@ -152,7 +161,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_ip_address(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/widgets/text.html",
+                "gc_core/admin/widgets/text.html",
                 {
                     "value": obj.ip_address,
                     "size": "small",
@@ -177,7 +186,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
 
         return mark_safe(
             render_to_string(
-                "admin/widgets/badge.html",
+                "gc_core/admin/widgets/badge.html",
                 {
                     "label": label,
                     "icon": "route",
