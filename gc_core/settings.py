@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # First-Party Apps
     "gc_users",
     "gc_core",
+    "gc_collections",
 ]
 
 MIDDLEWARE = [
@@ -165,6 +166,61 @@ UNFOLD = {
     "SIDEBAR": {
         "show_all_applications": True,
         "navigation": [
+            {
+                "title": "Art and Architecture Terminiology",
+                "items": [
+                    {
+                        "title": "Subjects",
+                        "icon": "category",
+                        "link": "/admin/gc_collections/aatsubject/",
+                    },
+                    {
+                        "title": "Subject Contributors",
+                        "icon": "group_add",
+                        "link": "/admin/gc_collections/aatsubjectcontributor/",
+                    },
+                    {
+                        "title": "Subject Sources",
+                        "icon": "source",
+                        "link": "/admin/gc_collections/aatsubjectsource/",
+                    },
+                    {
+                        "title": "Associative Relationships",
+                        "icon": "link",
+                        "link": "/admin/gc_collections/aatassociativerelationship/",
+                    },
+                    {
+                        "title": "Terms",
+                        "icon": "label",
+                        "link": "/admin/gc_collections/aatterm/",
+                    },
+                    {
+                        "title": "Term Contributors",
+                        "icon": "diversity_3",
+                        "link": "/admin/gc_collections/aattermcontributor/",
+                    },
+                    {
+                        "title": "Term Sources",
+                        "icon": "menu_book",
+                        "link": "/admin/gc_collections/aattermsource/",
+                    },
+                    {
+                        "title": "Notes",
+                        "icon": "note",
+                        "link": "/admin/gc_collections/aatnote/",
+                    },
+                    {
+                        "title": "Note Contributors",
+                        "icon": "record_voice_over",
+                        "link": "/admin/gc_collections/aatnotecontributor/",
+                    },
+                    {
+                        "title": "Note Sources",
+                        "icon": "library_books",
+                        "link": "/admin/gc_collections/aatnotesource/",
+                    },
+                ],
+            },
             {
                 "title": "API",
                 "items": [

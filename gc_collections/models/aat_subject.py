@@ -49,3 +49,8 @@ class AATSubject(SimpleBaseModel):
     # Model Methods
     def __str__(self):
         return self.aat_id
+
+    # Model Metadata
+    class Meta:
+        verbose_name = "AAT Subject"
+        verbose_name_plural = "AAT Subjects"

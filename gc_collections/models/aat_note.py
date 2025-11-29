@@ -20,3 +20,8 @@ class AATNote(SimpleBaseModel):
     # Model Methods
     def __str__(self):
         return f"{self.note_language}: {self.note_text[:50]}"
+
+    # Model Metadata
+    class Meta:
+        verbose_name = "AAT Note"
+        verbose_name_plural = "AAT Notes"

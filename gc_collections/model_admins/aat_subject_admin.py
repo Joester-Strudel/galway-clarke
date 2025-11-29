@@ -9,6 +9,13 @@ from unfold.admin import ModelAdmin, display
 from simple_history.admin import SimpleHistoryAdmin
 
 # First-Party Imports
+from ..inlines import (
+    AATAssociativeRelationshipInline,
+    AATNoteInline,
+    AATSubjectContributorInline,
+    AATSubjectSourceInline,
+    AATTermInline,
+)
 from ..models import AATSubject
 
 
@@ -42,6 +49,14 @@ class AATSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
         "created_at",
         "last_updated_at",
         "created_by",
+    ]
+
+    inlines = [
+        AATTermInline,
+        AATNoteInline,
+        AATSubjectContributorInline,
+        AATSubjectSourceInline,
+        AATAssociativeRelationshipInline,
     ]
 
     # Fieldsets for better organization
@@ -111,7 +126,9 @@ class AATSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
             )
         )
 
-    @display(description="Parent Relationship Type", ordering="parent_relationship_type")
+    @display(
+        description="Parent Relationship Type", ordering="parent_relationship_type"
+    )
     def formatted_parent_relationship_type(self, obj):
         return mark_safe(
             render_to_string(

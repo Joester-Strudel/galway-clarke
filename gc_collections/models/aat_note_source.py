@@ -19,3 +19,8 @@ class AATNoteSource(SimpleBaseModel):
     # Model Methods
     def __str__(self):
         return self.source_id
+
+    # Model Metadata
+    class Meta:
+        verbose_name = "AAT Note Source"
+        verbose_name_plural = "AAT Note Sources"

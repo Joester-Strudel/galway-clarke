@@ -30,3 +30,8 @@ class AATTermSource(SimpleBaseModel):
     # Model Methods
     def __str__(self):
         return self.source_id
+
+    # Model Metadata
+    class Meta:
+        verbose_name = "AAT Term Source"
+        verbose_name_plural = "AAT Term Sources"

@@ -25,3 +25,8 @@ class AATTermContributor(SimpleBaseModel):
     # Model Methods
     def __str__(self):
         return self.contributor_id
+
+    # Model Metadata
+    class Meta:
+        verbose_name = "AAT Term Contributor"
+        verbose_name_plural = "AAT Term Contributors"

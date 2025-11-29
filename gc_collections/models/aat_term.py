@@ -63,3 +63,8 @@ class AATTerm(SimpleBaseModel):
     # Model Methods
     def __str__(self):
         return self.term_text
+
+    # Model Metadata
+    class Meta:
+        verbose_name = "AAT Term"
+        verbose_name_plural = "AAT Terms"

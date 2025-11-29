@@ -9,6 +9,7 @@ from unfold.admin import ModelAdmin, display
 from simple_history.admin import SimpleHistoryAdmin
 
 # First-Party Imports
+from ..inlines import AATNoteContributorInline, AATNoteSourceInline
 from ..models import AATNote
 
 
@@ -37,6 +38,11 @@ class AATNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
         "created_at",
         "last_updated_at",
         "created_by",
+    ]
+
+    inlines = [
+        AATNoteContributorInline,
+        AATNoteSourceInline,
     ]
 
     # Fieldsets for better organization

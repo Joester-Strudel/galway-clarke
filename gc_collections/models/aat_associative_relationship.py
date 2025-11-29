@@ -28,3 +28,8 @@ class AATAssociativeRelationship(SimpleBaseModel):
     # Model Methods
     def __str__(self):
         return f"{self.relationship_type} → {self.related_aat_id}"
+    
+    # Model Metadata
+    class Meta:
+        verbose_name = "AAT Associative Relationship"
+        verbose_name_plural = "AAT Associative Relationships"
