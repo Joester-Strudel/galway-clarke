@@ -49,7 +49,8 @@ class HistoryBaseModel(models.Model):
         help_text="User who created this record.",
     )
 
-    history = HistoricalRecords()
+    # inherit=True propagates history to concrete subclasses without warning
+    history = HistoricalRecords(inherit=True)
 
     class Meta:
         abstract = True

@@ -194,6 +194,11 @@ UNFOLD = {
                 "title": "Users and Groups",
                 "items": [
                     {
+                        "title": "Organizations",
+                        "icon": "corporate_fare",
+                        "link": "/admin/gc_users/organization/",
+                    },
+                    {
                         "title": "Users",
                         "icon": "person",
                         "link": "/admin/gc_users/gcuser/",
