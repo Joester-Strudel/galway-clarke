@@ -70,7 +70,6 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
                     "start_date",
                     "end_date",
                     "routes",
-                    "masked_key",
                 ],
             },
         ),
@@ -98,7 +97,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_name(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/widgets/text.html",
+                "admin/text.html",
                 {
                     "value": obj.name,
                     "size": "large",
@@ -110,7 +109,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_start_date(self, obj):
         return mark_safe(
             render_to_string(
-                "gc_core/admin/widgets/text.html",
+                "admin/text.html",
                 {
                     "value": obj.start_date,
                     "size": "small",
@@ -122,7 +121,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_end_date(self, obj):
         return mark_safe(
             render_to_string(
-                "gc_core/admin/widgets/text.html",
+                "admin/text.html",
                 {
                     "value": obj.end_date,
                     "size": "small",
@@ -151,7 +150,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
 
         return mark_safe(
             render_to_string(
-                "gc_core/admin/widgets/badge.html",
+                "admin/badge.html",
                 {
                     "label": option["label"],
                     "icon": option["icon"],
@@ -164,7 +163,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_ip_address(self, obj):
         return mark_safe(
             render_to_string(
-                "gc_core/admin/widgets/text.html",
+                "admin/text.html",
                 {
                     "value": obj.ip_address,
                     "size": "small",
@@ -189,7 +188,7 @@ class ApiKeyAdmin(SimpleHistoryAdmin, ModelAdmin):
 
         return mark_safe(
             render_to_string(
-                "gc_core/admin/widgets/badge.html",
+                "admin/badge.html",
                 {
                     "label": label,
                     "icon": "route",

@@ -31,9 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # First-Party Apps (templates override below)
+    # Priority Apps
     "gc_dashboard",
-    "gc_users",
     # Third-Party Apps
     "unfold",
     "unfold.contrib.filters",
@@ -42,13 +41,16 @@ INSTALLED_APPS = [
     "unfold.contrib.import_export",
     "unfold.contrib.simple_history",
     "simple_history",
-    # Django Contrib Apps
+    # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # First-Party Apps
+    "gc_users",
+    "gc_core",
 ]
 
 MIDDLEWARE = [
@@ -164,6 +166,31 @@ UNFOLD = {
         "show_all_applications": True,
         "navigation": [
             {
+                "title": "API",
+                "items": [
+                    {
+                        "title": "API Keys",
+                        "icon": "key",
+                        "link": "/admin/gc_users/apikey/",
+                    },
+                    {
+                        "title": "API Routes",
+                        "icon": "route",
+                        "link": "/admin/gc_users/apiroute/",
+                    },
+                    {
+                        "title": "API Logs",
+                        "icon": "list_alt",
+                        "link": "/admin/gc_users/apilog/",
+                    },
+                    {
+                        "title": "API Docs",
+                        "icon": "api",
+                        "link": "/api/docs",
+                    },
+                ],
+            },
+            {
                 "title": "Users and Groups",
                 "items": [
                     {
@@ -175,16 +202,6 @@ UNFOLD = {
                         "title": "Groups",
                         "icon": "group",
                         "link": "/admin/auth/group/",
-                    },
-                    {
-                        "title": "API Keys",
-                        "icon": "key",
-                        "link": "/admin/gc_users/apikey/",
-                    },
-                    {
-                        "title": "API Logs",
-                        "icon": "list_alt",
-                        "link": "/admin/gc_users/apilog/",
                     },
                 ],
             },

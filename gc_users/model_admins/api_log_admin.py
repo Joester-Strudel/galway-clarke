@@ -285,7 +285,7 @@ class ApiLogAdmin(SimpleHistoryAdmin, ModelAdmin):
 
         return mark_safe(
             render_to_string(
-                "admin/widgets/badge.html",
+                "admin/badge.html",
                 {
                     "label": status_info["name"],
                     "icon": status_info["icon"],

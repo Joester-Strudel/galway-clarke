@@ -78,6 +78,9 @@ class GlobalAuth(HttpBearer):
         # --------------------------
         # 3) If all checks passed
         # --------------------------
+        # Log successful authentication once per request
+        self._log_attempt(api_key, "Authentication successful.", request, 200)
+
         # Attach the api_key to the request so downstream code can reference it
         request.api_key = api_key
         return api_key
