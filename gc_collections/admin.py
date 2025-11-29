@@ -1,3 +1,5 @@
-from django.contrib import admin
+# Django Imports
+from django.contrib import admin  # noqa: F401
 
-# Register your models here.
+# First-Party Imports
+from . import model_admins  # noqa: F401
