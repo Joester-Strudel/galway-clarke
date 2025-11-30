@@ -173,52 +173,72 @@ UNFOLD = {
                     {
                         "title": "Subjects",
                         "icon": "category",
-                        "link": "/admin/gc_collections/aatsubject/",
+                        "link": "/admin/gc_definitions/aatsubject/",
                     },
                     {
                         "title": "Subject Contributors",
                         "icon": "group_add",
-                        "link": "/admin/gc_collections/aatsubjectcontributor/",
+                        "link": "/admin/gc_definitions/aatsubjectcontributor/",
                     },
                     {
                         "title": "Subject Sources",
                         "icon": "source",
-                        "link": "/admin/gc_collections/aatsubjectsource/",
+                        "link": "/admin/gc_definitions/aatsubjectsource/",
                     },
                     {
                         "title": "Associative Relationships",
                         "icon": "link",
-                        "link": "/admin/gc_collections/aatassociativerelationship/",
+                        "link": "/admin/gc_definitions/aatassociativerelationship/",
                     },
                     {
                         "title": "Terms",
                         "icon": "label",
-                        "link": "/admin/gc_collections/aatterm/",
+                        "link": "/admin/gc_definitions/aatterm/",
                     },
                     {
                         "title": "Term Contributors",
                         "icon": "diversity_3",
-                        "link": "/admin/gc_collections/aattermcontributor/",
+                        "link": "/admin/gc_definitions/aattermcontributor/",
                     },
                     {
                         "title": "Term Sources",
                         "icon": "menu_book",
-                        "link": "/admin/gc_collections/aattermsource/",
+                        "link": "/admin/gc_definitions/aattermsource/",
                     },
                     {
                         "title": "Notes",
                         "icon": "note",
-                        "link": "/admin/gc_collections/aatnote/",
+                        "link": "/admin/gc_definitions/aatnote/",
                     },
                     {
                         "title": "Note Contributors",
                         "icon": "record_voice_over",
-                        "link": "/admin/gc_collections/aatnotecontributor/",
+                        "link": "/admin/gc_definitions/aatnotecontributor/",
                     },
                     {
                         "title": "Note Sources",
                         "icon": "library_books",
-                        "link": "/admin/gc_collections/aatnotesource/",
+                        "link": "/admin/gc_definitions/aatnotesource/",
+                    },
+                ],
+            },
+            {
+                "title": "ISO Languages",
+                "items": [
+                    {
+                        "title": "ISO Languages",
+                        "icon": "translate",
+                        "link": "/admin/gc_definitions/isolanguage/",
+                    },
+                    {
+                        "title": "ISO Language Scopes",
+                        "icon": "layers",
+                        "link": "/admin/gc_definitions/isolanguagescope/",
+                    },
+                    {
+                        "title": "ISO Language Types",
+                        "icon": "category",
+                        "link": "/admin/gc_definitions/isolanguagetype/",
                     },
                 ],
             },
