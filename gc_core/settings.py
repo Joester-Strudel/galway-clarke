@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "gc_users",
     "gc_core",
     "gc_collections",
+    "gc_definitions",
 ]
 
 MIDDLEWARE = [
