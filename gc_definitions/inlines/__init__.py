@@ -11,7 +11,6 @@ from .aat_subject_source_inline import AATSubjectSourceInline
 from .aat_term_contributor_inline import AATTermContributorInline
 from .aat_term_inline import AATTermInline
 from .aat_term_source_inline import AATTermSourceInline
-from .collection_inline import CollectionInline
 
 __all__ = [
     "AATAssociativeRelationshipInline",
@@ -24,5 +23,4 @@ __all__ = [
     "AATTermContributorInline",
     "AATTermInline",
     "AATTermSourceInline",
-    "CollectionInline",
 ]

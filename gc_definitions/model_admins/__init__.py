@@ -9,6 +9,9 @@ from .aat_subject_source_admin import AATSubjectSourceAdmin
 from .aat_term_admin import AATTermAdmin
 from .aat_term_contributor_admin import AATTermContributorAdmin
 from .aat_term_source_admin import AATTermSourceAdmin
+from .iso_language_admin import IsoLanguageAdmin
+from .iso_language_scope_admin import IsoLanguageScopeAdmin
+from .iso_language_type_admin import IsoLanguageTypeAdmin
 
 
 __all__ = [
@@ -22,4 +25,7 @@ __all__ = [
     "AATTermAdmin",
     "AATTermContributorAdmin",
     "AATTermSourceAdmin",
+    "IsoLanguageAdmin",
+    "IsoLanguageScopeAdmin",
+    "IsoLanguageTypeAdmin",
 ]

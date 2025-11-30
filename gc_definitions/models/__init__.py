@@ -9,6 +9,9 @@ from .aat_subject_source import AATSubjectSource
 from .aat_term import AATTerm
 from .aat_term_contributor import AATTermContributor
 from .aat_term_source import AATTermSource
+from .iso_language_scope import IsoLanguageScope
+from .iso_language_type import IsoLanguageType
+from .iso_language import IsoLanguage
 
 
 __all__ = [
@@ -22,4 +25,7 @@ __all__ = [
     "AATTerm",
     "AATTermContributor",
     "AATTermSource",
+    "IsoLanguageScope",
+    "IsoLanguageType",
+    "IsoLanguage",
 ]

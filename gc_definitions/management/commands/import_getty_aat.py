@@ -8,7 +8,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 
 # First-Party Imports
-from gc_collections.models import (
+from gc_definitions.models import (
     AATSubject,
     AATSubjectContributor,
     AATSubjectSource,
