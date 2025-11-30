@@ -7,7 +7,7 @@ from gc_core.models import SimpleBaseModel
 
 class AATSubjectContributor(SimpleBaseModel):
     subject = models.ForeignKey(
-        "gc_collections.AATSubject",
+        "gc_definitions.AATSubject",
         on_delete=models.CASCADE,
         related_name="subject_contributors",
     )

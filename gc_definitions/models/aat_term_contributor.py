@@ -7,7 +7,7 @@ from gc_core.models import SimpleBaseModel
 
 class AATTermContributor(SimpleBaseModel):
     term = models.ForeignKey(
-        "gc_collections.AATTerm",
+        "gc_definitions.AATTerm",
         on_delete=models.CASCADE,
         related_name="contributors",
     )

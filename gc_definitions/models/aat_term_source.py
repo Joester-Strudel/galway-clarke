@@ -7,7 +7,7 @@ from gc_core.models import SimpleBaseModel
 
 class AATTermSource(SimpleBaseModel):
     term = models.ForeignKey(
-        "gc_collections.AATTerm",
+        "gc_definitions.AATTerm",
         on_delete=models.CASCADE,
         related_name="sources",
     )

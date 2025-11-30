@@ -7,7 +7,7 @@ from gc_core.models import SimpleBaseModel
 
 class AATNoteSource(SimpleBaseModel):
     note = models.ForeignKey(
-        "gc_collections.AATNote",
+        "gc_definitions.AATNote",
         on_delete=models.CASCADE,
         related_name="sources",
     )
