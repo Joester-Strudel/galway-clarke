@@ -9,12 +9,12 @@ from unfold.admin import ModelAdmin, display
 from simple_history.admin import SimpleHistoryAdmin
 
 # First-Party Imports
-from ..inlines import AATTermContributorInline, AATTermSourceInline
-from ..models import AATTerm
+from ..inlines import AatTermContributorInline, AatTermSourceInline
+from ..models import AatTerm
 
 
-@admin.register(AATTerm)
-class AATTermAdmin(SimpleHistoryAdmin, ModelAdmin):
+@admin.register(AatTerm)
+class AatTermAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
     list_display = [
         "formatted_term_text",
@@ -35,7 +35,6 @@ class AATTermAdmin(SimpleHistoryAdmin, ModelAdmin):
         "term_text",
         "display_name",
         "term_id",
-        "language_code",
         "qualifier",
         "subject__aat_id",
     ]
@@ -50,8 +49,8 @@ class AATTermAdmin(SimpleHistoryAdmin, ModelAdmin):
     ]
 
     inlines = [
-        AATTermContributorInline,
-        AATTermSourceInline,
+        AatTermContributorInline,
+        AatTermSourceInline,
     ]
 
     # Fieldsets for better organization
@@ -68,7 +67,6 @@ class AATTermAdmin(SimpleHistoryAdmin, ModelAdmin):
                     "is_preferred",
                     "term_type",
                     "part_of_speech",
-                    "language_code",
                     "qualifier",
                     "historic_flag",
                     "vernacular",

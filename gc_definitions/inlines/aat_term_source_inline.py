@@ -2,11 +2,11 @@
 from unfold.admin import TabularInline
 
 # First-Party Imports
-from ..models import AATTermSource
+from ..models import AatTermSource
 
 
-class AATTermSourceInline(TabularInline):
-    model = AATTermSource
+class AatTermSourceInline(TabularInline):
+    model = AatTermSource
     fields = [
         "source_id",
         "page",

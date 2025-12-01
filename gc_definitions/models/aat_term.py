@@ -5,9 +5,9 @@ from django.db import models
 from gc_core.models import SimpleBaseModel
 
 
-class AATTerm(SimpleBaseModel):
+class AatTerm(SimpleBaseModel):
     subject = models.ForeignKey(
-        "gc_definitions.AATSubject",
+        "gc_definitions.AatSubject",
         on_delete=models.CASCADE,
         related_name="terms",
     )
@@ -48,8 +48,9 @@ class AATTerm(SimpleBaseModel):
         null=True,
         blank=True,
     )
-    language_code = models.CharField(
-        max_length=50,
+    language_code = models.ForeignKey(
+        "gc_definitions.IsoLanguage",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         help_text="Parsed from language field (e.g., '70051/English')",

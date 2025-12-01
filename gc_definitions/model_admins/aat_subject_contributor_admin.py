@@ -9,11 +9,11 @@ from unfold.admin import ModelAdmin, display
 from simple_history.admin import SimpleHistoryAdmin
 
 # First-Party Imports
-from ..models import AATSubjectContributor
+from ..models import AatSubjectContributor
 
 
-@admin.register(AATSubjectContributor)
-class AATSubjectContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
+@admin.register(AatSubjectContributor)
+class AatSubjectContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
     list_display = [
         "formatted_subject",

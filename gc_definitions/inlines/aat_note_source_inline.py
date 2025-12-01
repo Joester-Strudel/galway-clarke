@@ -2,11 +2,11 @@
 from unfold.admin import TabularInline
 
 # First-Party Imports
-from ..models import AATNoteSource
+from ..models import AatNoteSource
 
 
-class AATNoteSourceInline(TabularInline):
-    model = AATNoteSource
+class AatNoteSourceInline(TabularInline):
+    model = AatNoteSource
     fields = [
         "source_id",
     ]

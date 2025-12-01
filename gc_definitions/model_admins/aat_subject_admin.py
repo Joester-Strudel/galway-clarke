@@ -10,17 +10,17 @@ from simple_history.admin import SimpleHistoryAdmin
 
 # First-Party Imports
 from ..inlines import (
-    AATAssociativeRelationshipInline,
-    AATNoteInline,
-    AATSubjectContributorInline,
-    AATSubjectSourceInline,
-    AATTermInline,
+    AatAssociativeRelationshipInline,
+    AatNoteInline,
+    AatSubjectContributorInline,
+    AatSubjectSourceInline,
+    AatTermInline,
 )
-from ..models import AATSubject
+from ..models import AatSubject
 
 
-@admin.register(AATSubject)
-class AATSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
+@admin.register(AatSubject)
+class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
     list_display = [
         "formatted_aat_id",
@@ -52,11 +52,11 @@ class AATSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     ]
 
     inlines = [
-        AATTermInline,
-        AATNoteInline,
-        AATSubjectContributorInline,
-        AATSubjectSourceInline,
-        AATAssociativeRelationshipInline,
+        AatTermInline,
+        AatNoteInline,
+        AatSubjectContributorInline,
+        AatSubjectSourceInline,
+        AatAssociativeRelationshipInline,
     ]
 
     # Fieldsets for better organization

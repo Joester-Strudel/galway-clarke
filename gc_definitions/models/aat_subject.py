@@ -5,7 +5,7 @@ from django.db import models
 from gc_core.models import SimpleBaseModel
 
 
-class AATSubject(SimpleBaseModel):
+class AatSubject(SimpleBaseModel):
     aat_id = models.CharField(
         max_length=32,
         unique=True,

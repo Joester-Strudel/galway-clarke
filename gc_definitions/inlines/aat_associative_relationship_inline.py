@@ -2,11 +2,11 @@
 from unfold.admin import TabularInline
 
 # First-Party Imports
-from ..models import AATAssociativeRelationship
+from ..models import AatAssociativeRelationship
 
 
-class AATAssociativeRelationshipInline(TabularInline):
-    model = AATAssociativeRelationship
+class AatAssociativeRelationshipInline(TabularInline):
+    model = AatAssociativeRelationship
     fields = [
         "relationship_type",
         "related_aat_id",

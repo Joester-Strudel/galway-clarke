@@ -9,11 +9,11 @@ from unfold.admin import ModelAdmin, display
 from simple_history.admin import SimpleHistoryAdmin
 
 # First-Party Imports
-from ..models import AATNoteContributor
+from ..models import AatNoteContributor
 
 
-@admin.register(AATNoteContributor)
-class AATNoteContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
+@admin.register(AatNoteContributor)
+class AatNoteContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
     list_display = [
         "formatted_note",

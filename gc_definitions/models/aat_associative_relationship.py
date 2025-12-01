@@ -5,9 +5,9 @@ from django.db import models
 from gc_core.models import SimpleBaseModel
 
 
-class AATAssociativeRelationship(SimpleBaseModel):
+class AatAssociativeRelationship(SimpleBaseModel):
     subject = models.ForeignKey(
-        "gc_definitions.AATSubject",
+        "gc_definitions.AatSubject",
         on_delete=models.CASCADE,
         related_name="associative_relationships",
     )

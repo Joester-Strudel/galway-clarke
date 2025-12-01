@@ -5,9 +5,9 @@ from django.db import models
 from gc_core.models import SimpleBaseModel
 
 
-class AATTermContributor(SimpleBaseModel):
+class AatTermContributor(SimpleBaseModel):
     term = models.ForeignKey(
-        "gc_definitions.AATTerm",
+        "gc_definitions.AatTerm",
         on_delete=models.CASCADE,
         related_name="contributors",
     )

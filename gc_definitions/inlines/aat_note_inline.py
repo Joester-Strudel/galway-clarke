@@ -2,18 +2,16 @@
 from unfold.admin import TabularInline
 
 # First-Party Imports
-from ..models import AATNote
+from ..models import AatNote
 
 
-class AATNoteInline(TabularInline):
-    model = AATNote
+class AatNoteInline(TabularInline):
+    model = AatNote
     fields = [
         "note_text",
-        "note_language",
     ]
     readonly_fields = [
         "note_text",
-        "note_language",
     ]
     verbose_name = "Note"
     tab = True

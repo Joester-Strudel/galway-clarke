@@ -23,6 +23,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
         "formatted_iso_639_5",
         "formatted_scope",
         "formatted_type",
+        "formatted_getty_language_code",
         "created_at",
     ]
     list_filter = [
@@ -62,9 +63,9 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
                     "iso_set_639_2_code",
                     "iso_set_639_3_code",
                     "iso_set_639_5_code",
+                    "getty_language_code",
                     "iso_language_scope",
                     "iso_language_type",
-                    "getty_language_code",
                 ],
             },
         ),
@@ -137,6 +138,18 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "admin/text.html",
                 {
                     "value": obj.iso_set_639_5_code or "N/A",
+                    "size": "small",
+                },
+            )
+        )
+
+    @display(description="Getty Code", ordering="getty_language_code")
+    def formatted_getty_language_code(self, obj):
+        return mark_safe(
+            render_to_string(
+                "admin/text.html",
+                {
+                    "value": obj.getty_language_code or "N/A",
                     "size": "small",
                 },
             )

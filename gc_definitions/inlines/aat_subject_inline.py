@@ -2,11 +2,11 @@
 from unfold.admin import TabularInline
 
 # First-Party Imports
-from ..models import AATSubject
+from ..models import AatSubject
 
 
-class AATSubjectInline(TabularInline):
-    model = AATSubject
+class AatSubjectInline(TabularInline):
+    model = AatSubject
     fields = [
         "aat_id",
         "record_type",

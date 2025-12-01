@@ -5,9 +5,9 @@ from django.db import models
 from gc_core.models import SimpleBaseModel
 
 
-class AATNoteContributor(SimpleBaseModel):
+class AatNoteContributor(SimpleBaseModel):
     note = models.ForeignKey(
-        "gc_definitions.AATNote",
+        "gc_definitions.AatNote",
         on_delete=models.CASCADE,
         related_name="contributors",
     )

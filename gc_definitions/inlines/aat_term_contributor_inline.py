@@ -2,11 +2,11 @@
 from unfold.admin import TabularInline
 
 # First-Party Imports
-from ..models import AATTermContributor
+from ..models import AatTermContributor
 
 
-class AATTermContributorInline(TabularInline):
-    model = AATTermContributor
+class AatTermContributorInline(TabularInline):
+    model = AatTermContributor
     fields = [
         "contributor_id",
         "preferred_flag",

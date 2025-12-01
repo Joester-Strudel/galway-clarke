@@ -9,16 +9,17 @@ from django.db import transaction
 
 # First-Party Imports
 from gc_definitions.models import (
-    AATSubject,
-    AATSubjectContributor,
-    AATSubjectSource,
-    AATAssociativeRelationship,
-    AATNote,
-    AATNoteContributor,
-    AATNoteSource,
-    AATTerm,
-    AATTermContributor,
-    AATTermSource,
+    AatSubject,
+    AatSubjectContributor,
+    AatSubjectSource,
+    AatAssociativeRelationship,
+    AatNote,
+    AatNoteContributor,
+    AatNoteSource,
+    AatTerm,
+    AatTermContributor,
+    AatTermSource,
+    IsoLanguage,
 )
 
 
@@ -63,7 +64,7 @@ class Command(BaseCommand):
             # ---------------------------------------------------------
             # FIXED FIELD NAME: uses aat_id instead of subject_id
             # ---------------------------------------------------------
-            subject, _ = AATSubject.objects.get_or_create(
+            subject, _ = AatSubject.objects.get_or_create(
                 aat_id=subject_id,
             )
 
@@ -98,7 +99,7 @@ class Command(BaseCommand):
             ):
                 cid = clean(contrib_el.findtext("Contributor_id"))
                 if cid:
-                    AATSubjectContributor.objects.get_or_create(
+                    AatSubjectContributor.objects.get_or_create(
                         subject=subject,
                         contributor_id=cid,
                     )
@@ -109,7 +110,7 @@ class Command(BaseCommand):
             for src_el in subject_el.findall("Subject_Sources/Subject_Source/Source"):
                 sid = clean(src_el.findtext("Source_ID"))
                 if sid:
-                    AATSubjectSource.objects.get_or_create(
+                    AatSubjectSource.objects.get_or_create(
                         subject=subject,
                         source_id=sid,
                     )
@@ -118,17 +119,20 @@ class Command(BaseCommand):
             # Descriptive Notes
             # ---------------------------------------------------------
             for note_el in subject_el.findall("Descriptive_Notes/Descriptive_Note"):
-                note = AATNote.objects.create(
+                language_obj = self._resolve_language(
+                    clean(note_el.findtext("Note_Language"))
+                )
+                note = AatNote.objects.create(
                     subject=subject,
                     note_text=clean(note_el.findtext("Note_Text")),
-                    note_language=clean(note_el.findtext("Note_Language")),
+                    note_language=language_obj,
                 )
 
                 # ---- Note Contributors ----
                 for nc_el in note_el.findall("Note_Contributors/Note_Contributor"):
                     cid = clean(nc_el.findtext("Contributor_id"))
                     if cid:
-                        AATNoteContributor.objects.create(
+                        AatNoteContributor.objects.create(
                             note=note,
                             contributor_id=cid,
                         )
@@ -137,7 +141,7 @@ class Command(BaseCommand):
                 for ns_el in note_el.findall("Note_Sources/Note_Source/Source"):
                     sid = clean(ns_el.findtext("Source_ID"))
                     if sid:
-                        AATNoteSource.objects.create(
+                        AatNoteSource.objects.create(
                             note=note,
                             source_id=sid,
                         )
@@ -152,7 +156,7 @@ class Command(BaseCommand):
                     if not term_text:
                         continue
 
-                    term = AATTerm.objects.create(
+                    term = AatTerm.objects.create(
                         subject=subject,
                         term_id=clean(term_el.findtext("Term_ID")),
                         term_text=term_text,
@@ -165,7 +169,9 @@ class Command(BaseCommand):
                     # ---- Term Languages ----
                     for lang_el in term_el.findall("Term_Languages/Term_Language"):
                         language_code_raw = clean(lang_el.findtext("Language"))
-                        term.language_code = language_code_raw
+                        language_obj = self._resolve_language(language_code_raw)
+                        if language_obj:
+                            term.language_code = language_obj
 
                         term.term_type = clean(lang_el.findtext("Term_Type"))
                         term.part_of_speech = clean(lang_el.findtext("Part_of_Speech"))
@@ -178,7 +184,7 @@ class Command(BaseCommand):
                     ):
                         cid = clean(tcon_el.findtext("Contributor_id"))
                         if cid:
-                            AATTermContributor.objects.create(
+                            AatTermContributor.objects.create(
                                 term=term,
                                 contributor_id=cid,
                                 preferred_flag=clean(tcon_el.findtext("Preferred")),
@@ -190,7 +196,7 @@ class Command(BaseCommand):
                         if src_el is not None:
                             sid = clean(src_el.findtext("Source_ID"))
                             if sid:
-                                AATTermSource.objects.create(
+                                AatTermSource.objects.create(
                                     term=term,
                                     source_id=sid,
                                     page=clean(ts_el.findtext("Page")),
@@ -203,7 +209,7 @@ class Command(BaseCommand):
             assoc_parent = subject_el.find("Associative_Relationships")
             if assoc_parent is not None:
                 for ar in assoc_parent.findall("Associative_Relationship"):
-                    AATAssociativeRelationship.objects.create(
+                    AatAssociativeRelationship.objects.create(
                         subject=subject,
                         relationship_type=clean(ar.findtext("Relationship_Type")),
                         related_aat_id=clean(
@@ -213,3 +219,30 @@ class Command(BaseCommand):
                     )
 
         self.stdout.write(self.style.SUCCESS("AAT import completed successfully."))
+
+    def _resolve_language(self, language_raw):
+        """
+        Parse language strings like '70051/English', create/update IsoLanguage,
+        and return the instance.
+        """
+        if not language_raw:
+            return None
+
+        parts = [part.strip() for part in language_raw.split("/") if part and part.strip()]
+        if not parts:
+            return None
+
+        name = parts[-1]
+        getty_code = parts[0] if len(parts) > 1 else None
+
+        iso_language, created = IsoLanguage.objects.get_or_create(
+            name=name,
+            defaults={"getty_language_code": getty_code},
+        )
+
+        # Update getty code if we learned a new one
+        if getty_code and iso_language.getty_language_code != getty_code:
+            iso_language.getty_language_code = getty_code
+            iso_language.save(update_fields=["getty_language_code"])
+
+        return iso_language

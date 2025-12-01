@@ -9,12 +9,12 @@ from unfold.admin import ModelAdmin, display
 from simple_history.admin import SimpleHistoryAdmin
 
 # First-Party Imports
-from ..inlines import AATNoteContributorInline, AATNoteSourceInline
-from ..models import AATNote
+from ..inlines import AatNoteContributorInline, AatNoteSourceInline
+from ..models import AatNote
 
 
-@admin.register(AATNote)
-class AATNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
+@admin.register(AatNote)
+class AatNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
     list_display = [
         "formatted_subject",
@@ -22,12 +22,10 @@ class AATNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
         "formatted_note_text",
     ]
     list_filter = [
-        "note_language",
         "created_at",
     ]
     search_fields = [
         "note_text",
-        "note_language",
         "subject__aat_id",
     ]
     ordering = [
@@ -41,8 +39,8 @@ class AATNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
     ]
 
     inlines = [
-        AATNoteContributorInline,
-        AATNoteSourceInline,
+        AatNoteContributorInline,
+        AatNoteSourceInline,
     ]
 
     # Fieldsets for better organization
@@ -54,7 +52,6 @@ class AATNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "fields": [
                     "subject",
                     "note_text",
-                    "note_language",
                 ],
             },
         ),

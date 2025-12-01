@@ -2,24 +2,22 @@
 from unfold.admin import TabularInline
 
 # First-Party Imports
-from ..models import AATTerm
+from ..models import AatTerm
 
 
-class AATTermInline(TabularInline):
-    model = AATTerm
+class AatTermInline(TabularInline):
+    model = AatTerm
     fields = [
         "term_text",
         "display_name",
         "is_preferred",
         "term_type",
-        "language_code",
     ]
     readonly_fields = [
         "term_text",
         "display_name",
         "is_preferred",
         "term_type",
-        "language_code",
     ]
     verbose_name = "Term"
     tab = True

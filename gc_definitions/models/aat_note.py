@@ -5,17 +5,21 @@ from django.db import models
 from gc_core.models import SimpleBaseModel
 
 
-class AATNote(SimpleBaseModel):
+class AatNote(SimpleBaseModel):
     subject = models.ForeignKey(
-        "gc_definitions.AATSubject",
+        "gc_definitions.AatSubject",
         on_delete=models.CASCADE,
         related_name="notes",
     )
     note_text = models.TextField()
-    note_language = models.CharField(
-        max_length=100,
-        help_text="Language of note text (e.g., English, Spanish, Dutch)",
+    note_language = models.ForeignKey(
+        "gc_definitions.IsoLanguage",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text="Parsed from language field (e.g., '70051/English')",
     )
+
 
     # Model Methods
     def __str__(self):

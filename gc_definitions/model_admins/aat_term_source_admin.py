@@ -9,11 +9,11 @@ from unfold.admin import ModelAdmin, display
 from simple_history.admin import SimpleHistoryAdmin
 
 # First-Party Imports
-from ..models import AATTermSource
+from ..models import AatTermSource
 
 
-@admin.register(AATTermSource)
-class AATTermSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
+@admin.register(AatTermSource)
+class AatTermSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
     list_display = [
         "formatted_term",
