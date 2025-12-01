@@ -12,6 +12,19 @@ from .aat_term_source_admin import AatTermSourceAdmin
 from .iso_language_admin import IsoLanguageAdmin
 from .iso_language_scope_admin import IsoLanguageScopeAdmin
 from .iso_language_type_admin import IsoLanguageTypeAdmin
+from .ulan_associative_relationship_admin import UlanAssociativeRelationshipAdmin
+from .ulan_biography_admin import UlanBiographyAdmin
+from .ulan_nationality_admin import UlanNationalityAdmin
+from .ulan_note_admin import UlanNoteAdmin
+from .ulan_note_contributor_admin import UlanNoteContributorAdmin
+from .ulan_note_source_admin import UlanNoteSourceAdmin
+from .ulan_role_admin import UlanRoleAdmin
+from .ulan_subject_admin import UlanSubjectAdmin
+from .ulan_subject_contributor_admin import UlanSubjectContributorAdmin
+from .ulan_subject_source_admin import UlanSubjectSourceAdmin
+from .ulan_term_admin import UlanTermAdmin
+from .ulan_term_contributor_admin import UlanTermContributorAdmin
+from .ulan_term_source_admin import UlanTermSourceAdmin
 
 
 __all__ = [
@@ -28,4 +41,17 @@ __all__ = [
     "IsoLanguageAdmin",
     "IsoLanguageScopeAdmin",
     "IsoLanguageTypeAdmin",
+    "UlanAssociativeRelationshipAdmin",
+    "UlanBiographyAdmin",
+    "UlanNationalityAdmin",
+    "UlanNoteAdmin",
+    "UlanNoteContributorAdmin",
+    "UlanNoteSourceAdmin",
+    "UlanRoleAdmin",
+    "UlanSubjectAdmin",
+    "UlanSubjectContributorAdmin",
+    "UlanSubjectSourceAdmin",
+    "UlanTermAdmin",
+    "UlanTermContributorAdmin",
+    "UlanTermSourceAdmin",
 ]
