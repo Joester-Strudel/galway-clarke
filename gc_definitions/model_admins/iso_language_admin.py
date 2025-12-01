@@ -21,9 +21,13 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
         "formatted_iso_639_2",
         "formatted_iso_639_3",
         "formatted_iso_639_5",
+        "formatted_scope",
+        "formatted_type",
         "created_at",
     ]
     list_filter = [
+        "iso_language_scope",
+        "iso_language_type",
         "created_at",
     ]
     search_fields = [
@@ -32,6 +36,9 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
         "iso_set_639_2_code",
         "iso_set_639_3_code",
         "iso_set_639_5_code",
+        "iso_language_scope__name",
+        "iso_language_type__name",
+        "getty_language_code",
     ]
     ordering = [
         "name",
@@ -55,6 +62,9 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
                     "iso_set_639_2_code",
                     "iso_set_639_3_code",
                     "iso_set_639_5_code",
+                    "iso_language_scope",
+                    "iso_language_type",
+                    "getty_language_code",
                 ],
             },
         ),
@@ -127,6 +137,30 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "admin/text.html",
                 {
                     "value": obj.iso_set_639_5_code or "N/A",
+                    "size": "small",
+                },
+            )
+        )
+
+    @display(description="Scope", ordering="iso_language_scope__name")
+    def formatted_scope(self, obj):
+        return mark_safe(
+            render_to_string(
+                "admin/text.html",
+                {
+                    "value": obj.iso_language_scope or "N/A",
+                    "size": "small",
+                },
+            )
+        )
+
+    @display(description="Type", ordering="iso_language_type__name")
+    def formatted_type(self, obj):
+        return mark_safe(
+            render_to_string(
+                "admin/text.html",
+                {
+                    "value": obj.iso_language_type or "N/A",
                     "size": "small",
                 },
             )

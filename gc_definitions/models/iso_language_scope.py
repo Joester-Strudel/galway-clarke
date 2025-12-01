@@ -10,7 +10,7 @@ class IsoLanguageScope(SimpleBaseModel):
         max_length=255,
         help_text="ISO Language Scope Name",
     )
-    
+
     # Model Methods
     def __str__(self):
         return self.name
