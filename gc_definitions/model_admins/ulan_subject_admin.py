@@ -18,7 +18,7 @@ class UlanSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     list_display = [
         "formatted_ulan_id",
         "formatted_record_type",
-        "formatted_parent_ulan_id",
+        "formatted_parent",
         "formatted_parent_relationship_type",
         "formatted_merged_status",
     ]
@@ -26,13 +26,15 @@ class UlanSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
         "record_type",
         "merged_status",
         "parent_relationship_type",
+        "parent",
         "created_at",
     ]
     search_fields = [
         "ulan_id",
-        "parent_ulan_id",
+        "record_type__name",
+        "parent__ulan_id",
         "parent_string",
-        "parent_relationship_type",
+        "parent_relationship_type__name",
     ]
     ordering = [
         "ulan_id",
@@ -54,7 +56,7 @@ class UlanSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
                     "ulan_id",
                     "record_type",
                     "merged_status",
-                    "parent_ulan_id",
+                    "parent",
                     "parent_relationship_type",
                     "parent_string",
                     "parent_historic_flag",
@@ -93,12 +95,12 @@ class UlanSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
             )
         )
 
-    @display(description="Parent ULAN ID", ordering="parent_ulan_id")
-    def formatted_parent_ulan_id(self, obj):
+    @display(description="Parent ULAN ID", ordering="parent__ulan_id")
+    def formatted_parent(self, obj):
         return mark_safe(
             render_to_string(
                 "admin/text.html",
-                {"value": obj.parent_ulan_id or "N/A", "size": "small"},
+                {"value": obj.parent or "N/A", "size": "small"},
             )
         )
 

@@ -32,15 +32,17 @@ class UlanTerm(SimpleBaseModel):
         null=True,
         blank=True,
     )
-    is_preferred = models.BooleanField(default=False)
-    term_type = models.CharField(
-        max_length=100,
+    is_preferred = models.BooleanField(default=False,)
+    term_type = models.ForeignKey(
+        "gc_definitions.UlanTermType",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         help_text="Term_Type",
     )
-    part_of_speech = models.CharField(
-        max_length=100,
+    part_of_speech = models.ForeignKey(
+        "gc_definitions.UlanPartOfSpeech",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )

@@ -19,7 +19,7 @@ class UlanRole(SimpleBaseModel):
         null=True,
         blank=True,
     )
-    is_preferred = models.BooleanField(default=False)
+    is_preferred = models.BooleanField(default=False,)
 
     def __str__(self):
         return self.role_id

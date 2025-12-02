@@ -11,11 +11,18 @@ class UlanAssociativeRelationship(SimpleBaseModel):
         on_delete=models.CASCADE,
         related_name="associative_relationships",
     )
-    relationship_type = models.CharField(
-        max_length=100,
+    relationship_type = models.ForeignKey(
+        "gc_definitions.UlanAssociativeRelationshipType",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="associative_relationships",
     )
-    related_ulan_id = models.CharField(
-        max_length=32,
+    related_subject = models.ForeignKey(
+        "gc_definitions.UlanSubject",
+        on_delete=models.CASCADE,
+        related_name="associative_relationships_to",
+        help_text="Related ULAN subject",
     )
     historic_flag = models.CharField(
         max_length=50,
@@ -40,7 +47,7 @@ class UlanAssociativeRelationship(SimpleBaseModel):
     )
 
     def __str__(self):
-        return f"{self.relationship_type} → {self.related_ulan_id}"
+        return f"{self.relationship_type} → {self.related_subject}"
 
     class Meta:
         verbose_name = "ULAN Associative Relationship"

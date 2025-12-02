@@ -48,8 +48,9 @@ class AatSubject(SimpleBaseModel):
         verbose_name="Parent String",
         help_text="Parent_String Listing Hierarchy Ancestors",
     )
-    parent_relationship_type = models.CharField(
-        max_length=50,
+    parent_relationship_type = models.ForeignKey(
+        "gc_definitions.AatParentRelationshipType",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         verbose_name="Parent Relationship Type",

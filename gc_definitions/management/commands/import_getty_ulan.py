@@ -8,15 +8,20 @@ from django.conf import settings
 from gc_definitions.models import (
     IsoLanguage,
     UlanSubject,
+    UlanParentRelationshipType,
+    UlanSubjectRecordType,
     UlanSubjectContributor,
     UlanSubjectSource,
     UlanTerm,
     UlanTermContributor,
     UlanTermSource,
     UlanAssociativeRelationship,
+    UlanAssociativeRelationshipType,
     UlanBiography,
     UlanRole,
     UlanNationality,
+    UlanTermType,
+    UlanPartOfSpeech,
 )
 
 
@@ -73,15 +78,30 @@ class Command(BaseCommand):
         # ---------------------------------------------------------
         # BASIC SUBJECT FIELDS
         # ---------------------------------------------------------
-        subject.record_type = self._text(subject_el, "Record_Type")
+        record_type_value = self._text(subject_el, "Record_Type")
+        if record_type_value:
+            rt_obj, _ = UlanSubjectRecordType.objects.get_or_create(
+                name=record_type_value
+            )
+            subject.record_type = rt_obj
         subject.merged_status = self._text(subject_el, "Merged_Status")
 
         # Parent Relationships
         parent_el = subject_el.find("Parent_Relationships/Preferred_Parent")
         if parent_el is not None:
-            subject.parent_ulan_id = self._text(parent_el, "Parent_Subject_ID")
+            parent_ulan_id = self._text(parent_el, "Parent_Subject_ID")
+            if parent_ulan_id:
+                parent_subject, _ = UlanSubject.objects.get_or_create(
+                    ulan_id=parent_ulan_id,
+                )
+                subject.parent = parent_subject
             subject.parent_string = self._text(parent_el, "Parent_String")
-            subject.parent_relationship_type = self._text(parent_el, "Hier_Rel_Type")
+            parent_rel_type_val = self._text(parent_el, "Hier_Rel_Type")
+            if parent_rel_type_val:
+                prt_obj, _ = UlanParentRelationshipType.objects.get_or_create(
+                    name=parent_rel_type_val
+                )
+                subject.parent_relationship_type = prt_obj
             subject.parent_historic_flag = self._text(parent_el, "Historic_Flag")
 
         subject.save()
@@ -184,8 +204,16 @@ class Command(BaseCommand):
             if lang_block is not None:
                 raw_lang = self._text(lang_block, "Language")
                 term.language_code = self._get_language(raw_lang)
-                term.term_type = self._text(lang_block, "Term_Type")
-                term.part_of_speech = self._text(lang_block, "Part_of_Speech")
+                term_type_val = self._text(lang_block, "Term_Type")
+                if term_type_val:
+                    tt_obj, _ = UlanTermType.objects.get_or_create(name=term_type_val)
+                    term.term_type = tt_obj
+
+                pos_val = self._text(lang_block, "Part_of_Speech")
+                if pos_val:
+                    pos_obj, _ = UlanPartOfSpeech.objects.get_or_create(name=pos_val)
+                    term.part_of_speech = pos_obj
+
                 term.qualifier = self._text(lang_block, "Qualifier")
 
             term.save()
@@ -220,13 +248,23 @@ class Command(BaseCommand):
             return
 
         for block in ar_el.findall("Associative_Relationship"):
-            rel_type = self._text(block, "Relationship_Type")
+            rel_type_value = self._text(block, "Relationship_Type")
+            rel_type = None
+            if rel_type_value:
+                rel_type, _ = UlanAssociativeRelationshipType.objects.get_or_create(
+                    name=rel_type_value
+                )
             vp_id = self._text(block.find("Related_Subject_ID"), "VP_Subject_ID")
+            related_subject = None
+            if vp_id:
+                related_subject, _ = UlanSubject.objects.get_or_create(
+                    ulan_id=vp_id,
+                )
 
             ar, _ = UlanAssociativeRelationship.objects.get_or_create(
                 subject=subject,
                 relationship_type=rel_type,
-                related_ulan_id=vp_id,
+                related_subject=related_subject,
             )
 
             ar.historic_flag = self._text(block, "Historic_Flag")

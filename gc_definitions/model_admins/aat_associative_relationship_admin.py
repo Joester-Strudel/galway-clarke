@@ -18,17 +18,18 @@ class AatAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     list_display = [
         "formatted_subject",
         "formatted_relationship_type",
-        "formatted_related_aat_id",
+        "formatted_related_subject",
         "formatted_historic_flag",
     ]
     list_filter = [
         "relationship_type",
         "historic_flag",
+        "related_subject",
         "created_at",
     ]
     search_fields = [
         "relationship_type",
-        "related_aat_id",
+        "related_subject__aat_id",
         "historic_flag",
         "subject__aat_id",
     ]
@@ -51,7 +52,7 @@ class AatAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "fields": [
                     "subject",
                     "relationship_type",
-                    "related_aat_id",
+                    "related_subject",
                     "historic_flag",
                 ],
             },
@@ -94,13 +95,13 @@ class AatAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
             )
         )
 
-    @display(description="Related AAT ID", ordering="related_aat_id")
-    def formatted_related_aat_id(self, obj):
+    @display(description="Related AAT ID", ordering="related_subject__aat_id")
+    def formatted_related_subject(self, obj):
         return mark_safe(
             render_to_string(
                 "admin/text.html",
                 {
-                    "value": obj.related_aat_id,
+                    "value": obj.related_subject,
                     "size": "small",
                 },
             )

@@ -18,17 +18,18 @@ class UlanAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     list_display = [
         "formatted_subject",
         "formatted_relationship_type",
-        "formatted_related_ulan_id",
+        "formatted_related_subject",
         "formatted_display_date",
     ]
     list_filter = [
         "relationship_type",
         "historic_flag",
+        "related_subject",
         "created_at",
     ]
     search_fields = [
-        "relationship_type",
-        "related_ulan_id",
+        "relationship_type__name",
+        "related_subject__ulan_id",
         "historic_flag",
         "display_date",
         "subject__ulan_id",
@@ -52,7 +53,7 @@ class UlanAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "fields": [
                     "subject",
                     "relationship_type",
-                    "related_ulan_id",
+                    "related_subject",
                     "historic_flag",
                     "display_date",
                     "start_date",
@@ -83,21 +84,21 @@ class UlanAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
             )
         )
 
-    @display(description="Relationship Type", ordering="relationship_type")
+    @display(description="Relationship Type", ordering="relationship_type__name")
     def formatted_relationship_type(self, obj):
         return mark_safe(
             render_to_string(
                 "admin/text.html",
-                {"value": obj.relationship_type, "size": "small"},
+                {"value": obj.relationship_type or "N/A", "size": "small"},
             )
         )
 
-    @display(description="Related ULAN ID", ordering="related_ulan_id")
-    def formatted_related_ulan_id(self, obj):
+    @display(description="Related ULAN ID", ordering="related_subject__ulan_id")
+    def formatted_related_subject(self, obj):
         return mark_safe(
             render_to_string(
                 "admin/text.html",
-                {"value": obj.related_ulan_id, "size": "small"},
+                {"value": obj.related_subject, "size": "small"},
             )
         )
 

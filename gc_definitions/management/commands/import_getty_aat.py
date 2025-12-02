@@ -13,7 +13,9 @@ from gc_definitions.models import (
     AatSubjectContributor,
     AatSubjectRecordType,
     AatSubjectSource,
+    AatParentRelationshipType,
     AatAssociativeRelationship,
+    AatAssociativeRelationshipType,
     AatNote,
     AatNoteContributor,
     AatNoteSource,
@@ -80,9 +82,14 @@ class Command(BaseCommand):
                         aat_id=parent_aat_id
                     )
                     subject.parent = parent_subject
-                subject.parent_relationship_type = clean(
+                relationship_type_value = clean(
                     parent_rel.findtext("Relationship_Type")
                 )
+                if relationship_type_value:
+                    prt_obj, _ = AatParentRelationshipType.objects.get_or_create(
+                        name=relationship_type_value
+                    )
+                    subject.parent_relationship_type = prt_obj
                 subject.parent_historic_flag = clean(
                     parent_rel.findtext("Historic_Flag")
                 )
@@ -220,12 +227,28 @@ class Command(BaseCommand):
             assoc_parent = subject_el.find("Associative_Relationships")
             if assoc_parent is not None:
                 for ar in assoc_parent.findall("Associative_Relationship"):
+                    related_aat_id = clean(
+                        ar.findtext("Related_Subject_ID/VP_Subject_ID")
+                    )
+                    related_subject = None
+                    if related_aat_id:
+                        related_subject, _ = AatSubject.objects.get_or_create(
+                            aat_id=related_aat_id
+                        )
+
+                    relationship_type_value = clean(ar.findtext("Relationship_Type"))
+                    relationship_type_obj = None
+                    if relationship_type_value:
+                        relationship_type_obj, _ = (
+                            AatAssociativeRelationshipType.objects.get_or_create(
+                                name=relationship_type_value
+                            )
+                        )
+
                     AatAssociativeRelationship.objects.create(
                         subject=subject,
-                        relationship_type=clean(ar.findtext("Relationship_Type")),
-                        related_aat_id=clean(
-                            ar.findtext("Related_Subject_ID/VP_Subject_ID")
-                        ),
+                        relationship_type=relationship_type_obj,
+                        related_subject=related_subject,
                         historic_flag=clean(ar.findtext("Historic_Flag")),
                     )
 

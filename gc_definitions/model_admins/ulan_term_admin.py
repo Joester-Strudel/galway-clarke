@@ -20,6 +20,7 @@ class UlanTermAdmin(SimpleHistoryAdmin, ModelAdmin):
         "formatted_subject",
         "formatted_is_preferred",
         "formatted_term_type",
+        "formatted_part_of_speech",
         "formatted_language_code",
     ]
     list_filter = [
@@ -36,6 +37,8 @@ class UlanTermAdmin(SimpleHistoryAdmin, ModelAdmin):
         "term_id",
         "qualifier",
         "subject__ulan_id",
+        "term_type__name",
+        "part_of_speech__name",
     ]
     ordering = [
         "term_text",
@@ -119,12 +122,21 @@ class UlanTermAdmin(SimpleHistoryAdmin, ModelAdmin):
             )
         )
 
-    @display(description="Term Type", ordering="term_type")
+    @display(description="Term Type", ordering="term_type__name")
     def formatted_term_type(self, obj):
         return mark_safe(
             render_to_string(
                 "admin/text.html",
                 {"value": obj.term_type or "N/A", "size": "small"},
+            )
+        )
+
+    @display(description="Part of Speech", ordering="part_of_speech__name")
+    def formatted_part_of_speech(self, obj):
+        return mark_safe(
+            render_to_string(
+                "admin/text.html",
+                {"value": obj.part_of_speech or "N/A", "size": "small"},
             )
         )
 

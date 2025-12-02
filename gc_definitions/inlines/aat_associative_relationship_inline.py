@@ -9,12 +9,12 @@ class AatAssociativeRelationshipInline(TabularInline):
     model = AatAssociativeRelationship
     fields = [
         "relationship_type",
-        "related_aat_id",
+        "related_subject",
         "historic_flag",
     ]
     readonly_fields = [
         "relationship_type",
-        "related_aat_id",
+        "related_subject",
         "historic_flag",
     ]
     verbose_name = "Associative Relationship"

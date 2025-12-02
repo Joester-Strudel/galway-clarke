@@ -41,7 +41,7 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
         "aat_id",
         "parent__aat_id",
         "parent_string",
-        "parent_relationship_type",
+        "parent_relationship_type__name",
         "terms__term_text",
     ]
     ordering = [

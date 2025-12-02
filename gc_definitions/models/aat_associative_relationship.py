@@ -11,12 +11,18 @@ class AatAssociativeRelationship(SimpleBaseModel):
         on_delete=models.CASCADE,
         related_name="associative_relationships",
     )
-    relationship_type = models.CharField(
-        max_length=100,
+    relationship_type = models.ForeignKey(
+        "gc_definitions.AatAssociativeRelationshipType",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="associative_relationships",
         help_text="Relationship_Type (e.g., 'distinguished from')",
     )
-    related_aat_id = models.CharField(
-        max_length=32,
+    related_subject = models.ForeignKey(
+        "gc_definitions.AatSubject",
+        on_delete=models.CASCADE,
+        related_name="associative_relationships_to",
         help_text="VP_Subject_ID for the related concept",
     )
     historic_flag = models.CharField(
@@ -27,7 +33,7 @@ class AatAssociativeRelationship(SimpleBaseModel):
 
     # Model Methods
     def __str__(self):
-        return f"{self.relationship_type} → {self.related_aat_id}"
+        return f"{self.relationship_type} → {self.related_subject}"
 
     # Model Metadata
     class Meta:

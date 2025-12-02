@@ -11,8 +11,9 @@ class UlanSubject(SimpleBaseModel):
         unique=True,
         help_text="Getty ULAN Subject_ID",
     )
-    record_type = models.CharField(
-        max_length=50,
+    record_type = models.ForeignKey(
+        "gc_definitions.UlanSubjectRecordType",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         help_text="Record_Type (e.g., Person, Corporate Body, Family, Group)",
@@ -22,10 +23,12 @@ class UlanSubject(SimpleBaseModel):
         null=True,
         blank=True,
     )
-    parent_ulan_id = models.CharField(
-        max_length=32,
+    parent = models.ForeignKey(
+        "gc_definitions.UlanSubject",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
+        related_name="children",
         help_text="Parent_Subject_ID for hierarchy",
     )
     parent_string = models.TextField(
@@ -33,8 +36,9 @@ class UlanSubject(SimpleBaseModel):
         blank=True,
         help_text="Parent_String ancestry chain",
     )
-    parent_relationship_type = models.CharField(
-        max_length=100,
+    parent_relationship_type = models.ForeignKey(
+        "gc_definitions.UlanParentRelationshipType",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         help_text="Hier_Rel_Type (e.g. Instance-BTI)",
