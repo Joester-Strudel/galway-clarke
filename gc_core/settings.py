@@ -71,7 +71,9 @@ ROOT_URLCONF = "gc_core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            BASE_DIR / "gc_reference" / "templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -168,77 +170,27 @@ UNFOLD = {
         "show_all_applications": True,
         "navigation": [
             {
-                "title": "Art and Architecture Terminiology",
+                "title": "Reference Data",
                 "items": [
                     {
-                        "title": "Subjects",
+                        "title": "Dashboard",
                         "icon": "category",
-                        "link": "/admin/gc_reference/aatsubject/",
+                        "link": "/admin/reference/",
                     },
                     {
-                        "title": "Subject Contributors",
-                        "icon": "group_add",
-                        "link": "/admin/gc_reference/aatsubjectcontributor/",
+                        "title": "AAT",
+                        "icon": "schema",
+                        "link": "/admin/aat/",
                     },
                     {
-                        "title": "Subject Sources",
-                        "icon": "source",
-                        "link": "/admin/gc_reference/aatsubjectsource/",
+                        "title": "ULAN",
+                        "icon": "groups",
+                        "link": "/admin/ulan/",
                     },
                     {
-                        "title": "Associative Relationships",
-                        "icon": "link",
-                        "link": "/admin/gc_reference/aatassociativerelationship/",
-                    },
-                    {
-                        "title": "Terms",
-                        "icon": "label",
-                        "link": "/admin/gc_reference/aatterm/",
-                    },
-                    {
-                        "title": "Term Contributors",
-                        "icon": "diversity_3",
-                        "link": "/admin/gc_reference/aattermcontributor/",
-                    },
-                    {
-                        "title": "Term Sources",
-                        "icon": "menu_book",
-                        "link": "/admin/gc_reference/aattermsource/",
-                    },
-                    {
-                        "title": "Notes",
-                        "icon": "note",
-                        "link": "/admin/gc_reference/aatnote/",
-                    },
-                    {
-                        "title": "Note Contributors",
-                        "icon": "record_voice_over",
-                        "link": "/admin/gc_reference/aatnotecontributor/",
-                    },
-                    {
-                        "title": "Note Sources",
-                        "icon": "library_books",
-                        "link": "/admin/gc_reference/aatnotesource/",
-                    },
-                ],
-            },
-            {
-                "title": "ISO Languages",
-                "items": [
-                    {
-                        "title": "ISO Languages",
+                        "title": "Languages",
                         "icon": "translate",
-                        "link": "/admin/gc_reference/isolanguage/",
-                    },
-                    {
-                        "title": "ISO Language Scopes",
-                        "icon": "layers",
-                        "link": "/admin/gc_reference/isolanguagescope/",
-                    },
-                    {
-                        "title": "ISO Language Types",
-                        "icon": "category",
-                        "link": "/admin/gc_reference/isolanguagetype/",
+                        "link": "/admin/languages/",
                     },
                 ],
             },

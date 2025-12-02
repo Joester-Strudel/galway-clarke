@@ -7,6 +7,7 @@ from ..models import AatAssociativeRelationship
 
 class AatAssociativeRelationshipInline(TabularInline):
     model = AatAssociativeRelationship
+    fk_name = "subject"
     fields = [
         "relationship_type",
         "related_subject",
