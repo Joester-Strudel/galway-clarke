@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     "gc_users",
     "gc_core",
     "gc_collections",
-    "gc_definitions",
+    "gc_reference",
 ]
 
 MIDDLEWARE = [
@@ -173,52 +173,52 @@ UNFOLD = {
                     {
                         "title": "Subjects",
                         "icon": "category",
-                        "link": "/admin/gc_definitions/aatsubject/",
+                        "link": "/admin/gc_reference/aatsubject/",
                     },
                     {
                         "title": "Subject Contributors",
                         "icon": "group_add",
-                        "link": "/admin/gc_definitions/aatsubjectcontributor/",
+                        "link": "/admin/gc_reference/aatsubjectcontributor/",
                     },
                     {
                         "title": "Subject Sources",
                         "icon": "source",
-                        "link": "/admin/gc_definitions/aatsubjectsource/",
+                        "link": "/admin/gc_reference/aatsubjectsource/",
                     },
                     {
                         "title": "Associative Relationships",
                         "icon": "link",
-                        "link": "/admin/gc_definitions/aatassociativerelationship/",
+                        "link": "/admin/gc_reference/aatassociativerelationship/",
                     },
                     {
                         "title": "Terms",
                         "icon": "label",
-                        "link": "/admin/gc_definitions/aatterm/",
+                        "link": "/admin/gc_reference/aatterm/",
                     },
                     {
                         "title": "Term Contributors",
                         "icon": "diversity_3",
-                        "link": "/admin/gc_definitions/aattermcontributor/",
+                        "link": "/admin/gc_reference/aattermcontributor/",
                     },
                     {
                         "title": "Term Sources",
                         "icon": "menu_book",
-                        "link": "/admin/gc_definitions/aattermsource/",
+                        "link": "/admin/gc_reference/aattermsource/",
                     },
                     {
                         "title": "Notes",
                         "icon": "note",
-                        "link": "/admin/gc_definitions/aatnote/",
+                        "link": "/admin/gc_reference/aatnote/",
                     },
                     {
                         "title": "Note Contributors",
                         "icon": "record_voice_over",
-                        "link": "/admin/gc_definitions/aatnotecontributor/",
+                        "link": "/admin/gc_reference/aatnotecontributor/",
                     },
                     {
                         "title": "Note Sources",
                         "icon": "library_books",
-                        "link": "/admin/gc_definitions/aatnotesource/",
+                        "link": "/admin/gc_reference/aatnotesource/",
                     },
                 ],
             },
@@ -228,17 +228,17 @@ UNFOLD = {
                     {
                         "title": "ISO Languages",
                         "icon": "translate",
-                        "link": "/admin/gc_definitions/isolanguage/",
+                        "link": "/admin/gc_reference/isolanguage/",
                     },
                     {
                         "title": "ISO Language Scopes",
                         "icon": "layers",
-                        "link": "/admin/gc_definitions/isolanguagescope/",
+                        "link": "/admin/gc_reference/isolanguagescope/",
                     },
                     {
                         "title": "ISO Language Types",
                         "icon": "category",
-                        "link": "/admin/gc_definitions/isolanguagetype/",
+                        "link": "/admin/gc_reference/isolanguagetype/",
                     },
                 ],
             },
