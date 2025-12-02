@@ -11,6 +11,7 @@ from django.db import transaction
 from gc_definitions.models import (
     AatSubject,
     AatSubjectContributor,
+    AatSubjectRecordType,
     AatSubjectSource,
     AatAssociativeRelationship,
     AatNote,
@@ -73,7 +74,12 @@ class Command(BaseCommand):
             # ---------------------------------------------------------
             parent_rel = subject_el.find("Parent_Relationships/Preferred_Parent")
             if parent_rel is not None:
-                subject.parent_aat_id = clean(parent_rel.findtext("Parent_Subject_ID"))
+                parent_aat_id = clean(parent_rel.findtext("Parent_Subject_ID"))
+                if parent_aat_id:
+                    parent_subject, _ = AatSubject.objects.get_or_create(
+                        aat_id=parent_aat_id
+                    )
+                    subject.parent = parent_subject
                 subject.parent_relationship_type = clean(
                     parent_rel.findtext("Relationship_Type")
                 )
@@ -86,7 +92,12 @@ class Command(BaseCommand):
             # ---------------------------------------------------------
             # Subject-level metadata
             # ---------------------------------------------------------
-            subject.record_type = clean(subject_el.findtext("Record_Type"))
+            record_type_value = clean(subject_el.findtext("Record_Type"))
+            if record_type_value:
+                record_type_obj, _ = AatSubjectRecordType.objects.get_or_create(
+                    name=record_type_value
+                )
+                subject.record_type = record_type_obj
             subject.merged_status = clean(subject_el.findtext("Merged_Status"))
             subject.sort_order = clean(subject_el.findtext("Sort_Order"))
             subject.save()

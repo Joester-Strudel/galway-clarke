@@ -4,6 +4,7 @@ from .aat_note_admin import AatNoteAdmin
 from .aat_note_contributor_admin import AatNoteContributorAdmin
 from .aat_note_source_admin import AatNoteSourceAdmin
 from .aat_subject_admin import AatSubjectAdmin
+from .aat_subject_record_type_admin import AatSubjectRecordTypeAdmin
 from .aat_subject_contributor_admin import AatSubjectContributorAdmin
 from .aat_subject_source_admin import AatSubjectSourceAdmin
 from .aat_term_admin import AatTermAdmin
@@ -33,6 +34,7 @@ __all__ = [
     "AatNoteContributorAdmin",
     "AatNoteSourceAdmin",
     "AatSubjectAdmin",
+    "AatSubjectRecordTypeAdmin",
     "AatSubjectContributorAdmin",
     "AatSubjectSourceAdmin",
     "AatTermAdmin",

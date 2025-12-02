@@ -4,6 +4,7 @@ from .aat_note import AatNote
 from .aat_note_contributor import AatNoteContributor
 from .aat_note_source import AatNoteSource
 from .aat_subject import AatSubject
+from .aat_subject_record_type import AatSubjectRecordType
 from .aat_subject_contributor import AatSubjectContributor
 from .aat_subject_source import AatSubjectSource
 from .aat_term import AatTerm
@@ -18,6 +19,7 @@ from .ulan_nationality import UlanNationality
 from .ulan_note import UlanNote
 from .ulan_note_contributor import UlanNoteContributor
 from .ulan_note_source import UlanNoteSource
+from .ulan_role import UlanRole
 from .ulan_subject import UlanSubject
 from .ulan_subject_contributor import UlanSubjectContributor
 from .ulan_subject_source import UlanSubjectSource
@@ -32,6 +34,7 @@ __all__ = [
     "AatNoteContributor",
     "AatNoteSource",
     "AatSubject",
+    "AatSubjectRecordType",
     "AatSubjectContributor",
     "AatSubjectSource",
     "AatTerm",
@@ -46,6 +49,7 @@ __all__ = [
     "UlanNote",
     "UlanNoteContributor",
     "UlanNoteSource",
+    "UlanRole",
     "UlanSubject",
     "UlanSubjectContributor",
     "UlanSubjectSource",

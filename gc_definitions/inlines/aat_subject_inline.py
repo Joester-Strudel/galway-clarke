@@ -12,7 +12,7 @@ class AatSubjectInline(TabularInline):
         "record_type",
         "merged_status",
         "sort_order",
-        "parent_aat_id",
+        "parent",
         "parent_relationship_type",
     ]
     readonly_fields = [
@@ -20,7 +20,7 @@ class AatSubjectInline(TabularInline):
         "record_type",
         "merged_status",
         "sort_order",
-        "parent_aat_id",
+        "parent",
         "parent_relationship_type",
     ]
     verbose_name = "Subject"

@@ -24,8 +24,9 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     # List Display
     list_display = [
         "formatted_aat_id",
+        "formatted_preferred_name",
         "formatted_record_type",
-        "formatted_parent_aat_id",
+        "formatted_parent",
         "formatted_parent_relationship_type",
         "formatted_merged_status",
     ]
@@ -33,18 +34,21 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
         "record_type",
         "merged_status",
         "parent_relationship_type",
+        "parent",
         "created_at",
     ]
     search_fields = [
         "aat_id",
-        "parent_aat_id",
+        "parent__aat_id",
         "parent_string",
         "parent_relationship_type",
+        "terms__term_text",
     ]
     ordering = [
         "aat_id",
     ]
     readonly_fields = [
+        "preferred_subject_name",
         "id",
         "created_at",
         "last_updated_at",
@@ -67,10 +71,11 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "classes": ["tab"],
                 "fields": [
                     "aat_id",
+                    "preferred_subject_name",
                     "record_type",
                     "merged_status",
                     "sort_order",
-                    "parent_aat_id",
+                    "parent",
                     "parent_relationship_type",
                     "parent_string",
                 ],
@@ -114,13 +119,13 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
             )
         )
 
-    @display(description="Parent AAT ID", ordering="parent_aat_id")
-    def formatted_parent_aat_id(self, obj):
+    @display(description="Parent AAT ID", ordering="parent__aat_id")
+    def formatted_parent(self, obj):
         return mark_safe(
             render_to_string(
                 "admin/text.html",
                 {
-                    "value": obj.parent_aat_id or "N/A",
+                    "value": obj.parent or "N/A",
                     "size": "small",
                 },
             )
@@ -148,6 +153,18 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
                 {
                     "value": obj.merged_status or "N/A",
                     "size": "small",
+                },
+            )
+        )
+
+    @display(description="Preferred Name", ordering="terms__term_text")
+    def formatted_preferred_name(self, obj):
+        return mark_safe(
+            render_to_string(
+                "admin/text.html",
+                {
+                    "value": obj.preferred_subject_name() or "N/A",
+                    "size": "medium",
                 },
             )
         )

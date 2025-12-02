@@ -9,46 +9,63 @@ class AatSubject(SimpleBaseModel):
     aat_id = models.CharField(
         max_length=32,
         unique=True,
+        verbose_name="AAT Subject ID",
         help_text="Getty AAT Subject_ID",
     )
-    record_type = models.CharField(
-        max_length=50,
+    record_type = models.ForeignKey(
+        "gc_definitions.AatSubjectRecordType",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        help_text="Record_Type field (e.g., 'Concept')",
+        verbose_name="Record Type",
+        help_text="Record_Type Field (e.g., 'Concept')",
     )
     merged_status = models.CharField(
         max_length=50,
         null=True,
         blank=True,
-        help_text="Merged_Status field",
+        verbose_name="Merged Status",
+        help_text="Merged_Status Field",
     )
     sort_order = models.IntegerField(
         null=True,
         blank=True,
+        verbose_name="Sort Order",
         help_text="Sort_Order",
     )
-    parent_aat_id = models.CharField(
-        max_length=32,
+    parent = models.ForeignKey(
+        "gc_definitions.AatSubject",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        help_text="Preferred Parent_Subject_ID",
+        related_name="children",
+        verbose_name="Parent Subject",
+        help_text="Preferred parent subject",
     )
     parent_string = models.TextField(
         null=True,
         blank=True,
-        help_text="Parent_String listing hierarchy ancestors",
+        verbose_name="Parent String",
+        help_text="Parent_String Listing Hierarchy Ancestors",
     )
     parent_relationship_type = models.CharField(
         max_length=50,
         null=True,
         blank=True,
+        verbose_name="Parent Relationship Type",
         help_text="Hier_Rel_Type (e.g., 'Genus/Species-BTG')",
     )
 
     # Model Methods
     def __str__(self):
         return self.aat_id
+
+    def preferred_subject_name(self):
+        """
+        Return the first preferred term text for this subject, if any.
+        """
+        preferred_term = self.terms.filter(is_preferred=True).first()
+        return preferred_term.term_text if preferred_term else None
 
     # Model Metadata
     class Meta:
