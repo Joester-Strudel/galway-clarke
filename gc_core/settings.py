@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "unfold.contrib.import_export",
     "unfold.contrib.simple_history",
     "simple_history",
+    "django_cotton",
     # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -73,6 +74,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
+            BASE_DIR / "templates",
             BASE_DIR / "gc_reference" / "templates",
         ],
         "APP_DIRS": True,
