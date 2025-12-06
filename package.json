@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "tailwind:watch": "npx @tailwindcss/cli -i ./gc_static/input.css -o ./gc_static/output.css --watch",
+    "tailwind:build": "npx @tailwindcss/cli -i ./gc_static/input.css -o ./gc_static/output.css"
+  },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.17",
     "tailwindcss": "^4.1.17"
