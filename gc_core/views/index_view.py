@@ -2,4 +2,9 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, "app/index.html")
+    template = (
+        "cotton/app/index.html"
+        if request.user.is_authenticated
+        else "cotton/app/gc_marketing/pages/index.html"
+    )
+    return render(request, template)

@@ -1,0 +1,19 @@
+<c-app.layouts.base>
+  <main class="mx-auto max-w-xl space-y-6 px-4 py-12">
+    <h1 class="text-3xl font-semibold">Sign out</h1>
+    <p class="text-slate-700">Are you sure you want to end your session?</p>
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <button
+        type="submit"
+        class="w-full rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+      >
+        Sign out
+      </button>
+    </form>
+    <p class="text-sm text-slate-600">
+      Changed your mind?
+      <a class="font-semibold text-slate-900 underline" href="{% url 'marketing-home' %}">Return home</a>.
+    </p>
+  </main>
+</c-app.layouts.base>

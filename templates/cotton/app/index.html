@@ -1,278 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% load static %}
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
-      rel="stylesheet"
-    />
-    <link href="{% static 'output.css' %}" rel="stylesheet" />
-    <title>Galway Clarke</title>
-    <style>
-      body {
-        font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
-      }
-      .display-font {
-        font-family: "Playfair Display", "Garamond", serif;
-      }
-    </style>
-  </head>
-  <body class="bg-[#f7f3ef] text-slate-900">
-    <div class="relative overflow-hidden">
-      <div class="absolute inset-0 -z-10">
-        <div class="absolute -left-20 -top-20 h-72 w-72 rotate-12 rounded-full bg-gradient-to-br from-[#f1e0e5] to-[#f8f0f5]"></div>
-        <div class="absolute bottom-10 right-0 h-80 w-80 -rotate-6 rounded-full bg-gradient-to-br from-[#f6d9e0] via-[#f3c8d0] to-[#f9f1f5]"></div>
+<c-app.layouts.base>
+  <header class="border-b border-slate-200 bg-white/70">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Galway Clarke</p>
+        <p class="text-lg font-semibold">Library dashboard</p>
       </div>
-
-      <div class="mx-auto max-w-6xl px-6 py-10 space-y-16">
-        <header class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p class="text-sm uppercase tracking-[0.2em] text-[#7b1e34]">Galway Clarke Library</p>
-            <h1 class="display-font text-3xl font-semibold text-[#3f101d]">Rare books, thoughtful curation.</h1>
-          </div>
-          <nav class="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-700">
-            <a class="rounded-full border border-[#d096a6] px-4 py-2 transition hover:border-[#93243f] hover:text-[#7b1e34]" href="#">Catalog</a>
-            <a class="rounded-full border border-[#d096a6] px-4 py-2 transition hover:border-[#93243f] hover:text-[#7b1e34]" href="#">Collections</a>
-            <a class="rounded-full border border-[#d096a6] px-4 py-2 transition hover:border-[#93243f] hover:text-[#7b1e34]" href="#">Reading Room</a>
-            <a class="rounded-full border border-[#d096a6] px-4 py-2 transition hover:border-[#93243f] hover:text-[#7b1e34]" href="#">About</a>
-          </nav>
-        </header>
-
-        <main class="space-y-20">
-          <section class="grid items-center gap-12 rounded-3xl bg-white/80 p-10 shadow-lg shadow-rose-100/50 ring-1 ring-rose-100/80 md:grid-cols-[1.1fr,0.9fr]">
-            <div class="space-y-6">
-              <div class="inline-flex items-center gap-2 rounded-full bg-[#f1e0e5] px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-[#7b1e34]">
-                <span class="h-2 w-2 rounded-full bg-[#93243f]"></span>
-                Since 1894
-              </div>
-              <h2 class="display-font text-4xl font-semibold leading-tight text-[#3f101d] md:text-5xl">
-                A home for the books that linger long after you close them.
-              </h2>
-              <p class="text-lg leading-relaxed text-slate-700">
-                We steward first editions, annotated manuscripts, and thoughtful reprints that invite slow reading. Every
-                volume is catalogued with provenance notes and the quiet detail they deserve.
-              </p>
-              <div class="flex flex-wrap gap-3">
-                <a class="inline-flex items-center justify-center rounded-full bg-[#93243f] px-5 py-3 text-sm font-semibold text-white shadow-md shadow-rose-200 transition hover:bg-[#7b1e34]" href="#">
-                  Browse the catalogue
-                </a>
-                <a class="inline-flex items-center justify-center rounded-full border border-[#d096a6] px-5 py-3 text-sm font-semibold text-[#7b1e34] transition hover:border-[#93243f] hover:text-[#93243f]" href="#">
-                  Book a reading table
-                </a>
-              </div>
-              <div class="flex flex-wrap items-center gap-4 text-sm text-slate-600">
-                <div class="flex items-center gap-2">
-                  <span class="h-2.5 w-2.5 rounded-full bg-[#93243f]"></span>
-                  Curated weekly
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="h-2.5 w-2.5 rounded-full bg-[#7b1e34]"></span>
-                  Annotations preserved
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="h-2.5 w-2.5 rounded-full bg-[#b65b70]"></span>
-                  Members' salon every Thursday
-                </div>
-              </div>
-            </div>
-
-            <div class="relative">
-              <div class="absolute -inset-6 rounded-3xl bg-gradient-to-b from-[#f6d9e0] via-white to-white"></div>
-              <div class="relative space-y-4 rounded-2xl border border-[#f1e0e5] bg-white/90 p-6 shadow-md">
-                <div class="space-y-2">
-                  <p class="text-xs uppercase tracking-[0.3em] text-[#7b1e34]">Featured volume</p>
-                  <p class="display-font text-2xl font-semibold text-[#3f101d]">Collected Essays of E. Blackwood</p>
-                  <p class="text-sm text-slate-600">Third printing, marginalia by the author, linen binding.</p>
-                </div>
-                <div class="grid grid-cols-2 gap-3 text-sm">
-                  <div class="rounded-lg bg-[#f9f1f5] p-3 text-[#65192c]">
-                    <p class="text-xs uppercase tracking-[0.2em] text-[#7b1e34]">Condition</p>
-                    <p class="font-semibold">Fine</p>
-                  </div>
-                  <div class="rounded-lg bg-[#f9f1f5] p-3 text-[#65192c]">
-                    <p class="text-xs uppercase tracking-[0.2em] text-[#7b1e34]">Provenance</p>
-                    <p class="font-semibold">Green Street Estate</p>
-                  </div>
-                </div>
-                <div class="rounded-xl bg-[#93243f] px-5 py-4 text-white shadow-inner shadow-[#7b1e34]/40">
-                  <p class="text-xs uppercase tracking-[0.25em] text-rose-100">Notes</p>
-                  <p class="mt-1 text-sm leading-relaxed text-rose-50">
-                    Pencil marginalia on chapters 2 and 5; pressed heather found between pp. 146–147 is preserved.
-                  </p>
-                </div>
-                <button class="w-full rounded-full border border-[#93243f] px-5 py-3 text-sm font-semibold text-[#93243f] transition hover:bg-[#93243f] hover:text-white">
-                  Request a private viewing
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <section class="space-y-6">
-            <div class="flex items-baseline justify-between">
-              <div>
-                <p class="text-sm uppercase tracking-[0.3em] text-[#7b1e34]">Shelves worth lingering on</p>
-                <h3 class="display-font text-3xl font-semibold text-[#3f101d]">Curated collections</h3>
-              </div>
-              <a class="text-sm font-semibold text-[#7b1e34] underline underline-offset-4 hover:text-[#93243f]" href="#">View all</a>
-            </div>
-            <div class="grid gap-6 md:grid-cols-3">
-              <article class="flex flex-col gap-3 rounded-2xl border border-[#f1e0e5] bg-white/80 p-6 shadow-sm">
-                <p class="text-xs uppercase tracking-[0.2em] text-[#7b1e34]">Rare Editions</p>
-                <h4 class="display-font text-xl font-semibold text-[#3f101d]">Modernist first printings</h4>
-                <p class="text-sm leading-relaxed text-slate-700">
-                  Joyce, Woolf, Stein—works with notes from early owners and librarians, catalogued with condition reports.
-                </p>
-                <a class="mt-auto text-sm font-semibold text-[#93243f] underline underline-offset-4 hover:text-[#7b1e34]" href="#">See the shelf</a>
-              </article>
-              <article class="flex flex-col gap-3 rounded-2xl border border-[#f1e0e5] bg-white/80 p-6 shadow-sm">
-                <p class="text-xs uppercase tracking-[0.2em] text-[#7b1e34]">Correspondence</p>
-                <h4 class="display-font text-xl font-semibold text-[#3f101d]">Letters & marginalia</h4>
-                <p class="text-sm leading-relaxed text-slate-700">
-                  Handwritten exchanges paired with the books they reference, preserved in custom sleeves.
-                </p>
-                <a class="mt-auto text-sm font-semibold text-[#93243f] underline underline-offset-4 hover:text-[#7b1e34]" href="#">Read excerpts</a>
-              </article>
-              <article class="flex flex-col gap-3 rounded-2xl border border-[#f1e0e5] bg-white/80 p-6 shadow-sm">
-                <p class="text-xs uppercase tracking-[0.2em] text-[#7b1e34]">Presswork</p>
-                <h4 class="display-font text-xl font-semibold text-[#3f101d]">Fine press & bindings</h4>
-                <p class="text-sm leading-relaxed text-slate-700">
-                  Small-run presses, deckled edges, letterpress impressions you can feel with your fingertip.
-                </p>
-                <a class="mt-auto text-sm font-semibold text-[#93243f] underline underline-offset-4 hover:text-[#7b1e34]" href="#">Explore bindings</a>
-              </article>
-            </div>
-          </section>
-
-          <section class="grid gap-10 rounded-3xl bg-[#f1e0e5]/70 p-10 ring-1 ring-[#e1bcc6] md:grid-cols-2">
-            <div class="space-y-4">
-              <p class="text-sm uppercase tracking-[0.3em] text-[#7b1e34]">Why we collect</p>
-              <h3 class="display-font text-3xl font-semibold text-[#3f101d]">Books as companions, not artifacts.</h3>
-              <p class="text-base leading-relaxed text-[#4f1323]">
-                Our cataloging notes privilege human traces—pencil ticks, folded corners, the way a book falls open. We
-                keep these details visible to honor the readers before you and invite the ones to come.
-              </p>
-              <div class="space-y-3 text-sm text-[#65192c]">
-                <div class="flex items-start gap-3">
-                  <span class="mt-1 h-2 w-2 rounded-full bg-[#93243f]"></span>
-                  <p>Provenance entries accompany every listing.</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-1 h-2 w-2 rounded-full bg-[#93243f]"></span>
-                  <p>Climate-controlled reading room with natural light and linen throws.</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-1 h-2 w-2 rounded-full bg-[#93243f]"></span>
-                  <p>Loan program for researchers with concierge pulls and digitization on request.</p>
-                </div>
-              </div>
-            </div>
-            <div class="rounded-2xl border border-[#d096a6] bg-white/80 p-8 shadow-md">
-              <p class="text-xs uppercase tracking-[0.25em] text-[#7b1e34]">Reading room log</p>
-              <div class="mt-4 space-y-4">
-                <div class="flex items-start justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-semibold text-[#3f101d]">Woolf, <em>To the Lighthouse</em></p>
-                    <p class="text-xs text-slate-600">Reader: D. Hargreaves · Notes on rhythm marked in graphite.</p>
-                  </div>
-                  <span class="rounded-full bg-[#f9f1f5] px-3 py-1 text-xs font-semibold text-[#7b1e34]">Table 3</span>
-                </div>
-                <div class="flex items-start justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-semibold text-[#3f101d]">Bishop, <em>Geography III</em></p>
-                    <p class="text-xs text-slate-600">Reader: A. Mbatha · Tracked enjambment variations.</p>
-                  </div>
-                  <span class="rounded-full bg-[#f9f1f5] px-3 py-1 text-xs font-semibold text-[#7b1e34]">Table 1</span>
-                </div>
-                <div class="flex items-start justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-semibold text-[#3f101d]">Morrison, <em>Beloved</em></p>
-                    <p class="text-xs text-slate-600">Reader: L. Akhtar · Focus on rememory passages.</p>
-                  </div>
-                  <span class="rounded-full bg-[#f9f1f5] px-3 py-1 text-xs font-semibold text-[#7b1e34]">Table 6</span>
-                </div>
-              </div>
-              <button class="mt-6 w-full rounded-full bg-[#93243f] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[#7b1e34]/50 transition hover:bg-[#7b1e34]">
-                Reserve a table
-              </button>
-            </div>
-          </section>
-
-          <section class="grid gap-8 md:grid-cols-[1.1fr,0.9fr]">
-            <div class="space-y-4">
-              <p class="text-sm uppercase tracking-[0.3em] text-[#7b1e34]">Salons & gatherings</p>
-              <h3 class="display-font text-3xl font-semibold text-[#3f101d]">A quiet calendar for attentive readers.</h3>
-              <p class="text-base leading-relaxed text-slate-700">
-                Evenings feature moderated conversation, no microphones, and a single bottle of wine shared between four.
-                Arrive early; the best chairs fill quickly.
-              </p>
-              <div class="space-y-3 rounded-2xl border border-[#f1e0e5] bg-white/70 p-6 shadow-sm">
-                <div class="flex items-center justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-semibold text-[#3f101d]">Marginalia Night</p>
-                    <p class="text-xs text-slate-600">Bring a passage with your own notes to read aloud.</p>
-                  </div>
-                  <span class="rounded-full bg-[#f1e0e5] px-3 py-1 text-xs font-semibold text-[#7b1e34]">Thurs · 7pm</span>
-                </div>
-                <div class="flex items-center justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-semibold text-[#3f101d]">Binder's Table</p>
-                    <p class="text-xs text-slate-600">Demonstration of hand stitching and cloth choices.</p>
-                  </div>
-                  <span class="rounded-full bg-[#f1e0e5] px-3 py-1 text-xs font-semibold text-[#7b1e34]">Sat · 2pm</span>
-                </div>
-                <div class="flex items-center justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-semibold text-[#3f101d]">Quiet Hours</p>
-                    <p class="text-xs text-slate-600">Phones away, lamps on, tea service included.</p>
-                  </div>
-                  <span class="rounded-full bg-[#f1e0e5] px-3 py-1 text-xs font-semibold text-[#7b1e34]">Daily · 4–6pm</span>
-                </div>
-              </div>
-            </div>
-            <div class="rounded-3xl border border-[#d096a6] bg-white/80 p-8 shadow-md">
-              <p class="text-sm uppercase tracking-[0.25em] text-[#7b1e34]">Newsletter</p>
-              <h4 class="display-font text-2xl font-semibold text-[#3f101d]">A slow letter, once a fortnight.</h4>
-              <p class="mt-3 text-sm leading-relaxed text-slate-700">
-                Shelf notes, new arrivals, and the occasional poem tucked at the end. No ads, no noise.
-              </p>
-              <form class="mt-6 space-y-4">
-                <div class="space-y-2">
-                  <label class="text-xs uppercase tracking-[0.2em] text-[#7b1e34]" for="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    class="w-full rounded-full border border-[#d096a6] bg-white px-4 py-3 text-sm text-[#3f101d] shadow-inner focus:border-[#93243f] focus:outline-none focus:ring-2 focus:ring-[#f1e0e5]"
-                    placeholder="you@example.com"
-                  />
-                </div>
-                <button class="w-full rounded-full bg-[#93243f] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[#7b1e34]/40 transition hover:bg-[#7b1e34]">
-                  Join the letter
-                </button>
-              </form>
-              <p class="mt-3 text-xs text-slate-500">We keep your address only for these letters. Unsubscribe anytime.</p>
-            </div>
-          </section>
-        </main>
-
-        <footer class="border-t border-[#e1bcc6] pt-6">
-          <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p class="text-sm uppercase tracking-[0.25em] text-[#7b1e34]">Galway Clarke</p>
-              <p class="text-sm text-slate-600">4 Rose Lane, Room 3 · Appointments welcome.</p>
-            </div>
-            <div class="flex flex-wrap gap-4 text-sm font-semibold text-[#93243f]">
-              <a class="hover:text-[#7b1e34]" href="#">Catalogue</a>
-              <a class="hover:text-[#7b1e34]" href="#">Research loans</a>
-              <a class="hover:text-[#7b1e34]" href="#">Visit</a>
-              <a class="hover:text-[#7b1e34]" href="#">Contact</a>
-            </div>
-          </div>
-        </footer>
-      </div>
+      <nav class="flex flex-wrap items-center gap-2 text-sm font-semibold">
+        <a class="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-400" href="#">Catalog</a>
+        <a class="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-400" href="#">Collections</a>
+        <a class="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-400" href="#">Reading Room</a>
+        <a class="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-400" href="{% url 'admin:index' %}">Admin</a>
+        <a class="rounded-full border border-slate-900 px-4 py-2 text-slate-900 transition hover:bg-slate-900 hover:text-white" href="{% url 'signout' %}">
+          Sign out
+        </a>
+      </nav>
     </div>
-  </body>
-</html>
+  </header>
+
+  <main class="mx-auto max-w-6xl space-y-10 px-6 py-10">
+    <section class="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
+      <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-sm text-slate-600">Welcome back{% if request.user.first_name %}, {{ request.user.first_name }}{% endif %}.</p>
+          <h1 class="text-3xl font-semibold">Your Galway Clarke dashboard</h1>
+        </div>
+        <div class="flex gap-2 text-sm">
+          <span class="rounded-full bg-emerald-100 px-3 py-1 font-semibold text-emerald-800">Member</span>
+          <span class="rounded-full bg-slate-100 px-3 py-1 text-slate-700">{{ request.user.email }}</span>
+        </div>
+      </div>
+      <p class="mt-4 text-slate-700">
+        Explore the catalogue, reserve the reading room, and keep track of the volumes you love most.
+      </p>
+    </section>
+
+    <section class="grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
+        <h2 class="text-xl font-semibold">Quick links</h2>
+        <ul class="mt-4 space-y-2 text-slate-700">
+          <li><a class="font-semibold text-slate-900 underline" href="#">Browse catalog</a></li>
+          <li><a class="font-semibold text-slate-900 underline" href="#">Book a reading table</a></li>
+          <li><a class="font-semibold text-slate-900 underline" href="{% url 'admin:index' %}">Open admin</a></li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
+        <h2 class="text-xl font-semibold">Account</h2>
+        <p class="mt-2 text-slate-700">Signed in as {{ request.user.get_full_name|default:request.user.email }}.</p>
+        <div class="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
+          <a class="rounded-full border border-slate-200 px-4 py-2 transition hover:border-slate-400" href="#">Manage profile</a>
+          <a class="rounded-full border border-slate-900 px-4 py-2 text-slate-900 transition hover:bg-slate-900 hover:text-white" href="{% url 'signout' %}">Sign out</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</c-app.layouts.base>

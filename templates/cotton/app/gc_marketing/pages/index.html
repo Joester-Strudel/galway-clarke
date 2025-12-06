@@ -1,0 +1,28 @@
+<c-app.layouts.base>
+  <main class="mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center gap-10 px-6 py-12 text-center">
+    <div class="space-y-3">
+      <p class="text-sm uppercase tracking-[0.3em] text-slate-600">Galway Clarke</p>
+      <h1 class="text-4xl font-semibold leading-tight md:text-5xl">Fine books, thoughtful reading.</h1>
+      <p class="text-lg text-slate-700">
+        Join to browse the collection, reserve the reading room, and keep track of your favorite finds.
+      </p>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a
+        class="rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-slate-800"
+        href="{% url 'signup' %}"
+      >
+        Create an account
+      </a>
+      <a
+        class="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400"
+        href="{% url 'signin' %}"
+      >
+        Sign in
+      </a>
+    </div>
+    <p class="text-sm text-slate-500">
+      Staff? Head to the <a class="font-semibold text-slate-900 underline" href="{% url 'admin:index' %}">admin dashboard</a>.
+    </p>
+  </main>
+</c-app.layouts.base>
