@@ -36,6 +36,11 @@ class GcUser(AbstractBaseUser, PermissionsMixin):
         max_length=150,
         blank=True,
     )
+    preferences = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text="User-specific preferences and UI state.",
+    )
     last_name = models.CharField(
         max_length=150,
         blank=True,

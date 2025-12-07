@@ -1,7 +1,6 @@
 <div
   id="htmx_app"
-  x-data="{ navCollapsed: false }"
-  @toggle-nav.window="navCollapsed = !navCollapsed"
+  x-data="{ navCollapsed: {% if user_preferences.nav_collapsed %}true{% else %}false{% endif %} }"
 >
   <c-app.components.header />
   <c-app.layouts.main />

@@ -1,15 +1,16 @@
+<!-- prettier-ignore -->
 <a
-  class="flex items-center gap-3 rounded px-3 py-2 transition hover:bg-white/10"
+  class="flex w-full items-center rounded py-2 px-3 transition hover:bg-starlight/10"
   href="{{ href|default:'#' }}"
   {% if hx_get %}hx-get="{{ hx_get }}"{% endif %}
   hx-target="#htmx_workspace"
   hx-swap="innerHTML"
+  {% if hx_get %}hx-push-url="{{ hx_push|default:hx_get }}"{% endif %}
 >
-  <span class="material-symbols-outlined text-base transition duration-200 pr-1.5">{{ icon|default:"circle" }}</span>
+  <span class="material-symbols-outlined text-base transition duration-200 shrink-0">{{ icon|default:"circle" }}</span>
   <span
-    x-show="!navCollapsed"
-    x-transition.opacity
-    class="origin-left transition duration-200"
+    class="origin-left transition-all duration-200"
+    :class="navCollapsed ? 'opacity-0 w-0 ml-0 overflow-hidden' : 'opacity-100 w-auto ml-3'"
   >
     {{ label|default:"Menu Item" }}
   </span>

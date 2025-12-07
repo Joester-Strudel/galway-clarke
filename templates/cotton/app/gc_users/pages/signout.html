@@ -1,20 +1,22 @@
 <c-app.layouts.base>
-  <main class="flex min-h-screen items-center justify-center px-4 py-12 text-white">
-    <div class="w-full max-w-3xl space-y-6 rounded-2xl bg-white/5 p-8 backdrop-blur-sm border border-white/10 gc-box-shadow">
-      <h1 class="text-3xl font-semibold">Sign out</h1>
-      <p class="text-white/80">Are you sure you want to end your session?</p>
+  <main class="flex min-h-screen items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md space-y-6 rounded-md bg-white p-8 shadow-xl text-center">
+      <h1 class="text-3xl font-bold text-slate-900">Sign Out</h1>
+      <p class="text-slate-700">Are you sure you want to end your session?</p>
       <form method="post" class="space-y-4">
         {% csrf_token %}
         <button
           type="submit"
-          class="w-full rounded bg-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/30"
+          class="w-full rounded max-w-[100px] bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
         >
-          Sign out
+          Sign Out
         </button>
       </form>
-      <p class="text-sm text-white/80">
+      <p class="text-sm text-slate-600">
         Changed your mind?
-        <a class="font-semibold text-white underline" href="{% url 'marketing-home' %}">Return home</a>.
+        <a class="font-semibold text-primary underline" href="{% url 'marketing-home' %}"
+          >Return home</a
+        >.
       </p>
     </div>
   </main>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 def get_dashboard_index(request):
@@ -9,4 +9,5 @@ def get_dashboard_index(request):
     if request.headers.get("HX-Request") == "true":
         return render(request, "cotton/app/gc_dashboard/pages/index.html")
 
-    return render(request, "cotton/app/index.html")
+    # For non-HTMX requests, render the full shell with the dashboard content preloaded.
+    return render(request, "cotton/app/index.html", {"workspace_template": "cotton/app/gc_dashboard/pages/index.html"})

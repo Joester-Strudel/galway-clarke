@@ -49,6 +49,7 @@ class GcUserAdmin(SimpleHistoryAdmin, ModelAdmin):
                     "last_name",
                     "email",
                     "date_joined",
+                    "preferences",
                 ],
             },
         ),

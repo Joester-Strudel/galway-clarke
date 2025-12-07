@@ -9,4 +9,4 @@ def get_crm_index(request):
     if request.headers.get("HX-Request") == "true":
         return render(request, "cotton/app/gc_crm/pages/index.html")
 
-    return render(request, "cotton/app/index.html")
+    return render(request, "cotton/app/index.html", {"workspace_template": "cotton/app/gc_crm/pages/index.html"})
