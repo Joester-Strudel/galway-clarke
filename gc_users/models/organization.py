@@ -1,4 +1,5 @@
 # Django Imports
+from django.conf import settings
 from django.db import models
 
 # First-Party Imports
@@ -12,6 +13,12 @@ class Organization(HistoryBaseModel):
         null=False,
         verbose_name="Name",
         help_text="The name of this organization.",
+    )
+    users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="organizations",
+        blank=True,
+        help_text="Users who belong to this organization.",
     )
 
     # Model Methods

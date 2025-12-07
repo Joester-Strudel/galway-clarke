@@ -1,0 +1,29 @@
+<c-app.layouts.base>
+  <main class="mx-auto max-w-2xl space-y-6 px-4 py-12">
+    <h1 class="text-3xl font-semibold">Choose an organization</h1>
+    {% if messages %}
+    <div class="space-y-2">
+      {% for message in messages %}
+      <div class="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <div class="space-y-3">
+        {% for org in organizations %}
+        <label class="flex cursor-pointer items-center gap-3 rounded border border-slate-200 bg-white px-4 py-3 shadow-sm hover:border-slate-300">
+          <input class="h-4 w-4 text-slate-900 focus:ring-slate-900" type="radio" name="organization_id" value="{{ org.id }}" />
+          <span class="text-slate-900">{{ org.name }}</span>
+        </label>
+        {% endfor %}
+      </div>
+      <button
+        type="submit"
+        class="w-full rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+      >
+        Continue
+      </button>
+    </form>
+  </main>
+</c-app.layouts.base>

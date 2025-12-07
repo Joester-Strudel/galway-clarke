@@ -1,0 +1,35 @@
+<c-app.layouts.base>
+  <main class="mx-auto max-w-xl space-y-6 px-4 py-12">
+    <h1 class="text-3xl font-semibold">Create an organization</h1>
+    {% if messages %}
+    <div class="space-y-2">
+      {% for message in messages %}
+      <div class="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-slate-700" for="name">Organization name</label>
+        <input
+          class="w-full rounded border border-slate-200 px-3 py-2 text-slate-900 focus:border-slate-400 focus:outline-none"
+          type="text"
+          id="name"
+          name="name"
+          required
+          value="{{ request.POST.name }}"
+        />
+      </div>
+      <button
+        type="submit"
+        class="w-full rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+      >
+        Create and continue
+      </button>
+    </form>
+    <p class="text-sm text-slate-600">
+      Already have organizations? <a class="font-semibold text-slate-900 underline" href="{% url 'select-organization' %}">Select one</a>.
+    </p>
+  </main>
+</c-app.layouts.base>

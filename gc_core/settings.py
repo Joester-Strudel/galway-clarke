@@ -66,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
+    "gc_users.middleware.OrganizationRequirementMiddleware",
 ]
 
 ROOT_URLCONF = "gc_core.urls"
@@ -83,6 +84,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "gc_users.context_processors.organization_context",
             ],
         },
     },

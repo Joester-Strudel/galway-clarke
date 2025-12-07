@@ -44,6 +44,7 @@ class OrganizationAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "classes": ["tab"],
                 "fields": [
                     "name",
+                    "users",
                 ],
             },
         ),
@@ -60,6 +61,7 @@ class OrganizationAdmin(SimpleHistoryAdmin, ModelAdmin):
             },
         ),
     )
+    filter_horizontal = ["users"]
 
     @display(description="Name", ordering="name")
     def formatted_name(self, obj):
