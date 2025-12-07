@@ -1,22 +1,33 @@
 <c-app.layouts.base>
-  <main class="mx-auto max-w-4xl space-y-6 px-4 py-12">
-    <h1 class="text-3xl font-semibold">Choose an organization</h1>
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {% for org in organizations %}
-      <a
-        href="{% url 'select-organization' %}?organization_id={{ org.id }}"
-        class="block rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
-      >
-        <p class="text-sm text-slate-500">Organization</p>
-        <p class="mt-1 text-lg font-semibold text-slate-900">{{ org.name }}</p>
-      </a>
-      {% empty %}
-      <p class="text-slate-700">You don't have any organizations yet.</p>
-      {% endfor %}
+  <main class="flex min-h-screen items-center justify-center px-4 py-12 text-white">
+    <div class="w-full max-w-5xl space-y-6 rounded-2xl bg-white/5 p-8 backdrop-blur-sm border border-white/10 gc-box-shadow">
+      <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-semibold">Choose an organization</h1>
+        <a
+          class="inline-flex items-center gap-2 rounded border border-white/30 px-3 py-2 text-sm font-semibold transition hover:border-white/60 hover:bg-white/10"
+          href="{% url 'create-organization' %}"
+        >
+          <span class="material-symbols-outlined text-base">add</span>
+          Create new
+        </a>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {% for org in organizations %}
+        <a
+          href="{% url 'select-organization' %}?organization_id={{ org.id }}"
+          class="block rounded-xl border border-white/10 bg-white/10 p-5 text-white shadow-lg transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/15"
+        >
+          <p class="text-sm text-white/80">Organization</p>
+          <p class="mt-1 text-lg font-semibold">{{ org.name }}</p>
+        </a>
+        {% empty %}
+        <p class="text-white/80">You don't have any organizations yet.</p>
+        {% endfor %}
+      </div>
+      <p class="text-sm text-white/80">
+        Need to create a new one?
+        <a class="font-semibold text-white underline" href="{% url 'create-organization' %}">Create an organization</a>.
+      </p>
     </div>
-    <p class="text-sm text-slate-600">
-      Need to create a new one?
-      <a class="font-semibold text-slate-900 underline" href="{% url 'create-organization' %}">Create an organization</a>.
-    </p>
   </main>
 </c-app.layouts.base>

@@ -9,10 +9,14 @@ from gc_users.views.signup_view import signup
 from gc_users.views.select_organization_view import select_organization
 from gc_users.views.create_organization_view import create_organization
 from gc_core.views.index_view import index
+from gc_dashboard.views.get_dashboard_index import get_dashboard_index
+from gc_crm.views.get_crm_index import get_crm_index
 
 
 urlpatterns = [
     path("", index, name="marketing-home"),
+    path("dashboard/", get_dashboard_index, name="dashboard-index"),
+    path("contacts/", get_crm_index, name="contacts-index"),
     path("signup/", signup, name="signup"),
     path("signin/", signin, name="signin"),
     path("signout/", signout, name="signout"),

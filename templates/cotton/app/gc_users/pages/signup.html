@@ -1,76 +1,78 @@
 <c-app.layouts.base>
-  <main class="mx-auto max-w-xl space-y-6 px-4 py-12">
-    <h1 class="text-3xl font-semibold">Create your account</h1>
-    {% if error %}
-    <div class="rounded border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{{ error }}</div>
-    {% endif %}
-    <form method="post" class="space-y-4">
-      {% csrf_token %}
-      <div class="space-y-1">
-        <label class="block text-sm font-medium text-slate-700" for="email">Email</label>
-        <input
-          class="w-full rounded border border-slate-200 px-3 py-2 text-slate-900 focus:border-slate-400 focus:outline-none"
-          type="email"
-          id="email"
-          name="email"
-          required
-          value="{{ request.POST.email }}"
-        />
-      </div>
-      <div class="grid gap-4 md:grid-cols-2">
+  <main class="flex min-h-screen items-center justify-center px-4 py-12 text-white">
+    <div class="w-full max-w-3xl space-y-6 rounded-2xl bg-white/5 p-8 backdrop-blur-sm border border-white/10 gc-box-shadow">
+      <h1 class="text-3xl font-semibold">Create your account</h1>
+      {% if error %}
+      <div class="rounded border border-white/20 bg-white/10 px-3 py-2 text-sm text-white">{{ error }}</div>
+      {% endif %}
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
         <div class="space-y-1">
-          <label class="block text-sm font-medium text-slate-700" for="first_name">First name</label>
+          <label class="block text-sm font-medium text-white/80" for="email">Email</label>
           <input
-            class="w-full rounded border border-slate-200 px-3 py-2 text-slate-900 focus:border-slate-400 focus:outline-none"
-            type="text"
-            id="first_name"
-            name="first_name"
-            value="{{ request.POST.first_name }}"
-          />
-        </div>
-        <div class="space-y-1">
-          <label class="block text-sm font-medium text-slate-700" for="last_name">Last name</label>
-          <input
-            class="w-full rounded border border-slate-200 px-3 py-2 text-slate-900 focus:border-slate-400 focus:outline-none"
-            type="text"
-            id="last_name"
-            name="last_name"
-            value="{{ request.POST.last_name }}"
-          />
-        </div>
-      </div>
-      <div class="grid gap-4 md:grid-cols-2">
-        <div class="space-y-1">
-          <label class="block text-sm font-medium text-slate-700" for="password1">Password</label>
-          <input
-            class="w-full rounded border border-slate-200 px-3 py-2 text-slate-900 focus:border-slate-400 focus:outline-none"
-            type="password"
-            id="password1"
-            name="password1"
+            class="w-full rounded border border-white/20 bg-white/5 px-3 py-2 text-white focus:border-white/50 focus:outline-none focus:ring-0"
+            type="email"
+            id="email"
+            name="email"
             required
+            value="{{ request.POST.email }}"
           />
         </div>
-        <div class="space-y-1">
-          <label class="block text-sm font-medium text-slate-700" for="password2">Confirm password</label>
-          <input
-            class="w-full rounded border border-slate-200 px-3 py-2 text-slate-900 focus:border-slate-400 focus:outline-none"
-            type="password"
-            id="password2"
-            name="password2"
-            required
-          />
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="space-y-1">
+            <label class="block text-sm font-medium text-white/80" for="first_name">First name</label>
+            <input
+              class="w-full rounded border border-white/20 bg-white/5 px-3 py-2 text-white focus:border-white/50 focus:outline-none focus:ring-0"
+              type="text"
+              id="first_name"
+              name="first_name"
+              value="{{ request.POST.first_name }}"
+            />
+          </div>
+          <div class="space-y-1">
+            <label class="block text-sm font-medium text-white/80" for="last_name">Last name</label>
+            <input
+              class="w-full rounded border border-white/20 bg-white/5 px-3 py-2 text-white focus:border-white/50 focus:outline-none focus:ring-0"
+              type="text"
+              id="last_name"
+              name="last_name"
+              value="{{ request.POST.last_name }}"
+            />
+          </div>
         </div>
-      </div>
-      <button
-        type="submit"
-        class="w-full rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
-      >
-        Create account
-      </button>
-    </form>
-    <p class="text-sm text-slate-600">
-      Already have an account?
-      <a class="font-semibold text-slate-900 underline" href="{% url 'signin' %}">Sign in</a>.
-    </p>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="space-y-1">
+            <label class="block text-sm font-medium text-white/80" for="password1">Password</label>
+            <input
+              class="w-full rounded border border-white/20 bg-white/5 px-3 py-2 text-white focus:border-white/50 focus:outline-none focus:ring-0"
+              type="password"
+              id="password1"
+              name="password1"
+              required
+            />
+          </div>
+          <div class="space-y-1">
+            <label class="block text-sm font-medium text-white/80" for="password2">Confirm password</label>
+            <input
+              class="w-full rounded border border-white/20 bg-white/5 px-3 py-2 text-white focus:border-white/50 focus:outline-none focus:ring-0"
+              type="password"
+              id="password2"
+              name="password2"
+              required
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="w-full rounded bg-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/30"
+        >
+          Create account
+        </button>
+      </form>
+      <p class="text-sm text-white/80">
+        Already have an account?
+        <a class="font-semibold text-white underline" href="{% url 'signin' %}">Sign in</a>.
+      </p>
+    </div>
   </main>
 </c-app.layouts.base>

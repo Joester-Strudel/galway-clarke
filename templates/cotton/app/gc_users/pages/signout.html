@@ -1,19 +1,21 @@
 <c-app.layouts.base>
-  <main class="mx-auto max-w-xl space-y-6 px-4 py-12">
-    <h1 class="text-3xl font-semibold">Sign out</h1>
-    <p class="text-slate-700">Are you sure you want to end your session?</p>
-    <form method="post" class="space-y-4">
-      {% csrf_token %}
-      <button
-        type="submit"
-        class="w-full rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
-      >
-        Sign out
-      </button>
-    </form>
-    <p class="text-sm text-slate-600">
-      Changed your mind?
-      <a class="font-semibold text-slate-900 underline" href="{% url 'marketing-home' %}">Return home</a>.
-    </p>
+  <main class="flex min-h-screen items-center justify-center px-4 py-12 text-white">
+    <div class="w-full max-w-3xl space-y-6 rounded-2xl bg-white/5 p-8 backdrop-blur-sm border border-white/10 gc-box-shadow">
+      <h1 class="text-3xl font-semibold">Sign out</h1>
+      <p class="text-white/80">Are you sure you want to end your session?</p>
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <button
+          type="submit"
+          class="w-full rounded bg-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/30"
+        >
+          Sign out
+        </button>
+      </form>
+      <p class="text-sm text-white/80">
+        Changed your mind?
+        <a class="font-semibold text-white underline" href="{% url 'marketing-home' %}">Return home</a>.
+      </p>
+    </div>
   </main>
 </c-app.layouts.base>

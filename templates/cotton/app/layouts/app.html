@@ -1,4 +1,8 @@
-<div x-data="{ navCollapsed: false }" @toggle-nav.window="navCollapsed = !navCollapsed">
+<div
+  id="htmx_app"
+  x-data="{ navCollapsed: false }"
+  @toggle-nav.window="navCollapsed = !navCollapsed"
+>
   <c-app.components.header />
   <c-app.layouts.main />
 </div>

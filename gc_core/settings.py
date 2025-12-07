@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "unfold.contrib.simple_history",
     "simple_history",
     "django_cotton",
+    "django_htmx",
     # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -67,6 +68,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
     "gc_users.middleware.OrganizationRequirementMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "gc_core.urls"

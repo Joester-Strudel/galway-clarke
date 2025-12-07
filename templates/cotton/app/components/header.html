@@ -27,7 +27,8 @@
     <button
       type="button"
       class="flex h-full items-center justify-center p-0 text-white"
-      aria-label="Profile"
+      aria-label="Open profile drawer"
+      @click="$dispatch('toggle-drawer')"
     >
       <span class="material-symbols-outlined text-2xl leading-none">account_circle</span>
     </button>

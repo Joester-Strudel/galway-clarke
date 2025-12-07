@@ -9,6 +9,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
+    <script src="{% static 'js/htmx.min.js' %}" defer></script>
     <style>
       @font-face {
         font-family: "DM Serif Display";
@@ -29,7 +30,12 @@
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <title>Galway Clarke</title>
   </head>
-  <body class="text-slate-900" style="background: linear-gradient(to top right, #4a2733, #594051)">
+  <body
+    id="htmx_body"
+    class="text-slate-900"
+    style="background: linear-gradient(to top right, #4a2733, #594051)"
+  >
+    <c-app.components.drawer />
     {{ slot }}
   </body>
 </html>
