@@ -17,13 +17,11 @@ def select_organization(request):
         messages.info(request, "Create an organization to continue.")
         return redirect("create-organization")
 
-    if request.method == "POST":
-        org_id = request.POST.get("organization_id")
-        if org_id and orgs.filter(id=org_id).exists():
-            request.session["active_organization_id"] = int(org_id)
-            messages.success(request, "Organization selected.")
-            return redirect("marketing-home")
-        messages.error(request, "Please choose a valid organization.")
+    org_id = request.POST.get("organization_id") if request.method == "POST" else request.GET.get("organization_id")
+    if org_id and orgs.filter(id=org_id).exists():
+        request.session["active_organization_id"] = str(org_id)
+        messages.success(request, "Organization selected.")
+        return redirect("marketing-home")
 
     return render(
         request,

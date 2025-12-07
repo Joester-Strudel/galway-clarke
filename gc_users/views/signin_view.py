@@ -19,21 +19,14 @@ def signin(request):
         if user is not None:
             login(request, user)
 
-            # If the user belongs to multiple organizations, let them pick one.
+            # Require an organization selection after sign-in.
             org_qs = user.organizations.all()
             if not org_qs.exists():
                 messages.info(request, "Create an organization to continue.")
                 return redirect("create-organization")
-            if org_qs.count() == 1:
-                request.session["active_organization_id"] = org_qs.first().id
-                messages.success(request, "Signed in successfully.")
-                return redirect("marketing-home")
-            if org_qs.count() > 1:
-                messages.info(request, "Choose an organization to continue.")
-                return redirect("select-organization")
 
-            messages.success(request, "Signed in successfully.")
-            return redirect("marketing-home")
+            messages.info(request, "Choose an organization to continue.")
+            return redirect("select-organization")
 
         context["error"] = "Invalid email or password."
 

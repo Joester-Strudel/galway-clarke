@@ -44,6 +44,7 @@ class OrganizationAdmin(SimpleHistoryAdmin, ModelAdmin):
                 "classes": ["tab"],
                 "fields": [
                     "name",
+                    "owner",
                     "users",
                 ],
             },
@@ -62,12 +63,13 @@ class OrganizationAdmin(SimpleHistoryAdmin, ModelAdmin):
         ),
     )
     filter_horizontal = ["users"]
+    autocomplete_fields = ["owner"]
 
     @display(description="Name", ordering="name")
     def formatted_name(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.name,
                     "size": "large",

@@ -21,9 +21,9 @@ def create_organization(request):
         if not name:
             messages.error(request, "Organization name is required.")
         else:
-            org = Organization.objects.create(name=name)
+            org = Organization.objects.create(name=name, owner=request.user)
             org.users.add(request.user)
-            request.session["active_organization_id"] = org.id
+            request.session["active_organization_id"] = str(org.id)
             messages.success(request, "Organization created.")
             return redirect("marketing-home")
 

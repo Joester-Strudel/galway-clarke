@@ -11,8 +11,17 @@ class Organization(HistoryBaseModel):
         max_length=255,
         blank=False,
         null=False,
+        unique=True,
         verbose_name="Name",
         help_text="The name of this organization.",
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name="owned_organizations",
+        null=True,
+        blank=True,
+        help_text="User who owns this organization.",
     )
     users = models.ManyToManyField(
         settings.AUTH_USER_MODEL,

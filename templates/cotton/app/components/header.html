@@ -1,0 +1,35 @@
+<header class="relative flex h-[50px] items-center justify-between overflow-hidden px-4">
+  <div class="flex items-center gap-2">
+    <h1
+      class="text-white text-2xl font-semibold leading-none"
+      style="font-family: 'DM Serif Display', serif"
+    >
+      Galway Clarke
+    </h1>
+    <button
+      type="button"
+      class="flex h-full items-center justify-center p-0 text-white"
+      aria-label="Toggle navigation"
+      @click="$dispatch('toggle-nav')"
+    >
+      <span class="material-symbols-outlined text-2xl leading-none">menu_open</span>
+    </button>
+  </div>
+  <div class="flex items-center gap-2">
+    <div class="flex w-32 flex-col overflow-hidden text-white text-xs leading-tight">
+      <span class="truncate font-semibold"
+        >{{ request.user.get_full_name|default:request.user.email }}</span
+      >
+      <span class="truncate text-[0.7rem] text-white/80">
+        {{ active_organization.name|default:"No organization" }}
+      </span>
+    </div>
+    <button
+      type="button"
+      class="flex h-full items-center justify-center p-0 text-white"
+      aria-label="Profile"
+    >
+      <span class="material-symbols-outlined text-2xl leading-none">account_circle</span>
+    </button>
+  </div>
+</header>
