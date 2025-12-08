@@ -1,5 +1,5 @@
 <aside
-  class="mr-1 bg-cloud dark:bg-obsidian text-obsidian dark:text-starlight transition-all duration-300"
+  class="mr-1 bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-gc-light-text-primary dark:text-gc-dark-text-primary transition-all duration-300"
   :class="navCollapsed ? 'w-16' : 'w-48'"
 >
   <nav class="space-y-1 p-3 text-sm font-semibold">
@@ -10,13 +10,15 @@
       hx-get="{% url 'dashboard-index' %}"
       hx-push="/"
     />
+
     <c-app.components.navbar_item
       icon="contacts"
-      label="Contacts"
-      href="{% url 'contacts-index' %}"
-      hx-get="{% url 'contacts-index' %}"
-      hx-push="{% url 'contacts-index' %}"
+      label="Customers"
+      href="{% url 'crm-index' %}"
+      hx-get="{% url 'crm-index' %}"
+      hx-push="{% url 'crm-index' %}"
     />
+
     <c-app.components.navbar_item icon="volunteer_activism" label="Donors" />
     <c-app.components.navbar_item icon="campaign" label="Engagement" />
     <c-app.components.navbar_item icon="confirmation_number" label="Events" />

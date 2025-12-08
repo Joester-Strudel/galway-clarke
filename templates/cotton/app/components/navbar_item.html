@@ -1,16 +1,25 @@
 <!-- prettier-ignore -->
 <a
-  class="flex w-full items-center rounded py-2 px-3 transition hover:bg-starlight/10"
+  class="flex w-full items-center rounded py-2 px-3 transition
+         text-gc-light-text-primary dark:text-gc-dark-text-primary
+         hover:bg-gc-light-bg-secondary/10 dark:hover:bg-gc-dark-bg-secondary/10"
   href="{{ href|default:'#' }}"
   {% if hx_get %}hx-get="{{ hx_get }}"{% endif %}
   hx-target="#htmx_workspace"
   hx-swap="innerHTML"
   {% if hx_get %}hx-push-url="{{ hx_push|default:hx_get }}"{% endif %}
 >
-  <span class="material-symbols-outlined text-base transition duration-200 shrink-0">{{ icon|default:"circle" }}</span>
+  <span
+    class="material-symbols-outlined text-base transition duration-200 shrink-0 text-gc-theme-accent"
+  >
+    {{ icon|default:"circle" }}
+  </span>
+
   <span
     class="origin-left transition-all duration-200"
-    :class="navCollapsed ? 'opacity-0 w-0 ml-0 overflow-hidden' : 'opacity-100 w-auto ml-3'"
+    :class="navCollapsed
+      ? 'opacity-0 w-0 ml-0 overflow-hidden'
+      : 'opacity-100 w-auto ml-3'"
   >
     {{ label|default:"Menu Item" }}
   </span>

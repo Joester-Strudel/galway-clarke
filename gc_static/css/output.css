@@ -11,7 +11,6 @@
     --color-red-200: oklch(88.5% 0.062 18.334);
     --color-red-700: oklch(50.5% 0.213 27.518);
     --color-slate-50: oklch(98.4% 0.003 247.858);
-    --color-slate-100: oklch(96.8% 0.007 247.896);
     --color-slate-200: oklch(92.9% 0.013 255.508);
     --color-slate-300: oklch(86.9% 0.022 252.894);
     --color-slate-400: oklch(70.4% 0.04 256.788);
@@ -62,11 +61,15 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
-    --color-primary: #150124;
-    --color-obsidian: #0f0f0f;
-    --color-charcoal: #121212;
-    --color-cloud: #ededed;
-    --color-starlight: #e9e1f2;
+    --color-primary: #8c4323;
+    --color-gc-theme-accent: #ce6a3b;
+    --color-gc-dark-bg-primary: #1a1614;
+    --color-gc-dark-bg-secondary: #2a2421;
+    --color-gc-dark-text-primary: #f4ede7;
+    --color-gc-light-bg-primary: #f5efe7;
+    --color-gc-light-bg-secondary: #faf6f0;
+    --color-gc-light-text-primary: #3a2f2a;
+    --color-gc-light-text-secondary: #5e514a;
   }
 }
 @layer base {
@@ -320,9 +323,6 @@
   .w-full {
     width: 100%;
   }
-  .w-screen {
-    width: 100vw;
-  }
   .max-w-3xl {
     max-width: var(--container-3xl);
   }
@@ -378,6 +378,9 @@
   }
   .flex-wrap {
     flex-wrap: wrap;
+  }
+  .items-baseline {
+    align-items: baseline;
   }
   .items-center {
     align-items: center;
@@ -479,6 +482,15 @@
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
   }
+  .border-gc-light-bg-secondary {
+    border-color: var(--color-gc-light-bg-secondary);
+  }
+  .border-gc-light-bg-secondary\/40 {
+    border-color: color-mix(in srgb, #faf6f0 40%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-gc-light-bg-secondary) 40%, transparent);
+    }
+  }
   .border-gray-200 {
     border-color: var(--color-gray-200);
   }
@@ -509,20 +521,17 @@
       background-color: color-mix(in oklab, var(--color-black) 50%, transparent);
     }
   }
-  .bg-cloud {
-    background-color: var(--color-cloud);
+  .bg-gc-light-bg-primary {
+    background-color: var(--color-gc-light-bg-primary);
   }
-  .bg-obsidian {
-    background-color: var(--color-obsidian);
+  .bg-gc-light-bg-secondary {
+    background-color: var(--color-gc-light-bg-secondary);
   }
   .bg-primary {
     background-color: var(--color-primary);
   }
   .bg-red-50 {
     background-color: var(--color-red-50);
-  }
-  .bg-slate-100 {
-    background-color: var(--color-slate-100);
   }
   .bg-slate-900 {
     background-color: var(--color-slate-900);
@@ -589,6 +598,9 @@
   }
   .py-12 {
     padding-block: calc(var(--spacing) * 12);
+  }
+  .pb-3 {
+    padding-bottom: calc(var(--spacing) * 3);
   }
   .pl-0 {
     padding-left: calc(var(--spacing) * 0);
@@ -661,14 +673,14 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
-  .text-obsidian {
-    color: var(--color-obsidian);
+  .text-gc-light-text-primary {
+    color: var(--color-gc-light-text-primary);
   }
-  .text-obsidian\/70 {
-    color: color-mix(in srgb, #0f0f0f 70%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      color: color-mix(in oklab, var(--color-obsidian) 70%, transparent);
-    }
+  .text-gc-light-text-secondary {
+    color: var(--color-gc-light-text-secondary);
+  }
+  .text-gc-theme-accent {
+    color: var(--color-gc-theme-accent);
   }
   .text-primary {
     color: var(--color-primary);
@@ -684,9 +696,6 @@
   }
   .text-slate-700 {
     color: var(--color-slate-700);
-  }
-  .text-slate-800 {
-    color: var(--color-slate-800);
   }
   .text-slate-900 {
     color: var(--color-slate-900);
@@ -708,6 +717,9 @@
   }
   .opacity-0 {
     opacity: 0%;
+  }
+  .opacity-80 {
+    opacity: 80%;
   }
   .opacity-100 {
     opacity: 100%;
@@ -781,12 +793,12 @@
       }
     }
   }
-  .hover\:bg-cloud\/10 {
+  .hover\:bg-gc-light-bg-secondary\/10 {
     &:hover {
       @media (hover: hover) {
-        background-color: color-mix(in srgb, #ededed 10%, transparent);
+        background-color: color-mix(in srgb, #faf6f0 10%, transparent);
         @supports (color: color-mix(in lab, red, red)) {
-          background-color: color-mix(in oklab, var(--color-cloud) 10%, transparent);
+          background-color: color-mix(in oklab, var(--color-gc-light-bg-secondary) 10%, transparent);
         }
       }
     }
@@ -798,27 +810,10 @@
       }
     }
   }
-  .hover\:bg-slate-200 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-slate-200);
-      }
-    }
-  }
   .hover\:bg-slate-800 {
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-slate-800);
-      }
-    }
-  }
-  .hover\:bg-starlight\/10 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: color-mix(in srgb, #e9e1f2 10%, transparent);
-        @supports (color: color-mix(in lab, red, red)) {
-          background-color: color-mix(in oklab, var(--color-starlight) 10%, transparent);
-        }
       }
     }
   }
@@ -832,19 +827,12 @@
       }
     }
   }
-  .hover\:text-slate-600 {
+  .hover\:text-gc-light-text-primary\/70 {
     &:hover {
       @media (hover: hover) {
-        color: var(--color-slate-600);
-      }
-    }
-  }
-  .hover\:text-starlight\/70 {
-    &:hover {
-      @media (hover: hover) {
-        color: color-mix(in srgb, #e9e1f2 70%, transparent);
+        color: color-mix(in srgb, #3a2f2a 70%, transparent);
         @supports (color: color-mix(in lab, red, red)) {
-          color: color-mix(in oklab, var(--color-starlight) 70%, transparent);
+          color: color-mix(in oklab, var(--color-gc-light-text-primary) 70%, transparent);
         }
       }
     }
@@ -927,74 +915,121 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
-  .dark\:border-charcoal {
+  .dark\:border-gc-dark-bg-secondary {
     @media (prefers-color-scheme: dark) {
-      border-color: var(--color-charcoal);
+      border-color: var(--color-gc-dark-bg-secondary);
     }
   }
-  .dark\:border-starlight {
+  .dark\:border-gc-dark-bg-secondary\/40 {
     @media (prefers-color-scheme: dark) {
-      border-color: var(--color-starlight);
-    }
-  }
-  .dark\:bg-charcoal {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-charcoal);
-    }
-  }
-  .dark\:bg-obsidian {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-obsidian);
-    }
-  }
-  .dark\:text-cloud {
-    @media (prefers-color-scheme: dark) {
-      color: var(--color-cloud);
-    }
-  }
-  .dark\:text-starlight {
-    @media (prefers-color-scheme: dark) {
-      color: var(--color-starlight);
-    }
-  }
-  .dark\:text-starlight\/70 {
-    @media (prefers-color-scheme: dark) {
-      color: color-mix(in srgb, #e9e1f2 70%, transparent);
+      border-color: color-mix(in srgb, #2a2421 40%, transparent);
       @supports (color: color-mix(in lab, red, red)) {
-        color: color-mix(in oklab, var(--color-starlight) 70%, transparent);
+        border-color: color-mix(in oklab, var(--color-gc-dark-bg-secondary) 40%, transparent);
       }
     }
   }
-  .dark\:hover\:bg-charcoal {
+  .dark\:bg-gc-dark-bg-primary {
     @media (prefers-color-scheme: dark) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: var(--color-charcoal);
-        }
+      background-color: var(--color-gc-dark-bg-primary);
+    }
+  }
+  .dark\:bg-gc-dark-bg-secondary {
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-gc-dark-bg-secondary);
+    }
+  }
+  .dark\:text-gc-dark-text-primary {
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-gc-dark-text-primary);
+    }
+  }
+  .dark\:text-gc-dark-text-primary\/70 {
+    @media (prefers-color-scheme: dark) {
+      color: color-mix(in srgb, #f4ede7 70%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, var(--color-gc-dark-text-primary) 70%, transparent);
       }
     }
   }
-  .dark\:hover\:text-charcoal {
+  .dark\:hover\:bg-gc-dark-bg-secondary\/10 {
     @media (prefers-color-scheme: dark) {
       &:hover {
         @media (hover: hover) {
-          color: var(--color-charcoal);
-        }
-      }
-    }
-  }
-  .dark\:hover\:text-starlight\/80 {
-    @media (prefers-color-scheme: dark) {
-      &:hover {
-        @media (hover: hover) {
-          color: color-mix(in srgb, #e9e1f2 80%, transparent);
+          background-color: color-mix(in srgb, #2a2421 10%, transparent);
           @supports (color: color-mix(in lab, red, red)) {
-            color: color-mix(in oklab, var(--color-starlight) 80%, transparent);
+            background-color: color-mix(in oklab, var(--color-gc-dark-bg-secondary) 10%, transparent);
           }
         }
       }
     }
   }
+  .dark\:hover\:text-gc-dark-text-primary\/70 {
+    @media (prefers-color-scheme: dark) {
+      &:hover {
+        @media (hover: hover) {
+          color: color-mix(in srgb, #f4ede7 70%, transparent);
+          @supports (color: color-mix(in lab, red, red)) {
+            color: color-mix(in oklab, var(--color-gc-dark-text-primary) 70%, transparent);
+          }
+        }
+      }
+    }
+  }
+}
+.gc_title_font {
+  font-family: "DM Serif Display", serif;
+}
+:root[data-theme="rust"] {
+  --color-primary: #8c4323;
+  --color-gc-theme: #8c4323;
+  --color-gc-theme-accent: #ce6a3b;
+  --color-gc-theme-accent-dark: #8c4323;
+  --color-gc-dark-bg-primary: #1a1614;
+  --color-gc-dark-bg-secondary: #2a2421;
+  --color-gc-dark-text-primary: #f4ede7;
+  --color-gc-light-bg-primary: #f5efe7;
+  --color-gc-light-bg-secondary: #faf6f0;
+  --color-gc-light-text-primary: #3a2f2a;
+  --color-gc-light-text-secondary: #5e514a;
+}
+:root[data-theme="midnight"] {
+  --color-primary: #3b2a69;
+  --color-gc-theme: #3b2a69;
+  --color-gc-theme-accent: #6d72ff;
+  --color-gc-theme-accent-dark: #2e2453;
+  --color-gc-dark-bg-primary: #0f1020;
+  --color-gc-dark-bg-secondary: #1c1d33;
+  --color-gc-dark-text-primary: #f3f4ff;
+  --color-gc-light-bg-primary: #e7e8f5;
+  --color-gc-light-bg-secondary: #f2f2fc;
+  --color-gc-light-text-primary: #23223a;
+  --color-gc-light-text-secondary: #4a4967;
+}
+:root[data-theme="forest"] {
+  --color-primary: #4d5e3b;
+  --color-gc-theme: #4d5e3b;
+  --color-gc-theme-accent: #6e8b55;
+  --color-gc-theme-accent-dark: #3b4729;
+  --color-gc-dark-bg-primary: #0e130d;
+  --color-gc-dark-bg-secondary: #1b2617;
+  --color-gc-dark-text-primary: #ecf2e7;
+  --color-gc-light-bg-primary: #eef2ea;
+  --color-gc-light-bg-secondary: #f7faf4;
+  --color-gc-light-text-primary: #2a3327;
+  --color-gc-light-text-secondary: #515b4d;
+}
+:root[data-theme="slate"] {
+  --color-primary: #1e2a32;
+  --color-gc-theme: #1e2a32;
+  --color-gc-theme-accent: #36c2c1;
+  --color-gc-theme-accent-dark: #1c7070;
+  --color-gc-dark-bg-primary: #0c1114;
+  --color-gc-dark-bg-secondary: #1b2328;
+  --color-gc-dark-text-primary: #e2eff1;
+  --color-gc-light-bg-primary: #e8eef0;
+  --color-gc-light-bg-secondary: #f4f7f8;
+  --color-gc-light-text-primary: #1e2a32;
+  --color-gc-light-text-secondary: #4a5961;
 }
 @property --tw-translate-x {
   syntax: "*";

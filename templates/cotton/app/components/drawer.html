@@ -18,66 +18,83 @@
     x-transition:leave="transition transform ease-in duration-200"
     x-transition:leave-start="translate-x-0"
     x-transition:leave-end="translate-x-full"
-    class="fixed right-0 top-0 flex h-full w-80 flex-col border-l border-slate-200 dark:border-charcoal bg-cloud dark:bg-obsidian text-obsidian dark:text-starlight shadow-2xl"
+    class="fixed right-0 top-0 flex h-full w-80 flex-col border-l border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-gc-light-text-primary dark:text-gc-dark-text-primary shadow-2xl"
   >
+    <!-- Header -->
     <div
-      class="flex items-center justify-between border-b border-slate-200 dark:border-charcoal px-4 py-3"
+      class="flex items-center justify-between border-b border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-4 py-3"
     >
       <div>
         {% if request.user.is_authenticated %}
         <p class="text-sm font-semibold">
           {{ request.user.get_full_name|default:request.user.email }}
         </p>
-        <p class="text-xs text-obsidian/70 dark:text-starlight/70">
+        <p class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
           {{ active_organization.name|default:"No organization" }}
         </p>
         {% else %}
         <p class="text-sm font-semibold">Guest</p>
-        <p class="text-xs text-obsidian/70 dark:text-starlight/70">Not signed in</p>
+        <p class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+          Not signed in
+        </p>
         {% endif %}
       </div>
+
       <button
         type="button"
-        class="rounded p-2 text-obsidian dark:text-starlight hover:bg-starlight/10 dark:hover:bg-charcoal transition"
+        class="rounded p-2 text-gc-light-text-primary dark:text-gc-dark-text-primary hover:bg-gc-light-bg-secondary/10 dark:hover:bg-gc-dark-bg-secondary/10 transition"
         aria-label="Close drawer"
         @click="open = false"
       >
         <span class="material-symbols-outlined text-lg leading-none">close</span>
       </button>
     </div>
+
+    <!-- Drawer Content -->
     <div class="flex-1 overflow-y-auto px-4 py-4 space-y-3">
       {% if request.user.is_authenticated %}
       <a
-        class="flex items-center gap-2 text-sm font-semibold text-obsidian dark:text-starlight hover:text-starlight/70 dark:hover:text-starlight/80"
+        class="flex items-center gap-2 text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary hover:text-gc-light-text-primary/70 dark:hover:text-gc-dark-text-primary/70"
         href="#"
       >
-        <span class="material-symbols-outlined text-base">person</span> Profile
+        <span class="material-symbols-outlined text-base">person</span>
+        Profile
       </a>
+
       <a
-        class="flex items-center gap-2 text-sm font-semibold text-obsidian dark:text-starlight hover:text-starlight/70 dark:hover:text-starlight/80"
+        class="flex items-center gap-2 text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary hover:text-gc-light-text-primary/70 dark:hover:text-gc-dark-text-primary/70"
         href="{% url 'select-organization' %}"
       >
-        <span class="material-symbols-outlined text-base">swap_horiz</span> Switch organization
+        <span class="material-symbols-outlined text-base">swap_horiz</span>
+        Switch organization
       </a>
+
       <a
-        class="flex items-center gap-2 text-sm font-semibold text-obsidian dark:text-starlight hover:text-starlight/70 dark:hover:text-starlight/80"
+        class="flex items-center gap-2 text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary hover:text-gc-light-text-primary/70 dark:hover:text-gc-dark-text-primary/70"
         href="{% url 'signout' %}"
       >
-        <span class="material-symbols-outlined text-base">logout</span> Sign out
+        <span class="material-symbols-outlined text-base">logout</span>
+        Sign out
       </a>
+
       {% else %}
+
       <a
-        class="flex items-center gap-2 text-sm font-semibold text-obsidian dark:text-starlight hover:text-starlight/70 dark:hover:text-starlight/80"
+        class="flex items-center gap-2 text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary hover:text-gc-light-text-primary/70 dark:hover:text-gc-dark-text-primary/70"
         href="{% url 'signin' %}"
       >
-        <span class="material-symbols-outlined text-base">login</span> Sign in
+        <span class="material-symbols-outlined text-base">login</span>
+        Sign in
       </a>
+
       <a
-        class="flex items-center gap-2 text-sm font-semibold text-obsidian dark:text-starlight hover:text-starlight/70 dark:hover:text-starlight/80"
+        class="flex items-center gap-2 text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary hover:text-gc-light-text-primary/70 dark:hover:text-gc-dark-text-primary/70"
         href="{% url 'signup' %}"
       >
-        <span class="material-symbols-outlined text-base">person_add</span> Sign up
+        <span class="material-symbols-outlined text-base">person_add</span>
+        Sign up
       </a>
+
       {% endif %}
     </div>
   </aside>

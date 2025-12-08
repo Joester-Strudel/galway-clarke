@@ -17,7 +17,7 @@ from gc_crm.views.get_crm_index import get_crm_index
 urlpatterns = [
     path("", index, name="marketing-home"),
     path("dashboard/", get_dashboard_index, name="dashboard-index"),
-    path("contacts/", get_crm_index, name="contacts-index"),
+    path("crm/", get_crm_index, name="crm-index"),
     path("signup/", signup, name="signup"),
     path("signin/", signin, name="signin"),
     path("signout/", signout, name="signout"),

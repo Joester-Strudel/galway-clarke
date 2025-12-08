@@ -1,7 +1,6 @@
-<section id="htmx_workspace" class="flex-1 gc-box-shadow rounded-md p-6 m-2">
-  {% if workspace_template %}
-    {% include workspace_template %}
-  {% else %}
-    Right
-  {% endif %}
+<section
+  id="htmx_workspace"
+  class="flex-1 gc-box-shadow bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary text-gc-light-text-primary dark:text-gc-dark-text-primary rounded-md p-6 m-2"
+>
+  {% if workspace_template %} {% include workspace_template %} {% else %} Right {% endif %}
 </section>

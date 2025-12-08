@@ -1,9 +1,120 @@
 @import "tailwindcss";
 
+/* ============================================================
+   GLOBAL DEFAULT (Rust Theme is the default)
+   ============================================================ */
 @theme {
-  --color-primary: #150124;
-  --color-obsidian: #0f0f0f;
-  --color-charcoal: #121212;
-  --color-cloud: #ededed;
-  --color-starlight: #e9e1f2;
+  /* ===== Brand / Accent ===== */
+  --color-primary: #8c4323; /* Deep rust variant */
+  --color-gc-theme: #8c4323;
+  --color-gc-theme-accent: #ce6a3b; /* Main rust */
+  --color-gc-theme-accent-dark: #8c4323;
+
+  /* ===== Dark Mode (Warm Charcoal) ===== */
+  --color-gc-dark-bg-primary: #1a1614; /* Main dark background */
+  --color-gc-dark-bg-secondary: #2a2421; /* Panels, cards */
+  --color-gc-dark-text-primary: #f4ede7; /* Warm white */
+
+  /* ===== Light Mode (Parchment) ===== */
+  --color-gc-light-bg-primary: #f5efe7; /* Page background */
+  --color-gc-light-bg-secondary: #faf6f0; /* Cards, sidebars */
+  --color-gc-light-text-primary: #3a2f2a; /* Warm ink */
+  --color-gc-light-text-secondary: #5e514a; /* Muted warm gray */
+}
+
+/* ===== Typography ===== */
+.gc_title_font {
+  font-family: "DM Serif Display", serif;
+}
+
+/* ============================================================
+   THEME 1: RUST (DEFAULT THEME)
+   Warm, archival, parchment + charcoal + rust accent
+   ============================================================ */
+:root[data-theme="rust"] {
+  --color-primary: #8c4323;
+  --color-gc-theme: #8c4323;
+  --color-gc-theme-accent: #ce6a3b;
+  --color-gc-theme-accent-dark: #8c4323;
+
+  --color-gc-dark-bg-primary: #1a1614;
+  --color-gc-dark-bg-secondary: #2a2421;
+  --color-gc-dark-text-primary: #f4ede7;
+
+  --color-gc-light-bg-primary: #f5efe7;
+  --color-gc-light-bg-secondary: #faf6f0;
+  --color-gc-light-text-primary: #3a2f2a;
+  --color-gc-light-text-secondary: #5e514a;
+}
+
+/* ============================================================
+   THEME 2: MIDNIGHT INDIGO
+   Deep violets + blue-black shadows + cool accents
+   Accent: Electric Indigo (#6D72FF)
+   ============================================================ */
+:root[data-theme="midnight"] {
+  /* Brand / Accent */
+  --color-primary: #3b2a69; /* Deep indigo-violet */
+  --color-gc-theme: #3b2a69;
+  --color-gc-theme-accent: #6d72ff; /* Electric indigo */
+  --color-gc-theme-accent-dark: #2e2453;
+
+  /* Dark Mode */
+  --color-gc-dark-bg-primary: #0f1020; /* Blue-black */
+  --color-gc-dark-bg-secondary: #1c1d33; /* Indigo charcoal */
+  --color-gc-dark-text-primary: #f3f4ff; /* Soft cool white */
+
+  /* Light Mode */
+  --color-gc-light-bg-primary: #e7e8f5; /* Misty lavender */
+  --color-gc-light-bg-secondary: #f2f2fc; /* Soft violet-paper */
+  --color-gc-light-text-primary: #23223a; /* Ink indigo */
+  --color-gc-light-text-secondary: #4a4967;
+}
+
+/* ============================================================
+   THEME 3: FOREST MOSS
+   Desaturated greens, moss neutrals, soft natural tones
+   Accent: Moss Green (#6E8B55)
+   ============================================================ */
+:root[data-theme="forest"] {
+  /* Brand / Accent */
+  --color-primary: #4d5e3b; /* Deep moss */
+  --color-gc-theme: #4d5e3b;
+  --color-gc-theme-accent: #6e8b55; /* Moss green accent */
+  --color-gc-theme-accent-dark: #3b4729; /* Dark moss */
+
+  /* Dark Mode */
+  --color-gc-dark-bg-primary: #0e130d; /* Forest night */
+  --color-gc-dark-bg-secondary: #1b2617; /* Pine shadow */
+  --color-gc-dark-text-primary: #ecf2e7; /* Soft moss-white */
+
+  /* Light Mode */
+  --color-gc-light-bg-primary: #eef2ea; /* Sage parchment */
+  --color-gc-light-bg-secondary: #f7faf4; /* Lighter sage */
+  --color-gc-light-text-primary: #2a3327; /* Woodland ink */
+  --color-gc-light-text-secondary: #515b4d;
+}
+
+/* ============================================================
+   THEME 4: SLATE AURORA
+   Cool stone neutrals, icy backgrounds, teal aurora accent
+   Accent: Aurora Teal (#36C2C1)
+   ============================================================ */
+:root[data-theme="slate"] {
+  /* Brand / Accent */
+  --color-primary: #1e2a32; /* Dark slate */
+  --color-gc-theme: #1e2a32;
+  --color-gc-theme-accent: #36c2c1; /* Frosted teal */
+  --color-gc-theme-accent-dark: #1c7070; /* Deep teal */
+
+  /* Dark Mode */
+  --color-gc-dark-bg-primary: #0c1114; /* Abyss slate */
+  --color-gc-dark-bg-secondary: #1b2328; /* Stone panel */
+  --color-gc-dark-text-primary: #e2eff1; /* Cool frost white */
+
+  /* Light Mode */
+  --color-gc-light-bg-primary: #e8eef0; /* Ice slate */
+  --color-gc-light-bg-secondary: #f4f7f8; /* Frosted slate card */
+  --color-gc-light-text-primary: #1e2a32; /* Deep slate ink */
+  --color-gc-light-text-secondary: #4a5961;
 }
