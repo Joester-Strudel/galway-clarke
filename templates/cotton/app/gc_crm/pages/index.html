@@ -1,5 +1,350 @@
-<c-app.components.workspace_header>
-  <c-app.components.workspace_title>Customers</c-app.components.workspace_title>
-  <c-app.components.workspace_tab>Organizations</c-app.components.workspace_tab>
-  <c-app.components.workspace_tab>Individuals</c-app.components.workspace_tab>
-</c-app.components.workspace_header>
+<c-app.components.workspace.workspace_header>
+  <c-app.components.workspace.workspace_title>Customers</c-app.components.workspace.workspace_title>
+  <c-app.components.workspace.workspace_tab>Organizations</c-app.components.workspace.workspace_tab>
+  <c-app.components.workspace.workspace_tab>Individuals</c-app.components.workspace.workspace_tab>
+</c-app.components.workspace.workspace_header>
+
+<div class="mt-4 flex h-full flex-col gap-4 min-h-0">
+  <div class="flex-1 min-h-0 rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary">
+    <c-app.components.tables.table>
+      <c-app.components.tables.table_header>
+        <tr>
+          <c-app.components.tables.table_header_cell>Name</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Status</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Location</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Primary Contact</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Last Activity</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Industry</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Employees</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>ARR</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Plan</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Tags</c-app.components.tables.table_header_cell>
+        </tr>
+      </c-app.components.tables.table_header>
+      <tbody>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Acme Arts Museum</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Boston, MA</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Rachel Kim</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>3 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Museum</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>120</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$180k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Enterprise</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-gc-theme-accent/15 px-2 py-1 text-xs font-semibold text-gc-theme-accent">Key</span><span class="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Major Gift</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Harbor City Gallery</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Seattle, WA</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Marcus Lee</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>1 week ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Gallery</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>42</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$72k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Greenwood Cultural Center</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300 px-2 py-1 text-xs font-semibold">Churn Risk</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Austin, TX</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Sophia Patel</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>2 weeks ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Community Center</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>65</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$54k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-rose-500/15 px-2 py-1 text-xs font-semibold text-rose-600">At Risk</span><span class="rounded-full bg-slate-500/15 px-2 py-1 text-xs font-semibold text-slate-600">Follow-up</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Riverfront Arts Alliance</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Portland, OR</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Elena Diaz</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>5 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Arts Council</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>38</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$48k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-gc-theme-accent/15 px-2 py-1 text-xs font-semibold text-gc-theme-accent">Key</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Bayview Maritime Museum</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Norfolk, VA</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Isaiah Brooks</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>4 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Museum</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>27</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$62k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Sunrise History Center</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Phoenix, AZ</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Danielle Moore</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>6 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>History</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>19</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$35k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Major Gift</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Prairie Heritage Trust</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300 px-2 py-1 text-xs font-semibold">Churn Risk</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Des Moines, IA</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Olivia Carter</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>3 weeks ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Land Trust</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>51</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$44k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-rose-500/15 px-2 py-1 text-xs font-semibold text-rose-600">At Risk</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Harborview Science Center</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>San Diego, CA</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Jared Collins</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Yesterday</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Science</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>90</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$210k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Enterprise</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-gc-theme-accent/15 px-2 py-1 text-xs font-semibold text-gc-theme-accent">Key</span><span class="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Major Gift</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Lakeside Children's Museum</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Madison, WI</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Priya Desai</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>5 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Children's</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>33</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$58k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span><span class="rounded-full bg-slate-500/15 px-2 py-1 text-xs font-semibold text-slate-600">Follow-up</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Metro Arts Collective</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Chicago, IL</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Andre Johnson</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>2 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Arts Collective</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>76</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$125k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Enterprise</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-gc-theme-accent/15 px-2 py-1 text-xs font-semibold text-gc-theme-accent">Key</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Summit Cultural Foundation</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300 px-2 py-1 text-xs font-semibold">Churn Risk</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Denver, CO</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Hannah Nguyen</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>3 weeks ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Foundation</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>24</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$39k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-rose-500/15 px-2 py-1 text-xs font-semibold text-rose-600">At Risk</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>North Star Folk Museum</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Minneapolis, MN</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Caleb Thompson</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>1 week ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Folk</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>31</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$64k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Seaside Heritage Museum</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Charleston, SC</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Madeline Flores</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>4 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Heritage</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>44</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$93k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Major Gift</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Urban Culture Lab</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Brooklyn, NY</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Diego Morales</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Today</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Arts Lab</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>58</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$140k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Enterprise</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-gc-theme-accent/15 px-2 py-1 text-xs font-semibold text-gc-theme-accent">Key</span><span class="rounded-full bg-slate-500/15 px-2 py-1 text-xs font-semibold text-slate-600">Follow-up</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Gateway Art Institute</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>St. Louis, MO</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Sarah Kim</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>2 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Art School</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>47</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$70k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Harbor Lights Playhouse</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300 px-2 py-1 text-xs font-semibold">Churn Risk</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Providence, RI</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Ben Carter</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>2 weeks ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Theater</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>29</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$46k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-rose-500/15 px-2 py-1 text-xs font-semibold text-rose-600">At Risk</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Willow Grove Botanical</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Portland, ME</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Nora Benson</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>1 week ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Botanical</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>53</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$102k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Enterprise</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-gc-theme-accent/15 px-2 py-1 text-xs font-semibold text-gc-theme-accent">Key</span><span class="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Major Gift</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Silverline Design Museum</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Columbus, OH</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Mei Chen</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>4 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Design</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>36</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$68k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Oak Ridge Conservatory</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300 px-2 py-1 text-xs font-semibold">Churn Risk</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Richmond, VA</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Grace Holloway</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>3 weeks ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Conservatory</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>22</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$41k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-rose-500/15 px-2 py-1 text-xs font-semibold text-rose-600">At Risk</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Evergreen Performing Arts</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Boise, ID</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Logan Price</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>6 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Performing Arts</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>34</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$59k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Major Gift</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Canopy Arts Hub</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Asheville, NC</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Jenna Brooks</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>2 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Arts Hub</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>18</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$33k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Harbor Sound Conservatory</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300 px-2 py-1 text-xs font-semibold">Churn Risk</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Baltimore, MD</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Victor James</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>2 weeks ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Music</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>26</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$47k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-rose-500/15 px-2 py-1 text-xs font-semibold text-rose-600">At Risk</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Central Arts Network</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Kansas City, MO</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Emma Wright</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Today</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Network</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>41</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$84k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-gc-theme-accent/15 px-2 py-1 text-xs font-semibold text-gc-theme-accent">Key</span><span class="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Major Gift</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Redwood Arts Council</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Santa Cruz, CA</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Leo Martinez</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>3 days ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Arts Council</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>39</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$77k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>Maple Grove Arts Center</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300 px-2 py-1 text-xs font-semibold">Churn Risk</span></c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Toronto, ON</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Amelia Scott</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>2 weeks ago</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Arts Center</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>28</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>$52k</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-rose-500/15 px-2 py-1 text-xs font-semibold text-rose-600">At Risk</span></span></c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+      </tbody>
+      <c-app.components.tables.table_footer>
+        <tr>
+          <td class="px-4 py-2" colspan="10">Showing sample CRM organizations</td>
+        </tr>
+      </c-app.components.tables.table_footer>
+    </c-app.components.tables.table>
+  </div>
+  <div class="flex items-center justify-between rounded-md border-2 border-gc-light-text-primary/10 dark:border-gc-dark-text-primary/20 bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary px-4 py-2 text-sm">
+    <div class="flex items-center gap-3">
+      <span class="text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">Rows 1-20 of 120</span>
+      <label class="flex items-center gap-1 text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+        <span>Rows per page</span>
+        <select class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-transparent px-2 py-1 text-gc-light-text-primary dark:text-gc-dark-text-primary">
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <button type="button" class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-secondary/60 dark:bg-gc-dark-bg-secondary/60 px-3 py-1 text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary hover:bg-gc-light-bg-secondary/80 dark:hover:bg-gc-dark-bg-secondary/80 transition">Prev</button>
+      <button type="button" class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-theme-accent/15 px-3 py-1 text-sm font-semibold text-gc-theme-accent hover:bg-gc-theme-accent/25 transition">Next</button>
+    </div>
+  </div>
+</div>

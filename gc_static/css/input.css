@@ -1,36 +1,28 @@
 @import "tailwindcss";
 
-/* ============================================================
-   GLOBAL DEFAULT (Rust Theme is the default)
-   ============================================================ */
+/* Rust (Default) */
 @theme {
-  /* ===== Brand / Accent ===== */
-  --color-primary: #8c4323; /* Deep rust variant */
+  --color-primary: #8c4323;
   --color-gc-theme: #8c4323;
-  --color-gc-theme-accent: #ce6a3b; /* Main rust */
+  --color-gc-theme-accent: #ce6a3b;
   --color-gc-theme-accent-dark: #8c4323;
 
-  /* ===== Dark Mode (Warm Charcoal) ===== */
-  --color-gc-dark-bg-primary: #1a1614; /* Main dark background */
-  --color-gc-dark-bg-secondary: #2a2421; /* Panels, cards */
-  --color-gc-dark-text-primary: #f4ede7; /* Warm white */
+  --color-gc-dark-bg-primary: #1a1614;
+  --color-gc-dark-bg-secondary: #2a2421;
+  --color-gc-dark-text-primary: #f4ede7;
 
-  /* ===== Light Mode (Parchment) ===== */
-  --color-gc-light-bg-primary: #f5efe7; /* Page background */
-  --color-gc-light-bg-secondary: #faf6f0; /* Cards, sidebars */
-  --color-gc-light-text-primary: #3a2f2a; /* Warm ink */
-  --color-gc-light-text-secondary: #5e514a; /* Muted warm gray */
+  --color-gc-light-bg-primary: #f5efe7;
+  --color-gc-light-bg-secondary: #faf6f0;
+  --color-gc-light-text-primary: #3a2f2a;
+  --color-gc-light-text-secondary: #5e514a;
 }
 
-/* ===== Typography ===== */
+/* Typography */
 .gc_title_font {
   font-family: "DM Serif Display", serif;
 }
 
-/* ============================================================
-   THEME 1: RUST (DEFAULT THEME)
-   Warm, archival, parchment + charcoal + rust accent
-   ============================================================ */
+/* Rust */
 :root[data-theme="rust"] {
   --color-primary: #8c4323;
   --color-gc-theme: #8c4323;
@@ -47,74 +39,155 @@
   --color-gc-light-text-secondary: #5e514a;
 }
 
-/* ============================================================
-   THEME 2: MIDNIGHT INDIGO
-   Deep violets + blue-black shadows + cool accents
-   Accent: Electric Indigo (#6D72FF)
-   ============================================================ */
+/* Midnight */
 :root[data-theme="midnight"] {
-  /* Brand / Accent */
-  --color-primary: #3b2a69; /* Deep indigo-violet */
+  --color-primary: #3b2a69;
   --color-gc-theme: #3b2a69;
-  --color-gc-theme-accent: #6d72ff; /* Electric indigo */
+  --color-gc-theme-accent: #6d72ff;
   --color-gc-theme-accent-dark: #2e2453;
 
-  /* Dark Mode */
-  --color-gc-dark-bg-primary: #0f1020; /* Blue-black */
-  --color-gc-dark-bg-secondary: #1c1d33; /* Indigo charcoal */
-  --color-gc-dark-text-primary: #f3f4ff; /* Soft cool white */
+  --color-gc-dark-bg-primary: #0f1020;
+  --color-gc-dark-bg-secondary: #1c1d33;
+  --color-gc-dark-text-primary: #f3f4ff;
 
-  /* Light Mode */
-  --color-gc-light-bg-primary: #e7e8f5; /* Misty lavender */
-  --color-gc-light-bg-secondary: #f2f2fc; /* Soft violet-paper */
-  --color-gc-light-text-primary: #23223a; /* Ink indigo */
+  --color-gc-light-bg-primary: #e7e8f5;
+  --color-gc-light-bg-secondary: #f2f2fc;
+  --color-gc-light-text-primary: #23223a;
   --color-gc-light-text-secondary: #4a4967;
 }
 
-/* ============================================================
-   THEME 3: FOREST MOSS
-   Desaturated greens, moss neutrals, soft natural tones
-   Accent: Moss Green (#6E8B55)
-   ============================================================ */
+/* Forest */
 :root[data-theme="forest"] {
-  /* Brand / Accent */
-  --color-primary: #4d5e3b; /* Deep moss */
+  --color-primary: #4d5e3b;
   --color-gc-theme: #4d5e3b;
-  --color-gc-theme-accent: #6e8b55; /* Moss green accent */
-  --color-gc-theme-accent-dark: #3b4729; /* Dark moss */
+  --color-gc-theme-accent: #6e8b55;
+  --color-gc-theme-accent-dark: #3b4729;
 
-  /* Dark Mode */
-  --color-gc-dark-bg-primary: #0e130d; /* Forest night */
-  --color-gc-dark-bg-secondary: #1b2617; /* Pine shadow */
-  --color-gc-dark-text-primary: #ecf2e7; /* Soft moss-white */
+  --color-gc-dark-bg-primary: #0e130d;
+  --color-gc-dark-bg-secondary: #1b2617;
+  --color-gc-dark-text-primary: #ecf2e7;
 
-  /* Light Mode */
-  --color-gc-light-bg-primary: #eef2ea; /* Sage parchment */
-  --color-gc-light-bg-secondary: #f7faf4; /* Lighter sage */
-  --color-gc-light-text-primary: #2a3327; /* Woodland ink */
+  --color-gc-light-bg-primary: #eef2ea;
+  --color-gc-light-bg-secondary: #f7faf4;
+  --color-gc-light-text-primary: #2a3327;
   --color-gc-light-text-secondary: #515b4d;
 }
 
-/* ============================================================
-   THEME 4: SLATE AURORA
-   Cool stone neutrals, icy backgrounds, teal aurora accent
-   Accent: Aurora Teal (#36C2C1)
-   ============================================================ */
+/* Slate */
 :root[data-theme="slate"] {
-  /* Brand / Accent */
-  --color-primary: #1e2a32; /* Dark slate */
+  --color-primary: #1e2a32;
   --color-gc-theme: #1e2a32;
-  --color-gc-theme-accent: #36c2c1; /* Frosted teal */
-  --color-gc-theme-accent-dark: #1c7070; /* Deep teal */
+  --color-gc-theme-accent: #36c2c1;
+  --color-gc-theme-accent-dark: #1c7070;
 
-  /* Dark Mode */
-  --color-gc-dark-bg-primary: #0c1114; /* Abyss slate */
-  --color-gc-dark-bg-secondary: #1b2328; /* Stone panel */
-  --color-gc-dark-text-primary: #e2eff1; /* Cool frost white */
+  --color-gc-dark-bg-primary: #0c1114;
+  --color-gc-dark-bg-secondary: #1b2328;
+  --color-gc-dark-text-primary: #e2eff1;
 
-  /* Light Mode */
-  --color-gc-light-bg-primary: #e8eef0; /* Ice slate */
-  --color-gc-light-bg-secondary: #f4f7f8; /* Frosted slate card */
-  --color-gc-light-text-primary: #1e2a32; /* Deep slate ink */
+  --color-gc-light-bg-primary: #e8eef0;
+  --color-gc-light-bg-secondary: #f4f7f8;
+  --color-gc-light-text-primary: #1e2a32;
   --color-gc-light-text-secondary: #4a5961;
+}
+
+/* Ocean */
+:root[data-theme="ocean"] {
+  --color-primary: #0c3c4c;
+  --color-gc-theme: #0c3c4c;
+  --color-gc-theme-accent: #2fc2d5;
+  --color-gc-theme-accent-dark: #146b78;
+
+  --color-gc-dark-bg-primary: #061d26;
+  --color-gc-dark-bg-secondary: #0f2f3c;
+  --color-gc-dark-text-primary: #e3f8fb;
+
+  --color-gc-light-bg-primary: #e5f5f7;
+  --color-gc-light-bg-secondary: #f2fbfc;
+  --color-gc-light-text-primary: #0f2b33;
+  --color-gc-light-text-secondary: #3e5a62;
+}
+
+/* Rose */
+:root[data-theme="rose"] {
+  --color-primary: #8a3a4b;
+  --color-gc-theme: #8a3a4b;
+  --color-gc-theme-accent: #e58fa8;
+  --color-gc-theme-accent-dark: #6a2a39;
+
+  --color-gc-dark-bg-primary: #2b1a20;
+  --color-gc-dark-bg-secondary: #3d252c;
+  --color-gc-dark-text-primary: #fdeaf0;
+
+  --color-gc-light-bg-primary: #f7edf1;
+  --color-gc-light-bg-secondary: #fcf5f7;
+  --color-gc-light-text-primary: #3c2930;
+  --color-gc-light-text-secondary: #6a5860;
+}
+
+/* Sandstone */
+:root[data-theme="sandstone"] {
+  --color-primary: #a46a3e;
+  --color-gc-theme: #a46a3e;
+  --color-gc-theme-accent: #d89e6b;
+  --color-gc-theme-accent-dark: #805433;
+
+  --color-gc-dark-bg-primary: #2a1f18;
+  --color-gc-dark-bg-secondary: #3a2b22;
+  --color-gc-dark-text-primary: #f3e8df;
+
+  --color-gc-light-bg-primary: #f6efe9;
+  --color-gc-light-bg-secondary: #fbf7f3;
+  --color-gc-light-text-primary: #3b2f27;
+  --color-gc-light-text-secondary: #6a5b51;
+}
+
+/* Orchid */
+:root[data-theme="orchid"] {
+  --color-primary: #5d3a7a;
+  --color-gc-theme: #5d3a7a;
+  --color-gc-theme-accent: #c56cec;
+  --color-gc-theme-accent-dark: #46285c;
+
+  --color-gc-dark-bg-primary: #1b1122;
+  --color-gc-dark-bg-secondary: #2d1a38;
+  --color-gc-dark-text-primary: #f8ebff;
+
+  --color-gc-light-bg-primary: #f3e8fb;
+  --color-gc-light-bg-secondary: #faf4fe;
+  --color-gc-light-text-primary: #2d1d38;
+  --color-gc-light-text-secondary: #5c4a6a;
+}
+
+/* Ember */
+:root[data-theme="ember"] {
+  --color-primary: #bb4b1e;
+  --color-gc-theme: #bb4b1e;
+  --color-gc-theme-accent: #ff7a3c;
+  --color-gc-theme-accent-dark: #8a3414;
+
+  --color-gc-dark-bg-primary: #1c0f0b;
+  --color-gc-dark-bg-secondary: #2c1812;
+  --color-gc-dark-text-primary: #ffe8df;
+
+  --color-gc-light-bg-primary: #fbeee9;
+  --color-gc-light-bg-secondary: #fff6f3;
+  --color-gc-light-text-primary: #42261d;
+  --color-gc-light-text-secondary: #745a52;
+}
+
+/* Noir */
+:root[data-theme="noir"] {
+  --color-primary: #1a1a1a;
+  --color-gc-theme: #1a1a1a;
+  --color-gc-theme-accent: #6e6e6e;
+  --color-gc-theme-accent-dark: #3e3e3e;
+
+  --color-gc-dark-bg-primary: #000000;
+  --color-gc-dark-bg-secondary: #111111;
+  --color-gc-dark-text-primary: #f2f2f2;
+
+  --color-gc-light-bg-primary: #f5f5f5;
+  --color-gc-light-bg-secondary: #ffffff;
+  --color-gc-light-text-primary: #111111;
+  --color-gc-light-text-secondary: #4b4b4b;
 }

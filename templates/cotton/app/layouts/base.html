@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="forest">
+<html lang="en" data-theme="{{ user_preferences.theme|default:'rust' }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,7 +51,7 @@
     <title>Galway Clarke</title>
   </head>
   <body id="htmx_body">
-    <c-app.components.drawer />
+    <c-app.components.workspace.drawer />
     {{ slot }}
   </body>
 </html>

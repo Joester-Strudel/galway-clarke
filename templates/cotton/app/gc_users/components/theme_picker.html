@@ -1,0 +1,120 @@
+<div
+  x-data="themePicker('{{ user_preferences.theme|default:'rust' }}')"
+  x-init="init()"
+  class="rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-secondary/50 dark:bg-gc-dark-bg-secondary/50 p-3"
+>
+  <div class="flex items-center justify-between mb-3">
+    <div>
+      <p class="text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">
+        Theme
+      </p>
+      <p class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+        Pick an accent to use across the app
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-4 gap-3">
+    <template x-for="theme in themes" :key="theme.id">
+      <button
+        type="button"
+        class="group relative flex flex-col items-center gap-2 focus:outline-none"
+        :aria-label="`Activate ${theme.displayName} theme`"
+        @click="applyTheme(theme.id)"
+      >
+        <span
+          class="flex h-12 w-12 items-center justify-center rounded-full border-2 transition"
+          :class="currentTheme === theme.id ? 'border-gc-theme-accent ring-2 ring-gc-theme-accent/30' : 'border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary'"
+        >
+          <span class="h-8 w-8 rounded-full" :style="`background:${theme.accent}`"></span>
+        </span>
+        <span
+          class="text-xs font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary"
+          x-text="theme.displayName"
+        ></span>
+      </button>
+    </template>
+  </div>
+</div>
+
+<script>
+  function themePicker(initialTheme) {
+    return {
+      themes: [],
+      currentTheme: initialTheme || document.documentElement.dataset.theme || "rust",
+      init() {
+        this.themes = this.discoverThemes();
+        this.applyTheme(this.currentTheme, { persist: false });
+      },
+      discoverThemes() {
+        const baseThemes = [
+          "rust",
+          "midnight",
+          "forest",
+          "slate",
+          "ocean",
+          "rose",
+          "sandstone",
+          "orchid",
+          "ember",
+          "noir",
+        ];
+        const fallbackAccents = {
+          rust: "#ce6a3b",
+          midnight: "#6d72ff",
+          forest: "#6e8b55",
+          slate: "#36c2c1",
+          ocean: "#2fc2d5",
+          rose: "#e58fa8",
+          sandstone: "#d89e6b",
+          orchid: "#c56cec",
+          ember: "#ff7a3c",
+          noir: "#6e6e6e",
+        };
+        const ids = new Set(baseThemes);
+
+        for (const sheet of Array.from(document.styleSheets)) {
+          try {
+            for (const rule of Array.from(sheet.cssRules || [])) {
+              const selector = rule.selectorText || "";
+              const match = selector.match(/:root\[data-theme=\"?([\\w-]+)\"?\]/);
+              if (match && match[1]) {
+                ids.add(match[1]);
+              }
+            }
+          } catch (_err) {
+            // Some stylesheets may be cross-origin; skip them.
+            continue;
+          }
+        }
+
+        if (ids.size === 0) ids.add("rust");
+
+        const originalTheme = document.documentElement.dataset.theme || this.currentTheme || "rust";
+        const themes = [];
+
+        for (const id of ids) {
+          document.documentElement.dataset.theme = id;
+          const accent =
+            getComputedStyle(document.documentElement)
+              .getPropertyValue("--color-gc-theme-accent")
+              .trim() ||
+            fallbackAccents[id] ||
+            "#888";
+          const displayName = id.charAt(0).toUpperCase() + id.slice(1);
+          themes.push({ id, displayName, accent });
+        }
+
+        document.documentElement.dataset.theme = originalTheme;
+        return themes;
+      },
+      applyTheme(theme, { persist = true } = {}) {
+        this.currentTheme = theme;
+        document.documentElement.dataset.theme = theme;
+        if (persist && typeof updateUserPreferences === "function") {
+          updateUserPreferences({ theme });
+        }
+      },
+    };
+  }
+</script>
