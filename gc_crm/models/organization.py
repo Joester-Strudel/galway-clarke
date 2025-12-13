@@ -71,6 +71,12 @@ class Organization(HistoryBaseModel):
         blank=True,
         verbose_name="Last Activity",
     )
+    notes = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Notes",
+        help_text="Internal notes about this organization.",
+    )
 
     # Model Methods
     def __str__(self):

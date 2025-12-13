@@ -51,6 +51,12 @@ class Individual(SimpleBaseModel):
         default=False,
         verbose_name="Primary Contact",
     )
+    notes = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Notes",
+        help_text="Internal notes about this individual.",
+    )
 
     # Model Methods
     def __str__(self):
