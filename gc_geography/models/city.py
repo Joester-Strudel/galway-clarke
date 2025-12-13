@@ -30,7 +30,11 @@ class City(SimpleBaseModel):
     )
 
     def __str__(self):
-        state = getattr(self.state, "abbreviation", None) or getattr(self.state, "name", None) or "Unknown State"
+        state = (
+            getattr(self.state, "abbreviation", None)
+            or getattr(self.state, "name", None)
+            or "Unknown State"
+        )
         return f"{self.name} ({state})"
 
     class Meta:

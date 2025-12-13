@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class GcEngagementConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'gc_engagement'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "gc_engagement"

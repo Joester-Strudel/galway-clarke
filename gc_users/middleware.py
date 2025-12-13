@@ -22,7 +22,11 @@ class OrganizationRequirementMiddleware:
                 reverse("create-team"),
                 reverse("admin:index"),
             }
-            if not path.startswith("/admin") and path not in exempt_paths and not path.startswith("/static/"):
+            if (
+                not path.startswith("/admin")
+                and path not in exempt_paths
+                and not path.startswith("/static/")
+            ):
                 user_orgs = request.user.organizations.all()
                 active_org_id = request.session.get("active_organization_id")
 

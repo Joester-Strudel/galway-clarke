@@ -15,9 +15,18 @@ def reference_view(request: HttpRequest):
             [
                 ("Subjects", "/admin/gc_reference/aatsubject/"),
                 ("Subject Record Types", "/admin/gc_reference/aatsubjectrecordtype/"),
-                ("Parent Relationship Types", "/admin/gc_reference/aatparentrelationshiptype/"),
-                ("Associative Relationships", "/admin/gc_reference/aatassociativerelationship/"),
-                ("Associative Relationship Types", "/admin/gc_reference/aatassociativerelationshiptype/"),
+                (
+                    "Parent Relationship Types",
+                    "/admin/gc_reference/aatparentrelationshiptype/",
+                ),
+                (
+                    "Associative Relationships",
+                    "/admin/gc_reference/aatassociativerelationship/",
+                ),
+                (
+                    "Associative Relationship Types",
+                    "/admin/gc_reference/aatassociativerelationshiptype/",
+                ),
                 ("Terms", "/admin/gc_reference/aatterm/"),
                 ("Term Contributors", "/admin/gc_reference/aattermcontributor/"),
                 ("Term Sources", "/admin/gc_reference/aattermsource/"),
@@ -33,9 +42,18 @@ def reference_view(request: HttpRequest):
             [
                 ("Subjects", "/admin/gc_reference/ulansubject/"),
                 ("Subject Record Types", "/admin/gc_reference/ulansubjectrecordtype/"),
-                ("Parent Relationship Types", "/admin/gc_reference/ulanparentrelationshiptype/"),
-                ("Associative Relationships", "/admin/gc_reference/ulanassociativerelationship/"),
-                ("Associative Relationship Types", "/admin/gc_reference/ulanassociativerelationshiptype/"),
+                (
+                    "Parent Relationship Types",
+                    "/admin/gc_reference/ulanparentrelationshiptype/",
+                ),
+                (
+                    "Associative Relationships",
+                    "/admin/gc_reference/ulanassociativerelationship/",
+                ),
+                (
+                    "Associative Relationship Types",
+                    "/admin/gc_reference/ulanassociativerelationshiptype/",
+                ),
                 ("Terms", "/admin/gc_reference/ulanterm/"),
                 ("Term Types", "/admin/gc_reference/ulantermtype/"),
                 ("Parts of Speech", "/admin/gc_reference/ulanpartofspeech/"),
@@ -70,8 +88,14 @@ def aat_view(request: HttpRequest):
         ("Subjects", "/admin/gc_reference/aatsubject/"),
         ("Subject Record Types", "/admin/gc_reference/aatsubjectrecordtype/"),
         ("Parent Relationship Types", "/admin/gc_reference/aatparentrelationshiptype/"),
-        ("Associative Relationships", "/admin/gc_reference/aatassociativerelationship/"),
-        ("Associative Relationship Types", "/admin/gc_reference/aatassociativerelationshiptype/"),
+        (
+            "Associative Relationships",
+            "/admin/gc_reference/aatassociativerelationship/",
+        ),
+        (
+            "Associative Relationship Types",
+            "/admin/gc_reference/aatassociativerelationshiptype/",
+        ),
         ("Terms", "/admin/gc_reference/aatterm/"),
         ("Term Contributors", "/admin/gc_reference/aattermcontributor/"),
         ("Term Sources", "/admin/gc_reference/aattermsource/"),
@@ -93,9 +117,18 @@ def ulan_view(request: HttpRequest):
     links = [
         ("Subjects", "/admin/gc_reference/ulansubject/"),
         ("Subject Record Types", "/admin/gc_reference/ulansubjectrecordtype/"),
-        ("Parent Relationship Types", "/admin/gc_reference/ulanparentrelationshiptype/"),
-        ("Associative Relationships", "/admin/gc_reference/ulanassociativerelationship/"),
-        ("Associative Relationship Types", "/admin/gc_reference/ulanassociativerelationshiptype/"),
+        (
+            "Parent Relationship Types",
+            "/admin/gc_reference/ulanparentrelationshiptype/",
+        ),
+        (
+            "Associative Relationships",
+            "/admin/gc_reference/ulanassociativerelationship/",
+        ),
+        (
+            "Associative Relationship Types",
+            "/admin/gc_reference/ulanassociativerelationshiptype/",
+        ),
         ("Terms", "/admin/gc_reference/ulanterm/"),
         ("Term Types", "/admin/gc_reference/ulantermtype/"),
         ("Parts of Speech", "/admin/gc_reference/ulanpartofspeech/"),

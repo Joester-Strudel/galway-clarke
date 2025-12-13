@@ -37,7 +37,9 @@ class Command(BaseCommand):
                 zipcode, _ = ZipCode.objects.get_or_create(
                     zip_code_five_digit=row["zip"],
                     defaults={
-                        "population": int(row["population"]) if row["population"] else None,
+                        "population": int(row["population"])
+                        if row["population"]
+                        else None,
                         "density": float(row["density"]) if row["density"] else None,
                     },
                 )

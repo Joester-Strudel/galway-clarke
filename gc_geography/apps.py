@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class GcGeographyConfig(AppConfig):
-    name = 'gc_geography'
+    name = "gc_geography"

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class GcMarketingConfig(AppConfig):
-    name = 'gc_marketing'
+    name = "gc_marketing"

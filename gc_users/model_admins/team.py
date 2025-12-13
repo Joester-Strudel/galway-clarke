@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 # Third-Party Imports
 from simple_history.admin import SimpleHistoryAdmin
 from unfold.admin import ModelAdmin, display
-    
+
 # First-Party Imports
 from ..models import Team
 

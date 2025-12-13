@@ -6,5 +6,8 @@ def individuals_view(request):
     if request.htmx:
         return render(request, "cotton/app/gc_crm/pages/individuals.html")
 
-    context = {"workspace_template": "cotton/app/gc_crm/pages/index.html", "initial_tab": "individuals"}
+    context = {
+        "workspace_template": "cotton/app/gc_crm/pages/index.html",
+        "initial_tab": "individuals",
+    }
     return render(request, "cotton/app/index.html", context)
