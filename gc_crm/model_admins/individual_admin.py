@@ -27,6 +27,10 @@ class IndividualAdmin(ModelAdmin):
         "primary",
         "organization",
         "tags",
+        "location_state",
+        "location_county",
+        "location_city",
+        "location_zip",
         "created_at",
         "last_updated_at",
     ]
@@ -39,6 +43,10 @@ class IndividualAdmin(ModelAdmin):
     ordering = ["-created_at"]
     autocomplete_fields = [
         "organization",
+        "location_city",
+        "location_state",
+        "location_county",
+        "location_zip",
         "tags",
     ]
     filter_horizontal = ["tags"]
@@ -59,6 +67,12 @@ class IndividualAdmin(ModelAdmin):
                     "last_name",
                     "email",
                     "phone",
+                    "address_one",
+                    "address_two",
+                    "location_city",
+                    "location_state",
+                    "location_county",
+                    "location_zip",
                     "organization",
                     "tags",
                     "primary",

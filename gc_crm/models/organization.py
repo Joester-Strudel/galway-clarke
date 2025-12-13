@@ -41,15 +41,49 @@ class Organization(HistoryBaseModel):
         related_name="organizations",
         verbose_name="Industry",
     )
-    location_city = models.CharField(
-        max_length=100,
+    address_one = models.CharField(
+        max_length=255,
         blank=True,
+        null=True,
+        verbose_name="Address Line 1",
+    )
+    address_two = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name="Address Line 2",
+    )
+    location_city = models.ForeignKey(
+        "gc_geography.City",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="crm_organizations",
         verbose_name="City",
     )
-    location_state = models.CharField(
-        max_length=100,
+    location_state = models.ForeignKey(
+        "gc_geography.State",
+        on_delete=models.SET_NULL,
+        null=True,
         blank=True,
+        related_name="crm_organizations",
         verbose_name="State/Region",
+    )
+    location_county = models.ForeignKey(
+        "gc_geography.County",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="crm_organizations",
+        verbose_name="County",
+    )
+    location_zip = models.ForeignKey(
+        "gc_geography.ZipCode",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="crm_organizations",
+        verbose_name="Zip Code",
     )
     primary_contact = models.ForeignKey(
         "gc_crm.Individual",
