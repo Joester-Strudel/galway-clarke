@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import get_crm_index, get_crm_organizations, get_crm_individuals
+from .views import index_view, organizations_view, individuals_view
 
 urlpatterns = [
-    path("", get_crm_index, name="crm-index"),
-    path("organizations/", get_crm_organizations, name="crm-organizations"),
-    path("individuals/", get_crm_individuals, name="crm-individuals"),
+    path("", index_view, name="crm-index"),
+    path("organizations/", organizations_view, name="crm-organizations"),
+    path("individuals/", individuals_view, name="crm-individuals"),
 ]

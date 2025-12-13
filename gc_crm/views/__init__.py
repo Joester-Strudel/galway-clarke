@@ -1,5 +1,5 @@
-from .index_view import get_crm_index
-from .organizations_view import get_crm_organizations
-from .individuals_view import get_crm_individuals
+from .index_view import index_view
+from .organizations_view import organizations_view
+from .individuals_view import individuals_view
 
-__all__ = ["get_crm_index", "get_crm_organizations", "get_crm_individuals"]
+__all__ = ["index_view", "organizations_view", "individuals_view",]

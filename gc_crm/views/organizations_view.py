@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 
-def get_crm_organizations(request):
+def organizations_view(request):
     """Serve the organizations tab content or full shell."""
     if request.htmx:
         return render(request, "cotton/app/gc_crm/pages/organizations.html")
