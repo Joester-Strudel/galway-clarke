@@ -1,0 +1,20 @@
+<c-app.layouts.base>
+  <c-app.layouts.team_shell title="Create a Team" subtitle="Name your team to get started.">
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <c-app.components.fields.text_field
+        id="name"
+        name="name"
+        label="Team Name"
+        required="true"
+        value="{{ request.POST.name }}"
+        placeholder="Marketing, Operations, Development..."
+      />
+      <c-app.components.buttons.primary_button type="submit" label="Create and continue" />
+    </form>
+    <p class="text-sm">
+      Already have teams?
+      <a class="font-semibold text-gc-theme-accent underline" href="{% url 'select-organization' %}">Select one</a>.
+    </p>
+  </c-app.layouts.team_shell>
+</c-app.layouts.base>

@@ -31,6 +31,7 @@
       }
     </style>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="{% static 'js/flash_messages.js' %}" defer></script>
     <script>
       function getCookie(name) {
         const value = `; ${document.cookie}`;
@@ -51,6 +52,13 @@
     <title>Galway Clarke</title>
   </head>
   <body id="htmx_body">
+    {% if messages %}
+    <c-app.components.toasts.toast_container>
+      {% for message in messages %}
+      <c-app.components.toasts.toast>{{ message }}</c-app.components.toasts.toast>
+      {% endfor %}
+    </c-app.components.toasts.toast_container>
+    {% endif %}
     <c-app.components.workspace.drawer />
     {{ slot }}
   </body>

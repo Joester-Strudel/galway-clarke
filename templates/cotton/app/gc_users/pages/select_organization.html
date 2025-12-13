@@ -1,35 +1,28 @@
 <c-app.layouts.base>
-  <main class="flex min-h-screen items-center justify-center px-4 py-12">
-    <div class="w-full max-w-5xl space-y-6 rounded-md bg-white p-8 shadow-xl text-center">
-      <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-slate-900">Select an Organization</h1>
-        <a
-          class="inline-flex items-center gap-2 rounded border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
-          href="{% url 'create-organization' %}"
-        >
-          <span class="material-symbols-outlined text-base">add</span>
-          Create new
-        </a>
-      </div>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {% for org in organizations %}
-        <a
-          href="{% url 'select-organization' %}?organization_id={{ org.id }}"
-          class="block rounded-xl border border-slate-200 bg-white p-5 text-slate-900 shadow-md transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-lg"
-        >
-          <p class="text-sm text-slate-500">Organization</p>
-          <p class="mt-1 text-lg font-semibold">{{ org.name }}</p>
-        </a>
-        {% empty %}
-        <p class="text-slate-600">You don't have any organizations yet.</p>
-        {% endfor %}
-      </div>
-      <p class="text-sm text-slate-600">
-        Need to create a new one?
-        <a class="font-semibold text-primary underline" href="{% url 'create-organization' %}"
-          >Create an organization</a
-        >.
-      </p>
+  <c-app.layouts.team_shell title="Select a Team" subtitle="Choose a team to continue.">
+    <div class="grid gap-4">
+      {% for org in organizations %}
+      <a
+        href="{% url 'select-organization' %}?organization_id={{ org.id }}"
+        class="block rounded-lg border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-white/80 dark:bg-gc-dark-bg-primary px-4 py-3 text-gc-light-text-primary dark:text-gc-dark-text-primary transition hover:-translate-y-0.5 hover:border-gc-theme-accent hover:shadow-md"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">Team</p>
+            <p class="text-lg font-semibold">{{ org.name }}</p>
+          </div>
+          <span class="material-symbols-outlined text-gc-theme-accent">arrow_forward</span>
+        </div>
+      </a>
+      {% empty %}
+      <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">You don't have any teams yet.</p>
+      {% endfor %}
     </div>
-  </main>
+    <div class="flex items-center justify-between pt-2">
+      <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+        Need to create a new one?
+      </p>
+      <a class="font-semibold text-gc-theme-accent underline text-sm" href="{% url 'create-team' %}">Create a team</a>
+    </div>
+  </c-app.layouts.team_shell>
 </c-app.layouts.base>

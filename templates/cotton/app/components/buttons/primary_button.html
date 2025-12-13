@@ -1,0 +1,6 @@
+<button
+  type="{{ type|default:'button' }}"
+  class="inline-flex items-center justify-center rounded-lg bg-gc-theme-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-gc-theme-accent/90 {{ extra_classes }}"
+>
+  {{ label|default:slot }}
+</button>

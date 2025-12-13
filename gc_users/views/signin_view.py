@@ -19,13 +19,13 @@ def signin(request):
         if user is not None:
             login(request, user)
 
-            # Require an organization selection after sign-in.
+            # Require a team selection after sign-in.
             org_qs = user.organizations.all()
             if not org_qs.exists():
-                messages.info(request, "Create an organization to continue.")
-                return redirect("create-organization")
+                messages.info(request, "Create a team to continue.")
+                return redirect("create-team")
 
-            messages.info(request, "Choose an organization to continue.")
+            messages.info(request, "Choose a team to continue.")
             return redirect("select-organization")
 
         context["error"] = "Invalid email or password."

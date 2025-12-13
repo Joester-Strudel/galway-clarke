@@ -19,7 +19,7 @@ class OrganizationRequirementMiddleware:
                 reverse("signup"),
                 reverse("signout"),
                 reverse("select-organization"),
-                reverse("create-organization"),
+                reverse("create-team"),
                 reverse("admin:index"),
             }
             if not path.startswith("/admin") and path not in exempt_paths and not path.startswith("/static/"):
@@ -27,7 +27,7 @@ class OrganizationRequirementMiddleware:
                 active_org_id = request.session.get("active_organization_id")
 
                 if not user_orgs.exists():
-                    return redirect("create-organization")
+                    return redirect("create-team")
 
                 if not active_org_id or not user_orgs.filter(id=active_org_id).exists():
                     return redirect("select-organization")

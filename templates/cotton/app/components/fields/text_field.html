@@ -1,0 +1,12 @@
+<div class="space-y-1">
+  <label class="block text-sm font-medium" for="{{ id }}">{{ label }}</label>
+  <input
+    class="w-full rounded-lg border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-white/80 dark:bg-gc-dark-bg-primary px-4 py-3 focus:border-gc-theme-accent focus:ring-0 focus:outline-none"
+    type="{{ type|default:'text' }}"
+    id="{{ id }}"
+    name="{{ name }}"
+    {% if required %}required{% endif %}
+    value="{{ value }}"
+    placeholder="{{ placeholder }}"
+  />
+</div>

@@ -1,23 +1,12 @@
 <c-app.layouts.base>
-  <main class="flex min-h-screen items-center justify-center px-4 py-12">
-    <div class="w-full max-w-md space-y-6 rounded-md bg-white p-8 shadow-xl text-center">
-      <h1 class="text-3xl font-bold text-slate-900">Sign Out</h1>
-      <p class="text-slate-700">Are you sure you want to end your session?</p>
-      <form method="post" class="space-y-4">
-        {% csrf_token %}
-        <button
-          type="submit"
-          class="w-full rounded max-w-[100px] bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
-        >
-          Sign Out
-        </button>
-      </form>
-      <p class="text-sm text-slate-600">
-        Changed your mind?
-        <a class="font-semibold text-primary underline" href="{% url 'marketing-home' %}"
-          >Return home</a
-        >.
-      </p>
-    </div>
-  </main>
+  <c-app.layouts.team_shell title="Sign Out" subtitle="Are you sure you want to end your session?">
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <c-app.components.buttons.primary_button type="submit" label="Sign Out" extra_classes="w-full md:w-auto" />
+    </form>
+    <p class="text-sm">
+      Changed your mind?
+      <a class="font-semibold text-gc-theme-accent underline" href="{% url 'marketing-home' %}">Return home</a>.
+    </p>
+  </c-app.layouts.team_shell>
 </c-app.layouts.base>

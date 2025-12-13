@@ -1,0 +1,71 @@
+<main
+  class="min-h-screen w-screen bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-gc-light-text-primary dark:text-gc-dark-text-primary flex flex-col md:flex-row"
+>
+  <!-- Left carousel -->
+  <div
+    x-data="{
+      slides: [
+        { image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80', title: 'A place for your team', subtitle: 'Organize, track, and move faster together.' },
+        { image: 'https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1200&q=80', title: 'Build momentum', subtitle: 'Keep customers, donors, and members aligned.' },
+        { image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80', title: 'Stay connected', subtitle: 'Notes, tags, and activity in one workspace.' },
+      ],
+      current: 0,
+      interval: null,
+      start() { this.interval = setInterval(() => this.next(), 4500); },
+      stop() { clearInterval(this.interval); },
+      next() { this.current = (this.current + 1) % this.slides.length; },
+      go(i) { this.current = i; }
+    }"
+    x-init="start()"
+    class="relative flex-1 min-h-[320px] md:min-h-[calc(100vh-1.5rem)] h-[calc(100vh-1.5rem)] overflow-hidden m-3 rounded-md"
+  >
+    <template x-for="(slide, idx) in slides" :key="idx">
+      <div
+        x-show="current === idx"
+        x-transition.opacity
+        class="absolute inset-0 flex flex-col justify-between bg-cover bg-center"
+        :style="`background-image: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6)), url(${slide.image})`"
+      >
+        <div class="flex items-center justify-between p-5 text-sm font-semibold text-white">
+          <span class="uppercase tracking-wide text-white/80">Galway Clarke</span>
+          <a
+            href="/"
+            class="rounded-full bg-white/15 px-3 py-1 text-white text-xs font-semibold backdrop-blur-sm border border-white/20 hover:bg-white/25"
+          >
+            Back to site →
+          </a>
+        </div>
+        <div class="p-8 space-y-2 text-white">
+          <h2 class="text-3xl font-semibold leading-tight" x-text="slide.title"></h2>
+          <p class="text-sm text-white/80" x-text="slide.subtitle"></p>
+        </div>
+        <div class="flex items-center gap-2 p-5 justify-center">
+          <template x-for="(dot, i) in slides" :key="i">
+            <button
+              type="button"
+              class="h-2.5 w-2.5 rounded-full transition"
+              :class="current === i ? 'bg-white' : 'bg-white/40'"
+              @click="go(i)"
+              aria-label="Change slide"
+            ></button>
+          </template>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <!-- Right slot -->
+  <div class="flex-1 flex items-center justify-center">
+    <div class="w-full max-w-lg space-y-6 px-6 py-10 md:px-12">
+      <div class="space-y-2">
+        <h1 class="gc_title_font text-3xl font-semibold">{{ title }}</h1>
+        {% if subtitle %}
+        <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+          {{ subtitle }}
+        </p>
+        {% endif %}
+      </div>
+      {{ slot }}
+    </div>
+  </div>
+</main>
