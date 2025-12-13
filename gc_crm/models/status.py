@@ -3,6 +3,7 @@ from django.db import models
 
 # First-Party Imports
 from gc_core.models import SimpleBaseModel
+from gc_core.constants.colors import TAILWIND_COLOR_CHOICES
 
 
 class Status(SimpleBaseModel):
@@ -23,10 +24,12 @@ class Status(SimpleBaseModel):
     )
     color = models.CharField(
         max_length=20,
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         verbose_name="Color",
         help_text="Optional hex or token to style this status.",
+        choices=TAILWIND_COLOR_CHOICES,
+        default="gray",
     )
     description = models.TextField(
         blank=True,
