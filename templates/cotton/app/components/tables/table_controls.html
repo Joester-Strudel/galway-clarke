@@ -1,0 +1,33 @@
+<div class="mt-2 rounded-md border-2 border-gc-light-text-primary/10 dark:border-gc-dark-text-primary/20 bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary px-4 py-2">
+  <div class="flex items-center justify-between text-sm">
+    <span>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} · Total {{ page_obj.paginator.count }}
+    </span>
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-3 py-1 disabled:opacity-50"
+        {% if not page_obj.has_previous %}disabled{% else %}
+        hx-get="{{ page_url }}?page={{ page_obj.previous_page_number }}"
+        hx-target="{{ hx_target|default:'#crm_tab_content' }}"
+        hx-swap="innerHTML"
+        hx-push-url="true"
+        {% endif %}
+      >
+        Prev
+      </button>
+      <button
+        type="button"
+        class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-3 py-1 disabled:opacity-50"
+        {% if not page_obj.has_next %}disabled{% else %}
+        hx-get="{{ page_url }}?page={{ page_obj.next_page_number }}"
+        hx-target="{{ hx_target|default:'#crm_tab_content' }}"
+        hx-swap="innerHTML"
+        hx-push-url="true"
+        {% endif %}
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

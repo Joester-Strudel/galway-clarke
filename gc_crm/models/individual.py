@@ -51,7 +51,7 @@ class Individual(SimpleBaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="crm_organizations",
+        related_name="crm_individuals_city",
         verbose_name="City",
     )
     location_state = models.ForeignKey(
@@ -59,7 +59,7 @@ class Individual(SimpleBaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="crm_organizations",
+        related_name="crm_individuals_state",
         verbose_name="State/Region",
     )
     location_county = models.ForeignKey(
@@ -67,7 +67,7 @@ class Individual(SimpleBaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="crm_organizations",
+        related_name="crm_individuals_county",
         verbose_name="County",
     )
     location_zip = models.ForeignKey(
@@ -75,7 +75,7 @@ class Individual(SimpleBaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="crm_organizations",
+        related_name="crm_individuals_zip",
         verbose_name="Zip Code",
     )
     organization = models.ForeignKey(

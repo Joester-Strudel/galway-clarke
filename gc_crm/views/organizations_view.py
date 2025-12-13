@@ -1,14 +1,38 @@
 # Django Imports
+from django.core.paginator import Paginator
 from django.shortcuts import render
+
+from gc_crm.models import Organization
+
+
+def _get_org_page(request):
+    qs = (
+        Organization.objects.select_related(
+            "status",
+            "industry",
+            "location_city",
+            "location_state",
+            "primary_contact",
+        )
+        .prefetch_related("tags")
+        .order_by("name")
+    )
+    paginator = Paginator(qs, 20)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return page_obj
 
 
 def organizations_view(request):
     """Serve the organizations tab content or full shell."""
-    if request.htmx:
-        return render(request, "cotton/app/gc_crm/pages/organizations.html")
-
+    page_obj = _get_org_page(request)
     context = {
         "workspace_template": "cotton/app/gc_crm/pages/index.html",
         "initial_tab": "organizations",
+        "page_obj": page_obj,
     }
+
+    if request.htmx:
+        return render(request, "cotton/app/gc_crm/pages/organizations.html", {"page_obj": page_obj})
+
     return render(request, "cotton/app/index.html", context)

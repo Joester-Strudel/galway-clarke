@@ -58,7 +58,7 @@ class Organization(HistoryBaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="crm_organizations",
+        related_name="crm_organizations_city",
         verbose_name="City",
     )
     location_state = models.ForeignKey(
@@ -66,7 +66,7 @@ class Organization(HistoryBaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="crm_organizations",
+        related_name="crm_organizations_state",
         verbose_name="State/Region",
     )
     location_county = models.ForeignKey(
@@ -74,7 +74,7 @@ class Organization(HistoryBaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="crm_organizations",
+        related_name="crm_organizations_county",
         verbose_name="County",
     )
     location_zip = models.ForeignKey(
@@ -82,7 +82,7 @@ class Organization(HistoryBaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="crm_organizations",
+        related_name="crm_organizations_zip",
         verbose_name="Zip Code",
     )
     primary_contact = models.ForeignKey(

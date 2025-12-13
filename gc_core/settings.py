@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # First-Party Apps
+    "gc_crm",
+    "gc_geography",
     "gc_users",
     "gc_core",
     "gc_collections",

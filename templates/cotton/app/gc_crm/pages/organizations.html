@@ -1,61 +1,71 @@
-<div class="flex-1 min-h-0 rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary">
-  <c-app.components.tables.table>
-    <c-app.components.tables.table_header>
-      <tr>
-        <c-app.components.tables.table_header_cell>Name</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>Status</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>Location</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>Primary Contact</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>Last Activity</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>Industry</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>Employees</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>ARR</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>Plan</c-app.components.tables.table_header_cell>
-        <c-app.components.tables.table_header_cell>Tags</c-app.components.tables.table_header_cell>
-      </tr>
-    </c-app.components.tables.table_header>
-    <tbody>
-      <c-app.components.tables.table_row>
-        <c-app.components.tables.table_cell>Acme Arts Museum</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-1 text-xs font-semibold">Active</span></c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Boston, MA</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Rachel Kim</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>3 days ago</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Museum</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>120</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>$180k</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Enterprise</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-gc-theme-accent/15 px-2 py-1 text-xs font-semibold text-gc-theme-accent">Key</span><span class="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-semibold text-emerald-600">Major Gift</span></span></c-app.components.tables.table_cell>
-      </c-app.components.tables.table_row>
-      <c-app.components.tables.table_row>
-        <c-app.components.tables.table_cell>Harbor City Gallery</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 px-2 py-1 text-xs font-semibold">Pending</span></c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Seattle, WA</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Marcus Lee</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>1 week ago</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Gallery</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>42</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>$72k</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Growth</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-amber-500/15 px-2 py-1 text-xs font-semibold text-amber-700">Prospect</span></span></c-app.components.tables.table_cell>
-      </c-app.components.tables.table_row>
-      <c-app.components.tables.table_row>
-        <c-app.components.tables.table_cell>Greenwood Cultural Center</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell><span class="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300 px-2 py-1 text-xs font-semibold">Churn Risk</span></c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Austin, TX</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Sophia Patel</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>2 weeks ago</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Community Center</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>65</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>$54k</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell>Standard</c-app.components.tables.table_cell>
-        <c-app.components.tables.table_cell><span class="inline-flex gap-1"><span class="rounded-full bg-rose-500/15 px-2 py-1 text-xs font-semibold text-rose-600">At Risk</span><span class="rounded-full bg-slate-500/15 px-2 py-1 text-xs font-semibold text-slate-600">Follow-up</span></span></c-app.components.tables.table_cell>
-      </c-app.components.tables.table_row>
-    </tbody>
-    <c-app.components.tables.table_footer>
-      <tr>
-        <td class="px-4 py-2" colspan="10">Showing sample CRM organizations</td>
-      </tr>
-    </c-app.components.tables.table_footer>
-  </c-app.components.tables.table>
+<div class="flex-1 min-h-0 h-full rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary flex flex-col">
+  <div class="flex-1 min-h-0 overflow-auto">
+    <c-app.components.tables.table>
+      <c-app.components.tables.table_header>
+        <tr>
+          <c-app.components.tables.table_header_cell>Name</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Status</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>City</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>State</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Industry</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Primary Contact</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Last Activity</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>Tags</c-app.components.tables.table_header_cell>
+        </tr>
+      </c-app.components.tables.table_header>
+      <tbody>
+        {% for org in page_obj %}
+        <c-app.components.tables.table_row>
+          <c-app.components.tables.table_cell>{{ org.name }}</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>
+            {% if org.status %}
+            <span class="inline-flex items-center gap-1 rounded-full bg-gc-theme-accent/10 text-gc-theme-accent px-2 py-1 text-xs font-semibold">
+              {{ org.status.name }}
+            </span>
+            {% else %}
+            <span class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">—</span>
+            {% endif %}
+          </c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>{{ org.location_city.name|default:"—" }}</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>{{ org.location_state.abbreviation|default:org.location_state.name|default:"—" }}</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>{{ org.industry.name|default:"—" }}</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>
+            {% if org.primary_contact %}
+              {{ org.primary_contact.first_name }} {{ org.primary_contact.last_name }}
+            {% else %}
+              —
+            {% endif %}
+          </c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>
+            {% if org.last_activity_at %}
+              {{ org.last_activity_at|date:"M d, Y" }}
+            {% else %}
+              —
+            {% endif %}
+          </c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell>
+            {% if org.tags.all %}
+            <span class="inline-flex flex-wrap gap-1">
+              {% for tag in org.tags.all %}
+              <span class="rounded-full bg-gc-theme-accent/10 text-gc-theme-accent px-2 py-1 text-xs font-semibold">{{ tag.name }}</span>
+              {% endfor %}
+            </span>
+            {% else %}
+            <span class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">—</span>
+            {% endif %}
+          </c-app.components.tables.table_cell>
+        </c-app.components.tables.table_row>
+        {% empty %}
+        <tr>
+          <td class="px-4 py-3 text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70" colspan="8">No organizations yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </c-app.components.tables.table>
+  </div>
+  <c-app.components.tables.table_controls
+    page_obj=page_obj
+    page_url="{% url 'crm-organizations' %}"
+    hx_target="#crm_tab_content"
+  />
 </div>
