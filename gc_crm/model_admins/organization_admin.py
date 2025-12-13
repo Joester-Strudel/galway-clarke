@@ -23,7 +23,7 @@ class OrganizationAdmin(ModelAdmin):
         "last_updated_at",
     ]
     list_filter = [
-        "account",
+        "team",
         "status",
         "industry",
         "location_state",
@@ -40,7 +40,7 @@ class OrganizationAdmin(ModelAdmin):
     ]
     ordering = ["name"]
     autocomplete_fields = [
-        "account",
+        "team",
         "status",
         "industry",
         "primary_contact",
@@ -65,7 +65,7 @@ class OrganizationAdmin(ModelAdmin):
                 "classes": ["tab"],
                 "fields": [
                     "name",
-                    "account",
+                    "team",
                     "status",
                     "industry",
                     "primary_contact",
@@ -95,9 +95,9 @@ class OrganizationAdmin(ModelAdmin):
         ),
     ]
 
-    @display(description=_("Team"), ordering="account__name")
+    @display(description=_("Team"), ordering="team__name")
     def formatted_team(self, obj):
-        return getattr(obj.account, "name", "-")
+        return getattr(obj.team, "name", "-")
 
     @display(description=_("Status"), ordering="status__name")
     def formatted_status(self, obj):

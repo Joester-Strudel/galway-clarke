@@ -11,7 +11,7 @@ class Organization(HistoryBaseModel):
     Separate from gc_users.Team to avoid naming collisions.
     """
 
-    account = models.ForeignKey(
+    team = models.ForeignKey(
         "gc_users.Team",
         on_delete=models.CASCADE,
         related_name="crm_organizations",

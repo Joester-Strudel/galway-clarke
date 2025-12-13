@@ -11,6 +11,13 @@ from gc_core.models import SimpleBaseModel
 
 class Individual(SimpleBaseModel):
     # Fields
+    team = models.ForeignKey(
+        "gc_users.Team",
+        on_delete=models.CASCADE,
+        related_name="crm_individuals",
+        verbose_name="Team",
+        help_text="Owning team within Galway Clarke.",
+    )
     first_name = models.CharField(
         max_length=255,
         blank=True,

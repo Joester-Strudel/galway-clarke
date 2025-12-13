@@ -25,6 +25,7 @@ class IndividualAdmin(ModelAdmin):
     ]
     list_filter = [
         "primary",
+        "team",
         "organization",
         "tags",
         "location_state",
@@ -42,6 +43,7 @@ class IndividualAdmin(ModelAdmin):
     ]
     ordering = ["-created_at"]
     autocomplete_fields = [
+        "team",
         "organization",
         "location_city",
         "location_state",
@@ -63,6 +65,7 @@ class IndividualAdmin(ModelAdmin):
             {
                 "classes": ["tab"],
                 "fields": [
+                    "team",
                     "first_name",
                     "last_name",
                     "email",
@@ -94,9 +97,9 @@ class IndividualAdmin(ModelAdmin):
         ),
     ]
 
-    @display(description=_("Team"), ordering="organization__account__name")
+    @display(description=_("Team"), ordering="team__name")
     def formatted_team(self, obj):
-        return getattr(getattr(obj.organization, "account", None), "name", "-")
+        return getattr(obj.team, "name", "-")
 
     @display(description=_("Organization"), ordering="organization__name")
     def formatted_org(self, obj):
