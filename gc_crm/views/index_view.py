@@ -1,7 +1,8 @@
+# Django Imports
 from django.shortcuts import render
 
 
-def get_crm_index(request):
+def index_view(request):
     """
     Render the CRM contacts page. If this is an HTMX request, return only the
     contacts fragment; otherwise return the full shell.

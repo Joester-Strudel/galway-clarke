@@ -1,6 +1,9 @@
+# Django Imports
 from django.urls import path
 
+# First-Party Imports
 from .views import index_view, organizations_view, individuals_view
+
 
 urlpatterns = [
     path("", index_view, name="crm-index"),
