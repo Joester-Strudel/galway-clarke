@@ -6,7 +6,7 @@ from django.db import models
 from gc_core.models import HistoryBaseModel
 
 
-class Organization(HistoryBaseModel):
+class Team(HistoryBaseModel):
     name = models.CharField(
         max_length=255,
         blank=False,
@@ -35,6 +35,6 @@ class Organization(HistoryBaseModel):
         return self.name
 
     class Meta:
-        verbose_name = "Organization"
-        verbose_name_plural = "Organizations"
+        verbose_name = "Team"
+        verbose_name_plural = "Teams"
         ordering = ("name",)

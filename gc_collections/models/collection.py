@@ -14,11 +14,11 @@ class Collection(HistoryBaseModel):
         help_text="The name of this collection.",
     )
     organization = models.ForeignKey(
-        "gc_users.Organization",
+        "gc_users.Team",
         on_delete=models.CASCADE,
         related_name="collections",
-        verbose_name="Organization",
-        help_text="The organization this collection belongs to.",
+        verbose_name="Team",
+        help_text="The team this collection belongs to.",
     )
 
     # Model Methods

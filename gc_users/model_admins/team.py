@@ -7,14 +7,14 @@ from django.utils.translation import gettext_lazy as _
 # Third-Party Imports
 from simple_history.admin import SimpleHistoryAdmin
 from unfold.admin import ModelAdmin, display
-
+    
 # First-Party Imports
-from ..models import Organization
+from ..models import Team
 
 
-@admin.register(Organization)
-class OrganizationAdmin(SimpleHistoryAdmin, ModelAdmin):
-    """Admin configuration for Organization."""
+@admin.register(Team)
+class TeamAdmin(SimpleHistoryAdmin, ModelAdmin):
+    """Admin configuration for Team."""
 
     list_display = [
         "formatted_name",

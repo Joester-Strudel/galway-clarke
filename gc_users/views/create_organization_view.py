@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
-from gc_users.models import Organization
+from gc_users.models import Team
 
 
 @login_required
@@ -21,9 +21,9 @@ def create_organization(request):
         if not name:
             messages.error(request, "Organization name is required.")
         else:
-            org = Organization.objects.create(name=name, owner=request.user)
-            org.users.add(request.user)
-            request.session["active_organization_id"] = str(org.id)
+            team = Team.objects.create(name=name, owner=request.user)
+            team.users.add(request.user)
+            request.session["active_organization_id"] = str(team.id)
             messages.success(request, "Organization created.")
             return redirect("marketing-home")
 
