@@ -43,13 +43,12 @@
             :options="tag_color_choices"
           />
           <div class="sm:col-span-1">
-            <button
+            <c-app.components.buttons.primary_button
               type="submit"
-              class="inline-flex items-center justify-center gap-1 w-full rounded-md bg-gc-theme-accent/90 px-3 py-2 text-sm font-semibold text-white hover:bg-gc-theme-accent transition"
-            >
-              <span class="material-symbols-outlined text-base leading-none">add</span>
-              Add
-            </button>
+              icon="add"
+              label="Add"
+              extra_classes="w-full justify-center px-3 py-2"
+            />
           </div>
         </div>
       </form>
@@ -84,12 +83,11 @@
             />
           </div>
           <div class="flex items-center gap-2">
-            <button
+            <c-app.components.buttons.primary_button
               type="submit"
-              class="rounded-md bg-gc-theme-accent/10 px-3 py-2 text-sm font-semibold text-gc-theme-accent hover:bg-gc-theme-accent/20 transition"
-            >
-              Save
-            </button>
+              label="Save"
+              extra_classes="px-3 py-2"
+            />
             <button
               type="button"
               class="rounded-md border border-rose-500/50 px-3 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-500/10 transition"

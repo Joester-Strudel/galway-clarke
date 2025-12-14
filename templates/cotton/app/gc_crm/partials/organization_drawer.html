@@ -59,14 +59,13 @@
       <div class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
         Last updated {{ organization.last_updated_at|date:"M d, Y H:i" }}
       </div>
-      <button
+      <c-app.components.buttons.primary_button
         form="org_form_{{ organization.id }}"
         type="submit"
-        class="inline-flex items-center gap-1 rounded-md bg-gc-theme-accent/90 px-3 py-2 text-sm font-semibold text-white hover:bg-gc-theme-accent transition"
-      >
-        <span class="material-symbols-outlined text-base leading-none">save</span>
-        Save
-      </button>
+        icon="save"
+        label="Save"
+        extra_classes="px-3 py-2"
+      />
     </div>
   </c-app.components.drawers.drawer_footer>
 </div>

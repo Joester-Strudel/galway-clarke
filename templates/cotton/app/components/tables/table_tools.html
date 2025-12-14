@@ -2,12 +2,55 @@
   class="relative mb-3 flex items-center justify-between"
   x-data="{
     filtersOpen: false,
+    searchUrl: '{{ search_url|default:request.path|default:'' }}',
+    hxTarget: '{{ hx_target|default:'#crm_tab_content' }}',
+    hxSelect: '{{ hx_select|default:'' }}',
     clearFilters() {
-      const inputs = this.$refs.filterForm?.querySelectorAll('[data-table-filter-input]') || [];
-      inputs.forEach((input) => {
-        input.value = '';
-        input.defaultValue = '';
+      const root = this.$el;
+      const wrappers = root.querySelectorAll('[data-table-filter-input]');
+      wrappers.forEach((wrapper) => {
+        wrapper.querySelectorAll('input, select, textarea').forEach((field) => {
+          if (field.type === 'checkbox' || field.type === 'radio') {
+            field.checked = false;
+            field.defaultChecked = false;
+          } else {
+            field.value = '';
+            field.defaultValue = '';
+          }
+          field.dispatchEvent(new Event('input', { bubbles: true }));
+          field.dispatchEvent(new Event('change', { bubbles: true }));
+        });
       });
+
+      const searchInput = root.querySelector('[data-table-search-input]');
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.defaultValue = '';
+        searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+        searchInput.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      const form = this.$refs.filterForm || root.querySelector('form');
+      if (this.searchUrl && window.htmx) {
+        if (form) {
+          htmx.trigger(form, 'submit');
+        } else {
+          const url = this.searchUrl || window.location.pathname;
+          const includeSelector = `[data-table-tools-hidden] input, [data-table-search-input], [data-table-filter-input] input, [data-table-filter-input] select, [data-table-filter-input] textarea`;
+          const formData = new FormData();
+          root.querySelectorAll(includeSelector).forEach((el) => {
+            if (!el.name || el.disabled) return;
+            if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+            formData.append(el.name, el.value ?? '');
+          });
+          htmx.ajax('GET', url, {
+            target: this.hxTarget || undefined,
+            swap: 'innerHTML',
+            select: this.hxSelect || undefined,
+            values: Object.fromEntries(formData),
+          });
+        }
+      }
     },
   }"
   @close-filters-drawer.window="filtersOpen = false"
@@ -27,11 +70,11 @@
       aria-label="Search table"
       data-table-search-input
       {% if search_url %}
-      hx-get="{{ search_url }}"
+      hx-get="{{ search_url|default:request.path|default:'' }}"
       hx-trigger="keyup changed delay:1s"
       hx-target="{{ hx_target|default:'#crm_tab_content' }}"
       hx-swap="innerHTML"
-      hx-include="[data-table-tools-hidden], [data-table-filter-input]"
+      hx-include="[data-table-tools-hidden] input, [data-table-search-input], [data-table-filter-input] input, [data-table-filter-input] select, [data-table-filter-input] textarea"
       {% if hx_select %}hx-select="{{ hx_select }}"{% endif %}
       {% endif %}
     />
@@ -79,7 +122,7 @@
 
       <form
         class="flex h-full flex-col overflow-hidden"
-        action="{{ search_url|default:'' }}"
+        action="{{ search_url|default:request.path|default:'' }}"
         method="get"
         @submit="filtersOpen = false"
         x-ref="filterForm"
@@ -87,7 +130,7 @@
         hx-get="{{ search_url }}"
         hx-target="{{ hx_target|default:'#crm_tab_content' }}"
         hx-swap="innerHTML"
-        hx-include="[data-table-tools-hidden], [data-table-search-input], [data-table-filter-input]"
+        hx-include="[data-table-tools-hidden] input, [data-table-search-input], [data-table-filter-input] input, [data-table-filter-input] select, [data-table-filter-input] textarea"
         {% if hx_select %}hx-select="{{ hx_select }}"{% endif %}
         {% endif %}
       >
@@ -105,26 +148,17 @@
         </div>
         <c-app.components.drawers.drawer_footer>
           <div class="flex items-center justify-end gap-2">
-            <button
+            <c-app.components.buttons.secondary_button
               type="button"
-              class="rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-3 py-2 text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary hover:border-gc-theme-accent/40 hover:text-gc-theme-accent transition"
-              @click="clearFilters()"
-              {% if search_url %}
-              hx-get="{{ search_url }}"
-              hx-target="{{ hx_target|default:'#crm_tab_content' }}"
-              hx-swap="innerHTML"
-              hx-include="[data-table-tools-hidden], [data-table-search-input]"
-              {% if hx_select %}hx-select="{{ hx_select }}"{% endif %}
-              {% endif %}
-            >
-              Clear
-            </button>
-            <button
+              label="Clear"
+              extra_classes="px-3 py-2"
+              @click.prevent="clearFilters()"
+            />
+            <c-app.components.buttons.primary_button
               type="submit"
-              class="inline-flex items-center gap-2 rounded-md border border-gc-theme-accent/30 bg-gc-theme-accent/10 px-3 py-2 text-sm font-semibold text-gc-theme-accent transition hover:bg-gc-theme-accent/20 focus:outline-none focus:ring-0"
-            >
-              Apply Filters
-            </button>
+              label="Apply Filters"
+              extra_classes="px-3 py-2"
+            />
           </div>
         </c-app.components.drawers.drawer_footer>
       </form>
