@@ -1,7 +1,9 @@
 # Django Imports
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 
+@login_required
 def individuals_view(request):
     """Serve the individuals tab content or full shell."""
     if request.htmx:

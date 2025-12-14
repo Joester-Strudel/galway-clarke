@@ -56,9 +56,7 @@
           </c-app.components.tables.table_cell>
         </c-app.components.tables.table_row>
         {% empty %}
-        <tr>
-          <td class="px-4 py-3 text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70" colspan="8">No organizations yet.</td>
-        </tr>
+        <c-app.components.empty.no_records message="No organizations yet." />
         {% endfor %}
       </tbody>
     </c-app.components.tables.table>

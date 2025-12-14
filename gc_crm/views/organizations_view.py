@@ -1,5 +1,6 @@
 # Django Imports
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from gc_crm.models import Organization
@@ -23,6 +24,7 @@ def _get_org_page(request):
     return page_obj
 
 
+@login_required
 def organizations_view(request):
     """Serve the organizations tab content or full shell."""
     page_obj = _get_org_page(request)

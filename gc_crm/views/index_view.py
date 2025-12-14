@@ -1,9 +1,11 @@
 # Django Imports
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from gc_crm.views.organizations_view import _get_org_page
 
 
+@login_required
 def index_view(request):
     """
     Render the CRM contacts page. If this is an HTMX request, return only the

@@ -1,44 +1,33 @@
 <c-app.layouts.base>
-  <main class="flex min-h-screen items-center justify-center px-4 py-12">
-    <div class="w-full max-w-md space-y-6 rounded-md bg-white p-8 shadow-xl text-center">
-      <h1 class="text-3xl font-bold text-slate-900">Sign In</h1>
-      {% if error %}
-      <div class="rounded border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{{ error }}</div>
-      {% endif %}
-      <form method="post" class="space-y-4">
-        {% csrf_token %}
-        <div class="space-y-1 text-left">
-          <label class="block text-sm font-medium text-slate-700" for="email">Email</label>
-          <input
-            class="w-full rounded border border-slate-200 px-3 py-2 text-slate-900 focus:border-slate-400 focus:outline-none"
-            type="email"
-            id="email"
-            name="email"
-            required
-            value="{{ request.POST.email }}"
-          />
-        </div>
-        <div class="space-y-1 text-left">
-          <label class="block text-sm font-medium text-slate-700" for="password">Password</label>
-          <input
-            class="w-full rounded border border-slate-200 px-3 py-2 text-slate-900 focus:border-slate-400 focus:outline-none"
-            type="password"
-            id="password"
-            name="password"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          class="w-full rounded max-w-[120px] bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 mx-auto"
-        >
-          Continue
-        </button>
-      </form>
-      <p class="text-sm text-slate-600">
-        Need an account?
-        <a class="font-semibold text-primary underline" href="{% url 'signup' %}">Sign up</a>.
-      </p>
+  <c-app.layouts.team_shell title="Welcome back" subtitle="Sign in to continue.">
+    {% if error %}
+    <div class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-white/80 dark:bg-gc-dark-bg-primary px-3 py-2 text-sm text-gc-light-text-primary">
+      {{ error }}
     </div>
-  </main>
+    {% endif %}
+
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <c-app.components.fields.text_field
+        id="email"
+        name="email"
+        label="Email"
+        type="email"
+        required="true"
+        value="{{ request.POST.email }}"
+      />
+      <c-app.components.fields.text_field
+        id="password"
+        name="password"
+        label="Password"
+        type="password"
+        required="true"
+      />
+      <c-app.components.buttons.primary_button type="submit" label="Continue" extra_classes="w-full md:w-auto" />
+    </form>
+    <p class="text-sm">
+      Need an account?
+      <a class="font-semibold text-gc-theme-accent underline" href="{% url 'signup' %}">Sign up</a>.
+    </p>
+  </c-app.layouts.team_shell>
 </c-app.layouts.base>

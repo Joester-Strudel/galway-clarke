@@ -1,0 +1,14 @@
+<div class="flex h-full w-full items-center justify-center">
+  <div class="flex items-center gap-3 rounded-md border border-dashed border-gc-light-text-secondary/50 dark:border-gc-dark-text-primary/40 bg-gc-light-bg-secondary/60 dark:bg-gc-dark-bg-secondary/40 px-4 py-3 text-center">
+    <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gc-light-text-secondary/50 dark:border-gc-dark-text-primary/40 text-gc-theme-accent bg-white/80 dark:bg-gc-dark-bg-primary/80">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Z" />
+        <path d="M14 3v4a2 2 0 0 0 2 2h4" />
+      </svg>
+    </span>
+    <div class="text-left">
+      <p class="text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">{{ message|default:"No records found." }}</p>
+      <p class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">Add a new record to get started.</p>
+    </div>
+  </div>
+</div>
