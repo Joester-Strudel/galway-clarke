@@ -223,21 +223,13 @@
     x-transition.opacity
   >
     <div class="absolute inset-0 bg-black/50" @click="showOrgDrawer = false"></div>
-    <aside
-      class="absolute right-0 top-0 flex h-full w-[640px] max-w-full flex-col border-l border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-gc-light-text-primary dark:text-gc-dark-text-primary shadow-2xl"
-      x-transition:enter="transition transform ease-out duration-300"
-      x-transition:enter-start="translate-x-full"
-      x-transition:enter-end="translate-x-0"
-      x-transition:leave="transition transform ease-in duration-200"
-      x-transition:leave-start="translate-x-0"
-      x-transition:leave-end="translate-x-full"
-    >
+    <c-app.components.drawers.wide_drawer>
       <div id="organization_drawer_content" class="h-full">
         <div class="flex h-full items-center justify-center text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
           Select an organization to edit.
         </div>
       </div>
-    </aside>
+    </c-app.components.drawers.wide_drawer>
   </div>
   {% endwith %}
 </div>

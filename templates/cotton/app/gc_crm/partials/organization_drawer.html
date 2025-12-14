@@ -1,36 +1,19 @@
 <div id="organization_drawer_content" class="flex h-full flex-col">
-  <div class="sticky top-0 z-10 flex items-center justify-between border-b border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-4 py-3 bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary">
-    <div>
-      <p class="text-base font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">
-        {{ organization.name }}
-      </p>
-      <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
-        Edit organization details.
-      </p>
-    </div>
-    <button
-      type="button"
-      class="rounded p-2 text-gc-light-text-primary dark:text-gc-dark-text-primary hover:bg-gc-light-bg-secondary/30 dark:hover:bg-gc-dark-bg-secondary/20 transition"
-      @click="$dispatch('close-org-drawer')"
-      aria-label="Close"
-    >
-      <span class="material-symbols-outlined text-lg leading-none">close</span>
-    </button>
-  </div>
+  <c-app.components.drawers.drawer_header
+    title="{{ organization.name }}"
+    subtitle="Edit organization details."
+    close_event="close-org-drawer"
+  />
 
   {% if error %}
   <div class="bg-rose-500/10 text-rose-700 dark:text-rose-300 px-4 py-3 text-sm">
     {{ error }}
   </div>
   {% endif %}
-  {% if success %}
-  <div class="bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 px-4 py-3 text-sm">
-    {{ success }}
-  </div>
-  {% endif %}
 
   <div class="flex-1 min-h-0 overflow-y-auto divide-y divide-gc-light-bg-secondary dark:divide-gc-dark-bg-secondary">
     <form
+      id="org_form_{{ organization.id }}"
       class="space-y-4 px-4 py-4"
       hx-post="{% url 'crm-organization-edit' organization.id %}"
       hx-target="#organization_drawer_content"
@@ -71,7 +54,7 @@
       />
     </form>
   </div>
-  <div class="sticky bottom-0 z-10 border-t border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary px-4 py-3">
+  <c-app.components.drawers.drawer_footer>
     <div class="flex items-center justify-between">
       <div class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
         Last updated {{ organization.last_updated_at|date:"M d, Y H:i" }}
@@ -85,9 +68,19 @@
         Save
       </button>
     </div>
-  </div>
+  </c-app.components.drawers.drawer_footer>
 </div>
 
-<template hx-swap-oob="outerHTML">
-  {% include "cotton/app/gc_crm/partials/organization_row.html" with org=organization %}
-</template>
+<div class="hidden" aria-hidden="true">
+  <table>
+    <tbody>
+      {% include "cotton/app/gc_crm/partials/organization_row.html" with org=organization oob="outerHTML" %}
+    </tbody>
+  </table>
+</div>
+
+{% if success %}
+<div hx-swap-oob="afterbegin:#toast_container">
+  <c-app.components.toasts.toast>{{ success }}</c-app.components.toasts.toast>
+</div>
+{% endif %}

@@ -1,4 +1,8 @@
 <div
+  x-data="{ show: true }"
+  x-init="setTimeout(() => { show = false; setTimeout(() => $el.remove(), 200); }, 4000)"
+  x-show="show"
+  x-transition.opacity
   class="min-w-[260px] max-w-sm rounded-lg border border-white/70 dark:border-gc-dark-bg-secondary bg-white text-gc-light-text-primary px-4 py-3 shadow-lg"
   data-flash-message
   style="pointer-events: auto"

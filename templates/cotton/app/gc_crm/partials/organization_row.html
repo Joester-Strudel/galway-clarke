@@ -1,5 +1,4 @@
-{% with row_id="organization_row_"|add:org.id %}
-<c-app.components.tables.table_row row_id="{{ row_id }}" oob="{{ oob|default:'' }}">
+<c-app.components.tables.table_row row_id="organization_row_{{ org.id }}" oob="{{ oob|default:'' }}">
   <c-app.components.tables.table_cell min_width="min-w-62">
     <div class="flex items-center gap-2">
       <button
@@ -73,4 +72,3 @@
     {% endif %}
   </c-app.components.tables.table_cell>
 </c-app.components.tables.table_row>
-{% endwith %}

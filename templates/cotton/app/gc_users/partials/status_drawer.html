@@ -1,22 +1,9 @@
 <div id="field_definitions_drawer" class="flex h-full flex-col">
-  <div class="flex items-center justify-between border-b border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-4 py-3">
-    <div>
-      <p class="text-base font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">
-        Customer Status
-      </p>
-      <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
-        Manage lifecycle statuses for this workspace.
-      </p>
-    </div>
-    <button
-      type="button"
-      class="rounded p-2 text-gc-light-text-primary dark:text-gc-dark-text-primary hover:bg-gc-light-bg-secondary/30 dark:hover:bg-gc-dark-bg-secondary/20 transition"
-      @click="$dispatch('close-status-drawer')"
-      aria-label="Close"
-    >
-      <span class="material-symbols-outlined text-lg leading-none">close</span>
-    </button>
-  </div>
+  <c-app.components.drawers.drawer_header
+    title="Customer Status"
+    subtitle="Manage lifecycle statuses for this workspace."
+    close_event="close-status-drawer"
+  />
 
   {% if error %}
   <div class="bg-amber-500/10 text-amber-700 dark:text-amber-300 px-4 py-3 text-sm">

@@ -1,0 +1,23 @@
+<div class="sticky top-0 z-10 flex items-center justify-between border-b border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-4 py-3 bg-(--color-primary)/10">
+  <div>
+    {% if title %}
+    <p class="text-base font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">
+      {{ title }}
+    </p>
+    {% endif %}
+    {% if subtitle %}
+    <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+      {{ subtitle }}
+    </p>
+    {% endif %}
+    {{ slot }}
+  </div>
+  <button
+    type="button"
+    class="rounded p-2 text-gc-light-text-primary dark:text-gc-dark-text-primary hover:bg-gc-light-bg-secondary/30 dark:hover:bg-gc-dark-bg-secondary/20 transition"
+    aria-label="Close"
+    @click="$dispatch('{{ close_event|default:'close-drawer' }}')"
+  >
+    <span class="material-symbols-outlined text-lg leading-none">close</span>
+  </button>
+</div>
