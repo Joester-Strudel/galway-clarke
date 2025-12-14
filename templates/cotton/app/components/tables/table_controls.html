@@ -12,11 +12,11 @@
         type="button"
         class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-3 py-1 disabled:opacity-50"
         {% if not page_obj or not page_obj.has_previous %}disabled{% else %}
-        hx-get="{{ page_url }}?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query|urlencode }}{% endif %}{% if sort_field %}&sort={{ sort_field }}{% endif %}{% if sort_direction %}&direction={{ sort_direction }}{% endif %}"
+        hx-get="{{ page_url }}?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query|urlencode }}{% endif %}{% if sort_field %}&sort={{ sort_field }}{% endif %}{% if sort_direction %}&direction={{ sort_direction }}{% endif %}{{ filter_querystring|default:'' }}"
         hx-target="{{ hx_target|default:'#crm_tab_content' }}"
         hx-swap="innerHTML"
         {% if hx_select %}hx-select="{{ hx_select }}"{% endif %}
-        hx-push-url="{{ page_url }}?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query|urlencode }}{% endif %}{% if sort_field %}&sort={{ sort_field }}{% endif %}{% if sort_direction %}&direction={{ sort_direction }}{% endif %}"
+        hx-push-url="{{ page_url }}?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query|urlencode }}{% endif %}{% if sort_field %}&sort={{ sort_field }}{% endif %}{% if sort_direction %}&direction={{ sort_direction }}{% endif %}{{ filter_querystring|default:'' }}"
         {% endif %}
       >
         Prev
@@ -25,11 +25,11 @@
         type="button"
         class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-3 py-1 disabled:opacity-50"
         {% if not page_obj or not page_obj.has_next %}disabled{% else %}
-        hx-get="{{ page_url }}?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query|urlencode }}{% endif %}{% if sort_field %}&sort={{ sort_field }}{% endif %}{% if sort_direction %}&direction={{ sort_direction }}{% endif %}"
+        hx-get="{{ page_url }}?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query|urlencode }}{% endif %}{% if sort_field %}&sort={{ sort_field }}{% endif %}{% if sort_direction %}&direction={{ sort_direction }}{% endif %}{{ filter_querystring|default:'' }}"
         hx-target="{{ hx_target|default:'#crm_tab_content' }}"
         hx-swap="innerHTML"
         {% if hx_select %}hx-select="{{ hx_select }}"{% endif %}
-        hx-push-url="{{ page_url }}?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query|urlencode }}{% endif %}{% if sort_field %}&sort={{ sort_field }}{% endif %}{% if sort_direction %}&direction={{ sort_direction }}{% endif %}"
+        hx-push-url="{{ page_url }}?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query|urlencode }}{% endif %}{% if sort_field %}&sort={{ sort_field }}{% endif %}{% if sort_direction %}&direction={{ sort_direction }}{% endif %}{{ filter_querystring|default:'' }}"
         {% endif %}
       >
         Next
