@@ -1,7 +1,11 @@
-<div class="mt-2 rounded-md border-2 border-gc-light-text-primary/10 dark:border-gc-dark-text-primary/20 bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary px-4 py-2">
-  <div class="flex items-center justify-between text-sm">
+<div class="mt-2 rounded-md border-2 border-gc-light-text-primary/10 dark:border-gc-dark-text-primary/20 bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary px-4 py-2">
+  <div class="flex items-center justify-between text-sm text-gc-light-text-primary dark:text-gc-dark-text-primary">
     <span>
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} · Total {{ page_obj.paginator.count }}
+      {% if page_obj %}
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} · Total {{ page_obj.paginator.count }}
+      {% else %}
+        No pagination data
+      {% endif %}
     </span>
     <div class="flex items-center gap-2">
       <button

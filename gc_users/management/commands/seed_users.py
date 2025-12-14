@@ -13,6 +13,7 @@ from django.core.management.base import BaseCommand
 
 # First-Party Imports
 from gc_users.models import Team
+from gc_crm.seeds.organizations import seed_organizations
 
 
 class Command(BaseCommand):
@@ -64,3 +65,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f"{status} team '{name}' with Joe as owner/member"))
 
         self.stdout.write(self.style.SUCCESS("User and team seeding complete."))
+
+        # Seed sample organizations for Team One (Joe)
+        seed_organizations()
+        self.stdout.write(self.style.SUCCESS("Sample organizations seeded for Team One."))

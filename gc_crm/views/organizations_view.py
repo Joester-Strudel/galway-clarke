@@ -7,17 +7,25 @@ from gc_crm.models import Organization
 
 
 def _get_org_page(request):
-    qs = (
-        Organization.objects.select_related(
-            "status",
-            "industry",
-            "location_city",
-            "location_state",
-            "primary_contact",
-        )
-        .prefetch_related("tags")
-        .order_by("name")
-    )
+    team = None
+    if request.user.is_authenticated:
+        # Prefer a team the user belongs to; fall back to owned teams.
+        team = request.user.organizations.first() or request.user.owned_organizations.first()
+
+    qs = Organization.objects.select_related(
+        "team",
+        "status",
+        "industry",
+        "location_city",
+        "location_state",
+        "primary_contact",
+    ).prefetch_related("tags")
+
+    if team and not request.user.is_superuser:
+        qs = qs.filter(team=team)
+
+    qs = qs.order_by("name")
+
     paginator = Paginator(qs, 20)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)

@@ -16,8 +16,8 @@
       <tbody>
         {% for org in page_obj %}
         <c-app.components.tables.table_row>
-          <c-app.components.tables.table_cell>{{ org.name }}</c-app.components.tables.table_cell>
-          <c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell min_width="min-w-62">{{ org.name }}</c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell min_width="min-w-28">
             {% if org.status %}
             <span class="inline-flex items-center gap-1 rounded-full bg-gc-theme-accent/10 text-gc-theme-accent px-2 py-1 text-xs font-semibold">
               {{ org.status.name }}
@@ -26,24 +26,42 @@
             <span class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">—</span>
             {% endif %}
           </c-app.components.tables.table_cell>
-          <c-app.components.tables.table_cell>{{ org.location_city.name|default:"—" }}</c-app.components.tables.table_cell>
-          <c-app.components.tables.table_cell>{{ org.location_state.abbreviation|default:org.location_state.name|default:"—" }}</c-app.components.tables.table_cell>
-          <c-app.components.tables.table_cell>{{ org.industry.name|default:"—" }}</c-app.components.tables.table_cell>
-          <c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell min_width="min-w-36">
+            {% if org.location_city %}
+              {{ org.location_city.name }}
+            {% else %}
+              —
+            {% endif %}
+          </c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell min_width="min-w-24">
+            {% if org.location_state %}
+              {{ org.location_state.abbreviation|default:org.location_state.name }}
+            {% else %}
+              —
+            {% endif %}
+          </c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell min_width="min-w-32">
+            {% if org.industry %}
+              {{ org.industry.name }}
+            {% else %}
+              —
+            {% endif %}
+          </c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell min_width="min-w-40">
             {% if org.primary_contact %}
               {{ org.primary_contact.first_name }} {{ org.primary_contact.last_name }}
             {% else %}
               —
             {% endif %}
           </c-app.components.tables.table_cell>
-          <c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell min_width="min-w-28">
             {% if org.last_activity_at %}
               {{ org.last_activity_at|date:"M d, Y" }}
             {% else %}
               —
             {% endif %}
           </c-app.components.tables.table_cell>
-          <c-app.components.tables.table_cell>
+          <c-app.components.tables.table_cell min_width="min-w-48">
             {% if org.tags.all %}
             <span class="inline-flex flex-wrap gap-1">
               {% for tag in org.tags.all %}
