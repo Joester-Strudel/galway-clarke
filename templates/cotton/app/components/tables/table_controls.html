@@ -2,20 +2,20 @@
   <div class="flex items-center justify-between text-sm text-gc-light-text-primary dark:text-gc-dark-text-primary">
     <span>
       {% if page_obj %}
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} · Total {{ page_obj.paginator.count }}
+        Page {{ page_obj.number|default:"1" }} of {{ page_obj.paginator.num_pages|default:"1" }} · Total {{ page_obj.paginator.count|default:"0" }}
       {% else %}
-        No pagination data
+        No records to paginate
       {% endif %}
     </span>
     <div class="flex items-center gap-2">
       <button
         type="button"
         class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-3 py-1 disabled:opacity-50"
-        {% if not page_obj.has_previous %}disabled{% else %}
+        {% if not page_obj or not page_obj.has_previous %}disabled{% else %}
         hx-get="{{ page_url }}?page={{ page_obj.previous_page_number }}"
         hx-target="{{ hx_target|default:'#crm_tab_content' }}"
         hx-swap="innerHTML"
-        hx-push-url="true"
+        hx-push-url="{{ page_url }}?page={{ page_obj.previous_page_number }}"
         {% endif %}
       >
         Prev
@@ -23,11 +23,11 @@
       <button
         type="button"
         class="rounded border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-3 py-1 disabled:opacity-50"
-        {% if not page_obj.has_next %}disabled{% else %}
+        {% if not page_obj or not page_obj.has_next %}disabled{% else %}
         hx-get="{{ page_url }}?page={{ page_obj.next_page_number }}"
         hx-target="{{ hx_target|default:'#crm_tab_content' }}"
         hx-swap="innerHTML"
-        hx-push-url="true"
+        hx-push-url="{{ page_url }}?page={{ page_obj.next_page_number }}"
         {% endif %}
       >
         Next
