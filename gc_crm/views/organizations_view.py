@@ -26,6 +26,25 @@ def _get_active_team(request):
 
 def _get_org_page(request):
     team = _get_active_team(request)
+    search_query = request.GET.get("search", "").strip()
+    sort_field = request.GET.get("sort", "name")
+    sort_direction = request.GET.get("direction", "asc")
+
+    allowed_sorts = {
+        "name": "name",
+        "status": "status__name",
+        "city": "location_city__name",
+        "state": "location_state__abbreviation",
+        "industry": "industry__name",
+        "primary_contact": "primary_contact__last_name",
+        "last_activity": "last_activity_at",
+    }
+
+    sort_field = sort_field if sort_field in allowed_sorts else "name"
+    sort_direction = "desc" if sort_direction == "desc" else "asc"
+    sort_expr = allowed_sorts[sort_field]
+    if sort_direction == "desc":
+        sort_expr = f"-{sort_expr}"
 
     qs = Organization.objects.select_related(
         "team",
@@ -42,12 +61,15 @@ def _get_org_page(request):
         # If no team context, show nothing for authenticated users.
         qs = qs.none()
 
-    qs = qs.order_by("name")
+    if search_query:
+        qs = qs.filter(name__icontains=search_query)
+
+    qs = qs.order_by(sort_expr, "id")
 
     paginator = Paginator(qs, 20)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return page_obj
+    return page_obj, search_query, sort_field, sort_direction
 
 
 def _pagination_context(page_obj):
@@ -74,10 +96,14 @@ def _pagination_context(page_obj):
 @login_required
 def organizations_view(request):
     """Serve the organizations tab content or full shell."""
-    pagination = _pagination_context(_get_org_page(request))
+    page_obj, search_query, sort_field, sort_direction = _get_org_page(request)
+    pagination = _pagination_context(page_obj)
     context = {
         "workspace_template": "cotton/app/gc_crm/pages/index.html",
         "initial_tab": "organizations",
+        "search_query": search_query,
+        "sort_field": sort_field,
+        "sort_direction": sort_direction,
         **pagination,
     }
 

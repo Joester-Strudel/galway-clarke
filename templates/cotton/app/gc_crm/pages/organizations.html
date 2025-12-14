@@ -1,15 +1,190 @@
-<div class="flex-1 min-h-0 h-full rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary flex flex-col">
+<c-app.components.tables.table_tools
+  search_url="{% url 'crm-organizations' %}"
+  hx_target="#crm_table_content"
+  hx_select="#crm_table_content"
+  :search_query="search_query"
+/>
+
+<div id="crm_table_content" class="flex-1 min-h-0 h-full rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary flex flex-col">
   <div class="flex-1 min-h-0 overflow-auto">
     <c-app.components.tables.table>
       <c-app.components.tables.table_header>
         <tr>
-          <c-app.components.tables.table_header_cell>Name</c-app.components.tables.table_header_cell>
-          <c-app.components.tables.table_header_cell>Status</c-app.components.tables.table_header_cell>
-          <c-app.components.tables.table_header_cell>City</c-app.components.tables.table_header_cell>
-          <c-app.components.tables.table_header_cell>State</c-app.components.tables.table_header_cell>
-          <c-app.components.tables.table_header_cell>Industry</c-app.components.tables.table_header_cell>
-          <c-app.components.tables.table_header_cell>Primary Contact</c-app.components.tables.table_header_cell>
-          <c-app.components.tables.table_header_cell>Last Activity</c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>
+            <div class="flex items-center gap-2">
+              <span>Name</span>
+              <div class="flex flex-col text-[11px] leading-none">
+                <button
+                  type="button"
+                  aria-label="Sort Name ascending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'name' and sort_direction == 'asc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=name&direction=asc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▲</button>
+                <button
+                  type="button"
+                  aria-label="Sort Name descending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'name' and sort_direction == 'desc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=name&direction=desc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▼</button>
+              </div>
+            </div>
+          </c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>
+            <div class="flex items-center gap-2">
+              <span>Status</span>
+              <div class="flex flex-col text-[11px] leading-none">
+                <button
+                  type="button"
+                  aria-label="Sort Status ascending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'status' and sort_direction == 'asc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=status&direction=asc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▲</button>
+                <button
+                  type="button"
+                  aria-label="Sort Status descending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'status' and sort_direction == 'desc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=status&direction=desc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▼</button>
+              </div>
+            </div>
+          </c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>
+            <div class="flex items-center gap-2">
+              <span>City</span>
+              <div class="flex flex-col text-[11px] leading-none">
+                <button
+                  type="button"
+                  aria-label="Sort City ascending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'city' and sort_direction == 'asc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=city&direction=asc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▲</button>
+                <button
+                  type="button"
+                  aria-label="Sort City descending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'city' and sort_direction == 'desc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=city&direction=desc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▼</button>
+              </div>
+            </div>
+          </c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>
+            <div class="flex items-center gap-2">
+              <span>State</span>
+              <div class="flex flex-col text-[11px] leading-none">
+                <button
+                  type="button"
+                  aria-label="Sort State ascending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'state' and sort_direction == 'asc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=state&direction=asc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▲</button>
+                <button
+                  type="button"
+                  aria-label="Sort State descending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'state' and sort_direction == 'desc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=state&direction=desc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▼</button>
+              </div>
+            </div>
+          </c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>
+            <div class="flex items-center gap-2">
+              <span>Industry</span>
+              <div class="flex flex-col text-[11px] leading-none">
+                <button
+                  type="button"
+                  aria-label="Sort Industry ascending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'industry' and sort_direction == 'asc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=industry&direction=asc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▲</button>
+                <button
+                  type="button"
+                  aria-label="Sort Industry descending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'industry' and sort_direction == 'desc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=industry&direction=desc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▼</button>
+              </div>
+            </div>
+          </c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>
+            <div class="flex items-center gap-2">
+              <span>Primary Contact</span>
+              <div class="flex flex-col text-[11px] leading-none">
+                <button
+                  type="button"
+                  aria-label="Sort Primary Contact ascending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'primary_contact' and sort_direction == 'asc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=primary_contact&direction=asc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▲</button>
+                <button
+                  type="button"
+                  aria-label="Sort Primary Contact descending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'primary_contact' and sort_direction == 'desc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=primary_contact&direction=desc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▼</button>
+              </div>
+            </div>
+          </c-app.components.tables.table_header_cell>
+          <c-app.components.tables.table_header_cell>
+            <div class="flex items-center gap-2">
+              <span>Last Activity</span>
+              <div class="flex flex-col text-[11px] leading-none">
+                <button
+                  type="button"
+                  aria-label="Sort Last Activity ascending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'last_activity' and sort_direction == 'asc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=last_activity&direction=asc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▲</button>
+                <button
+                  type="button"
+                  aria-label="Sort Last Activity descending"
+                  class="hover:text-gc-theme-accent {% if sort_field == 'last_activity' and sort_direction == 'desc' %}text-gc-theme-accent{% endif %}"
+                  hx-get="{% url 'crm-organizations' %}?sort=last_activity&direction=desc{% if search_query %}&search={{ search_query|urlencode }}{% endif %}"
+                  hx-target="#crm_table_content"
+                  hx-swap="innerHTML"
+                  hx-select="#crm_table_content"
+                >▼</button>
+              </div>
+            </div>
+          </c-app.components.tables.table_header_cell>
           <c-app.components.tables.table_header_cell>Tags</c-app.components.tables.table_header_cell>
         </tr>
       </c-app.components.tables.table_header>
@@ -82,6 +257,10 @@
   <c-app.components.tables.table_controls
     :page_obj="page_obj"
     page_url="{% url 'crm-organizations' %}"
-    hx_target="#crm_tab_content"
+    hx_target="#crm_table_content"
+    hx_select="#crm_table_content"
+    sort_field="{{ sort_field }}"
+    sort_direction="{{ sort_direction }}"
+    search_query="{{ search_query }}"
   />
 </div>

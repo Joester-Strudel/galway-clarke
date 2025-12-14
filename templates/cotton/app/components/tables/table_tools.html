@@ -1,0 +1,29 @@
+<div class="mb-3 flex items-center justify-between">
+  <div class="flex items-center gap-2">
+    {{ slot }}
+    <div class="hidden" data-table-tools-hidden>
+      <input type="hidden" name="sort" value="{{ sort_field|default:'name' }}">
+      <input type="hidden" name="direction" value="{{ sort_direction|default:'asc' }}">
+    </div>
+    <input
+      type="search"
+      name="search"
+      value="{{ search_query|default:'' }}"
+      placeholder="Search..."
+      class="w-56 rounded-md border border-gc-theme-accent/40 bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary px-3 py-2 text-sm text-gc-light-text-primary dark:text-gc-dark-text-primary focus:outline-none focus:ring-2 focus:ring-gc-theme-accent/60"
+      aria-label="Search table"
+      {% if search_url %}
+      hx-get="{{ search_url }}"
+      hx-trigger="keyup changed delay:1s"
+      hx-target="{{ hx_target|default:'#crm_tab_content' }}"
+      hx-swap="innerHTML"
+      hx-include="[data-table-tools-hidden]"
+      {% if hx_select %}hx-select="{{ hx_select }}"{% endif %}
+      {% endif %}
+    />
+  </div>
+  <div class="flex items-center gap-2">
+    <c-slot name="actions"></c-slot>
+    <c-app.components.buttons.add_button />
+  </div>
+</div>
