@@ -191,3 +191,76 @@
   --color-gc-light-text-primary: #111111;
   --color-gc-light-text-secondary: #4b4b4b;
 }
+
+@layer components {
+  .status-pill {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold border;
+  }
+
+  .status-pill-slate {
+    @apply bg-slate-100 text-slate-800 border border-slate-800 dark:bg-slate-900/40 dark:text-slate-100 dark:border-slate-100;
+  }
+  .status-pill-gray {
+    @apply bg-gray-100 text-gray-800 border border-gray-800 dark:bg-gray-900/40 dark:text-gray-100 dark:border-gray-100;
+  }
+  .status-pill-zinc {
+    @apply bg-zinc-100 text-zinc-800 border border-zinc-800 dark:bg-zinc-900/40 dark:text-zinc-100 dark:border-zinc-100;
+  }
+  .status-pill-neutral {
+    @apply bg-neutral-100 text-neutral-800 border border-neutral-800 dark:bg-neutral-900/40 dark:text-neutral-100 dark:border-neutral-100;
+  }
+  .status-pill-stone {
+    @apply bg-stone-100 text-stone-800 border border-stone-800 dark:bg-stone-900/40 dark:text-stone-100 dark:border-stone-100;
+  }
+  .status-pill-red {
+    @apply bg-red-100 text-red-800 border border-red-800 dark:bg-red-900/40 dark:text-red-100 dark:border-red-100;
+  }
+  .status-pill-orange {
+    @apply bg-orange-100 text-orange-800 border border-orange-800 dark:bg-orange-900/40 dark:text-orange-100 dark:border-orange-100;
+  }
+  .status-pill-amber {
+    @apply bg-amber-100 text-amber-800 border border-amber-800 dark:bg-amber-900/40 dark:text-amber-100 dark:border-amber-100;
+  }
+  .status-pill-yellow {
+    @apply bg-yellow-100 text-yellow-800 border border-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-100 dark:border-yellow-100;
+  }
+  .status-pill-lime {
+    @apply bg-lime-100 text-lime-800 border border-lime-800 dark:bg-lime-900/40 dark:text-lime-100 dark:border-lime-100;
+  }
+  .status-pill-green {
+    @apply bg-green-100 text-green-800 border border-green-800 dark:bg-green-900/40 dark:text-green-100 dark:border-green-100;
+  }
+  .status-pill-emerald {
+    @apply bg-emerald-100 text-emerald-800 border border-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-100 dark:border-emerald-100;
+  }
+  .status-pill-teal {
+    @apply bg-teal-100 text-teal-800 border border-teal-800 dark:bg-teal-900/40 dark:text-teal-100 dark:border-teal-100;
+  }
+  .status-pill-cyan {
+    @apply bg-cyan-100 text-cyan-800 border border-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-100 dark:border-cyan-100;
+  }
+  .status-pill-sky {
+    @apply bg-sky-100 text-sky-800 border border-sky-800 dark:bg-sky-900/40 dark:text-sky-100 dark:border-sky-100;
+  }
+  .status-pill-blue {
+    @apply bg-blue-100 text-blue-800 border border-blue-800 dark:bg-blue-900/40 dark:text-blue-100 dark:border-blue-100;
+  }
+  .status-pill-indigo {
+    @apply bg-indigo-100 text-indigo-800 border border-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-100 dark:border-indigo-100;
+  }
+  .status-pill-violet {
+    @apply bg-violet-100 text-violet-800 border border-violet-800 dark:bg-violet-900/40 dark:text-violet-100 dark:border-violet-100;
+  }
+  .status-pill-purple {
+    @apply bg-purple-100 text-purple-800 border border-purple-800 dark:bg-purple-900/40 dark:text-purple-100 dark:border-purple-100;
+  }
+  .status-pill-fuchsia {
+    @apply bg-fuchsia-100 text-fuchsia-800 border border-fuchsia-800 dark:bg-fuchsia-900/40 dark:text-fuchsia-100 dark:border-fuchsia-100;
+  }
+  .status-pill-pink {
+    @apply bg-pink-100 text-pink-800 border border-pink-800 dark:bg-pink-900/40 dark:text-pink-100 dark:border-pink-100;
+  }
+  .status-pill-rose {
+    @apply bg-rose-100 text-rose-800 border border-rose-800 dark:bg-rose-900/40 dark:text-rose-100 dark:border-rose-100;
+  }
+}

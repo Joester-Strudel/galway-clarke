@@ -7,6 +7,7 @@
     <button
       type="button"
       class="pb-1 border-b-2"
+      style="cursor: pointer;"
       :class="active === 'organizations' ? 'border-gc-theme-accent text-gc-theme-accent' : 'border-transparent text-gc-light-text-secondary dark:text-gc-dark-text-primary/70'"
       @click="active = 'organizations'"
       hx-get="{% url 'crm-organizations' %}"
@@ -19,6 +20,7 @@
     <button
       type="button"
       class="pb-1 border-b-2"
+      style="cursor: pointer;"
       :class="active === 'individuals' ? 'border-gc-theme-accent text-gc-theme-accent' : 'border-transparent text-gc-light-text-secondary dark:text-gc-dark-text-primary/70'"
       @click="active = 'individuals'"
       hx-get="{% url 'crm-individuals' %}"

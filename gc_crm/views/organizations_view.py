@@ -3,12 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
+from django.http import HttpResponseBadRequest
 from django.utils.dateparse import parse_date
 
 # Standard Library Imports
 from urllib.parse import urlencode
 
-from gc_crm.models import Organization
+from gc_crm.models import Organization, Status, Tag
 
 
 def _get_active_team(request):
@@ -222,7 +223,77 @@ def organizations_view(request):
         **pagination,
     }
 
+    hx_target = request.headers.get("HX-Target")
+    if request.htmx and hx_target == "htmx_workspace":
+        # Navbar click: return full CRM shell so header/tabs stay visible
+        return render(request, "cotton/app/gc_crm/pages/index.html", context)
     if request.htmx:
         return render(request, "cotton/app/gc_crm/pages/organizations.html", context)
 
     return render(request, "cotton/app/index.html", context)
+
+
+@login_required
+def organization_drawer_view(request, org_id):
+    """Return the organization drawer for view/edit, and out-of-band row swap."""
+    team = _get_active_team(request)
+    organization = Organization.objects.filter(id=org_id, team=team).prefetch_related("tags").select_related("status").first()
+    if not organization:
+        return HttpResponseBadRequest("Organization not found")
+
+    statuses = Status.objects.filter(team=team).order_by("name") if team else Status.objects.none()
+    tags = Tag.objects.filter(team=team).order_by("name") if team else Tag.objects.none()
+
+    error = None
+    success = None
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        status_id = request.POST.get("status")
+        tag_ids = request.POST.getlist("tags")
+        notes = request.POST.get("notes", "")
+
+        if not name:
+            error = "Name is required."
+        else:
+            organization.name = name
+            if status_id:
+                status = statuses.filter(id=status_id).first()
+                organization.status = status
+            else:
+                organization.status = None
+            organization.notes = notes
+
+            valid_tags = tags.filter(id__in=tag_ids)
+            organization.save()
+            organization.tags.set(valid_tags)
+            # Refresh from DB for accurate related fields in row partial.
+            organization.refresh_from_db()
+            success = "Saved changes."
+
+    selected_tag_ids = set(organization.tags.values_list("id", flat=True))
+    selected_tags = list(organization.tags.all())
+    status_initial = []
+    if organization.status:
+        status_initial = [
+            {
+                "value": str(organization.status_id),
+                "label": organization.status.name,
+                "color": organization.status.color or "gray",
+            }
+        ]
+    tag_initial = [
+        {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"} for tag in selected_tags
+    ]
+
+    context = {
+        "organization": organization,
+        "statuses": statuses,
+        "tags": tags,
+        "selected_tag_ids": selected_tag_ids,
+        "selected_tags": selected_tags,
+        "status_initial": status_initial,
+        "tag_initial": tag_initial,
+        "error": error,
+        "success": success,
+    }
+    return render(request, "cotton/app/gc_crm/partials/organization_drawer.html", context)

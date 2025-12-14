@@ -1,0 +1,125 @@
+<div id="tag_definitions_drawer" class="flex h-full flex-col">
+  <div class="flex items-center justify-between border-b border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-4 py-3">
+    <div>
+      <p class="text-base font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">
+        Customer Tags
+      </p>
+      <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+        Define reusable tags for organizations in this workspace.
+      </p>
+    </div>
+    <button
+      type="button"
+      class="rounded p-2 text-gc-light-text-primary dark:text-gc-dark-text-primary hover:bg-gc-light-bg-secondary/30 dark:hover:bg-gc-dark-bg-secondary/20 transition"
+      @click="$dispatch('close-tag-drawer')"
+      aria-label="Close"
+    >
+      <span class="material-symbols-outlined text-lg leading-none">close</span>
+    </button>
+  </div>
+
+  {% if error %}
+  <div class="bg-amber-500/10 text-amber-700 dark:text-amber-300 px-4 py-3 text-sm">
+    {{ error }}
+  </div>
+  {% endif %}
+
+  <div class="flex-1 overflow-y-auto divide-y divide-gc-light-bg-secondary dark:divide-gc-dark-bg-secondary">
+    {% if not team %}
+    <div class="px-4 py-4 text-sm text-amber-700 dark:text-amber-300">
+      No active team is selected. Choose a team to manage tags.
+    </div>
+    {% else %}
+    <div class="px-4 py-4">
+      <p class="text-sm font-semibold mb-2 text-gc-light-text-primary dark:text-gc-dark-text-primary">Add Tag</p>
+      <form
+        class="space-y-2"
+        hx-post="{% url 'settings-tag-create' %}"
+        hx-target="#tag_definitions_drawer"
+        hx-swap="outerHTML"
+      >
+        {% csrf_token %}
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 items-end">
+          <div class="sm:col-span-2">
+            <c-app.components.fields.text_field
+              id="tag_name_new"
+              name="name"
+              label="Tag name"
+              placeholder="Tag name"
+              required="true"
+            />
+          </div>
+          <c-app.components.fields.select_field
+            id="tag_color_new"
+            name="color"
+            label="Color"
+            :options="tag_color_choices"
+          />
+          <div class="sm:col-span-1">
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center gap-1 w-full rounded-md bg-gc-theme-accent/90 px-3 py-2 text-sm font-semibold text-white hover:bg-gc-theme-accent transition"
+            >
+              <span class="material-symbols-outlined text-base leading-none">add</span>
+              Add
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="px-4 py-4 space-y-3">
+      <p class="text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">Existing Tags</p>
+      {% if tags %}
+        {% for tag in tags %}
+        <form
+          class="flex flex-col gap-3 rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary p-3"
+          hx-post="{% url 'settings-tag-update' tag.id %}"
+          hx-target="#tag_definitions_drawer"
+          hx-swap="outerHTML"
+        >
+          {% csrf_token %}
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 items-end">
+            <div class="sm:col-span-2">
+              <c-app.components.fields.text_field
+                id="tag_name_{{ tag.id }}"
+                name="name"
+                label="Name"
+                value="{{ tag.name }}"
+              />
+            </div>
+            <c-app.components.fields.select_field
+              id="tag_color_{{ tag.id }}"
+              name="color"
+              label="Color"
+              :options="tag_color_choices"
+              selected="{{ tag.color }}"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              type="submit"
+              class="rounded-md bg-gc-theme-accent/10 px-3 py-2 text-sm font-semibold text-gc-theme-accent hover:bg-gc-theme-accent/20 transition"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="rounded-md border border-rose-500/50 px-3 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-500/10 transition"
+              hx-post="{% url 'settings-tag-delete' tag.id %}"
+              hx-target="#tag_definitions_drawer"
+              hx-swap="outerHTML"
+              hx-confirm="Delete this tag?"
+            >
+              Delete
+            </button>
+          </div>
+        </form>
+        {% endfor %}
+      {% else %}
+        <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">No tags yet.</p>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>

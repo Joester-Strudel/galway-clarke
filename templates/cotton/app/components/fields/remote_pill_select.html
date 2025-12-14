@@ -1,0 +1,128 @@
+{% comment %}
+Reusable remote pill select (single or multi).
+Props:
+- id: unique id
+- name: field name
+- label: label text
+- options_url: endpoint returning options partial (expects ?search=&page=)
+- initial: list of dicts {value,label,color}
+- multiple: "true"/"false"
+{% endcomment %}
+<div
+  x-data="remoteSelect({
+    id: '{{ id }}',
+    name: '{{ name }}',
+    label: '{{ label|escapejs }}',
+    optionsUrl: '{{ options_url }}',
+    multiple: {% if multiple %}true{% else %}false{% endif %},
+    initial: [
+      {% for item in initial %}
+      { value: '{{ item.value }}', label: '{{ item.label|escapejs }}', color: '{{ item.color|default:'gray' }}' }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ],
+  })"
+  class="relative space-y-1"
+>
+  <label class="block text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary" :for="id">{{ label }}</label>
+  <button
+    type="button"
+    class="w-full h-12 rounded-lg border border-gc-theme-accent bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-base text-gc-light-text-primary dark:text-gc-dark-text-primary px-3 shadow-sm flex items-center justify-between gap-2 focus:border-gc-theme-accent focus:ring-2 focus:ring-gc-theme-accent/40 focus:outline-none"
+    :id="id"
+    @click="toggle()"
+  >
+    <div class="flex items-center gap-2 flex-wrap">
+      <template x-if="selected.length === 0">
+        <span class="text-gc-light-text-secondary dark:text-gc-dark-text-primary/70 text-sm">Select...</span>
+      </template>
+      <template x-for="item in selected" :key="item.value">
+        <span
+          class="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold"
+          :class="pillClass(item.color)"
+        >
+          <span x-text="item.label"></span>
+          <button type="button" class="leading-none" @click.stop="remove(item.value)">&times;</button>
+        </span>
+      </template>
+    </div>
+    <span class="material-symbols-outlined text-lg leading-none text-gc-light-text-secondary dark:text-gc-dark-text-primary/70" x-text="open ? 'expand_less' : 'expand_more'"></span>
+  </button>
+
+  <div
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    class="absolute z-50 mt-1 w-full rounded-lg border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary shadow-lg max-h-80 overflow-auto"
+  >
+    <div class="p-2">
+      <input
+        type="text"
+        class="w-full h-10 rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-sm px-3"
+        placeholder="Search..."
+        x-model="search"
+        @input.debounce.300ms="fetchOptions()"
+        @keydown.escape.prevent.stop="open = false"
+      />
+    </div>
+    <div class="divide-y divide-gc-light-bg-secondary dark:divide-gc-dark-bg-secondary" :id="optionsId" data-options-container></div>
+  </div>
+
+  <template x-for="item in selected" :key="item.value">
+    <input type="hidden" :name="name" :value="item.value" />
+  </template>
+</div>
+
+<script>
+  function remoteSelect({ id, name, label, optionsUrl, multiple = false, initial = [] }) {
+    return {
+      id,
+      name,
+      label,
+      optionsUrl,
+      multiple,
+      open: false,
+      loaded: false,
+      search: "",
+      selected: initial.filter((item) => item.value && item.label),
+      get optionsId() {
+        return `${this.id}_options`;
+      },
+      toggle() {
+        this.open = !this.open;
+        if (this.open && !this.loaded) {
+          this.fetchOptions();
+          this.loaded = true;
+        }
+      },
+      fetchOptions(url = null) {
+        const target = document.getElementById(this.optionsId);
+        if (!target) return;
+        const query = this.search ? `?search=${encodeURIComponent(this.search)}` : "";
+        htmx.ajax("GET", url || `${this.optionsUrl}${query}`, {
+          target: `#${this.optionsId}`,
+          swap: "innerHTML",
+        });
+      },
+      pillClass(color) {
+        return `status-pill status-pill-${color || "gray"}`;
+      },
+      isSelected(value) {
+        return this.selected.some((i) => i.value === value);
+      },
+      toggleOption(value, label, color) {
+        if (this.multiple) {
+          if (this.isSelected(value)) {
+            this.selected = this.selected.filter((i) => i.value !== value);
+          } else {
+            this.selected = [...this.selected, { value, label, color }];
+          }
+        } else {
+          this.selected = [{ value, label, color }];
+          this.open = false;
+        }
+      },
+      remove(value) {
+        this.selected = this.selected.filter((i) => i.value !== value);
+      },
+    };
+  }
+</script>

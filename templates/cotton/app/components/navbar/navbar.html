@@ -14,15 +14,21 @@
     <c-app.components.navbar.navbar_item
       icon="contacts"
       label="Customers"
-      href="{% url 'crm-index' %}"
-      hx-get="{% url 'crm-index' %}"
-      hx-push="{% url 'crm-index' %}"
+      href="{% url 'crm-organizations' %}"
+      hx-get="{% url 'crm-organizations' %}"
+      hx-push="{% url 'crm-organizations' %}"
     />
 
     <c-app.components.navbar.navbar_item icon="volunteer_activism" label="Donors" />
     <c-app.components.navbar.navbar_item icon="campaign" label="Engagement" />
     <c-app.components.navbar.navbar_item icon="confirmation_number" label="Events" />
     <c-app.components.navbar.navbar_item icon="query_stats" label="Reports" />
-    <c-app.components.navbar.navbar_item icon="settings" label="Settings" />
+    <c-app.components.navbar.navbar_item
+      icon="settings"
+      label="Settings"
+      href="{% url 'settings-members' %}"
+      hx-get="{% url 'settings-members' %}"
+      hx-push="{% url 'settings-members' %}"
+    />
   </nav>
 </aside>

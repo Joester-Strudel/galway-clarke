@@ -6,6 +6,13 @@ from django.shortcuts import render
 @login_required
 def individuals_view(request):
     """Serve the individuals tab content or full shell."""
+    if request.htmx and request.headers.get("HX-Target") == "htmx_workspace":
+        # Navbar (or direct) htmx load should include header/tabs shell
+        return render(
+            request,
+            "cotton/app/gc_crm/pages/index.html",
+            {"workspace_template": "cotton/app/gc_crm/pages/index.html", "initial_tab": "individuals"},
+        )
     if request.htmx:
         return render(request, "cotton/app/gc_crm/pages/individuals.html")
 

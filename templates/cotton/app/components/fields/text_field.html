@@ -1,12 +1,13 @@
 <div class="space-y-1">
-  <label class="block text-sm font-medium" for="{{ id }}">{{ label }}</label>
+  <label class="block text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary" for="{{ id }}">{{ label }}</label>
   <input
-    class="w-full rounded-lg border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-white/80 dark:bg-gc-dark-bg-primary px-4 py-3 focus:border-gc-theme-accent focus:ring-0 focus:outline-none"
+    class="w-full h-12 rounded-lg border border-gc-theme-accent bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-base text-gc-light-text-primary dark:text-gc-dark-text-primary placeholder-gc-light-text-secondary/70 dark:placeholder-gc-dark-text-primary/60 px-4 shadow-sm focus:border-gc-theme-accent focus:ring-2 focus:ring-gc-theme-accent/40 focus:outline-none"
     type="{{ type|default:'text' }}"
     id="{{ id }}"
     name="{{ name }}"
     {% if required %}required{% endif %}
     value="{{ value }}"
     placeholder="{{ placeholder }}"
+    {% if disabled %}disabled{% endif %}
   />
 </div>
