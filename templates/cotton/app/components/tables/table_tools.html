@@ -1,4 +1,16 @@
-<div class="relative mb-3 flex items-center justify-between" x-data="{ filtersOpen: false }">
+<div
+  class="relative mb-3 flex items-center justify-between"
+  x-data="{
+    filtersOpen: false,
+    clearFilters() {
+      const inputs = this.$refs.filterForm?.querySelectorAll('[data-table-filter-input]') || [];
+      inputs.forEach((input) => {
+        input.value = '';
+        input.defaultValue = '';
+      });
+    },
+  }"
+>
   <div class="flex items-center gap-2">
     {{ slot }}
     <div class="hidden" data-table-tools-hidden>
@@ -78,11 +90,12 @@
         action="{{ search_url|default:'' }}"
         method="get"
         @submit="filtersOpen = false"
+        x-ref="filterForm"
         {% if search_url %}
         hx-get="{{ search_url }}"
         hx-target="{{ hx_target|default:'#crm_tab_content' }}"
         hx-swap="innerHTML"
-        hx-include="[data-table-tools-hidden], [data-table-search-input]"
+        hx-include="[data-table-tools-hidden], [data-table-search-input], [data-table-filter-input]"
         {% if hx_select %}hx-select="{{ hx_select }}"{% endif %}
         {% endif %}
       >
@@ -105,9 +118,16 @@
           <button
             type="button"
             class="rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-3 py-2 text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary hover:border-gc-theme-accent/40 hover:text-gc-theme-accent transition"
-            @click="filtersOpen = false"
+            @click="clearFilters()"
+            {% if search_url %}
+            hx-get="{{ search_url }}"
+            hx-target="{{ hx_target|default:'#crm_tab_content' }}"
+            hx-swap="innerHTML"
+            hx-include="[data-table-tools-hidden], [data-table-search-input]"
+            {% if hx_select %}hx-select="{{ hx_select }}"{% endif %}
+            {% endif %}
           >
-            Cancel
+            Clear
           </button>
           <button
             type="submit"
