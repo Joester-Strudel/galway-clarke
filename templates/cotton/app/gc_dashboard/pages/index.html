@@ -1,1 +1,16 @@
-<h1>Dashboard</h1>
+<c-app.components.workspace.workspace_header>
+  <c-app.components.workspace.workspace_title>Dashboard</c-app.components.workspace.workspace_title>
+</c-app.components.workspace.workspace_header>
+
+<div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+  <div class="rounded-lg border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary p-4 shadow-sm">
+    <p class="text-xs font-semibold uppercase tracking-wide text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">Total organizations</p>
+    <p class="mt-2 text-3xl font-bold text-gc-light-text-primary dark:text-gc-dark-text-primary">{{ organization_count }}</p>
+    <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">Across your active workspace.</p>
+  </div>
+  <div class="rounded-lg border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary p-4 shadow-sm">
+    <p class="text-xs font-semibold uppercase tracking-wide text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">Total contacts</p>
+    <p class="mt-2 text-3xl font-bold text-gc-light-text-primary dark:text-gc-dark-text-primary">{{ contact_count }}</p>
+    <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">Individuals linked to this workspace.</p>
+  </div>
+</div>
