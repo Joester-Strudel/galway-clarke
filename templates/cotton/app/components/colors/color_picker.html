@@ -1,9 +1,8 @@
-{% with picker_id=id|default:"color_picker" initial_color=selected|default_if_none:"gray" %}
 <div
   class="relative inline-flex items-center gap-2"
   x-data="{
     open: false,
-    value: '{{ initial_color }}',
+    value: '{{ selected|default_if_none:'gray' }}',
     alignX: 'left',
     alignY: 'down',
     colors: [
@@ -32,7 +31,7 @@
 >
   <input
     type="hidden"
-    id="{{ picker_id }}"
+    id="{{ id|default:'color_picker' }}"
     name="{{ name|default:'color' }}"
     x-model="value"
   />
@@ -86,4 +85,3 @@
     </div>
   </div>
 </div>
-{% endwith %}
