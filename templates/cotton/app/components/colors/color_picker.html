@@ -1,0 +1,89 @@
+{% with picker_id=id|default:"color_picker" initial_color=selected|default_if_none:"gray" %}
+<div
+  class="relative inline-flex items-center gap-2"
+  x-data="{
+    open: false,
+    value: '{{ initial_color }}',
+    alignX: 'left',
+    alignY: 'down',
+    colors: [
+      'slate','gray','zinc','neutral','stone',
+      'red','orange','amber','yellow','lime',
+      'green','emerald','teal','cyan','sky',
+      'blue','indigo','violet','purple','fuchsia',
+      'pink','rose',
+    ],
+    computePosition() {
+      const trigger = this.$refs.trigger;
+      const menu = this.$refs.menu;
+      if (!trigger || !menu) return;
+      const rect = trigger.getBoundingClientRect();
+      const menuWidth = menu.offsetWidth || menu.getBoundingClientRect().width || 200;
+      const menuHeight = menu.offsetHeight || menu.getBoundingClientRect().height || 200;
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      this.alignX = rect.left + menuWidth > viewportWidth - 12 ? 'right' : 'left';
+      this.alignY = rect.bottom + menuHeight > viewportHeight - 12 ? 'up' : 'down';
+    },
+  }"
+  @click.outside="open = false"
+  @keydown.escape.window="open = false"
+  @resize.window="open && computePosition()"
+>
+  <input
+    type="hidden"
+    id="{{ picker_id }}"
+    name="{{ name|default:'color' }}"
+    x-model="value"
+  />
+
+  <!-- Trigger: Color Circle -->
+  <button
+    type="button"
+    x-ref="trigger"
+    class="h-10 w-10 rounded-full border border-black/10 shadow-sm focus:outline-none focus:ring-2 focus:ring-gc-theme-accent/40"
+    :class="`bg-${value}-500`"
+    @click="open = !open; $nextTick(() => open && computePosition())"
+    aria-haspopup="true"
+    :aria-expanded="open"
+  >
+    <span class="sr-only">Selected color: <span x-text="value"></span></span>
+  </button>
+
+  <!-- Popover -->
+  <div
+    x-show="open"
+    x-transition
+    x-cloak
+    x-ref="menu"
+    class="absolute z-30 rounded-lg border border-black/10 bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary shadow-xl p-3"
+    :class="{
+      'left-0 right-auto origin-top-left': alignX === 'left',
+      'right-0 left-auto origin-top-right': alignX === 'right',
+      'mt-2 top-full': alignY === 'down',
+      'mb-2 bottom-full': alignY === 'up',
+    }"
+  >
+    <div class="grid grid-cols-6 gap-x-2 gap-y-3 min-w-48">
+      <template x-for="color in colors" :key="color">
+        <button
+          type="button"
+          class="h-8 w-8 rounded-full border border-black/10 transition focus:outline-none"
+          :class="[
+            `bg-${color}-500`,
+            value === color
+              ? 'ring-2 ring-gc-theme-accent ring-offset-2 ring-offset-gc-light-bg-primary dark:ring-offset-gc-dark-bg-primary'
+              : 'hover:ring-2 hover:ring-black/20',
+          ]"
+          @click="
+            value = color;
+            open = false;
+          "
+        >
+          <span class="sr-only" x-text="color"></span>
+        </button>
+      </template>
+    </div>
+  </div>
+</div>
+{% endwith %}

@@ -1,0 +1,11 @@
+<c-vars type="button" label="Delete" extra_classes="" class="" />
+<button
+  type="{{ type|default:'button' }}"
+  class="inline-flex items-center justify-center gap-2 rounded-lg bg-rose-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-rose-500/90 {{ extra_classes|default:'' }}{% if attrs.class %} {{ attrs.class }}{% endif %}"
+  {{ attrs }}
+>
+  {% if icon %}
+  <span class="material-symbols-outlined text-base leading-none">{{ icon }}</span>
+  {% endif %}
+  {{ label|default:slot }}
+</button>

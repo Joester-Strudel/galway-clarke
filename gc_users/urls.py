@@ -19,6 +19,12 @@ from gc_users.views.team_tags_view import (
     update_tag,
     delete_tag,
 )
+from gc_users.views.team_industries_view import (
+    team_industries_drawer,
+    create_industry,
+    update_industry,
+    delete_industry,
+)
 
 urlpatterns = [
     path("signup/", signup, name="signup"),
@@ -58,5 +64,17 @@ urlpatterns = [
         "settings/tags/<uuid:tag_id>/delete/",
         delete_tag,
         name="settings-tag-delete",
+    ),
+    path("settings/industries/", team_industries_drawer, name="settings-industries"),
+    path("settings/industries/create/", create_industry, name="settings-industry-create"),
+    path(
+        "settings/industries/<uuid:industry_id>/update/",
+        update_industry,
+        name="settings-industry-update",
+    ),
+    path(
+        "settings/industries/<uuid:industry_id>/delete/",
+        delete_industry,
+        name="settings-industry-delete",
     ),
 ]

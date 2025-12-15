@@ -1,0 +1,19 @@
+<div class="sm:col-span-2">
+  <c-app.components.fields.text_field
+    id="{{ name_field_id }}"
+    name="name"
+    label=""
+    placeholder="{{ name_field_placeholder|default:name_field_label|default:'Name' }}"
+    value="{{ name_field_value|default_if_none:'' }}"
+    required="{{ name_field_required|default_if_none:'' }}"
+  />
+</div>
+<div>
+  <c-app.components.colors.color_picker
+    id="{{ color_field_id|default:'color' }}"
+    name="color"
+    label="{{ color_field_label|default:'Color' }}"
+    :options="color_field_choices"
+    selected="{{ color_field_selected|default_if_none:'' }}"
+  />
+</div>

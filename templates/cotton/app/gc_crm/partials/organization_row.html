@@ -16,11 +16,7 @@
   </c-app.components.tables.table_cell>
   <c-app.components.tables.table_cell min_width="min-w-28">
     {% if org.status %}
-    {% with status_color=org.status.color|default_if_none:'gray' %}
-      <span class="status-pill status-pill-{{ status_color }}">
-        {{ org.status.name }}
-      </span>
-    {% endwith %}
+      <c-app.components.pills.pill label="{{ org.status.name }}" color="{{ org.status.color|default_if_none:'gray' }}" />
     {% else %}
     <span class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">—</span>
     {% endif %}
@@ -41,7 +37,7 @@
   </c-app.components.tables.table_cell>
   <c-app.components.tables.table_cell min_width="min-w-32">
     {% if org.industry %}
-      {{ org.industry.name }}
+      <c-app.components.pills.pill label="{{ org.industry.name }}" color="{{ org.industry.color|default_if_none:'gray' }}" />
     {% else %}
       —
     {% endif %}
@@ -64,9 +60,7 @@
     {% if org.tags.all %}
     <span class="inline-flex flex-wrap gap-1">
       {% for tag in org.tags.all %}
-      {% with tag_color=tag.color|default:"gray" %}
-      <span class="status-pill status-pill-{{ tag_color }}">{{ tag.name }}</span>
-      {% endwith %}
+        <c-app.components.pills.pill label="{{ tag.name }}" color="{{ tag.color|default:'gray' }}" />
       {% endfor %}
     </span>
     {% else %}

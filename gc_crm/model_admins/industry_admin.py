@@ -16,11 +16,13 @@ class IndustryAdmin(ModelAdmin):
     list_display = [
         "name",
         "formatted_team",
+        "color",
         "created_at",
         "last_updated_at",
     ]
     list_filter = [
         "team",
+        "color",
         "created_at",
         "last_updated_at",
     ]
@@ -44,6 +46,7 @@ class IndustryAdmin(ModelAdmin):
                 "fields": [
                     "name",
                     "team",
+                    "color",
                     "description",
                 ],
             },

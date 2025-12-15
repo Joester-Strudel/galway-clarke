@@ -17,45 +17,7 @@
       No active team is selected. Choose a team to manage statuses.
     </div>
     {% else %}
-    <div class="px-4 py-4">
-      <p class="text-sm font-semibold mb-2 text-gc-light-text-primary dark:text-gc-dark-text-primary">Add Status</p>
-      <form
-        class="space-y-2"
-        hx-post="{% url 'settings-status-create' %}"
-        hx-target="#field_definitions_drawer"
-        hx-swap="outerHTML"
-      >
-        {% csrf_token %}
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 items-end">
-          <div class="sm:col-span-2">
-            <c-app.components.fields.text_field
-              id="status_name_new"
-              name="name"
-              label="Status name"
-              placeholder="Status name"
-              required="true"
-            />
-          </div>
-          <c-app.components.fields.select_field
-            id="status_color_new"
-            name="color"
-            label="Color"
-            :options="status_color_choices"
-          />
-          <div class="sm:col-span-1">
-            <c-app.components.buttons.primary_button
-              type="submit"
-              icon="add"
-              label="Add"
-              extra_classes="w-full justify-center px-3 py-2"
-            />
-          </div>
-        </div>
-      </form>
-    </div>
-
     <div class="px-4 py-4 space-y-3">
-      <p class="text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">Existing Statuses</p>
       {% if statuses %}
         {% for status in statuses %}
         <form
@@ -65,45 +27,50 @@
           hx-swap="outerHTML"
         >
           {% csrf_token %}
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 items-end">
-            <div class="sm:col-span-2">
-              <c-app.components.fields.text_field
-                id="status_name_{{ status.id }}"
-                name="name"
-                label="Name"
-                value="{{ status.name }}"
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-end">
+            {% include "cotton/app/gc_users/components/field_definition_input.html" with name_field_id="status_name_{{ status.id }}" name_field_label="Name" name_field_value=status.name color_field_id="status_color_{{ status.id }}" color_field_label="Color" color_field_choices=status_color_choices color_field_selected=status.color only %}
+            <div class="flex items-center justify-end gap-2">
+              <c-app.components.buttons.primary_button
+                type="submit"
+                label="Save"
+                extra_classes="px-3 py-2"
+              />
+              <c-app.components.buttons.delete_button
+                hx-post="{% url 'settings-status-delete' status.id %}"
+                hx-target="#field_definitions_drawer"
+                hx-swap="outerHTML"
+                hx-confirm="Delete this status?"
               />
             </div>
-            <c-app.components.fields.select_field
-              id="status_color_{{ status.id }}"
-              name="color"
-              label="Color"
-              :options="status_color_choices"
-              selected="{{ status.color }}"
-            />
-          </div>
-          <div class="flex items-center gap-2">
-            <c-app.components.buttons.primary_button
-              type="submit"
-              label="Save"
-              extra_classes="px-3 py-2"
-            />
-            <button
-              type="button"
-              class="rounded-md border border-rose-500/50 px-3 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-500/10 transition"
-              hx-post="{% url 'settings-status-delete' status.id %}"
-              hx-target="#field_definitions_drawer"
-              hx-swap="outerHTML"
-              hx-confirm="Delete this status?"
-            >
-              Delete
-            </button>
           </div>
         </form>
         {% endfor %}
       {% else %}
         <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">No statuses yet.</p>
       {% endif %}
+      <div class="pt-2">
+        <div class="flex flex-col gap-3 rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary p-3">
+          <form
+            class="space-y-2"
+            hx-post="{% url 'settings-status-create' %}"
+            hx-target="#field_definitions_drawer"
+            hx-swap="outerHTML"
+          >
+            {% csrf_token %}
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-end">
+              {% include "cotton/app/gc_users/components/field_definition_input.html" with name_field_id="status_name_new" name_field_label="Status name" name_field_placeholder="Status name" name_field_required="true" color_field_id="status_color_new" color_field_label="Color" color_field_choices=status_color_choices only %}
+              <div class="sm:col-span-1 flex justify-end">
+                <c-app.components.buttons.primary_button
+                  type="submit"
+                  icon="add"
+                  label="Add"
+                  extra_classes="w-full justify-center px-3 py-2"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     {% endif %}
   </div>

@@ -1,8 +1,8 @@
-<div id="tag_definitions_drawer" class="flex h-full flex-col">
+<div id="industry_definitions_drawer" class="flex h-full flex-col">
   <c-app.components.drawers.drawer_header
-    title="Customer Tags"
-    subtitle="Define reusable tags for organizations in this workspace."
-    close_event="close-tag-drawer"
+    title="Customer Industries"
+    subtitle="Define industry tags for this workspace."
+    close_event="close-industry-drawer"
   />
 
   {% if error %}
@@ -14,21 +14,21 @@
   <div class="flex-1 overflow-y-auto divide-y divide-gc-light-bg-secondary dark:divide-gc-dark-bg-secondary">
     {% if not team %}
     <div class="px-4 py-4 text-sm text-amber-700 dark:text-amber-300">
-      No active team is selected. Choose a team to manage tags.
+      No active team is selected. Choose a team to manage industries.
     </div>
     {% else %}
     <div class="px-4 py-4 space-y-3">
-      {% if tags %}
-        {% for tag in tags %}
+      {% if industries %}
+        {% for industry in industries %}
         <form
           class="flex flex-col gap-3 rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary p-3"
-          hx-post="{% url 'settings-tag-update' tag.id %}"
-          hx-target="#tag_definitions_drawer"
+          hx-post="{% url 'settings-industry-update' industry.id %}"
+          hx-target="#industry_definitions_drawer"
           hx-swap="outerHTML"
         >
           {% csrf_token %}
           <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-end">
-            {% include "cotton/app/gc_users/components/field_definition_input.html" with name_field_id="tag_name_{{ tag.id }}" name_field_label="Name" name_field_value=tag.name color_field_id="tag_color_{{ tag.id }}" color_field_label="Color" color_field_choices=tag_color_choices color_field_selected=tag.color only %}
+            {% include "cotton/app/gc_users/components/field_definition_input.html" with name_field_id="industry_name_{{ industry.id }}" name_field_label="Name" name_field_value=industry.name color_field_id="industry_color_{{ industry.id }}" color_field_label="Color" color_field_choices=industry_color_choices color_field_selected=industry.color only %}
             <div class="flex items-center justify-end gap-2">
               <c-app.components.buttons.primary_button
                 type="submit"
@@ -36,29 +36,29 @@
                 extra_classes="px-3 py-2"
               />
               <c-app.components.buttons.delete_button
-                hx-post="{% url 'settings-tag-delete' tag.id %}"
-                hx-target="#tag_definitions_drawer"
+                hx-post="{% url 'settings-industry-delete' industry.id %}"
+                hx-target="#industry_definitions_drawer"
                 hx-swap="outerHTML"
-                hx-confirm="Delete this tag?"
+                hx-confirm="Delete this industry?"
               />
             </div>
           </div>
         </form>
         {% endfor %}
       {% else %}
-        <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">No tags yet.</p>
+        <p class="text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">No industries yet.</p>
       {% endif %}
       <div class="pt-2">
         <div class="flex flex-col gap-3 rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary p-3">
           <form
             class="space-y-2"
-            hx-post="{% url 'settings-tag-create' %}"
-            hx-target="#tag_definitions_drawer"
+            hx-post="{% url 'settings-industry-create' %}"
+            hx-target="#industry_definitions_drawer"
             hx-swap="outerHTML"
           >
             {% csrf_token %}
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-end">
-              {% include "cotton/app/gc_users/components/field_definition_input.html" with name_field_id="tag_name_new" name_field_label="Tag name" name_field_placeholder="Tag name" name_field_required="true" color_field_id="tag_color_new" color_field_label="Color" color_field_choices=tag_color_choices only %}
+              {% include "cotton/app/gc_users/components/field_definition_input.html" with name_field_id="industry_name_new" name_field_label="Industry name" name_field_placeholder="Industry name" name_field_required="true" color_field_id="industry_color_new" color_field_label="Color" color_field_choices=industry_color_choices color_field_selected="gray" only %}
               <div class="sm:col-span-1 flex justify-end">
                 <c-app.components.buttons.primary_button
                   type="submit"
