@@ -23,7 +23,11 @@ def team_settings(request, tab="members"):
         and request.headers.get("HX-Request") != "true"
     ):
         return redirect("settings-members")
-    template = "cotton/app/gc_users/pages/team_settings.html"
+    template = (
+        "cotton/app/gc_users/pages/field_definitions.html"
+        if initial_tab == "field-definitions"
+        else "cotton/app/gc_users/pages/members.html"
+    )
     team = _get_active_team(request)
     search_query = request.GET.get("search", "").strip()
     sort_field = request.GET.get("sort", "name")

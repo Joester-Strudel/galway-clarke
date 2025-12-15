@@ -1,9 +1,39 @@
-<div id="organization_drawer_content" class="flex h-full flex-col">
+<div
+  id="organization_drawer_content"
+  class="flex h-full flex-col"
+  x-data="{ activeTab: 'general' }"
+>
   <c-app.components.drawers.drawer_header
     title="{{ organization.name }}"
-    subtitle="Edit organization details."
     close_event="close-org-drawer"
-  />
+  >
+    <div class="mt-3 flex items-center gap-4 text-sm font-semibold">
+      <button
+        type="button"
+        class="pb-1 border-b-2 transition"
+        style="cursor: pointer;"
+        :class="activeTab === 'general'
+          ? 'border-gc-theme-accent text-gc-theme-accent'
+          : 'border-transparent text-gc-light-text-secondary dark:text-gc-dark-text-primary/70'
+        "
+        @click="activeTab = 'general'"
+      >
+        General
+      </button>
+      <button
+        type="button"
+        class="pb-1 border-b-2 transition"
+        style="cursor: pointer;"
+        :class="activeTab === 'notes'
+          ? 'border-gc-theme-accent text-gc-theme-accent'
+          : 'border-transparent text-gc-light-text-secondary dark:text-gc-dark-text-primary/70'
+        "
+        @click="activeTab = 'notes'"
+      >
+        Notes
+      </button>
+    </div>
+  </c-app.components.drawers.drawer_header>
 
   {% if error %}
   <div class="bg-rose-500/10 text-rose-700 dark:text-rose-300 px-4 py-3 text-sm">
@@ -20,38 +50,42 @@
       hx-swap="outerHTML"
     >
       {% csrf_token %}
-      <c-app.components.fields.text_field
-        id="org_name_{{ organization.id }}"
-        name="name"
-        label="Name"
-        value="{{ organization.name }}"
-        required="true"
-      />
+      <div x-show="activeTab === 'general'" x-cloak class="space-y-4">
+        <c-app.components.fields.text_field
+          id="org_name_{{ organization.id }}"
+          name="name"
+          label="Name"
+          value="{{ organization.name }}"
+          required="true"
+        />
 
-      <c-app.components.fields.remote_pill_select
-        id="org_status_{{ organization.id }}"
-        name="status"
-        label="Status"
-        options_url="{% url 'crm-select-statuses' %}"
-        :initial="status_initial"
-      />
+        <c-app.components.fields.remote_pill_select
+          id="org_status_{{ organization.id }}"
+          name="status"
+          label="Status"
+          options_url="{% url 'crm-select-statuses' %}"
+          :initial="status_initial"
+        />
 
-      <c-app.components.fields.remote_pill_select
-        id="org_tags_{{ organization.id }}"
-        name="tags"
-        label="Tags"
-        options_url="{% url 'crm-select-tags' %}"
-        multiple="true"
-        :initial="tag_initial"
-      />
+        <c-app.components.fields.remote_pill_select
+          id="org_tags_{{ organization.id }}"
+          name="tags"
+          label="Tags"
+          options_url="{% url 'crm-select-tags' %}"
+          multiple="true"
+          :initial="tag_initial"
+        />
+      </div>
 
-      <c-app.components.fields.textarea_field
-        id="org_notes_{{ organization.id }}"
-        name="notes"
-        label="Notes"
-        rows="4"
-        value="{{ organization.notes }}"
-      />
+      <div x-show="activeTab === 'notes'" x-cloak>
+        <c-app.components.fields.textarea_field
+          id="org_notes_{{ organization.id }}"
+          name="notes"
+          label="Notes"
+          rows="4"
+          value="{{ organization.notes }}"
+        />
+      </div>
     </form>
   </div>
   <c-app.components.drawers.drawer_footer>

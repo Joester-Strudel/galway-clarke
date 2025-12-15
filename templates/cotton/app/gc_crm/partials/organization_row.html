@@ -14,7 +14,7 @@
       <span class="font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">{{ org.name }}</span>
     </div>
   </c-app.components.tables.table_cell>
-  <c-app.components.tables.table_cell min_width="min-w-28">
+  <c-app.components.tables.table_cell min_width="min-w-36">
     {% if org.status %}
       <c-app.components.pills.pill label="{{ org.status.name }}" color="{{ org.status.color|default_if_none:'gray' }}" />
     {% else %}
@@ -56,7 +56,7 @@
       —
     {% endif %}
   </c-app.components.tables.table_cell>
-  <c-app.components.tables.table_cell min_width="min-w-48">
+  <c-app.components.tables.table_cell min_width="min-w-84">
     {% if org.tags.all %}
     <span class="inline-flex flex-wrap gap-1">
       {% for tag in org.tags.all %}
