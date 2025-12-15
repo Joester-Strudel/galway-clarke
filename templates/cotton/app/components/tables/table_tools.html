@@ -1,3 +1,4 @@
+{% with filter_form_id=filter_form_id|default:'table_filters_form' %}
 <div
   class="relative mb-3 flex items-center justify-between"
   x-data="{
@@ -5,18 +6,23 @@
     searchUrl: '{{ search_url|default:request.path|default:'' }}',
     hxTarget: '{{ hx_target|default:'#crm_tab_content' }}',
     hxSelect: '{{ hx_select|default:'' }}',
+    filterFormId: '{{ filter_form_id|escapejs }}',
     clearFilters() {
       const root = this.$el;
+      const form =
+        this.$refs.filterForm ||
+        (this.filterFormId ? document.getElementById(this.filterFormId) : null) ||
+        root.querySelector('form');
       const wrappers = root.querySelectorAll('[data-table-filter-input]');
       wrappers.forEach((wrapper) => {
-        wrapper.querySelectorAll('input, select, textarea').forEach((field) => {
-          if (field.type === 'checkbox' || field.type === 'radio') {
-            field.checked = false;
-            field.defaultChecked = false;
-          } else {
-            field.value = '';
-            field.defaultValue = '';
-          }
+        wrapper.querySelectorAll('select').forEach((field) => {
+          field.value = '';
+          field.dispatchEvent(new Event('input', { bubbles: true }));
+          field.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        wrapper.querySelectorAll('input[type=checkbox], input[type=radio]').forEach((field) => {
+          field.checked = false;
+          field.defaultChecked = false;
           field.dispatchEvent(new Event('input', { bubbles: true }));
           field.dispatchEvent(new Event('change', { bubbles: true }));
         });
@@ -30,26 +36,21 @@
         searchInput.dispatchEvent(new Event('change', { bubbles: true }));
       }
 
-      const form = this.$refs.filterForm || root.querySelector('form');
-      if (this.searchUrl && window.htmx) {
-        if (form) {
-          htmx.trigger(form, 'submit');
-        } else {
-          const url = this.searchUrl || window.location.pathname;
-          const includeSelector = `[data-table-tools-hidden] input, [data-table-search-input], [data-table-filter-input] input, [data-table-filter-input] select, [data-table-filter-input] textarea`;
-          const formData = new FormData();
-          root.querySelectorAll(includeSelector).forEach((el) => {
-            if (!el.name || el.disabled) return;
-            if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
-            formData.append(el.name, el.value ?? '');
-          });
-          htmx.ajax('GET', url, {
-            target: this.hxTarget || undefined,
-            swap: 'innerHTML',
-            select: this.hxSelect || undefined,
-            values: Object.fromEntries(formData),
-          });
-        }
+      const url = this.searchUrl || window.location.pathname;
+      if (window.htmx && url) {
+        const includeSelector = `[data-table-tools-hidden] input, [data-table-search-input], [data-table-filter-input] input, [data-table-filter-input] select, [data-table-filter-input] textarea`;
+        const formData = new FormData();
+        (form || root).querySelectorAll(includeSelector).forEach((el) => {
+          if (!el.name || el.disabled) return;
+          if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+          formData.append(el.name, el.value ?? '');
+        });
+        htmx.ajax('GET', url, {
+          target: this.hxTarget || undefined,
+          swap: 'innerHTML',
+          select: this.hxSelect || undefined,
+          values: Object.fromEntries(formData),
+        });
       }
     },
   }"
@@ -121,6 +122,7 @@
       />
 
       <form
+        id="{{ filter_form_id }}"
         class="flex h-full flex-col overflow-hidden"
         action="{{ search_url|default:request.path|default:'' }}"
         method="get"
@@ -152,7 +154,7 @@
               type="button"
               label="Clear"
               extra_classes="px-3 py-2"
-              @click.prevent="clearFilters()"
+              @click.prevent="clearFormFields('{{ filter_form_id|escapejs }}'); clearFilters()"
             />
             <c-app.components.buttons.primary_button
               type="submit"
@@ -166,3 +168,4 @@
   </div>
   {% endif %}
 </div>
+{% endwith %}

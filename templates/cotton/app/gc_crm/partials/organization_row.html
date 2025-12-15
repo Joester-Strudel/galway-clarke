@@ -64,7 +64,9 @@
     {% if org.tags.all %}
     <span class="inline-flex flex-wrap gap-1">
       {% for tag in org.tags.all %}
-      <span class="rounded-full bg-gc-theme-accent/10 text-gc-theme-accent px-2 py-1 text-xs font-semibold">{{ tag.name }}</span>
+      {% with tag_color=tag.color|default:"gray" %}
+      <span class="status-pill status-pill-{{ tag_color }}">{{ tag.name }}</span>
+      {% endwith %}
       {% endfor %}
     </span>
     {% else %}
