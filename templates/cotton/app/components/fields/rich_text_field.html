@@ -1,0 +1,165 @@
+{% comment %}
+Rich text editor field.
+Props:
+- id: unique id
+- name: form field name
+- label: label text
+- value: initial HTML or plain text
+- placeholder: optional placeholder text
+{% endcomment %}
+<div
+  class="space-y-2"
+  x-data="richTextField({
+    id: '{{ id }}',
+    name: '{{ name }}',
+    value: '{{ value|default:''|escapejs }}',
+    placeholder: '{{ placeholder|default:'Add notes, bullets, and links'|escapejs }}',
+  })"
+  x-init="init()"
+>
+  <label class="block text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary" :for="id">
+    {{ label }}
+  </label>
+  <div
+    class="rounded-lg border border-gc-theme-accent bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary shadow-sm"
+    :class="{ 'ring-2 ring-gc-theme-accent/40 border-gc-theme-accent': isFocused }"
+  >
+    <div class="flex items-center gap-1 border-b border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary px-2 py-1 text-sm text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+      <template x-for="button in toolbar" :key="button.command">
+        <button
+          type="button"
+          class="rounded-md p-2 transition hover:bg-gc-light-bg-secondary dark:hover:bg-gc-dark-bg-secondary"
+          @click="apply(button.command)"
+          :aria-label="button.label"
+        >
+          <span class="material-symbols-outlined text-base leading-none" x-text="button.icon"></span>
+        </button>
+      </template>
+    </div>
+    <div class="relative">
+      <div
+        class="pointer-events-none absolute inset-0 px-4 py-3 text-base text-gc-light-text-secondary/70 dark:text-gc-dark-text-primary/60"
+        x-show="!value"
+        x-text="placeholder"
+      ></div>
+      <div
+        :id="id"
+        x-ref="editor"
+        class="min-h-[180px] w-full px-4 py-3 text-base text-gc-light-text-primary dark:text-gc-dark-text-primary leading-relaxed focus:outline-none"
+        contenteditable="true"
+        role="textbox"
+        aria-multiline="true"
+        @input="syncFromEditor()"
+        @blur="onBlur()"
+        @focus="onFocus()"
+        @paste="onPaste($event)"
+      ></div>
+    </div>
+    <input type="hidden" :name="name" :value="value" />
+  </div>
+</div>
+
+<script>
+  function richTextField({ id, name, value = "", placeholder = "" }) {
+    return {
+      id,
+      name,
+      value,
+      placeholder,
+      isFocused: false,
+      toolbar: [
+        { command: "bold", icon: "format_bold", label: "Bold" },
+        { command: "italic", icon: "format_italic", label: "Italic" },
+        { command: "underline", icon: "format_underlined", label: "Underline" },
+        { command: "insertUnorderedList", icon: "format_list_bulleted", label: "Bullet list" },
+        { command: "insertOrderedList", icon: "format_list_numbered", label: "Numbered list" },
+      ],
+      init() {
+        this.setEditorContent(this.value);
+      },
+      onFocus() {
+        this.isFocused = true;
+      },
+      onBlur() {
+        this.isFocused = false;
+        this.syncFromEditor();
+      },
+      apply(command) {
+        this.$refs.editor.focus();
+        document.execCommand(command, false, null);
+        this.syncFromEditor();
+      },
+      onPaste(event) {
+        event.preventDefault();
+        const text = (event.clipboardData || window.clipboardData).getData("text/plain");
+        document.execCommand("insertText", false, text);
+        this.syncFromEditor();
+      },
+      normalizeInitial(val) {
+        if (!val) return "";
+        const decoded = this.decodeEntities(val);
+        const looksLikeHtml = /<[^>]+>/;
+        return looksLikeHtml.test(decoded) ? decoded : decoded.replace(/\n/g, "<br>");
+      },
+      setEditorContent(html) {
+        const clean = this.sanitize(this.normalizeInitial(html));
+        this.$refs.editor.innerHTML = clean;
+        this.value = this.contentIsEmpty(clean) ? "" : clean;
+      },
+      syncFromEditor() {
+        const clean = this.sanitize(this.$refs.editor.innerHTML);
+        this.value = this.contentIsEmpty(clean) ? "" : clean;
+        if (!this.value) {
+          this.$refs.editor.innerHTML = "";
+        }
+      },
+      sanitize(html) {
+        const container = document.createElement("div");
+        container.innerHTML = html;
+        const allowedTags = new Set(["P", "BR", "DIV", "SPAN", "B", "STRONG", "I", "EM", "U", "UL", "OL", "LI", "A"]);
+        const walk = (node) => {
+          Array.from(node.childNodes).forEach((child) => {
+            if (child.nodeType === Node.COMMENT_NODE) {
+              child.remove();
+              return;
+            }
+            if (child.nodeType === Node.ELEMENT_NODE) {
+              if (!allowedTags.has(child.tagName)) {
+                child.replaceWith(...Array.from(child.childNodes));
+                return;
+              }
+              Array.from(child.attributes).forEach((attr) => {
+                if (!(child.tagName === "A" && attr.name === "href")) {
+                  child.removeAttribute(attr.name);
+                }
+              });
+              if (child.tagName === "A") {
+                const href = child.getAttribute("href") || "";
+                if (!href || href.trim().toLowerCase().startsWith("javascript:")) {
+                  child.removeAttribute("href");
+                }
+              }
+              walk(child);
+            }
+          });
+        };
+        walk(container);
+        return container.innerHTML.replace(/&nbsp;/g, " ").trim();
+      },
+      contentIsEmpty(html) {
+        const stripped = html
+          .replace(/<br\s*\/?>/gi, "")
+          .replace(/<div>\s*<\/div>/gi, "")
+          .replace(/<p>\s*<\/p>/gi, "")
+          .replace(/&nbsp;/gi, " ")
+          .trim();
+        return stripped.length === 0;
+      },
+      decodeEntities(str) {
+        const textarea = document.createElement("textarea");
+        textarea.innerHTML = str;
+        return textarea.value;
+      },
+    };
+  }
+</script>

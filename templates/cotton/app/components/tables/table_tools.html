@@ -93,7 +93,29 @@
     </button>
     {% endif %}
     <c-slot name="actions"></c-slot>
-    <c-app.components.buttons.add_button />
+    {% if not hide_default_add %}
+    <button
+      type="button"
+      class="inline-flex items-center gap-2 rounded-md border-2 border-gc-theme-accent/60 bg-gc-theme-accent/10 px-3 py-2 text-sm font-semibold text-gc-theme-accent transition hover:bg-gc-theme-accent/20 focus:outline-none focus:ring-0"
+      {% if add_onclick or add_open_event %}
+      @click="
+        {% if add_open_event %}$dispatch('{{ add_open_event }}');{% endif %}
+        {% if add_onclick %}{{ add_onclick|escapejs }}{% endif %}
+      "
+      {% endif %}
+      {% if add_url %}
+      hx-get="{{ add_url }}"
+      hx-target="{{ add_target|default:'#crm_tab_content' }}"
+      hx-swap="{{ add_swap|default:'innerHTML' }}"
+      {% if add_select %}hx-select="{{ add_select }}"{% endif %}
+      {% endif %}
+    >
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span>Add</span>
+    </button>
+    {% endif %}
   </div>
 
   {% if filter_fields %}

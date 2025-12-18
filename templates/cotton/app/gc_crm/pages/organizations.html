@@ -1,6 +1,7 @@
 <div
   x-data="{ showOrgDrawer: false }"
   @close-org-drawer.window="showOrgDrawer = false"
+  @open-org-drawer.window="showOrgDrawer = true"
   class="flex-1 min-h-0 flex flex-col gap-4"
 >
   <c-app.components.tables.table_tools
@@ -10,6 +11,10 @@
     :search_query="search_query"
     :filter_fields="filter_fields"
     filter_form_id="organization_filters_form"
+    add_url="{% url 'crm-organization-create' %}"
+    add_target="#organization_drawer_content"
+    add_swap="outerHTML"
+    add_open_event="open-org-drawer"
   />
 
     <div id="crm_table_content" class="flex-1 min-h-0 h-full rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary flex flex-col">

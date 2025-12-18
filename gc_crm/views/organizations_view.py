@@ -3,11 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.utils.dateparse import parse_date
+from django.urls import reverse
 
 # Standard Library Imports
-from urllib.parse import urlencode
+import uuid
+from urllib.parse import urlencode, urlsplit
 
 from gc_crm.models import Organization, Status, Tag
 
@@ -243,6 +245,8 @@ def organization_drawer_view(request, org_id):
 
     statuses = Status.objects.filter(team=team).order_by("name") if team else Status.objects.none()
     tags = Tag.objects.filter(team=team).order_by("name") if team else Tag.objects.none()
+    active_tab = request.POST.get("active_tab", request.GET.get("active_tab", "general"))
+    refresh_table = False
 
     error = None
     success = None
@@ -269,6 +273,7 @@ def organization_drawer_view(request, org_id):
             # Refresh from DB for accurate related fields in row partial.
             organization.refresh_from_db()
             success = "Saved changes."
+            refresh_table = True
 
     selected_tag_ids = set(organization.tags.values_list("id", flat=True))
     selected_tags = list(organization.tags.all())
@@ -295,5 +300,102 @@ def organization_drawer_view(request, org_id):
         "tag_initial": tag_initial,
         "error": error,
         "success": success,
+        "active_tab": active_tab,
+        "is_new": False,
+        "refresh_table": refresh_table,
+        "list_refresh_url": _current_list_url(request),
     }
     return render(request, "cotton/app/gc_crm/partials/organization_drawer.html", context)
+
+
+@login_required
+def organization_create_view(request):
+    """Render and handle the add-organization drawer."""
+    team = _get_active_team(request)
+    if not team:
+        return HttpResponseBadRequest("Team context not found")
+
+    organization = Organization(id=uuid.uuid4(), team=team)
+    statuses = Status.objects.filter(team=team).order_by("name")
+    tags = Tag.objects.filter(team=team).order_by("name")
+    active_tab = request.POST.get("active_tab", request.GET.get("active_tab", "general"))
+    refresh_table = False
+
+    error = None
+    success = None
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        status_id = request.POST.get("status")
+        tag_ids = request.POST.getlist("tags")
+        notes = request.POST.get("notes", "")
+
+        if not name:
+            error = "Name is required."
+        else:
+            organization.name = name
+            organization.status = statuses.filter(id=status_id).first() if status_id else None
+            organization.notes = notes
+            organization.save()
+            valid_tags = tags.filter(id__in=tag_ids)
+            organization.tags.set(valid_tags)
+            organization.refresh_from_db()
+            success = "Organization created."
+            refresh_table = True
+
+    selected_tag_ids = set(organization.tags.values_list("id", flat=True))
+    selected_tags = list(organization.tags.all())
+    status_initial = []
+    if organization.status:
+        status_initial = [
+            {
+                "value": str(organization.status_id),
+                "label": organization.status.name,
+                "color": organization.status.color or "gray",
+            }
+        ]
+    tag_initial = [
+        {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"} for tag in selected_tags
+    ]
+
+    context = {
+        "organization": organization,
+        "statuses": statuses,
+        "tags": tags,
+        "selected_tag_ids": selected_tag_ids,
+        "selected_tags": selected_tags,
+        "status_initial": status_initial,
+        "tag_initial": tag_initial,
+        "error": error,
+        "success": success,
+        "active_tab": active_tab,
+        "is_new": True,
+        "refresh_table": refresh_table,
+        "list_refresh_url": _current_list_url(request),
+    }
+    return render(request, "cotton/app/gc_crm/partials/organization_drawer.html", context)
+
+
+def _current_list_url(request):
+    """Resolve current list URL (with querystring) for refreshing the table."""
+    hx_current = request.headers.get("HX-Current-URL") or ""
+    if hx_current:
+        parts = urlsplit(hx_current)
+        path = parts.path or reverse("crm-organizations")
+        query = f"?{parts.query}" if parts.query else ""
+        return f"{path}{query}"
+    return reverse("crm-organizations")
+
+
+@login_required
+def organization_delete_view(request, org_id):
+    """Delete an organization and return a simple acknowledgement."""
+    if request.method != "POST":
+        return HttpResponseBadRequest("Invalid method")
+
+    team = _get_active_team(request)
+    organization = Organization.objects.filter(id=org_id, team=team).first()
+    if not organization:
+        return HttpResponseBadRequest("Organization not found")
+
+    organization.delete()
+    return HttpResponse("Deleted")
