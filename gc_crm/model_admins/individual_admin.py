@@ -23,18 +23,7 @@ class IndividualAdmin(ModelAdmin):
         "created_at",
         "last_updated_at",
     ]
-    list_filter = [
-        "primary",
-        "team",
-        "organization",
-        "tags",
-        "location_state",
-        "location_county",
-        "location_city",
-        "location_zip",
-        "created_at",
-        "last_updated_at",
-    ]
+    list_filter = []
     search_fields = [
         "first_name",
         "last_name",

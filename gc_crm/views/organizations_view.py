@@ -253,6 +253,10 @@ def organization_drawer_view(request, org_id):
     tags = Tag.objects.filter(team=team).order_by("name") if team else Tag.objects.none()
     industries = Industry.objects.filter(team=team).order_by("name") if team else Industry.objects.none()
     individuals = Individual.objects.filter(team=team).order_by("last_name", "first_name") if team else Individual.objects.none()
+    cities = City.objects.select_related("state")
+    states = State.objects.all()
+    counties = County.objects.select_related("state")
+    zip_codes = ZipCode.objects.all()
     active_tab = request.POST.get("active_tab", request.GET.get("active_tab", "general"))
     refresh_table = False
 
@@ -347,13 +351,25 @@ def organization_drawer_view(request, org_id):
         state_initial = [
             {
                 "value": str(organization.location_state_id),
-                "label": organization.location_state.abbreviation or organization.location_state.name,
+                "label": organization.location_state.name,
                 "color": "gray",
             }
         ]
     county_initial = []
     if organization.location_county:
-        county_initial = [{"value": str(organization.location_county_id), "label": organization.location_county.name, "color": "gray"}]
+        county_label_state = ""
+        if organization.location_county.state:
+            county_label_state = (
+                organization.location_county.state.abbreviation
+                or organization.location_county.state.name
+                or ""
+            )
+        county_label = organization.location_county.name
+        if county_label_state:
+            county_label = f"{county_label} ({county_label_state})"
+        county_initial = [
+            {"value": str(organization.location_county_id), "label": county_label, "color": "gray"}
+        ]
     zip_initial = []
     if organization.location_zip:
         zip_initial = [{"value": str(organization.location_zip_id), "label": organization.location_zip.zip_code_five_digit, "color": "gray"}]
@@ -409,8 +425,13 @@ def organization_create_view(request):
     tags = Tag.objects.filter(team=team).order_by("name")
     industries = Industry.objects.filter(team=team).order_by("name")
     individuals = Individual.objects.filter(team=team).order_by("last_name", "first_name")
+    cities = City.objects.select_related("state")
+    states = State.objects.all()
+    counties = County.objects.select_related("state")
+    zip_codes = ZipCode.objects.all()
     active_tab = request.POST.get("active_tab", request.GET.get("active_tab", "general"))
     refresh_table = False
+    is_new = True
 
     error = None
     success = None
@@ -448,6 +469,7 @@ def organization_create_view(request):
             organization.refresh_from_db()
             success = "Organization created."
             refresh_table = True
+            is_new = False
 
     selected_tag_ids = set(organization.tags.values_list("id", flat=True))
     selected_tags = list(organization.tags.all())
@@ -497,13 +519,21 @@ def organization_create_view(request):
         state_initial = [
             {
                 "value": str(organization.location_state_id),
-                "label": organization.location_state.abbreviation or organization.location_state.name,
+                "label": organization.location_state.name,
                 "color": "gray",
             }
         ]
     county_initial = []
     if organization.location_county:
-        county_initial = [{"value": str(organization.location_county_id), "label": organization.location_county.name, "color": "gray"}]
+        county_label_state = ""
+        if organization.location_county.state:
+            county_label_state = organization.location_county.state.name or organization.location_county.state.abbreviation or ""
+        county_label = organization.location_county.name
+        if county_label_state:
+            county_label = f"{county_label} ({county_label_state})"
+        county_initial = [
+            {"value": str(organization.location_county_id), "label": county_label, "color": "gray"}
+        ]
     zip_initial = []
     if organization.location_zip:
         zip_initial = [{"value": str(organization.location_zip_id), "label": organization.location_zip.zip_code_five_digit, "color": "gray"}]
@@ -540,7 +570,7 @@ def organization_create_view(request):
         "error": error,
         "success": success,
         "active_tab": active_tab,
-        "is_new": True,
+        "is_new": is_new,
         "refresh_table": refresh_table,
         "list_refresh_url": _current_list_url(request),
     }

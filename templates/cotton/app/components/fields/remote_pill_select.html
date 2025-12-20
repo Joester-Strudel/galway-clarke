@@ -24,6 +24,11 @@ Props:
   class="relative space-y-1"
 >
   <label class="block text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary" :for="id">{{ label }}</label>
+  {% if help_text %}
+  <p class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+    {{ help_text|safe }}
+  </p>
+  {% endif %}
   <button
     type="button"
     class="w-full h-12 rounded-lg border border-gc-theme-accent bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-base text-gc-light-text-primary dark:text-gc-dark-text-primary px-3 shadow-sm flex items-center justify-between gap-2 focus:border-gc-theme-accent focus:ring-2 focus:ring-gc-theme-accent/40 focus:outline-none"
@@ -52,6 +57,12 @@ Props:
     x-cloak
     @click.outside="open = false"
     class="absolute z-50 mt-1 w-full rounded-lg border-2 border-gc-theme-accent bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary shadow-lg max-h-80 overflow-auto"
+    @scroll.passive="
+      const sentinel = $el.querySelector('[data-load-more]');
+      if (sentinel && sentinel.getBoundingClientRect().top <= $el.getBoundingClientRect().bottom + 8) {
+        sentinel.dispatchEvent(new CustomEvent('loadmore', { bubbles: true }));
+      }
+    "
   >
     <div class="p-2">
       <input

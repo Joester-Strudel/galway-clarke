@@ -22,23 +22,23 @@ class OrganizationAdmin(ModelAdmin):
         "created_at",
         "last_updated_at",
     ]
-    list_filter = [
-        "team",
-        "status",
-        "industry",
-        "location_state",
-        "location_county",
-        "location_city",
-        "location_zip",
-        "created_at",
-        "last_updated_at",
-    ]
+    list_filter = []
     search_fields = [
         "name",
         "location_city",
         "location_state",
     ]
     ordering = ["name"]
+    list_select_related = (
+        "team",
+        "status",
+        "industry",
+        "location_city",
+        "location_state",
+        "location_county",
+        "location_zip",
+        "primary_contact",
+    )
     autocomplete_fields = [
         "team",
         "status",

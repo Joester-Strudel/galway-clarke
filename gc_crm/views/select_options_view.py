@@ -137,7 +137,7 @@ def select_states(request):
     qs = State.objects.all()
     page_obj, next_url = _paginate_options(qs, request)
     options = [
-        {"value": str(state.id), "label": state.abbreviation or state.name, "color": "gray"}
+        {"value": str(state.id), "label": state.name, "color": "gray"}
         for state in page_obj
     ]
     return render(
@@ -152,7 +152,11 @@ def select_counties(request):
     qs = County.objects.all()
     page_obj, next_url = _paginate_options(qs, request)
     options = [
-        {"value": str(county.id), "label": county.name, "color": "gray"}
+        {
+            "value": str(county.id),
+            "label": f"{county.name}{' (' + (county.state.abbreviation or county.state.name) + ')' if county.state else ''}",
+            "color": "gray",
+        }
         for county in page_obj
     ]
     return render(

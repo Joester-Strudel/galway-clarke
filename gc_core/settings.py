@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     "django_htmx",
     # Django Apps
     "django.contrib.admin",
+    "django_select2",
+    "django_select2_admin_filters",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -182,7 +184,37 @@ UNFOLD = {
     "SIDEBAR": {
         "show_all_applications": True,
         "navigation": [
-          {
+            {
+                "title": "CRM",
+                "items": [
+                    {
+                        "title": "Organizations",
+                        "icon": "corporate_fare",
+                        "link": "/admin/gc_crm/organization/",
+                    },
+                    {
+                        "title": "Individuals",
+                        "icon": "person_search",
+                        "link": "/admin/gc_crm/individual/",
+                    },
+                    {
+                        "title": "Statuses",
+                        "icon": "flag",
+                        "link": "/admin/gc_crm/status/",
+                    },
+                    {
+                        "title": "Industries",
+                        "icon": "factory",
+                        "link": "/admin/gc_crm/industry/",
+                    },
+                    {
+                        "title": "Tags",
+                        "icon": "sell",
+                        "link": "/admin/gc_crm/tag/",
+                    },
+                ],
+            },
+            {
                 "title": "Geography",
                 "items": [
                     {

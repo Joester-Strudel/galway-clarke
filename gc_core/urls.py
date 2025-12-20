@@ -12,5 +12,6 @@ urlpatterns = [
     path("dashboard/", get_dashboard_index, name="dashboard-index"),
     path("crm/", include("gc_crm.urls")),
     path("", include("gc_users.urls")),
+    path("select2/", include("django_select2.urls")),
     path("admin/", admin.site.urls),
 ]
