@@ -108,7 +108,7 @@
           label="Status"
           options_url="{% url 'crm-select-statuses' %}"
           :initial="status_initial"
-          help_text='Want to change the options for this dropdown? <a href="http://localhost:8000/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
+          help_text='Want to change the options for this dropdown? <a href="/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
         />
 
         <c-app.components.fields.remote_pill_select
@@ -117,7 +117,7 @@
           label="Industry"
           options_url="{% url 'crm-select-industries' %}"
           :initial="industry_initial"
-          help_text='Want to change the options for this dropdown? <a href="http://localhost:8000/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
+          help_text='Want to change the options for this dropdown? <a href="/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
         />
 
         <c-app.components.fields.remote_pill_select
@@ -127,7 +127,7 @@
           options_url="{% url 'crm-select-tags' %}"
           multiple="true"
           :initial="tag_initial"
-          help_text='Want to change the options for this dropdown? <a href="http://localhost:8000/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
+          help_text='Want to change the options for this dropdown? <a href="/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
         />
 
         <c-app.components.fields.remote_pill_select
