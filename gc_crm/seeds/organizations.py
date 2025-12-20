@@ -32,10 +32,18 @@ def seed_organizations():
         team.users.add(joe)
 
     # Ensure a couple of statuses/industries exist
-    default_status, _ = Status.objects.get_or_create(name="Active", defaults={"team": team})
-    pending_status, _ = Status.objects.get_or_create(name="Prospect", defaults={"team": team})
-    museum_industry, _ = Industry.objects.get_or_create(name="Museum", defaults={"team": team})
-    gallery_industry, _ = Industry.objects.get_or_create(name="Gallery", defaults={"team": team})
+    default_status, _ = Status.objects.get_or_create(
+        name="Active", defaults={"team": team}
+    )
+    pending_status, _ = Status.objects.get_or_create(
+        name="Prospect", defaults={"team": team}
+    )
+    museum_industry, _ = Industry.objects.get_or_create(
+        name="Museum", defaults={"team": team}
+    )
+    gallery_industry, _ = Industry.objects.get_or_create(
+        name="Gallery", defaults={"team": team}
+    )
 
     sample_names = [
         "Acme Arts Museum",
@@ -98,7 +106,8 @@ def seed_organizations():
             defaults={
                 "status": default_status,
                 "industry": random.choice([museum_industry, gallery_industry]),
-                "last_activity_at": timezone.now() - timedelta(days=random.randint(0, 60)),
+                "last_activity_at": timezone.now()
+                - timedelta(days=random.randint(0, 60)),
                 "notes": "Sample organization record for development.",
             },
         )
@@ -108,7 +117,9 @@ def seed_organizations():
             # Refresh a couple fields for variety
             org.status = random.choice([default_status, pending_status])
             org.industry = random.choice([museum_industry, gallery_industry])
-            org.last_activity_at = timezone.now() - timedelta(days=random.randint(0, 60))
+            org.last_activity_at = timezone.now() - timedelta(
+                days=random.randint(0, 60)
+            )
             org.save()
 
     print(f"Seeded {created_count} organizations (upserted {len(sample_names)}).")

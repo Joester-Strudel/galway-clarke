@@ -34,7 +34,9 @@ urlpatterns = [
     path("create-team/", create_team, name="create-team"),
     path("user/preferences/", update_preferences, name="user-preferences"),
     path("settings/", team_settings, name="settings"),
-    path("settings/members/", team_settings, {"tab": "members"}, name="settings-members"),
+    path(
+        "settings/members/", team_settings, {"tab": "members"}, name="settings-members"
+    ),
     path(
         "settings/field-definitions/",
         team_settings,
@@ -66,7 +68,9 @@ urlpatterns = [
         name="settings-tag-delete",
     ),
     path("settings/industries/", team_industries_drawer, name="settings-industries"),
-    path("settings/industries/create/", create_industry, name="settings-industry-create"),
+    path(
+        "settings/industries/create/", create_industry, name="settings-industry-create"
+    ),
     path(
         "settings/industries/<uuid:industry_id>/update/",
         update_industry,

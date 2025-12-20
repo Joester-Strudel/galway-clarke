@@ -10,8 +10,16 @@ from gc_core.constants.colors import TAILWIND_COLOR_CHOICES
 
 
 def _industries_context(team):
-    industries = Industry.objects.filter(team=team).order_by("name") if team else Industry.objects.none()
-    return {"team": team, "industries": industries, "industry_color_choices": TAILWIND_COLOR_CHOICES}
+    industries = (
+        Industry.objects.filter(team=team).order_by("name")
+        if team
+        else Industry.objects.none()
+    )
+    return {
+        "team": team,
+        "industries": industries,
+        "industry_color_choices": TAILWIND_COLOR_CHOICES,
+    }
 
 
 @login_required

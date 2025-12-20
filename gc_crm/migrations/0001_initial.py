@@ -6,121 +6,370 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='HistoricalOrganization',
+            name="HistoricalOrganization",
             fields=[
-                ('id', models.UUIDField(db_index=True, default=uuid.uuid4, editable=False)),
-                ('created_at', models.DateTimeField(blank=True, editable=False, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(blank=True, editable=False, verbose_name='Last Updated')),
-                ('name', models.CharField(max_length=255, verbose_name='Name')),
-                ('address_one', models.CharField(blank=True, max_length=255, null=True, verbose_name='Address Line 1')),
-                ('address_two', models.CharField(blank=True, max_length=255, null=True, verbose_name='Address Line 2')),
-                ('last_activity_at', models.DateTimeField(blank=True, null=True, verbose_name='Last Activity')),
-                ('notes', models.TextField(blank=True, help_text='Internal notes about this organization.', null=True, verbose_name='Notes')),
-                ('history_id', models.AutoField(primary_key=True, serialize=False)),
-                ('history_date', models.DateTimeField(db_index=True)),
-                ('history_change_reason', models.CharField(max_length=100, null=True)),
-                ('history_type', models.CharField(choices=[('+', 'Created'), ('~', 'Changed'), ('-', 'Deleted')], max_length=1)),
+                (
+                    "id",
+                    models.UUIDField(db_index=True, default=uuid.uuid4, editable=False),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        blank=True, editable=False, verbose_name="Created At"
+                    ),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(
+                        blank=True, editable=False, verbose_name="Last Updated"
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="Name")),
+                (
+                    "address_one",
+                    models.CharField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        verbose_name="Address Line 1",
+                    ),
+                ),
+                (
+                    "address_two",
+                    models.CharField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        verbose_name="Address Line 2",
+                    ),
+                ),
+                (
+                    "last_activity_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Last Activity"
+                    ),
+                ),
+                (
+                    "notes",
+                    models.TextField(
+                        blank=True,
+                        help_text="Internal notes about this organization.",
+                        null=True,
+                        verbose_name="Notes",
+                    ),
+                ),
+                ("history_id", models.AutoField(primary_key=True, serialize=False)),
+                ("history_date", models.DateTimeField(db_index=True)),
+                ("history_change_reason", models.CharField(max_length=100, null=True)),
+                (
+                    "history_type",
+                    models.CharField(
+                        choices=[("+", "Created"), ("~", "Changed"), ("-", "Deleted")],
+                        max_length=1,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'historical Organization',
-                'verbose_name_plural': 'historical Organizations',
-                'ordering': ('-history_date', '-history_id'),
-                'get_latest_by': ('history_date', 'history_id'),
+                "verbose_name": "historical Organization",
+                "verbose_name_plural": "historical Organizations",
+                "ordering": ("-history_date", "-history_id"),
+                "get_latest_by": ("history_date", "history_id"),
             },
             bases=(simple_history.models.HistoricalChanges, models.Model),
         ),
         migrations.CreateModel(
-            name='Individual',
+            name="Individual",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('first_name', models.CharField(blank=True, max_length=255, null=True, verbose_name='First Name')),
-                ('last_name', models.CharField(blank=True, max_length=255, null=True, verbose_name='Last Name')),
-                ('email', models.EmailField(blank=True, max_length=254, null=True, verbose_name='Email')),
-                ('phone', models.CharField(blank=True, max_length=255, null=True, verbose_name='Phone')),
-                ('address_one', models.CharField(blank=True, max_length=255, null=True, verbose_name='Address Line 1')),
-                ('address_two', models.CharField(blank=True, max_length=255, null=True, verbose_name='Address Line 2')),
-                ('primary', models.BooleanField(default=False, verbose_name='Primary Contact')),
-                ('notes', models.TextField(blank=True, help_text='Internal notes about this individual.', null=True, verbose_name='Notes')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "first_name",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, verbose_name="First Name"
+                    ),
+                ),
+                (
+                    "last_name",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, verbose_name="Last Name"
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        blank=True, max_length=254, null=True, verbose_name="Email"
+                    ),
+                ),
+                (
+                    "phone",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, verbose_name="Phone"
+                    ),
+                ),
+                (
+                    "address_one",
+                    models.CharField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        verbose_name="Address Line 1",
+                    ),
+                ),
+                (
+                    "address_two",
+                    models.CharField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        verbose_name="Address Line 2",
+                    ),
+                ),
+                (
+                    "primary",
+                    models.BooleanField(default=False, verbose_name="Primary Contact"),
+                ),
+                (
+                    "notes",
+                    models.TextField(
+                        blank=True,
+                        help_text="Internal notes about this individual.",
+                        null=True,
+                        verbose_name="Notes",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Individual',
-                'verbose_name_plural': 'Individuals',
-                'ordering': ('-created_at',),
+                "verbose_name": "Individual",
+                "verbose_name_plural": "Individuals",
+                "ordering": ("-created_at",),
             },
         ),
         migrations.CreateModel(
-            name='Industry',
+            name="Industry",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(max_length=120, verbose_name='Name')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Description')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("name", models.CharField(max_length=120, verbose_name="Name")),
+                (
+                    "description",
+                    models.TextField(blank=True, null=True, verbose_name="Description"),
+                ),
             ],
             options={
-                'verbose_name': 'Industry',
-                'verbose_name_plural': 'Industries',
-                'ordering': ('name',),
+                "verbose_name": "Industry",
+                "verbose_name_plural": "Industries",
+                "ordering": ("name",),
             },
         ),
         migrations.CreateModel(
-            name='Organization',
+            name="Organization",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(max_length=255, verbose_name='Name')),
-                ('address_one', models.CharField(blank=True, max_length=255, null=True, verbose_name='Address Line 1')),
-                ('address_two', models.CharField(blank=True, max_length=255, null=True, verbose_name='Address Line 2')),
-                ('last_activity_at', models.DateTimeField(blank=True, null=True, verbose_name='Last Activity')),
-                ('notes', models.TextField(blank=True, help_text='Internal notes about this organization.', null=True, verbose_name='Notes')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="Name")),
+                (
+                    "address_one",
+                    models.CharField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        verbose_name="Address Line 1",
+                    ),
+                ),
+                (
+                    "address_two",
+                    models.CharField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        verbose_name="Address Line 2",
+                    ),
+                ),
+                (
+                    "last_activity_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Last Activity"
+                    ),
+                ),
+                (
+                    "notes",
+                    models.TextField(
+                        blank=True,
+                        help_text="Internal notes about this organization.",
+                        null=True,
+                        verbose_name="Notes",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Organization',
-                'verbose_name_plural': 'Organizations',
-                'ordering': ('name',),
+                "verbose_name": "Organization",
+                "verbose_name_plural": "Organizations",
+                "ordering": ("name",),
             },
         ),
         migrations.CreateModel(
-            name='Status',
+            name="Status",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='Lifecycle status (active, pending, churn risk, etc.).', max_length=80, verbose_name='Name')),
-                ('color', models.CharField(choices=[('slate', 'Slate'), ('gray', 'Gray'), ('zinc', 'Zinc'), ('neutral', 'Neutral'), ('stone', 'Stone'), ('red', 'Red'), ('orange', 'Orange'), ('amber', 'Amber'), ('yellow', 'Yellow'), ('lime', 'Lime'), ('green', 'Green'), ('emerald', 'Emerald'), ('teal', 'Teal'), ('cyan', 'Cyan'), ('sky', 'Sky'), ('blue', 'Blue'), ('indigo', 'Indigo'), ('violet', 'Violet'), ('purple', 'Purple'), ('fuchsia', 'Fuchsia'), ('pink', 'Pink'), ('rose', 'Rose')], default='gray', help_text='Optional hex or token to style this status.', max_length=20, verbose_name='Color')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Description')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Lifecycle status (active, pending, churn risk, etc.).",
+                        max_length=80,
+                        verbose_name="Name",
+                    ),
+                ),
+                (
+                    "color",
+                    models.CharField(
+                        choices=[
+                            ("slate", "Slate"),
+                            ("gray", "Gray"),
+                            ("zinc", "Zinc"),
+                            ("neutral", "Neutral"),
+                            ("stone", "Stone"),
+                            ("red", "Red"),
+                            ("orange", "Orange"),
+                            ("amber", "Amber"),
+                            ("yellow", "Yellow"),
+                            ("lime", "Lime"),
+                            ("green", "Green"),
+                            ("emerald", "Emerald"),
+                            ("teal", "Teal"),
+                            ("cyan", "Cyan"),
+                            ("sky", "Sky"),
+                            ("blue", "Blue"),
+                            ("indigo", "Indigo"),
+                            ("violet", "Violet"),
+                            ("purple", "Purple"),
+                            ("fuchsia", "Fuchsia"),
+                            ("pink", "Pink"),
+                            ("rose", "Rose"),
+                        ],
+                        default="gray",
+                        help_text="Optional hex or token to style this status.",
+                        max_length=20,
+                        verbose_name="Color",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(blank=True, null=True, verbose_name="Description"),
+                ),
             ],
             options={
-                'verbose_name': 'Status',
-                'verbose_name_plural': 'Statuses',
-                'ordering': ('name',),
+                "verbose_name": "Status",
+                "verbose_name_plural": "Statuses",
+                "ordering": ("name",),
             },
         ),
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(max_length=100, verbose_name='Name')),
-                ('color', models.CharField(blank=True, help_text='Optional hex or token to style this tag.', max_length=20, null=True, verbose_name='Color')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Description')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Name")),
+                (
+                    "color",
+                    models.CharField(
+                        blank=True,
+                        help_text="Optional hex or token to style this tag.",
+                        max_length=20,
+                        null=True,
+                        verbose_name="Color",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(blank=True, null=True, verbose_name="Description"),
+                ),
             ],
             options={
-                'verbose_name': 'Tag',
-                'verbose_name_plural': 'Tags',
-                'ordering': ('name',),
+                "verbose_name": "Tag",
+                "verbose_name_plural": "Tags",
+                "ordering": ("name",),
             },
         ),
     ]

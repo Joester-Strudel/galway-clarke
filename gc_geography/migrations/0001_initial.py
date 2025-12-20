@@ -5,72 +5,164 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='City',
+            name="City",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(max_length=255, verbose_name='City')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="City")),
             ],
             options={
-                'verbose_name': 'City',
-                'verbose_name_plural': 'Cities',
-                'ordering': ('state', 'name'),
+                "verbose_name": "City",
+                "verbose_name_plural": "Cities",
+                "ordering": ("state", "name"),
             },
         ),
         migrations.CreateModel(
-            name='County',
+            name="County",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(max_length=255, verbose_name='County')),
-                ('fips_code', models.CharField(blank=True, max_length=255, null=True, verbose_name='FIPS Code')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="County")),
+                (
+                    "fips_code",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, verbose_name="FIPS Code"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'County',
-                'verbose_name_plural': 'Counties',
-                'ordering': ('state', 'name'),
+                "verbose_name": "County",
+                "verbose_name_plural": "Counties",
+                "ordering": ("state", "name"),
             },
         ),
         migrations.CreateModel(
-            name='State',
+            name="State",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(max_length=255, verbose_name='State')),
-                ('abbreviation', models.CharField(blank=True, help_text='Two-letter state abbreviation.', max_length=2, null=True, verbose_name='Abbreviation')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="State")),
+                (
+                    "abbreviation",
+                    models.CharField(
+                        blank=True,
+                        help_text="Two-letter state abbreviation.",
+                        max_length=2,
+                        null=True,
+                        verbose_name="Abbreviation",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'State',
-                'verbose_name_plural': 'States',
-                'ordering': ('name',),
+                "verbose_name": "State",
+                "verbose_name_plural": "States",
+                "ordering": ("name",),
             },
         ),
         migrations.CreateModel(
-            name='ZipCode',
+            name="ZipCode",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('zip_code_five_digit', models.CharField(max_length=5, verbose_name='ZIP Code (5 Digit)')),
-                ('zip_code_nine_digit', models.CharField(blank=True, max_length=255, null=True, verbose_name='ZIP Code (9 Digit)')),
-                ('population', models.IntegerField(blank=True, default=0, null=True, verbose_name='Population')),
-                ('density', models.FloatField(blank=True, help_text='Population density per square mile.', null=True, verbose_name='Density')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "zip_code_five_digit",
+                    models.CharField(max_length=5, verbose_name="ZIP Code (5 Digit)"),
+                ),
+                (
+                    "zip_code_nine_digit",
+                    models.CharField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        verbose_name="ZIP Code (9 Digit)",
+                    ),
+                ),
+                (
+                    "population",
+                    models.IntegerField(
+                        blank=True, default=0, null=True, verbose_name="Population"
+                    ),
+                ),
+                (
+                    "density",
+                    models.FloatField(
+                        blank=True,
+                        help_text="Population density per square mile.",
+                        null=True,
+                        verbose_name="Density",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ZIP Code',
-                'verbose_name_plural': 'ZIP Codes',
-                'ordering': ('zip_code_five_digit',),
+                "verbose_name": "ZIP Code",
+                "verbose_name_plural": "ZIP Codes",
+                "ordering": ("zip_code_five_digit",),
             },
         ),
     ]

@@ -10,7 +10,9 @@ from gc_core.constants.colors import TAILWIND_COLOR_CHOICES
 
 
 def _tags_context(team):
-    tags = Tag.objects.filter(team=team).order_by("name") if team else Tag.objects.none()
+    tags = (
+        Tag.objects.filter(team=team).order_by("name") if team else Tag.objects.none()
+    )
     return {"team": team, "tags": tags, "tag_color_choices": TAILWIND_COLOR_CHOICES}
 
 
@@ -33,7 +35,9 @@ def create_tag(request):
     color = request.POST.get("color") or "gray"
     if not name:
         context = _tags_context(team) | {"error": "Name is required."}
-        return render(request, "cotton/app/gc_users/partials/tag_drawer.html", context, status=400)
+        return render(
+            request, "cotton/app/gc_users/partials/tag_drawer.html", context, status=400
+        )
 
     Tag.objects.create(team=team, name=name, color=color)
     context = _tags_context(team)

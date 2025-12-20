@@ -5,501 +5,1285 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='AatAssociativeRelationship',
+            name="AatAssociativeRelationship",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('historic_flag', models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "historic_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Associative Relationship',
-                'verbose_name_plural': 'AAT Associative Relationships',
+                "verbose_name": "AAT Associative Relationship",
+                "verbose_name_plural": "AAT Associative Relationships",
             },
         ),
         migrations.CreateModel(
-            name='AatAssociativeRelationshipType',
+            name="AatAssociativeRelationshipType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text="Relationship_Type value (e.g., 'distinguished from')", max_length=100, unique=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Relationship_Type value (e.g., 'distinguished from')",
+                        max_length=100,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Associative Relationship Type',
-                'verbose_name_plural': 'AAT Associative Relationship Types',
+                "verbose_name": "AAT Associative Relationship Type",
+                "verbose_name_plural": "AAT Associative Relationship Types",
             },
         ),
         migrations.CreateModel(
-            name='AatNote',
+            name="AatNote",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('note_text', models.TextField()),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("note_text", models.TextField()),
             ],
             options={
-                'verbose_name': 'AAT Note',
-                'verbose_name_plural': 'AAT Notes',
+                "verbose_name": "AAT Note",
+                "verbose_name_plural": "AAT Notes",
             },
         ),
         migrations.CreateModel(
-            name='AatNoteContributor',
+            name="AatNoteContributor",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('contributor_id', models.CharField(help_text='Contributor ID for descriptive note', max_length=100)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "contributor_id",
+                    models.CharField(
+                        help_text="Contributor ID for descriptive note", max_length=100
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Note Contributor',
-                'verbose_name_plural': 'AAT Note Contributors',
+                "verbose_name": "AAT Note Contributor",
+                "verbose_name_plural": "AAT Note Contributors",
             },
         ),
         migrations.CreateModel(
-            name='AatNoteSource',
+            name="AatNoteSource",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('source_id', models.CharField(help_text='Source reference for note text', max_length=255)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "source_id",
+                    models.CharField(
+                        help_text="Source reference for note text", max_length=255
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Note Source',
-                'verbose_name_plural': 'AAT Note Sources',
+                "verbose_name": "AAT Note Source",
+                "verbose_name_plural": "AAT Note Sources",
             },
         ),
         migrations.CreateModel(
-            name='AatParentRelationshipType',
+            name="AatParentRelationshipType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text="Parent relationship type (e.g., 'Genus/Species-BTG')", max_length=100, unique=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Parent relationship type (e.g., 'Genus/Species-BTG')",
+                        max_length=100,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Parent Relationship Type',
-                'verbose_name_plural': 'AAT Parent Relationship Types',
+                "verbose_name": "AAT Parent Relationship Type",
+                "verbose_name_plural": "AAT Parent Relationship Types",
             },
         ),
         migrations.CreateModel(
-            name='AatSubject',
+            name="AatSubject",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('aat_id', models.CharField(help_text='Getty AAT Subject_ID', max_length=32, unique=True, verbose_name='AAT Subject ID')),
-                ('merged_status', models.CharField(blank=True, help_text='Merged_Status Field', max_length=50, null=True, verbose_name='Merged Status')),
-                ('sort_order', models.IntegerField(blank=True, help_text='Sort_Order', null=True, verbose_name='Sort Order')),
-                ('parent_string', models.TextField(blank=True, help_text='Parent_String Listing Hierarchy Ancestors', null=True, verbose_name='Parent String')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "aat_id",
+                    models.CharField(
+                        help_text="Getty AAT Subject_ID",
+                        max_length=32,
+                        unique=True,
+                        verbose_name="AAT Subject ID",
+                    ),
+                ),
+                (
+                    "merged_status",
+                    models.CharField(
+                        blank=True,
+                        help_text="Merged_Status Field",
+                        max_length=50,
+                        null=True,
+                        verbose_name="Merged Status",
+                    ),
+                ),
+                (
+                    "sort_order",
+                    models.IntegerField(
+                        blank=True,
+                        help_text="Sort_Order",
+                        null=True,
+                        verbose_name="Sort Order",
+                    ),
+                ),
+                (
+                    "parent_string",
+                    models.TextField(
+                        blank=True,
+                        help_text="Parent_String Listing Hierarchy Ancestors",
+                        null=True,
+                        verbose_name="Parent String",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Subject',
-                'verbose_name_plural': 'AAT Subjects',
+                "verbose_name": "AAT Subject",
+                "verbose_name_plural": "AAT Subjects",
             },
         ),
         migrations.CreateModel(
-            name='AatSubjectContributor',
+            name="AatSubjectContributor",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('contributor_id', models.CharField(help_text='Contributor_id inside <Subject_Contributor>', max_length=100)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "contributor_id",
+                    models.CharField(
+                        help_text="Contributor_id inside <Subject_Contributor>",
+                        max_length=100,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Subject Contributor',
-                'verbose_name_plural': 'AAT Subject Contributors',
+                "verbose_name": "AAT Subject Contributor",
+                "verbose_name_plural": "AAT Subject Contributors",
             },
         ),
         migrations.CreateModel(
-            name='AatSubjectRecordType',
+            name="AatSubjectRecordType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='Record_Type value (e.g., Concept)', max_length=100, unique=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Record_Type value (e.g., Concept)",
+                        max_length=100,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Subject Record Type',
-                'verbose_name_plural': 'AAT Subject Record Types',
+                "verbose_name": "AAT Subject Record Type",
+                "verbose_name_plural": "AAT Subject Record Types",
             },
         ),
         migrations.CreateModel(
-            name='AatSubjectSource',
+            name="AatSubjectSource",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('source_id', models.CharField(help_text='Source_ID inside <Subject_Source>', max_length=255)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "source_id",
+                    models.CharField(
+                        help_text="Source_ID inside <Subject_Source>", max_length=255
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Subject Source',
-                'verbose_name_plural': 'AAT Subject Sources',
+                "verbose_name": "AAT Subject Source",
+                "verbose_name_plural": "AAT Subject Sources",
             },
         ),
         migrations.CreateModel(
-            name='AatTerm',
+            name="AatTerm",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('term_id', models.CharField(help_text='Term_ID inside <Preferred_Term> or <Non-Preferred_Term>', max_length=32)),
-                ('term_text', models.CharField(help_text='Primary term text', max_length=500)),
-                ('display_name', models.CharField(blank=True, max_length=500, null=True)),
-                ('historic_flag', models.CharField(blank=True, max_length=50, null=True)),
-                ('vernacular', models.CharField(blank=True, max_length=50, null=True)),
-                ('is_preferred', models.BooleanField(default=False)),
-                ('term_type', models.CharField(blank=True, help_text='Descriptor, Alternate Descriptor, Used For Term, etc.', max_length=100, null=True)),
-                ('part_of_speech', models.CharField(blank=True, max_length=100, null=True)),
-                ('qualifier', models.CharField(blank=True, max_length=250, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "term_id",
+                    models.CharField(
+                        help_text="Term_ID inside <Preferred_Term> or <Non-Preferred_Term>",
+                        max_length=32,
+                    ),
+                ),
+                (
+                    "term_text",
+                    models.CharField(help_text="Primary term text", max_length=500),
+                ),
+                (
+                    "display_name",
+                    models.CharField(blank=True, max_length=500, null=True),
+                ),
+                (
+                    "historic_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
+                ("vernacular", models.CharField(blank=True, max_length=50, null=True)),
+                ("is_preferred", models.BooleanField(default=False)),
+                (
+                    "term_type",
+                    models.CharField(
+                        blank=True,
+                        help_text="Descriptor, Alternate Descriptor, Used For Term, etc.",
+                        max_length=100,
+                        null=True,
+                    ),
+                ),
+                (
+                    "part_of_speech",
+                    models.CharField(blank=True, max_length=100, null=True),
+                ),
+                ("qualifier", models.CharField(blank=True, max_length=250, null=True)),
             ],
             options={
-                'verbose_name': 'AAT Term',
-                'verbose_name_plural': 'AAT Terms',
+                "verbose_name": "AAT Term",
+                "verbose_name_plural": "AAT Terms",
             },
         ),
         migrations.CreateModel(
-            name='AatTermContributor',
+            name="AatTermContributor",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('contributor_id', models.CharField(help_text='Contributor_id for a term', max_length=100)),
-                ('preferred_flag', models.CharField(blank=True, help_text='Preferred, Non Preferred, etc.', max_length=50, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "contributor_id",
+                    models.CharField(
+                        help_text="Contributor_id for a term", max_length=100
+                    ),
+                ),
+                (
+                    "preferred_flag",
+                    models.CharField(
+                        blank=True,
+                        help_text="Preferred, Non Preferred, etc.",
+                        max_length=50,
+                        null=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Term Contributor',
-                'verbose_name_plural': 'AAT Term Contributors',
+                "verbose_name": "AAT Term Contributor",
+                "verbose_name_plural": "AAT Term Contributors",
             },
         ),
         migrations.CreateModel(
-            name='AatTermSource',
+            name="AatTermSource",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('source_id', models.CharField(help_text='Source_ID from <Term_Source>', max_length=255)),
-                ('page', models.CharField(blank=True, help_text='Page or extra locator info', max_length=100, null=True)),
-                ('preferred_flag', models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "source_id",
+                    models.CharField(
+                        help_text="Source_ID from <Term_Source>", max_length=255
+                    ),
+                ),
+                (
+                    "page",
+                    models.CharField(
+                        blank=True,
+                        help_text="Page or extra locator info",
+                        max_length=100,
+                        null=True,
+                    ),
+                ),
+                (
+                    "preferred_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
             ],
             options={
-                'verbose_name': 'AAT Term Source',
-                'verbose_name_plural': 'AAT Term Sources',
+                "verbose_name": "AAT Term Source",
+                "verbose_name_plural": "AAT Term Sources",
             },
         ),
         migrations.CreateModel(
-            name='IsoLanguage',
+            name="IsoLanguage",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='Offical name of the language', max_length=255)),
-                ('iso_set_639_1_code', models.CharField(blank=True, help_text='ISO 639-1 code for the language', max_length=3, null=True, verbose_name='ISO 639-1 Code')),
-                ('iso_set_639_2_code', models.CharField(blank=True, help_text='ISO 639-2 code for the language', max_length=3, null=True, verbose_name='ISO 639-2 Code')),
-                ('iso_set_639_3_code', models.CharField(blank=True, help_text='ISO 639-3 code for the language', max_length=3, null=True, verbose_name='ISO 639-3 Code')),
-                ('iso_set_639_5_code', models.CharField(blank=True, help_text='ISO 639-5 code for the language', max_length=3, null=True, verbose_name='ISO 639-5 Code')),
-                ('getty_language_code', models.CharField(blank=True, help_text='Getty language code for the language', max_length=20, null=True, verbose_name='Getty Language Code')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Offical name of the language", max_length=255
+                    ),
+                ),
+                (
+                    "iso_set_639_1_code",
+                    models.CharField(
+                        blank=True,
+                        help_text="ISO 639-1 code for the language",
+                        max_length=3,
+                        null=True,
+                        verbose_name="ISO 639-1 Code",
+                    ),
+                ),
+                (
+                    "iso_set_639_2_code",
+                    models.CharField(
+                        blank=True,
+                        help_text="ISO 639-2 code for the language",
+                        max_length=3,
+                        null=True,
+                        verbose_name="ISO 639-2 Code",
+                    ),
+                ),
+                (
+                    "iso_set_639_3_code",
+                    models.CharField(
+                        blank=True,
+                        help_text="ISO 639-3 code for the language",
+                        max_length=3,
+                        null=True,
+                        verbose_name="ISO 639-3 Code",
+                    ),
+                ),
+                (
+                    "iso_set_639_5_code",
+                    models.CharField(
+                        blank=True,
+                        help_text="ISO 639-5 code for the language",
+                        max_length=3,
+                        null=True,
+                        verbose_name="ISO 639-5 Code",
+                    ),
+                ),
+                (
+                    "getty_language_code",
+                    models.CharField(
+                        blank=True,
+                        help_text="Getty language code for the language",
+                        max_length=20,
+                        null=True,
+                        verbose_name="Getty Language Code",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ISO Language',
-                'verbose_name_plural': 'ISO Languages',
+                "verbose_name": "ISO Language",
+                "verbose_name_plural": "ISO Languages",
             },
         ),
         migrations.CreateModel(
-            name='IsoLanguageScope',
+            name="IsoLanguageScope",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='ISO Language Scope Name', max_length=255)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="ISO Language Scope Name", max_length=255
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ISO Language Scope',
-                'verbose_name_plural': 'ISO Language Scopes',
+                "verbose_name": "ISO Language Scope",
+                "verbose_name_plural": "ISO Language Scopes",
             },
         ),
         migrations.CreateModel(
-            name='IsoLanguageType',
+            name="IsoLanguageType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='ISO Language Type Name', max_length=255)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="ISO Language Type Name", max_length=255
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ISO Language Type',
-                'verbose_name_plural': 'ISO Language Types',
+                "verbose_name": "ISO Language Type",
+                "verbose_name_plural": "ISO Language Types",
             },
         ),
         migrations.CreateModel(
-            name='UlanAssociativeRelationship',
+            name="UlanAssociativeRelationship",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('historic_flag', models.CharField(blank=True, max_length=50, null=True)),
-                ('display_date', models.CharField(blank=True, help_text='Display_Date inside <AR_Date>', max_length=255, null=True)),
-                ('start_date', models.CharField(blank=True, max_length=50, null=True)),
-                ('end_date', models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "historic_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
+                (
+                    "display_date",
+                    models.CharField(
+                        blank=True,
+                        help_text="Display_Date inside <AR_Date>",
+                        max_length=255,
+                        null=True,
+                    ),
+                ),
+                ("start_date", models.CharField(blank=True, max_length=50, null=True)),
+                ("end_date", models.CharField(blank=True, max_length=50, null=True)),
             ],
             options={
-                'verbose_name': 'ULAN Associative Relationship',
-                'verbose_name_plural': 'ULAN Associative Relationships',
+                "verbose_name": "ULAN Associative Relationship",
+                "verbose_name_plural": "ULAN Associative Relationships",
             },
         ),
         migrations.CreateModel(
-            name='UlanAssociativeRelationshipType',
+            name="UlanAssociativeRelationshipType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='Relationship type label for ULAN associative relationships', max_length=100, unique=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Relationship type label for ULAN associative relationships",
+                        max_length=100,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Associative Relationship Type',
-                'verbose_name_plural': 'ULAN Associative Relationship Types',
+                "verbose_name": "ULAN Associative Relationship Type",
+                "verbose_name_plural": "ULAN Associative Relationship Types",
             },
         ),
         migrations.CreateModel(
-            name='UlanBiography',
+            name="UlanBiography",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('biography_id', models.CharField(max_length=50)),
-                ('biography_text', models.TextField()),
-                ('birth_place', models.CharField(blank=True, max_length=255, null=True)),
-                ('birth_tgn_id', models.CharField(blank=True, max_length=32, null=True)),
-                ('birth_date', models.CharField(blank=True, max_length=50, null=True)),
-                ('death_place', models.CharField(blank=True, max_length=255, null=True)),
-                ('death_tgn_id', models.CharField(blank=True, max_length=32, null=True)),
-                ('death_date', models.CharField(blank=True, max_length=50, null=True)),
-                ('sex', models.CharField(blank=True, max_length=50, null=True)),
-                ('contributor_id', models.CharField(blank=True, max_length=100, null=True)),
-                ('is_preferred', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("biography_id", models.CharField(max_length=50)),
+                ("biography_text", models.TextField()),
+                (
+                    "birth_place",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "birth_tgn_id",
+                    models.CharField(blank=True, max_length=32, null=True),
+                ),
+                ("birth_date", models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "death_place",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "death_tgn_id",
+                    models.CharField(blank=True, max_length=32, null=True),
+                ),
+                ("death_date", models.CharField(blank=True, max_length=50, null=True)),
+                ("sex", models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "contributor_id",
+                    models.CharField(blank=True, max_length=100, null=True),
+                ),
+                ("is_preferred", models.BooleanField(default=False)),
             ],
             options={
-                'verbose_name': 'ULAN Biography',
-                'verbose_name_plural': 'ULAN Biographies',
+                "verbose_name": "ULAN Biography",
+                "verbose_name_plural": "ULAN Biographies",
             },
         ),
         migrations.CreateModel(
-            name='UlanNationality',
+            name="UlanNationality",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('nationality_code', models.CharField(help_text='e.g., 901600/French', max_length=100)),
-                ('display_order', models.IntegerField(blank=True, null=True)),
-                ('is_preferred', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "nationality_code",
+                    models.CharField(help_text="e.g., 901600/French", max_length=100),
+                ),
+                ("display_order", models.IntegerField(blank=True, null=True)),
+                ("is_preferred", models.BooleanField(default=False)),
             ],
             options={
-                'verbose_name': 'ULAN Nationality',
-                'verbose_name_plural': 'ULAN Nationalities',
+                "verbose_name": "ULAN Nationality",
+                "verbose_name_plural": "ULAN Nationalities",
             },
         ),
         migrations.CreateModel(
-            name='UlanNote',
+            name="UlanNote",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('note_text', models.TextField()),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("note_text", models.TextField()),
             ],
             options={
-                'verbose_name': 'ULAN Note',
-                'verbose_name_plural': 'ULAN Notes',
+                "verbose_name": "ULAN Note",
+                "verbose_name_plural": "ULAN Notes",
             },
         ),
         migrations.CreateModel(
-            name='UlanNoteContributor',
+            name="UlanNoteContributor",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('contributor_id', models.CharField(help_text='Contributor_id inside <Note_Contributor>', max_length=100)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "contributor_id",
+                    models.CharField(
+                        help_text="Contributor_id inside <Note_Contributor>",
+                        max_length=100,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Note Contributor',
-                'verbose_name_plural': 'ULAN Note Contributors',
+                "verbose_name": "ULAN Note Contributor",
+                "verbose_name_plural": "ULAN Note Contributors",
             },
         ),
         migrations.CreateModel(
-            name='UlanNoteSource',
+            name="UlanNoteSource",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('source_id', models.CharField(help_text='Source_ID inside <Note_Source>', max_length=255)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "source_id",
+                    models.CharField(
+                        help_text="Source_ID inside <Note_Source>", max_length=255
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Note Source',
-                'verbose_name_plural': 'ULAN Note Sources',
+                "verbose_name": "ULAN Note Source",
+                "verbose_name_plural": "ULAN Note Sources",
             },
         ),
         migrations.CreateModel(
-            name='UlanParentRelationshipType',
+            name="UlanParentRelationshipType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='Hier_Rel_Type (e.g. Instance-BTI)', max_length=100, unique=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Hier_Rel_Type (e.g. Instance-BTI)",
+                        max_length=100,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Parent Relationship Type',
-                'verbose_name_plural': 'ULAN Parent Relationship Types',
+                "verbose_name": "ULAN Parent Relationship Type",
+                "verbose_name_plural": "ULAN Parent Relationship Types",
             },
         ),
         migrations.CreateModel(
-            name='UlanPartOfSpeech',
+            name="UlanPartOfSpeech",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='Part of Speech value for ULAN terms', max_length=100, unique=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Part of Speech value for ULAN terms",
+                        max_length=100,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Part of Speech',
-                'verbose_name_plural': 'ULAN Parts of Speech',
+                "verbose_name": "ULAN Part of Speech",
+                "verbose_name_plural": "ULAN Parts of Speech",
             },
         ),
         migrations.CreateModel(
-            name='UlanRole',
+            name="UlanRole",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('role_id', models.CharField(max_length=100)),
-                ('historic_flag', models.CharField(blank=True, max_length=50, null=True)),
-                ('is_preferred', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("role_id", models.CharField(max_length=100)),
+                (
+                    "historic_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
+                ("is_preferred", models.BooleanField(default=False)),
             ],
             options={
-                'verbose_name': 'ULAN Role',
-                'verbose_name_plural': 'ULAN Roles',
+                "verbose_name": "ULAN Role",
+                "verbose_name_plural": "ULAN Roles",
             },
         ),
         migrations.CreateModel(
-            name='UlanSubject',
+            name="UlanSubject",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('ulan_id', models.CharField(help_text='Getty ULAN Subject_ID', max_length=32, unique=True)),
-                ('merged_status', models.CharField(blank=True, max_length=50, null=True)),
-                ('parent_string', models.TextField(blank=True, help_text='Parent_String ancestry chain', null=True)),
-                ('parent_historic_flag', models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "ulan_id",
+                    models.CharField(
+                        help_text="Getty ULAN Subject_ID", max_length=32, unique=True
+                    ),
+                ),
+                (
+                    "merged_status",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
+                (
+                    "parent_string",
+                    models.TextField(
+                        blank=True, help_text="Parent_String ancestry chain", null=True
+                    ),
+                ),
+                (
+                    "parent_historic_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Subject',
-                'verbose_name_plural': 'ULAN Subjects',
+                "verbose_name": "ULAN Subject",
+                "verbose_name_plural": "ULAN Subjects",
             },
         ),
         migrations.CreateModel(
-            name='UlanSubjectContributor',
+            name="UlanSubjectContributor",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('contributor_id', models.CharField(help_text='Contributor_id within <Subject_Contributor>', max_length=100)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "contributor_id",
+                    models.CharField(
+                        help_text="Contributor_id within <Subject_Contributor>",
+                        max_length=100,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Subject Contributor',
-                'verbose_name_plural': 'ULAN Subject Contributors',
+                "verbose_name": "ULAN Subject Contributor",
+                "verbose_name_plural": "ULAN Subject Contributors",
             },
         ),
         migrations.CreateModel(
-            name='UlanSubjectRecordType',
+            name="UlanSubjectRecordType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='Record_Type (e.g., Person, Corporate Body, Family, Group)', max_length=100, unique=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Record_Type (e.g., Person, Corporate Body, Family, Group)",
+                        max_length=100,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Subject Record Type',
-                'verbose_name_plural': 'ULAN Subject Record Types',
+                "verbose_name": "ULAN Subject Record Type",
+                "verbose_name_plural": "ULAN Subject Record Types",
             },
         ),
         migrations.CreateModel(
-            name='UlanSubjectSource',
+            name="UlanSubjectSource",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('source_id', models.CharField(help_text='Source_ID inside <Subject_Source>', max_length=255)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "source_id",
+                    models.CharField(
+                        help_text="Source_ID inside <Subject_Source>", max_length=255
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Subject Source',
-                'verbose_name_plural': 'ULAN Subject Sources',
+                "verbose_name": "ULAN Subject Source",
+                "verbose_name_plural": "ULAN Subject Sources",
             },
         ),
         migrations.CreateModel(
-            name='UlanTerm',
+            name="UlanTerm",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('term_id', models.CharField(max_length=32)),
-                ('term_text', models.CharField(max_length=500)),
-                ('display_name', models.CharField(blank=True, max_length=500, null=True)),
-                ('historic_flag', models.CharField(blank=True, max_length=50, null=True)),
-                ('vernacular', models.CharField(blank=True, max_length=50, null=True)),
-                ('is_preferred', models.BooleanField(default=False)),
-                ('qualifier', models.CharField(blank=True, max_length=250, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("term_id", models.CharField(max_length=32)),
+                ("term_text", models.CharField(max_length=500)),
+                (
+                    "display_name",
+                    models.CharField(blank=True, max_length=500, null=True),
+                ),
+                (
+                    "historic_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
+                ("vernacular", models.CharField(blank=True, max_length=50, null=True)),
+                ("is_preferred", models.BooleanField(default=False)),
+                ("qualifier", models.CharField(blank=True, max_length=250, null=True)),
             ],
             options={
-                'verbose_name': 'ULAN Term',
-                'verbose_name_plural': 'ULAN Terms',
+                "verbose_name": "ULAN Term",
+                "verbose_name_plural": "ULAN Terms",
             },
         ),
         migrations.CreateModel(
-            name='UlanTermContributor',
+            name="UlanTermContributor",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('contributor_id', models.CharField(max_length=100)),
-                ('preferred_flag', models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("contributor_id", models.CharField(max_length=100)),
+                (
+                    "preferred_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Term Contributor',
-                'verbose_name_plural': 'ULAN Term Contributors',
+                "verbose_name": "ULAN Term Contributor",
+                "verbose_name_plural": "ULAN Term Contributors",
             },
         ),
         migrations.CreateModel(
-            name='UlanTermSource',
+            name="UlanTermSource",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('source_id', models.CharField(max_length=255)),
-                ('page', models.CharField(blank=True, max_length=100, null=True)),
-                ('preferred_flag', models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                ("source_id", models.CharField(max_length=255)),
+                ("page", models.CharField(blank=True, max_length=100, null=True)),
+                (
+                    "preferred_flag",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Term Source',
-                'verbose_name_plural': 'ULAN Term Sources',
+                "verbose_name": "ULAN Term Source",
+                "verbose_name_plural": "ULAN Term Sources",
             },
         ),
         migrations.CreateModel(
-            name='UlanTermType',
+            name="UlanTermType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('last_updated_at', models.DateTimeField(auto_now=True, verbose_name='Last Updated')),
-                ('name', models.CharField(help_text='Term_Type value for ULAN terms', max_length=100, unique=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "last_updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Term_Type value for ULAN terms",
+                        max_length=100,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ULAN Term Type',
-                'verbose_name_plural': 'ULAN Term Types',
+                "verbose_name": "ULAN Term Type",
+                "verbose_name_plural": "ULAN Term Types",
             },
         ),
     ]

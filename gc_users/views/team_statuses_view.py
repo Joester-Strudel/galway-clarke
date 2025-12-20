@@ -11,9 +11,15 @@ from gc_core.constants.colors import TAILWIND_COLOR_CHOICES
 
 def _statuses_context(team):
     statuses = (
-        Status.objects.filter(team=team).order_by("name") if team else Status.objects.none()
+        Status.objects.filter(team=team).order_by("name")
+        if team
+        else Status.objects.none()
     )
-    return {"team": team, "statuses": statuses, "status_color_choices": TAILWIND_COLOR_CHOICES}
+    return {
+        "team": team,
+        "statuses": statuses,
+        "status_color_choices": TAILWIND_COLOR_CHOICES,
+    }
 
 
 @login_required
@@ -35,7 +41,12 @@ def create_status(request):
     color = request.POST.get("color") or "gray"
     if not name:
         context = _statuses_context(team) | {"error": "Name is required."}
-        return render(request, "cotton/app/gc_users/partials/status_drawer.html", context, status=400)
+        return render(
+            request,
+            "cotton/app/gc_users/partials/status_drawer.html",
+            context,
+            status=400,
+        )
 
     Status.objects.create(team=team, name=name, color=color)
     context = _statuses_context(team)

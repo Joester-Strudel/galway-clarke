@@ -11,7 +11,10 @@ def individuals_view(request):
         return render(
             request,
             "cotton/app/gc_crm/pages/index.html",
-            {"workspace_template": "cotton/app/gc_crm/pages/index.html", "initial_tab": "individuals"},
+            {
+                "workspace_template": "cotton/app/gc_crm/pages/index.html",
+                "initial_tab": "individuals",
+            },
         )
     if request.htmx:
         return render(request, "cotton/app/gc_crm/pages/individuals.html")

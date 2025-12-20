@@ -53,7 +53,8 @@ def select_tags(request):
     qs = Tag.objects.filter(team=team)
     page_obj, next_url = _paginate_options(qs, request)
     options = [
-        {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"} for tag in page_obj
+        {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"}
+        for tag in page_obj
     ]
     return render(
         request,
@@ -70,7 +71,11 @@ def select_industries(request):
     qs = Industry.objects.filter(team=team)
     page_obj, next_url = _paginate_options(qs, request)
     options = [
-        {"value": str(industry.id), "label": industry.name, "color": industry.color or "gray"}
+        {
+            "value": str(industry.id),
+            "label": industry.name,
+            "color": industry.color or "gray",
+        }
         for industry in page_obj
     ]
     return render(
@@ -88,7 +93,11 @@ def select_individuals(request):
     qs = Individual.objects.filter(team=team)
     search = request.GET.get("search", "").strip()
     if search:
-        qs = qs.filter(models.Q(first_name__icontains=search) | models.Q(last_name__icontains=search) | models.Q(email__icontains=search))
+        qs = qs.filter(
+            models.Q(first_name__icontains=search)
+            | models.Q(last_name__icontains=search)
+            | models.Q(email__icontains=search)
+        )
     paginator = Paginator(qs.order_by("last_name", "first_name"), 20)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -101,7 +110,11 @@ def select_individuals(request):
     options = [
         {
             "value": str(person.id),
-            "label": (f"{person.first_name} {person.last_name}".strip() or person.email or "Unnamed").strip(),
+            "label": (
+                f"{person.first_name} {person.last_name}".strip()
+                or person.email
+                or "Unnamed"
+            ).strip(),
             "color": "gray",
         }
         for person in page_obj
@@ -182,7 +195,11 @@ def select_zip_codes(request):
         querystring = params.urlencode()
         next_url = f"{request.path}?{querystring}"
     options = [
-        {"value": str(zip_code.id), "label": zip_code.zip_code_five_digit, "color": "gray"}
+        {
+            "value": str(zip_code.id),
+            "label": zip_code.zip_code_five_digit,
+            "color": "gray",
+        }
         for zip_code in page_obj
     ]
     return render(

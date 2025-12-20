@@ -37,7 +37,9 @@ class Command(BaseCommand):
             admin_user.is_superuser = True
             admin_user.set_password("admin1234")
             admin_user.save()
-            self.stdout.write(self.style.WARNING("Updated password/flags for admin@example.com"))
+            self.stdout.write(
+                self.style.WARNING("Updated password/flags for admin@example.com")
+            )
 
         # Create or update Joe
         joe_user, created_joe = User.objects.get_or_create(
@@ -49,12 +51,16 @@ class Command(BaseCommand):
         if created_joe:
             self.stdout.write(self.style.SUCCESS("Created user joe@example.com"))
         else:
-            self.stdout.write(self.style.WARNING("Updated password for joe@example.com"))
+            self.stdout.write(
+                self.style.WARNING("Updated password for joe@example.com")
+            )
 
         # Create teams and attach Joe as owner/member
         team_names = ["Team One", "Team Two", "Team Three"]
         for name in team_names:
-            team, created_team = Team.objects.get_or_create(name=name, defaults={"owner": joe_user})
+            team, created_team = Team.objects.get_or_create(
+                name=name, defaults={"owner": joe_user}
+            )
             # If existing, ensure owner set to Joe (primary contact intent)
             if team.owner != joe_user:
                 team.owner = joe_user
@@ -62,10 +68,14 @@ class Command(BaseCommand):
             team.users.add(joe_user)
 
             status = "Created" if created_team else "Updated"
-            self.stdout.write(self.style.SUCCESS(f"{status} team '{name}' with Joe as owner/member"))
+            self.stdout.write(
+                self.style.SUCCESS(f"{status} team '{name}' with Joe as owner/member")
+            )
 
         self.stdout.write(self.style.SUCCESS("User and team seeding complete."))
 
         # Seed sample organizations for Team One (Joe)
         seed_organizations()
-        self.stdout.write(self.style.SUCCESS("Sample organizations seeded for Team One."))
+        self.stdout.write(
+            self.style.SUCCESS("Sample organizations seeded for Team One.")
+        )

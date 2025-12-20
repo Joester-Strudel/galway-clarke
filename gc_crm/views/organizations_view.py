@@ -30,7 +30,9 @@ def _get_active_team(request):
             return team
 
     # Fallbacks
-    return request.user.organizations.first() or request.user.owned_organizations.first()
+    return (
+        request.user.organizations.first() or request.user.owned_organizations.first()
+    )
 
 
 def _get_filters(request):
@@ -171,7 +173,10 @@ def _get_org_page(request):
         parsed_date = parse_date(filters["filter_last_activity"])
         if parsed_date:
             qs = qs.filter(last_activity_at__date=parsed_date)
-        elif filters["filter_last_activity"].isdigit() and len(filters["filter_last_activity"]) == 4:
+        elif (
+            filters["filter_last_activity"].isdigit()
+            and len(filters["filter_last_activity"]) == 4
+        ):
             qs = qs.filter(last_activity_at__year=int(filters["filter_last_activity"]))
     if filters["filter_tag"]:
         qs = qs.filter(tags__name__icontains=filters["filter_tag"])
@@ -185,7 +190,15 @@ def _get_org_page(request):
     page_obj = paginator.get_page(page_number)
     filter_fields = _filter_fields(filters)
     filter_querystring = _filter_querystring(filters)
-    return page_obj, search_query, sort_field, sort_direction, filters, filter_fields, filter_querystring
+    return (
+        page_obj,
+        search_query,
+        sort_field,
+        sort_direction,
+        filters,
+        filter_fields,
+        filter_querystring,
+    )
 
 
 def _pagination_context(page_obj):
@@ -212,7 +225,15 @@ def _pagination_context(page_obj):
 @login_required
 def organizations_view(request):
     """Serve the organizations tab content or full shell."""
-    page_obj, search_query, sort_field, sort_direction, filters, filter_fields, filter_querystring = _get_org_page(request)
+    (
+        page_obj,
+        search_query,
+        sort_field,
+        sort_direction,
+        filters,
+        filter_fields,
+        filter_querystring,
+    ) = _get_org_page(request)
     pagination = _pagination_context(page_obj)
     context = {
         "workspace_template": "cotton/app/gc_crm/pages/index.html",
@@ -243,21 +264,45 @@ def organization_drawer_view(request, org_id):
     organization = (
         Organization.objects.filter(id=org_id, team=team)
         .prefetch_related("tags")
-        .select_related("status", "industry", "location_city", "location_state", "location_county", "location_zip", "primary_contact")
+        .select_related(
+            "status",
+            "industry",
+            "location_city",
+            "location_state",
+            "location_county",
+            "location_zip",
+            "primary_contact",
+        )
         .first()
     )
     if not organization:
         return HttpResponseBadRequest("Organization not found")
 
-    statuses = Status.objects.filter(team=team).order_by("name") if team else Status.objects.none()
-    tags = Tag.objects.filter(team=team).order_by("name") if team else Tag.objects.none()
-    industries = Industry.objects.filter(team=team).order_by("name") if team else Industry.objects.none()
-    individuals = Individual.objects.filter(team=team).order_by("last_name", "first_name") if team else Individual.objects.none()
+    statuses = (
+        Status.objects.filter(team=team).order_by("name")
+        if team
+        else Status.objects.none()
+    )
+    tags = (
+        Tag.objects.filter(team=team).order_by("name") if team else Tag.objects.none()
+    )
+    industries = (
+        Industry.objects.filter(team=team).order_by("name")
+        if team
+        else Industry.objects.none()
+    )
+    individuals = (
+        Individual.objects.filter(team=team).order_by("last_name", "first_name")
+        if team
+        else Individual.objects.none()
+    )
     cities = City.objects.select_related("state")
     states = State.objects.all()
     counties = County.objects.select_related("state")
     zip_codes = ZipCode.objects.all()
-    active_tab = request.POST.get("active_tab", request.GET.get("active_tab", "general"))
+    active_tab = request.POST.get(
+        "active_tab", request.GET.get("active_tab", "general")
+    )
     refresh_table = False
 
     error = None
@@ -285,14 +330,28 @@ def organization_drawer_view(request, org_id):
                 organization.status = status
             else:
                 organization.status = None
-            organization.industry = industries.filter(id=industry_id).first() if industry_id else None
-            organization.primary_contact = individuals.filter(id=primary_contact_id).first() if primary_contact_id else None
+            organization.industry = (
+                industries.filter(id=industry_id).first() if industry_id else None
+            )
+            organization.primary_contact = (
+                individuals.filter(id=primary_contact_id).first()
+                if primary_contact_id
+                else None
+            )
             organization.address_one = address_one
             organization.address_two = address_two
-            organization.location_city = cities.filter(id=city_id).first() if city_id else None
-            organization.location_state = states.filter(id=state_id).first() if state_id else None
-            organization.location_county = counties.filter(id=county_id).first() if county_id else None
-            organization.location_zip = zip_codes.filter(id=zip_id).first() if zip_id else None
+            organization.location_city = (
+                cities.filter(id=city_id).first() if city_id else None
+            )
+            organization.location_state = (
+                states.filter(id=state_id).first() if state_id else None
+            )
+            organization.location_county = (
+                counties.filter(id=county_id).first() if county_id else None
+            )
+            organization.location_zip = (
+                zip_codes.filter(id=zip_id).first() if zip_id else None
+            )
             organization.notes = notes
 
             valid_tags = tags.filter(id__in=tag_ids)
@@ -315,7 +374,8 @@ def organization_drawer_view(request, org_id):
             }
         ]
     tag_initial = [
-        {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"} for tag in selected_tags
+        {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"}
+        for tag in selected_tags
     ]
     industry_initial = []
     if organization.industry:
@@ -368,11 +428,21 @@ def organization_drawer_view(request, org_id):
         if county_label_state:
             county_label = f"{county_label} ({county_label_state})"
         county_initial = [
-            {"value": str(organization.location_county_id), "label": county_label, "color": "gray"}
+            {
+                "value": str(organization.location_county_id),
+                "label": county_label,
+                "color": "gray",
+            }
         ]
     zip_initial = []
     if organization.location_zip:
-        zip_initial = [{"value": str(organization.location_zip_id), "label": organization.location_zip.zip_code_five_digit, "color": "gray"}]
+        zip_initial = [
+            {
+                "value": str(organization.location_zip_id),
+                "label": organization.location_zip.zip_code_five_digit,
+                "color": "gray",
+            }
+        ]
     select_options = {
         "industries": [{"value": "", "label": "Select industry"}]
         + [{"value": str(ind.id), "label": ind.name} for ind in industries],
@@ -380,7 +450,11 @@ def organization_drawer_view(request, org_id):
         + [
             {
                 "value": str(person.id),
-                "label": (f"{person.first_name} {person.last_name}".strip() or person.email or "Unnamed").strip(),
+                "label": (
+                    f"{person.first_name} {person.last_name}".strip()
+                    or person.email
+                    or "Unnamed"
+                ).strip(),
             }
             for person in individuals
         ],
@@ -410,7 +484,9 @@ def organization_drawer_view(request, org_id):
         "refresh_table": refresh_table,
         "list_refresh_url": _current_list_url(request),
     }
-    return render(request, "cotton/app/gc_crm/partials/organization_drawer.html", context)
+    return render(
+        request, "cotton/app/gc_crm/partials/organization_drawer.html", context
+    )
 
 
 @login_required
@@ -424,12 +500,16 @@ def organization_create_view(request):
     statuses = Status.objects.filter(team=team).order_by("name")
     tags = Tag.objects.filter(team=team).order_by("name")
     industries = Industry.objects.filter(team=team).order_by("name")
-    individuals = Individual.objects.filter(team=team).order_by("last_name", "first_name")
+    individuals = Individual.objects.filter(team=team).order_by(
+        "last_name", "first_name"
+    )
     cities = City.objects.select_related("state")
     states = State.objects.all()
     counties = County.objects.select_related("state")
     zip_codes = ZipCode.objects.all()
-    active_tab = request.POST.get("active_tab", request.GET.get("active_tab", "general"))
+    active_tab = request.POST.get(
+        "active_tab", request.GET.get("active_tab", "general")
+    )
     refresh_table = False
     is_new = True
 
@@ -453,15 +533,31 @@ def organization_create_view(request):
             error = "Name is required."
         else:
             organization.name = name
-            organization.status = statuses.filter(id=status_id).first() if status_id else None
-            organization.industry = industries.filter(id=industry_id).first() if industry_id else None
-            organization.primary_contact = individuals.filter(id=primary_contact_id).first() if primary_contact_id else None
+            organization.status = (
+                statuses.filter(id=status_id).first() if status_id else None
+            )
+            organization.industry = (
+                industries.filter(id=industry_id).first() if industry_id else None
+            )
+            organization.primary_contact = (
+                individuals.filter(id=primary_contact_id).first()
+                if primary_contact_id
+                else None
+            )
             organization.address_one = address_one
             organization.address_two = address_two
-            organization.location_city = cities.filter(id=city_id).first() if city_id else None
-            organization.location_state = states.filter(id=state_id).first() if state_id else None
-            organization.location_county = counties.filter(id=county_id).first() if county_id else None
-            organization.location_zip = zip_codes.filter(id=zip_id).first() if zip_id else None
+            organization.location_city = (
+                cities.filter(id=city_id).first() if city_id else None
+            )
+            organization.location_state = (
+                states.filter(id=state_id).first() if state_id else None
+            )
+            organization.location_county = (
+                counties.filter(id=county_id).first() if county_id else None
+            )
+            organization.location_zip = (
+                zip_codes.filter(id=zip_id).first() if zip_id else None
+            )
             organization.notes = notes
             organization.save()
             valid_tags = tags.filter(id__in=tag_ids)
@@ -483,7 +579,8 @@ def organization_create_view(request):
             }
         ]
     tag_initial = [
-        {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"} for tag in selected_tags
+        {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"}
+        for tag in selected_tags
     ]
     industry_initial = []
     if organization.industry:
@@ -527,16 +624,30 @@ def organization_create_view(request):
     if organization.location_county:
         county_label_state = ""
         if organization.location_county.state:
-            county_label_state = organization.location_county.state.name or organization.location_county.state.abbreviation or ""
+            county_label_state = (
+                organization.location_county.state.name
+                or organization.location_county.state.abbreviation
+                or ""
+            )
         county_label = organization.location_county.name
         if county_label_state:
             county_label = f"{county_label} ({county_label_state})"
         county_initial = [
-            {"value": str(organization.location_county_id), "label": county_label, "color": "gray"}
+            {
+                "value": str(organization.location_county_id),
+                "label": county_label,
+                "color": "gray",
+            }
         ]
     zip_initial = []
     if organization.location_zip:
-        zip_initial = [{"value": str(organization.location_zip_id), "label": organization.location_zip.zip_code_five_digit, "color": "gray"}]
+        zip_initial = [
+            {
+                "value": str(organization.location_zip_id),
+                "label": organization.location_zip.zip_code_five_digit,
+                "color": "gray",
+            }
+        ]
     select_options = {
         "industries": [{"value": "", "label": "Select industry"}]
         + [{"value": str(ind.id), "label": ind.name} for ind in industries],
@@ -544,7 +655,11 @@ def organization_create_view(request):
         + [
             {
                 "value": str(person.id),
-                "label": (f"{person.first_name} {person.last_name}".strip() or person.email or "Unnamed").strip(),
+                "label": (
+                    f"{person.first_name} {person.last_name}".strip()
+                    or person.email
+                    or "Unnamed"
+                ).strip(),
             }
             for person in individuals
         ],
@@ -574,7 +689,9 @@ def organization_create_view(request):
         "refresh_table": refresh_table,
         "list_refresh_url": _current_list_url(request),
     }
-    return render(request, "cotton/app/gc_crm/partials/organization_drawer.html", context)
+    return render(
+        request, "cotton/app/gc_crm/partials/organization_drawer.html", context
+    )
 
 
 def _current_list_url(request):

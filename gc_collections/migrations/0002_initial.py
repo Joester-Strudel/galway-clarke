@@ -6,39 +6,75 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('gc_collections', '0001_initial'),
-        ('gc_users', '0001_initial'),
+        ("gc_collections", "0001_initial"),
+        ("gc_users", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='collection',
-            name='created_by',
-            field=models.ForeignKey(blank=True, help_text='User who created this record.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='%(class)s_created', to=settings.AUTH_USER_MODEL, verbose_name='Created By'),
+            model_name="collection",
+            name="created_by",
+            field=models.ForeignKey(
+                blank=True,
+                help_text="User who created this record.",
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="%(class)s_created",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Created By",
+            ),
         ),
         migrations.AddField(
-            model_name='collection',
-            name='organization',
-            field=models.ForeignKey(help_text='The team this collection belongs to.', on_delete=django.db.models.deletion.CASCADE, related_name='collections', to='gc_users.team', verbose_name='Team'),
+            model_name="collection",
+            name="organization",
+            field=models.ForeignKey(
+                help_text="The team this collection belongs to.",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="collections",
+                to="gc_users.team",
+                verbose_name="Team",
+            ),
         ),
         migrations.AddField(
-            model_name='historicalcollection',
-            name='created_by',
-            field=models.ForeignKey(blank=True, db_constraint=False, help_text='User who created this record.', null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='+', to=settings.AUTH_USER_MODEL, verbose_name='Created By'),
+            model_name="historicalcollection",
+            name="created_by",
+            field=models.ForeignKey(
+                blank=True,
+                db_constraint=False,
+                help_text="User who created this record.",
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="+",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Created By",
+            ),
         ),
         migrations.AddField(
-            model_name='historicalcollection',
-            name='history_user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to=settings.AUTH_USER_MODEL),
+            model_name="historicalcollection",
+            name="history_user",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="+",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='historicalcollection',
-            name='organization',
-            field=models.ForeignKey(blank=True, db_constraint=False, help_text='The team this collection belongs to.', null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='+', to='gc_users.team', verbose_name='Team'),
+            model_name="historicalcollection",
+            name="organization",
+            field=models.ForeignKey(
+                blank=True,
+                db_constraint=False,
+                help_text="The team this collection belongs to.",
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="+",
+                to="gc_users.team",
+                verbose_name="Team",
+            ),
         ),
     ]

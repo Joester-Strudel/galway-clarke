@@ -4,15 +4,43 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('gc_crm', '0002_initial'),
+        ("gc_crm", "0002_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='industry',
-            name='color',
-            field=models.CharField(choices=[('slate', 'Slate'), ('gray', 'Gray'), ('zinc', 'Zinc'), ('neutral', 'Neutral'), ('stone', 'Stone'), ('red', 'Red'), ('orange', 'Orange'), ('amber', 'Amber'), ('yellow', 'Yellow'), ('lime', 'Lime'), ('green', 'Green'), ('emerald', 'Emerald'), ('teal', 'Teal'), ('cyan', 'Cyan'), ('sky', 'Sky'), ('blue', 'Blue'), ('indigo', 'Indigo'), ('violet', 'Violet'), ('purple', 'Purple'), ('fuchsia', 'Fuchsia'), ('pink', 'Pink'), ('rose', 'Rose')], default='gray', help_text='Optional hex or token to style this status.', max_length=20, verbose_name='Color'),
+            model_name="industry",
+            name="color",
+            field=models.CharField(
+                choices=[
+                    ("slate", "Slate"),
+                    ("gray", "Gray"),
+                    ("zinc", "Zinc"),
+                    ("neutral", "Neutral"),
+                    ("stone", "Stone"),
+                    ("red", "Red"),
+                    ("orange", "Orange"),
+                    ("amber", "Amber"),
+                    ("yellow", "Yellow"),
+                    ("lime", "Lime"),
+                    ("green", "Green"),
+                    ("emerald", "Emerald"),
+                    ("teal", "Teal"),
+                    ("cyan", "Cyan"),
+                    ("sky", "Sky"),
+                    ("blue", "Blue"),
+                    ("indigo", "Indigo"),
+                    ("violet", "Violet"),
+                    ("purple", "Purple"),
+                    ("fuchsia", "Fuchsia"),
+                    ("pink", "Pink"),
+                    ("rose", "Rose"),
+                ],
+                default="gray",
+                help_text="Optional hex or token to style this status.",
+                max_length=20,
+                verbose_name="Color",
+            ),
         ),
     ]
