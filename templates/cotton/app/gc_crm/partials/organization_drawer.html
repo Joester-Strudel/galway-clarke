@@ -54,6 +54,18 @@
         type="button"
         class="pb-1 border-b-2 transition"
         style="cursor: pointer;"
+        :class="activeTab === 'address'
+          ? 'border-gc-theme-accent text-gc-theme-accent'
+          : 'border-transparent text-gc-light-text-secondary dark:text-gc-dark-text-primary/70'
+        "
+        @click="activeTab = 'address'"
+      >
+        Address
+      </button>
+      <button
+        type="button"
+        class="pb-1 border-b-2 transition"
+        style="cursor: pointer;"
         :class="activeTab === 'notes'
           ? 'border-gc-theme-accent text-gc-theme-accent'
           : 'border-transparent text-gc-light-text-secondary dark:text-gc-dark-text-primary/70'
@@ -99,12 +111,76 @@
         />
 
         <c-app.components.fields.remote_pill_select
+          id="org_industry_{{ organization.id }}"
+          name="industry"
+          label="Industry"
+          options_url="{% url 'crm-select-industries' %}"
+          :initial="industry_initial"
+        />
+
+        <c-app.components.fields.remote_pill_select
           id="org_tags_{{ organization.id }}"
           name="tags"
           label="Tags"
           options_url="{% url 'crm-select-tags' %}"
           multiple="true"
           :initial="tag_initial"
+        />
+
+        <c-app.components.fields.remote_pill_select
+          id="org_primary_contact_{{ organization.id }}"
+          name="primary_contact"
+          label="Primary Contact"
+          options_url="{% url 'crm-select-individuals' %}"
+          :initial="primary_contact_initial"
+        />
+      </div>
+
+      <div x-show="activeTab === 'address'" x-cloak class="space-y-4">
+        <c-app.components.fields.text_field
+          id="org_address_one_{{ organization.id }}"
+          name="address_one"
+          label="Address Line 1"
+          value="{{ organization.address_one|default:'' }}"
+        />
+
+        <c-app.components.fields.text_field
+          id="org_address_two_{{ organization.id }}"
+          name="address_two"
+          label="Address Line 2"
+          value="{{ organization.address_two|default:'' }}"
+        />
+
+        <c-app.components.fields.remote_pill_select
+          id="org_city_{{ organization.id }}"
+          name="location_city"
+          label="City"
+          options_url="{% url 'crm-select-cities' %}"
+          :initial="city_initial"
+        />
+
+        <c-app.components.fields.remote_pill_select
+          id="org_state_{{ organization.id }}"
+          name="location_state"
+          label="State/Region"
+          options_url="{% url 'crm-select-states' %}"
+          :initial="state_initial"
+        />
+
+        <c-app.components.fields.remote_pill_select
+          id="org_county_{{ organization.id }}"
+          name="location_county"
+          label="County"
+          options_url="{% url 'crm-select-counties' %}"
+          :initial="county_initial"
+        />
+
+        <c-app.components.fields.remote_pill_select
+          id="org_zip_{{ organization.id }}"
+          name="location_zip"
+          label="ZIP Code"
+          options_url="{% url 'crm-select-zip-codes' %}"
+          :initial="zip_initial"
         />
       </div>
 

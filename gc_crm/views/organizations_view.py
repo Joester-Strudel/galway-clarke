@@ -11,7 +11,8 @@ from django.urls import reverse
 import uuid
 from urllib.parse import urlencode, urlsplit
 
-from gc_crm.models import Organization, Status, Tag
+from gc_crm.models import Organization, Status, Tag, Industry, Individual
+from gc_geography.models import City, State, County, ZipCode
 
 
 def _get_active_team(request):
@@ -239,12 +240,19 @@ def organizations_view(request):
 def organization_drawer_view(request, org_id):
     """Return the organization drawer for view/edit, and out-of-band row swap."""
     team = _get_active_team(request)
-    organization = Organization.objects.filter(id=org_id, team=team).prefetch_related("tags").select_related("status").first()
+    organization = (
+        Organization.objects.filter(id=org_id, team=team)
+        .prefetch_related("tags")
+        .select_related("status", "industry", "location_city", "location_state", "location_county", "location_zip", "primary_contact")
+        .first()
+    )
     if not organization:
         return HttpResponseBadRequest("Organization not found")
 
     statuses = Status.objects.filter(team=team).order_by("name") if team else Status.objects.none()
     tags = Tag.objects.filter(team=team).order_by("name") if team else Tag.objects.none()
+    industries = Industry.objects.filter(team=team).order_by("name") if team else Industry.objects.none()
+    individuals = Individual.objects.filter(team=team).order_by("last_name", "first_name") if team else Individual.objects.none()
     active_tab = request.POST.get("active_tab", request.GET.get("active_tab", "general"))
     refresh_table = False
 
@@ -255,6 +263,14 @@ def organization_drawer_view(request, org_id):
         status_id = request.POST.get("status")
         tag_ids = request.POST.getlist("tags")
         notes = request.POST.get("notes", "")
+        industry_id = request.POST.get("industry")
+        primary_contact_id = request.POST.get("primary_contact")
+        address_one = request.POST.get("address_one", "").strip()
+        address_two = request.POST.get("address_two", "").strip()
+        city_id = request.POST.get("location_city")
+        state_id = request.POST.get("location_state")
+        county_id = request.POST.get("location_county")
+        zip_id = request.POST.get("location_zip")
 
         if not name:
             error = "Name is required."
@@ -265,6 +281,14 @@ def organization_drawer_view(request, org_id):
                 organization.status = status
             else:
                 organization.status = None
+            organization.industry = industries.filter(id=industry_id).first() if industry_id else None
+            organization.primary_contact = individuals.filter(id=primary_contact_id).first() if primary_contact_id else None
+            organization.address_one = address_one
+            organization.address_two = address_two
+            organization.location_city = cities.filter(id=city_id).first() if city_id else None
+            organization.location_state = states.filter(id=state_id).first() if state_id else None
+            organization.location_county = counties.filter(id=county_id).first() if county_id else None
+            organization.location_zip = zip_codes.filter(id=zip_id).first() if zip_id else None
             organization.notes = notes
 
             valid_tags = tags.filter(id__in=tag_ids)
@@ -289,15 +313,80 @@ def organization_drawer_view(request, org_id):
     tag_initial = [
         {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"} for tag in selected_tags
     ]
+    industry_initial = []
+    if organization.industry:
+        industry_initial = [
+            {
+                "value": str(organization.industry_id),
+                "label": organization.industry.name,
+                "color": organization.industry.color or "gray",
+            }
+        ]
+    primary_contact_initial = []
+    if organization.primary_contact:
+        primary_contact_initial = [
+            {
+                "value": str(organization.primary_contact_id),
+                "label": f"{organization.primary_contact.first_name} {organization.primary_contact.last_name}".strip()
+                or organization.primary_contact.email
+                or "Unnamed",
+                "color": "gray",
+            }
+        ]
+    city_initial = []
+    if organization.location_city:
+        city_initial = [
+            {
+                "value": str(organization.location_city_id),
+                "label": f"{organization.location_city.name}{' (' + (organization.location_city.state.abbreviation or organization.location_city.state.name) + ')' if organization.location_city.state else ''}",
+                "color": "gray",
+            }
+        ]
+    state_initial = []
+    if organization.location_state:
+        state_initial = [
+            {
+                "value": str(organization.location_state_id),
+                "label": organization.location_state.abbreviation or organization.location_state.name,
+                "color": "gray",
+            }
+        ]
+    county_initial = []
+    if organization.location_county:
+        county_initial = [{"value": str(organization.location_county_id), "label": organization.location_county.name, "color": "gray"}]
+    zip_initial = []
+    if organization.location_zip:
+        zip_initial = [{"value": str(organization.location_zip_id), "label": organization.location_zip.zip_code_five_digit, "color": "gray"}]
+    select_options = {
+        "industries": [{"value": "", "label": "Select industry"}]
+        + [{"value": str(ind.id), "label": ind.name} for ind in industries],
+        "individuals": [{"value": "", "label": "Select primary contact"}]
+        + [
+            {
+                "value": str(person.id),
+                "label": (f"{person.first_name} {person.last_name}".strip() or person.email or "Unnamed").strip(),
+            }
+            for person in individuals
+        ],
+    }
 
     context = {
         "organization": organization,
         "statuses": statuses,
         "tags": tags,
+        "industries": industries,
+        "individuals": individuals,
         "selected_tag_ids": selected_tag_ids,
         "selected_tags": selected_tags,
         "status_initial": status_initial,
         "tag_initial": tag_initial,
+        "industry_initial": industry_initial,
+        "primary_contact_initial": primary_contact_initial,
+        "city_initial": city_initial,
+        "state_initial": state_initial,
+        "county_initial": county_initial,
+        "zip_initial": zip_initial,
+        "select_options": select_options,
         "error": error,
         "success": success,
         "active_tab": active_tab,
@@ -318,6 +407,8 @@ def organization_create_view(request):
     organization = Organization(id=uuid.uuid4(), team=team)
     statuses = Status.objects.filter(team=team).order_by("name")
     tags = Tag.objects.filter(team=team).order_by("name")
+    industries = Industry.objects.filter(team=team).order_by("name")
+    individuals = Individual.objects.filter(team=team).order_by("last_name", "first_name")
     active_tab = request.POST.get("active_tab", request.GET.get("active_tab", "general"))
     refresh_table = False
 
@@ -328,12 +419,28 @@ def organization_create_view(request):
         status_id = request.POST.get("status")
         tag_ids = request.POST.getlist("tags")
         notes = request.POST.get("notes", "")
+        industry_id = request.POST.get("industry")
+        primary_contact_id = request.POST.get("primary_contact")
+        address_one = request.POST.get("address_one", "").strip()
+        address_two = request.POST.get("address_two", "").strip()
+        city_id = request.POST.get("location_city")
+        state_id = request.POST.get("location_state")
+        county_id = request.POST.get("location_county")
+        zip_id = request.POST.get("location_zip")
 
         if not name:
             error = "Name is required."
         else:
             organization.name = name
             organization.status = statuses.filter(id=status_id).first() if status_id else None
+            organization.industry = industries.filter(id=industry_id).first() if industry_id else None
+            organization.primary_contact = individuals.filter(id=primary_contact_id).first() if primary_contact_id else None
+            organization.address_one = address_one
+            organization.address_two = address_two
+            organization.location_city = cities.filter(id=city_id).first() if city_id else None
+            organization.location_state = states.filter(id=state_id).first() if state_id else None
+            organization.location_county = counties.filter(id=county_id).first() if county_id else None
+            organization.location_zip = zip_codes.filter(id=zip_id).first() if zip_id else None
             organization.notes = notes
             organization.save()
             valid_tags = tags.filter(id__in=tag_ids)
@@ -356,15 +463,80 @@ def organization_create_view(request):
     tag_initial = [
         {"value": str(tag.id), "label": tag.name, "color": tag.color or "gray"} for tag in selected_tags
     ]
+    industry_initial = []
+    if organization.industry:
+        industry_initial = [
+            {
+                "value": str(organization.industry_id),
+                "label": organization.industry.name,
+                "color": organization.industry.color or "gray",
+            }
+        ]
+    primary_contact_initial = []
+    if organization.primary_contact:
+        primary_contact_initial = [
+            {
+                "value": str(organization.primary_contact_id),
+                "label": f"{organization.primary_contact.first_name} {organization.primary_contact.last_name}".strip()
+                or organization.primary_contact.email
+                or "Unnamed",
+                "color": "gray",
+            }
+        ]
+    city_initial = []
+    if organization.location_city:
+        city_initial = [
+            {
+                "value": str(organization.location_city_id),
+                "label": f"{organization.location_city.name}{' (' + (organization.location_city.state.abbreviation or organization.location_city.state.name) + ')' if organization.location_city.state else ''}",
+                "color": "gray",
+            }
+        ]
+    state_initial = []
+    if organization.location_state:
+        state_initial = [
+            {
+                "value": str(organization.location_state_id),
+                "label": organization.location_state.abbreviation or organization.location_state.name,
+                "color": "gray",
+            }
+        ]
+    county_initial = []
+    if organization.location_county:
+        county_initial = [{"value": str(organization.location_county_id), "label": organization.location_county.name, "color": "gray"}]
+    zip_initial = []
+    if organization.location_zip:
+        zip_initial = [{"value": str(organization.location_zip_id), "label": organization.location_zip.zip_code_five_digit, "color": "gray"}]
+    select_options = {
+        "industries": [{"value": "", "label": "Select industry"}]
+        + [{"value": str(ind.id), "label": ind.name} for ind in industries],
+        "individuals": [{"value": "", "label": "Select primary contact"}]
+        + [
+            {
+                "value": str(person.id),
+                "label": (f"{person.first_name} {person.last_name}".strip() or person.email or "Unnamed").strip(),
+            }
+            for person in individuals
+        ],
+    }
 
     context = {
         "organization": organization,
         "statuses": statuses,
         "tags": tags,
+        "industries": industries,
+        "individuals": individuals,
         "selected_tag_ids": selected_tag_ids,
         "selected_tags": selected_tags,
         "status_initial": status_initial,
         "tag_initial": tag_initial,
+        "industry_initial": industry_initial,
+        "primary_contact_initial": primary_contact_initial,
+        "city_initial": city_initial,
+        "state_initial": state_initial,
+        "county_initial": county_initial,
+        "zip_initial": zip_initial,
+        "select_options": select_options,
         "error": error,
         "success": success,
         "active_tab": active_tab,

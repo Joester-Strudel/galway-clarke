@@ -7,13 +7,15 @@
     {% if multiple %}multiple{% endif %}
     {% if size %}size="{{ size }}"{% endif %}
     {% if required %}required{% endif %}
+    {% if disabled %}disabled{% endif %}
   >
-    {% for value,label in options %}
-      {% if multiple %}
-        <option value="{{ value }}" {% if value in selected_values %}selected{% endif %}>{{ label }}</option>
-      {% else %}
-        <option value="{{ value }}" {% if value == selected %}selected{% endif %}>{{ label }}</option>
-      {% endif %}
+    {% for option in options|default:[] %}
+      {% with
+        value=option.value|default_if_none:option.0|default_if_none:option
+        label=option.label|default_if_none:option.1|default_if_none:option
+      %}
+        {% include "cotton/app/components/fields/select_option.html" %}
+      {% endwith %}
     {% endfor %}
   </select>
 </div>

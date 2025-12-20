@@ -7,7 +7,15 @@ from .organizations_view import (
     organization_delete_view,
 )
 from .individuals_view import individuals_view
-from .select_options_view import select_statuses, select_tags
+from .select_options_view import (
+    select_statuses,
+    select_tags,
+    select_industries,
+    select_cities,
+    select_states,
+    select_counties,
+    select_zip_codes,
+)
 
 
 __all__ = [
@@ -19,4 +27,9 @@ __all__ = [
     "individuals_view",
     "select_statuses",
     "select_tags",
+    "select_industries",
+    "select_cities",
+    "select_states",
+    "select_counties",
+    "select_zip_codes",
 ]

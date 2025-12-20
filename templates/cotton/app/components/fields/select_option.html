@@ -1,0 +1,5 @@
+{% if multiple %}
+  <option value="{{ value }}" {% if value in selected_values %}selected{% endif %}>{{ label }}</option>
+{% else %}
+  <option value="{{ value }}" {% if value == selected %}selected{% endif %}>{{ label }}</option>
+{% endif %}

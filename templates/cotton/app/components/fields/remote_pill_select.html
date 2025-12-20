@@ -51,12 +51,12 @@ Props:
     x-show="open"
     x-cloak
     @click.outside="open = false"
-    class="absolute z-50 mt-1 w-full rounded-lg border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary shadow-lg max-h-80 overflow-auto"
+    class="absolute z-50 mt-1 w-full rounded-lg border-2 border-gc-theme-accent bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary shadow-lg max-h-80 overflow-auto"
   >
     <div class="p-2">
       <input
         type="text"
-        class="w-full h-10 rounded-md border border-gc-light-bg-secondary dark:border-gc-dark-bg-secondary bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary text-sm px-3"
+        class="w-full h-10 rounded-md border-2 border-gc-theme-accent bg-gc-light-bg-secondary dark:bg-gc-dark-bg-secondary text-sm px-3"
         placeholder="Search..."
         x-model="search"
         @input.debounce.300ms="fetchOptions()"

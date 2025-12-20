@@ -11,6 +11,11 @@ from .views import (
     organization_delete_view,
     select_statuses,
     select_tags,
+    select_industries,
+    select_cities,
+    select_states,
+    select_counties,
+    select_zip_codes,
 )
 
 
@@ -35,4 +40,9 @@ urlpatterns = [
     ),
     path("select/statuses/", select_statuses, name="crm-select-statuses"),
     path("select/tags/", select_tags, name="crm-select-tags"),
+    path("select/industries/", select_industries, name="crm-select-industries"),
+    path("select/cities/", select_cities, name="crm-select-cities"),
+    path("select/states/", select_states, name="crm-select-states"),
+    path("select/counties/", select_counties, name="crm-select-counties"),
+    path("select/zip-codes/", select_zip_codes, name="crm-select-zip-codes"),
 ]
