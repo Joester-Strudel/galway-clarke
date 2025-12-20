@@ -87,7 +87,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_name(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.name,
                     "size": "large",
@@ -99,7 +99,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_iso_639_1(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.iso_set_639_1_code or "N/A",
                     "size": "small",
@@ -111,7 +111,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_iso_639_2(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.iso_set_639_2_code or "N/A",
                     "size": "small",
@@ -123,7 +123,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_iso_639_3(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.iso_set_639_3_code or "N/A",
                     "size": "small",
@@ -135,7 +135,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_iso_639_5(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.iso_set_639_5_code or "N/A",
                     "size": "small",
@@ -147,7 +147,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_getty_language_code(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.getty_language_code or "N/A",
                     "size": "small",
@@ -159,7 +159,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_scope(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.iso_language_scope or "N/A",
                     "size": "small",
@@ -171,7 +171,7 @@ class IsoLanguageAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_type(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.iso_language_type or "N/A",
                     "size": "small",

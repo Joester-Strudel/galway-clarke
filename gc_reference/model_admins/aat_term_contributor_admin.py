@@ -71,7 +71,7 @@ class AatTermContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_term(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.term,
                     "size": "medium",
@@ -83,7 +83,7 @@ class AatTermContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_contributor_id(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.contributor_id,
                     "size": "small",
@@ -95,7 +95,7 @@ class AatTermContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_preferred_flag(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.preferred_flag or "N/A",
                     "size": "small",

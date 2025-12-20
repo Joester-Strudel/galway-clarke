@@ -1,5 +1,7 @@
 # Django Imports
 from django.contrib import admin
+from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 # Third-Party Imports
@@ -14,8 +16,8 @@ class CountyAdmin(ModelAdmin):
     """Admin configuration for counties."""
 
     list_display = [
-        "name",
-        "fips_code",
+        "formatted_name",
+        "formatted_fips",
         "formatted_state",
         "created_at",
         "last_updated_at",
@@ -65,4 +67,36 @@ class CountyAdmin(ModelAdmin):
 
     @display(description=_("State"), ordering="state__name")
     def formatted_state(self, obj):
-        return getattr(obj.state, "name", "-")
+        return mark_safe(
+            render_to_string(
+                "cotton/admin/components/text.html",
+                {
+                    "value": getattr(obj.state, "name", "—"),
+                    "size": "small",
+                },
+            )
+        )
+
+    @display(description=_("County"), ordering="name")
+    def formatted_name(self, obj):
+        return mark_safe(
+            render_to_string(
+                "cotton/admin/components/text.html",
+                {
+                    "value": obj.name,
+                    "size": "medium",
+                },
+            )
+        )
+
+    @display(description=_("FIPS"), ordering="fips_code")
+    def formatted_fips(self, obj):
+        return mark_safe(
+            render_to_string(
+                "cotton/admin/components/text.html",
+                {
+                    "value": obj.fips_code or "—",
+                    "size": "small",
+                },
+            )
+        )

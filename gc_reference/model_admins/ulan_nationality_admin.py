@@ -71,7 +71,7 @@ class UlanNationalityAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.subject, "size": "medium"},
             )
         )
@@ -80,7 +80,7 @@ class UlanNationalityAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_nationality_code(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.nationality_code, "size": "small"},
             )
         )
@@ -89,7 +89,7 @@ class UlanNationalityAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_display_order(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.display_order
                     if obj.display_order is not None

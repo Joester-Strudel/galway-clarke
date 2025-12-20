@@ -75,7 +75,7 @@ class AatAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.subject,
                     "size": "medium",
@@ -87,7 +87,7 @@ class AatAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_relationship_type(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.relationship_type,
                     "size": "small",
@@ -99,7 +99,7 @@ class AatAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_related_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.related_subject,
                     "size": "small",
@@ -111,7 +111,7 @@ class AatAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_historic_flag(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.historic_flag or "N/A",
                     "size": "small",

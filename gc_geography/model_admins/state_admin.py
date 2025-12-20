@@ -1,5 +1,7 @@
 # Django Imports
 from django.contrib import admin
+from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 # Third-Party Imports
@@ -14,9 +16,8 @@ class StateAdmin(ModelAdmin):
     """Admin configuration for states."""
 
     list_display = [
-        "name",
-        "abbreviation",
-        "economic_nexus",
+        "formatted_name",
+        "formatted_abbreviation",
         "created_at",
         "last_updated_at",
     ]
@@ -44,7 +45,6 @@ class StateAdmin(ModelAdmin):
                 "fields": [
                     "name",
                     "abbreviation",
-                    "economic_nexus",
                 ],
             },
         ),
@@ -61,3 +61,27 @@ class StateAdmin(ModelAdmin):
             },
         ),
     ]
+
+    @display(description=_("Name"), ordering="name")
+    def formatted_name(self, obj):
+        return mark_safe(
+            render_to_string(
+                "cotton/admin/components/text.html",
+                {
+                    "value": obj.name,
+                    "size": "medium",
+                },
+            )
+        )
+
+    @display(description=_("Abbreviation"), ordering="abbreviation")
+    def formatted_abbreviation(self, obj):
+        return mark_safe(
+            render_to_string(
+                "cotton/admin/components/text.html",
+                {
+                    "value": obj.abbreviation or "—",
+                    "size": "small",
+                },
+            )
+        )

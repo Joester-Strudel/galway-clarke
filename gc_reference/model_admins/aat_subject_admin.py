@@ -99,7 +99,7 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_aat_id(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.aat_id,
                     "size": "medium",
@@ -111,7 +111,7 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_record_type(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.record_type or "N/A",
                     "size": "small",
@@ -123,7 +123,7 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_parent(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.parent or "N/A",
                     "size": "small",
@@ -137,7 +137,7 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_parent_relationship_type(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.parent_relationship_type or "N/A",
                     "size": "small",
@@ -149,7 +149,7 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_merged_status(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.merged_status or "N/A",
                     "size": "small",
@@ -161,7 +161,7 @@ class AatSubjectAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_preferred_name(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.preferred_subject_name() or "N/A",
                     "size": "medium",

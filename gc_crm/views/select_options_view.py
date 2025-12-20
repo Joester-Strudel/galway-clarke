@@ -1,11 +1,12 @@
 # Django Imports
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db import models
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 
 # First-Party Imports
-from gc_crm.models import Status, Tag, Industry
+from gc_crm.models import Status, Tag, Industry, Individual
 from gc_crm.views.organizations_view import _get_active_team
 from gc_geography.models import City, State, County, ZipCode
 
@@ -71,6 +72,39 @@ def select_industries(request):
     options = [
         {"value": str(industry.id), "label": industry.name, "color": industry.color or "gray"}
         for industry in page_obj
+    ]
+    return render(
+        request,
+        "cotton/app/components/fields/remote_pill_select_options.html",
+        {"options": options, "next_url": next_url},
+    )
+
+
+@login_required
+def select_individuals(request):
+    team = _get_active_team(request)
+    if not team:
+        return HttpResponseBadRequest("No active team")
+    qs = Individual.objects.filter(team=team)
+    search = request.GET.get("search", "").strip()
+    if search:
+        qs = qs.filter(models.Q(first_name__icontains=search) | models.Q(last_name__icontains=search) | models.Q(email__icontains=search))
+    paginator = Paginator(qs.order_by("last_name", "first_name"), 20)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    next_url = None
+    if page_obj.has_next():
+        params = request.GET.copy()
+        params["page"] = page_obj.next_page_number()
+        querystring = params.urlencode()
+        next_url = f"{request.path}?{querystring}"
+    options = [
+        {
+            "value": str(person.id),
+            "label": (f"{person.first_name} {person.last_name}".strip() or person.email or "Unnamed").strip(),
+            "color": "gray",
+        }
+        for person in page_obj
     ]
     return render(
         request,

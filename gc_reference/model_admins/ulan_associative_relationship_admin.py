@@ -79,7 +79,7 @@ class UlanAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.subject, "size": "medium"},
             )
         )
@@ -88,7 +88,7 @@ class UlanAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_relationship_type(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.relationship_type or "N/A", "size": "small"},
             )
         )
@@ -97,7 +97,7 @@ class UlanAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_related_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.related_subject, "size": "small"},
             )
         )
@@ -106,7 +106,7 @@ class UlanAssociativeRelationshipAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_display_date(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.display_date or "N/A", "size": "small"},
             )
         )

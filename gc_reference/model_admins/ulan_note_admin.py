@@ -70,7 +70,7 @@ class UlanNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.subject, "size": "medium"},
             )
         )
@@ -79,7 +79,7 @@ class UlanNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_note_language(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.note_language or "N/A", "size": "small"},
             )
         )
@@ -91,7 +91,7 @@ class UlanNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
             note_preview = f"{note_preview}..."
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": note_preview, "size": "small"},
             )
         )

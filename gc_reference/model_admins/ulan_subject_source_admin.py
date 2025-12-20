@@ -66,7 +66,7 @@ class UlanSubjectSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.subject, "size": "medium"},
             )
         )
@@ -75,7 +75,7 @@ class UlanSubjectSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_source_id(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.source_id, "size": "small"},
             )
         )

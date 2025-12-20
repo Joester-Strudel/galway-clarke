@@ -1,6 +1,6 @@
 import csv
 from django.core.management.base import BaseCommand
-from ...models.state import State, County, City, ZipCode
+from ...models import State, County, City, ZipCode
 
 
 class Command(BaseCommand):

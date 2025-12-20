@@ -15,6 +15,7 @@ from .select_options_view import (
     select_states,
     select_counties,
     select_zip_codes,
+    select_individuals,
 )
 
 
@@ -32,4 +33,5 @@ __all__ = [
     "select_states",
     "select_counties",
     "select_zip_codes",
+    "select_individuals",
 ]

@@ -66,7 +66,7 @@ class AatSubjectContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.subject,
                     "size": "medium",
@@ -78,7 +78,7 @@ class AatSubjectContributorAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_contributor_id(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.contributor_id,
                     "size": "small",

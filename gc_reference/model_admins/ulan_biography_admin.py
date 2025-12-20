@@ -83,7 +83,7 @@ class UlanBiographyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.subject, "size": "medium"},
             )
         )
@@ -92,7 +92,7 @@ class UlanBiographyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_biography_id(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.biography_id, "size": "small"},
             )
         )
@@ -119,7 +119,7 @@ class UlanBiographyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_birth_place(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.birth_place or "N/A", "size": "small"},
             )
         )
@@ -128,7 +128,7 @@ class UlanBiographyAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_death_place(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.death_place or "N/A", "size": "small"},
             )
         )

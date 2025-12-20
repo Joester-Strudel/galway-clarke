@@ -73,7 +73,7 @@ class UlanRoleAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.subject, "size": "medium"},
             )
         )
@@ -82,7 +82,7 @@ class UlanRoleAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_role_id(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.role_id, "size": "small"},
             )
         )
@@ -109,7 +109,7 @@ class UlanRoleAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_historic_flag(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.historic_flag or "N/A", "size": "small"},
             )
         )

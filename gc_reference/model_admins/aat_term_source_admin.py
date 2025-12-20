@@ -74,7 +74,7 @@ class AatTermSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_term(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.term,
                     "size": "medium",
@@ -86,7 +86,7 @@ class AatTermSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_source_id(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.source_id,
                     "size": "small",
@@ -98,7 +98,7 @@ class AatTermSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_page(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.page or "N/A",
                     "size": "small",
@@ -110,7 +110,7 @@ class AatTermSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_preferred_flag(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.preferred_flag or "N/A",
                     "size": "small",

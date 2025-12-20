@@ -64,7 +64,7 @@ class UlanParentRelationshipTypeAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_name(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.name,
                     "size": "large",

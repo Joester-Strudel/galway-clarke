@@ -16,6 +16,7 @@ from .views import (
     select_states,
     select_counties,
     select_zip_codes,
+    select_individuals,
 )
 
 
@@ -45,4 +46,5 @@ urlpatterns = [
     path("select/states/", select_states, name="crm-select-states"),
     path("select/counties/", select_counties, name="crm-select-counties"),
     path("select/zip-codes/", select_zip_codes, name="crm-select-zip-codes"),
+    path("select/individuals/", select_individuals, name="crm-select-individuals"),
 ]

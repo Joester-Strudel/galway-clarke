@@ -73,7 +73,7 @@ class AatNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.subject,
                     "size": "medium",
@@ -85,7 +85,7 @@ class AatNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_note_language(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.note_language,
                     "size": "small",
@@ -101,7 +101,7 @@ class AatNoteAdmin(SimpleHistoryAdmin, ModelAdmin):
 
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": note_preview,
                     "size": "small",

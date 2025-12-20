@@ -92,7 +92,7 @@ class AatTermAdmin(SimpleHistoryAdmin, ModelAdmin):
         value = obj.display_name or obj.term_text
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": value,
                     "size": "medium",
@@ -104,7 +104,7 @@ class AatTermAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_subject(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.subject,
                     "size": "small",
@@ -144,7 +144,7 @@ class AatTermAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_term_type(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.term_type or "N/A",
                     "size": "small",
@@ -156,7 +156,7 @@ class AatTermAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_language_code(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {
                     "value": obj.language_code or "N/A",
                     "size": "small",

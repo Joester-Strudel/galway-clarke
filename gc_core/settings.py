@@ -182,6 +182,31 @@ UNFOLD = {
     "SIDEBAR": {
         "show_all_applications": True,
         "navigation": [
+          {
+                "title": "Geography",
+                "items": [
+                    {
+                        "title": "States",
+                        "icon": "map",
+                        "link": "/admin/gc_geography/state/",
+                    },
+                    {
+                        "title": "Counties",
+                        "icon": "map",
+                        "link": "/admin/gc_geography/county/",
+                    },
+                    {
+                        "title": "Cities",
+                        "icon": "location_city",
+                        "link": "/admin/gc_geography/city/",
+                    },
+                    {
+                        "title": "ZIP Codes",
+                        "icon": "local_post_office",
+                        "link": "/admin/gc_geography/zipcode/",
+                    },
+                ],
+            },
             {
                 "title": "Reference Data",
                 "items": [
@@ -204,31 +229,6 @@ UNFOLD = {
                         "title": "Languages",
                         "icon": "translate",
                         "link": "/admin/languages/",
-                    },
-                ],
-            },
-            {
-                "title": "API",
-                "items": [
-                    {
-                        "title": "API Keys",
-                        "icon": "key",
-                        "link": "/admin/gc_users/apikey/",
-                    },
-                    {
-                        "title": "API Routes",
-                        "icon": "route",
-                        "link": "/admin/gc_users/apiroute/",
-                    },
-                    {
-                        "title": "API Logs",
-                        "icon": "list_alt",
-                        "link": "/admin/gc_users/apilog/",
-                    },
-                    {
-                        "title": "API Docs",
-                        "icon": "api",
-                        "link": "/api/docs",
                     },
                 ],
             },

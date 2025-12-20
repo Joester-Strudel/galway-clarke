@@ -67,7 +67,7 @@ class UlanNoteSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_note(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.note, "size": "medium"},
             )
         )
@@ -76,7 +76,7 @@ class UlanNoteSourceAdmin(SimpleHistoryAdmin, ModelAdmin):
     def formatted_source_id(self, obj):
         return mark_safe(
             render_to_string(
-                "admin/text.html",
+                "cotton/admin/components/text.html",
                 {"value": obj.source_id, "size": "small"},
             )
         )
