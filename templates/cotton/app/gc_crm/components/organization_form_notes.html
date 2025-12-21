@@ -1,0 +1,12 @@
+{% comment %}
+Notes tab field for organization form.
+Expects:
+- organization
+{% endcomment %}
+<c-app.components.fields.rich_text_field
+  id="org_notes_{{ organization.id }}"
+  name="notes"
+  label="Notes"
+  value="{{ organization.notes|default_if_none:'' }}"
+  placeholder="Add internal notes with formatting"
+/>

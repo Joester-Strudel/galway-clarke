@@ -1,0 +1,19 @@
+{% comment %}
+Single changeform tab button.
+Props:
+- tab_id: the tab key (e.g., "general")
+- label: display text
+Relies on an Alpine variable named activeTab in the parent scope.
+{% endcomment %}
+<button
+  type="button"
+  class="pb-1 border-b-2 transition"
+  style="cursor: pointer;"
+  :class="activeTab === '{{ tab_id }}'
+    ? 'border-gc-theme-accent text-gc-theme-accent'
+    : 'border-transparent text-gc-light-text-secondary dark:text-gc-dark-text-primary/70'
+  "
+  @click="activeTab = '{{ tab_id }}'"
+>
+  {{ label }}
+</button>

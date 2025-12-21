@@ -1,0 +1,60 @@
+{% comment %}
+Reusable footer controls for changeforms with optional delete confirmation.
+Expects:
+- organization: model instance (for timestamp and is_new logic)
+- is_new: bool
+- deleteConfirm/deleteRecord/deleting bound in Alpine scope (for delete flow)
+- submit_button_form_id: form id to submit
+{% endcomment %}
+<div class="flex items-center justify-between">
+  <div class="flex flex-col gap-1 text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">
+    <div>
+      {% if organization.last_updated_at %}
+        Last updated {{ organization.last_updated_at|date:"M d, Y H:i" }}
+      {% else %}
+        Not saved yet
+      {% endif %}
+    </div>
+    {% if not is_new %}
+    <div class="flex items-center gap-2">
+      <template x-if="!deleteConfirm">
+        <button
+          type="button"
+          class="underline hover:text-gc-theme-accent transition"
+          @click="deleteConfirm = true"
+        >
+          Delete
+        </button>
+      </template>
+      <template x-if="deleteConfirm">
+        <div class="flex items-center gap-2">
+          <span>Are you sure?</span>
+          <button
+            type="button"
+            class="text-rose-500 hover:text-rose-400 font-semibold"
+            @click="deleteRecord()"
+            :disabled="deleting"
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            class="hover:text-gc-theme-accent"
+            @click="deleteConfirm = false"
+            :disabled="deleting"
+          >
+            No
+          </button>
+        </div>
+      </template>
+    </div>
+    {% endif %}
+  </div>
+  <c-app.components.buttons.primary_button
+    form="{{ submit_button_form_id }}"
+    type="submit"
+    icon="save"
+    label="Save"
+    extra_classes="px-3 py-2"
+  />
+</div>

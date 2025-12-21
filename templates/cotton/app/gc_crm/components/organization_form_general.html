@@ -1,0 +1,49 @@
+{% comment %}
+General tab fields for organization form.
+Expects:
+- organization
+- status_initial, industry_initial, tag_initial, primary_contact_initial
+{% endcomment %}
+<c-app.components.fields.text_field
+  id="org_name_{{ organization.id }}"
+  name="name"
+  label="Name"
+  value="{{ organization.name }}"
+  required="true"
+/>
+
+<c-app.components.fields.remote_pill_select
+  id="org_status_{{ organization.id }}"
+  name="status"
+  label="Status"
+  options_url="{% url 'crm-select-statuses' %}"
+  :initial="status_initial"
+  help_text='Want to change the options for this dropdown? <a href="/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
+/>
+
+<c-app.components.fields.remote_pill_select
+  id="org_industry_{{ organization.id }}"
+  name="industry"
+  label="Industry"
+  options_url="{% url 'crm-select-industries' %}"
+  :initial="industry_initial"
+  help_text='Want to change the options for this dropdown? <a href="/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
+/>
+
+<c-app.components.fields.remote_pill_select
+  id="org_tags_{{ organization.id }}"
+  name="tags"
+  label="Tags"
+  options_url="{% url 'crm-select-tags' %}"
+  multiple="true"
+  :initial="tag_initial"
+  help_text='Want to change the options for this dropdown? <a href="/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
+/>
+
+<c-app.components.fields.remote_pill_select
+  id="org_primary_contact_{{ organization.id }}"
+  name="primary_contact"
+  label="Primary Contact"
+  options_url="{% url 'crm-select-individuals' %}"
+  :initial="primary_contact_initial"
+/>
