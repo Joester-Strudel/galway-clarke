@@ -1,0 +1,67 @@
+{% comment %}
+General tab fields for individual form.
+Expects:
+- individual
+- organization_initial, tag_initial
+{% endcomment %}
+<c-app.components.fields.text_field
+  id="individual_first_name_{{ individual.id }}"
+  name="first_name"
+  label="First Name"
+  value="{{ individual.first_name|default:'' }}"
+/>
+
+<c-app.components.fields.text_field
+  id="individual_last_name_{{ individual.id }}"
+  name="last_name"
+  label="Last Name"
+  value="{{ individual.last_name|default:'' }}"
+/>
+
+<c-app.components.fields.text_field
+  id="individual_email_{{ individual.id }}"
+  name="email"
+  label="Email"
+  type="email"
+  value="{{ individual.email|default:'' }}"
+/>
+
+<c-app.components.fields.text_field
+  id="individual_phone_{{ individual.id }}"
+  name="phone"
+  label="Phone"
+  value="{{ individual.phone|default:'' }}"
+  placeholder="(555) 123-4567"
+/>
+
+<c-app.components.fields.remote_pill_select
+  id="individual_org_{{ individual.id }}"
+  name="organization"
+  label="Organization"
+  options_url="{% url 'crm-select-organizations' %}"
+  :initial="organization_initial"
+/>
+
+<c-app.components.fields.remote_pill_select
+  id="individual_tags_{{ individual.id }}"
+  name="tags"
+  label="Tags"
+  options_url="{% url 'crm-select-tags' %}"
+  multiple="true"
+  :initial="tag_initial"
+  help_text='Want to change the options for this dropdown? <a href="/settings/field-definitions/" class="text-gc-theme-accent underline" target="_blank" rel="noreferrer">Edit them here</a>.'
+/>
+
+<div class="flex items-center gap-3 rounded-lg border border-gc-theme-accent/40 bg-gc-light-bg-primary dark:bg-gc-dark-bg-primary px-4 py-3">
+  <input
+    type="checkbox"
+    id="individual_primary_{{ individual.id }}"
+    name="primary"
+    class="h-4 w-4 rounded border-gc-theme-accent text-gc-theme-accent focus:ring-gc-theme-accent"
+    {% if individual.primary %}checked{% endif %}
+  />
+  <div class="flex flex-col">
+    <label class="text-sm font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary" for="individual_primary_{{ individual.id }}">Primary Contact</label>
+    <span class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">Mark this individual as the main contact for their organization.</span>
+  </div>
+</div>

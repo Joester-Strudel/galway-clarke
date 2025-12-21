@@ -81,3 +81,8 @@ Use this as a recipe to build a CRUD workspace (list + drawer + tabs) for any ap
 8. Remote selects + rich text fields as needed.
 9. E2E tests for create/edit/delete/tab persistence/selects/auth; seed data fixtures.
 10. Tune timeouts/slowmo for visibility; keep helpers reusable.
+
+## Codex Notes – CRM Individuals Workspace Fixes
+- Prevent reversing edit URLs with empty IDs: when rendering the individuals drawer for “add”, do not include the OOB row swap or any `crm-individual-edit` URL; pass explicit `save_url`/`delete_url` into the drawer context and forward `edit_url` to the row partial.
+- Avoid showing “None” error banners: wrap `form_error` with `error|default_if_none:''` so the alert is hidden when no error is present (applied to both individuals and organizations drawers).
+- Remote selects: close the dropdown immediately after selecting an option (single or multi) so it doesn’t intercept subsequent clicks (e.g., checkboxes near the field); implemented in `remote_pill_select` toggle.

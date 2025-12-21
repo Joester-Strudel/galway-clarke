@@ -1,3 +1,4 @@
+{% url 'crm-organization-edit' org.id as default_edit_url %}
 <c-app.components.tables.table_row row_id="organization_row_{{ org.id }}" oob="{{ oob|default:'' }}">
   <c-app.components.tables.table_cell min_width="min-w-62">
     <div class="flex items-center gap-2">
@@ -5,7 +6,7 @@
         type="button"
         class="flex items-center justify-center h-7 w-7 text-gc-theme-accent cursor-pointer"
         @click="showOrgDrawer = true"
-        hx-get="{% url 'crm-organization-edit' org.id %}"
+        hx-get="{{ edit_url|default:default_edit_url }}"
         hx-target="#organization_drawer_content"
         hx-swap="outerHTML"
       >

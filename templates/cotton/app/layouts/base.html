@@ -38,6 +38,20 @@
       html,
       body {
         overscroll-behavior: none;
+        height: 100%;
+        min-height: 100%;
+        overflow: hidden;
+      }
+      #htmx_app {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      #htmx_main {
+        height: calc(100dvh - 50px);
+        max-height: calc(100dvh - 50px);
+        min-height: calc(100vh - 50px);
+        overflow: hidden;
       }
       .gc-box-shadow {
         box-shadow: rgba(100, 100, 111, 0.15) 0px 7px 29px 0px;

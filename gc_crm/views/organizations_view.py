@@ -304,6 +304,8 @@ def organization_drawer_view(request, org_id):
         "active_tab", request.GET.get("active_tab", "general")
     )
     refresh_table = False
+    save_url = reverse("crm-organization-edit", args=[organization.id])
+    delete_url = reverse("crm-organization-delete", args=[organization.id])
 
     error = None
     success = None
@@ -483,6 +485,9 @@ def organization_drawer_view(request, org_id):
         "is_new": False,
         "refresh_table": refresh_table,
         "list_refresh_url": _current_list_url(request),
+        "save_url": save_url,
+        "delete_url": delete_url,
+        "edit_url": save_url,
     }
     return render(
         request, "cotton/app/gc_crm/partials/organization_drawer.html", context
@@ -512,6 +517,9 @@ def organization_create_view(request):
     )
     refresh_table = False
     is_new = True
+    save_url = reverse("crm-organization-create")
+    delete_url = ""
+    edit_url = ""
 
     error = None
     success = None
@@ -566,6 +574,9 @@ def organization_create_view(request):
             success = "Organization created."
             refresh_table = True
             is_new = False
+            edit_url = reverse("crm-organization-edit", args=[organization.id])
+            save_url = edit_url
+            delete_url = reverse("crm-organization-delete", args=[organization.id])
 
     selected_tag_ids = set(organization.tags.values_list("id", flat=True))
     selected_tags = list(organization.tags.all())
@@ -688,21 +699,24 @@ def organization_create_view(request):
         "is_new": is_new,
         "refresh_table": refresh_table,
         "list_refresh_url": _current_list_url(request),
+        "save_url": save_url,
+        "delete_url": delete_url,
+        "edit_url": edit_url,
     }
     return render(
         request, "cotton/app/gc_crm/partials/organization_drawer.html", context
     )
 
 
-def _current_list_url(request):
+def _current_list_url(request, default_name="crm-organizations"):
     """Resolve current list URL (with querystring) for refreshing the table."""
     hx_current = request.headers.get("HX-Current-URL") or ""
     if hx_current:
         parts = urlsplit(hx_current)
-        path = parts.path or reverse("crm-organizations")
+        path = parts.path or reverse(default_name)
         query = f"?{parts.query}" if parts.query else ""
         return f"{path}{query}"
-    return reverse("crm-organizations")
+    return reverse(default_name)
 
 
 @login_required

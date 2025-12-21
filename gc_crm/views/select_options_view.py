@@ -6,7 +6,7 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 
 # First-Party Imports
-from gc_crm.models import Status, Tag, Industry, Individual
+from gc_crm.models import Status, Tag, Industry, Individual, Organization
 from gc_crm.views.organizations_view import _get_active_team
 from gc_geography.models import City, State, County, ZipCode
 
@@ -77,6 +77,34 @@ def select_industries(request):
             "color": industry.color or "gray",
         }
         for industry in page_obj
+    ]
+    return render(
+        request,
+        "cotton/app/components/fields/remote_pill_select_options.html",
+        {"options": options, "next_url": next_url},
+    )
+
+
+@login_required
+def select_organizations(request):
+    team = _get_active_team(request)
+    if not team:
+        return HttpResponseBadRequest("No active team")
+    qs = Organization.objects.filter(team=team)
+    search = request.GET.get("search", "").strip()
+    if search:
+        qs = qs.filter(name__icontains=search)
+    paginator = Paginator(qs.order_by("name"), 20)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    next_url = None
+    if page_obj.has_next():
+        params = request.GET.copy()
+        params["page"] = page_obj.next_page_number()
+        querystring = params.urlencode()
+        next_url = f"{request.path}?{querystring}"
+    options = [
+        {"value": str(org.id), "label": org.name, "color": "gray"} for org in page_obj
     ]
     return render(
         request,

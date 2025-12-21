@@ -12,7 +12,7 @@ from django.test import Client
 # First-Party Imports
 from gc_geography.models import City, County, State, ZipCode
 from gc_users.models import Team
-from gc_crm.models import Organization, Status
+from gc_crm.models import Organization, Status, Individual
 
 # Allow Django ORM usage in async-capable test runner contexts (Playwright).
 os.environ.setdefault("DJANGO_ALLOW_ASYNC_UNSAFE", "true")
@@ -33,11 +33,18 @@ def user_and_team(db):
     team.users.add(user)
     # Ensure a baseline organization exists for edit flows
     default_status = Status.objects.filter(team=team).first()
-    Organization.objects.create(
+    org = Organization.objects.create(
         team=team,
         name="Seed Organization",
         status=default_status,
         notes="Seeded for E2E tests.",
+    )
+    Individual.objects.create(
+        team=team,
+        first_name="Seed",
+        last_name="Contact",
+        email="seed@example.com",
+        organization=org,
     )
     return user, team
 

@@ -1,0 +1,84 @@
+{% url 'crm-individual-edit' individual.id as default_edit_url %}
+<c-app.components.tables.table_row row_id="individual_row_{{ individual.id }}" oob="{{ oob|default:'' }}">
+  <c-app.components.tables.table_cell min_width="min-w-64">
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        class="flex items-center justify-center h-7 w-7 text-gc-theme-accent cursor-pointer"
+        @click="showIndividualDrawer = true"
+        hx-get="{{ edit_url|default:default_edit_url }}"
+        hx-target="#individual_drawer_content"
+        hx-swap="outerHTML"
+      >
+        <span class="material-symbols-outlined leading-none" style="font-size: 16px;">open_in_new</span>
+      </button>
+      <div class="flex flex-col">
+        <span class="font-semibold text-gc-light-text-primary dark:text-gc-dark-text-primary">
+          {% if individual.first_name or individual.last_name %}
+            {{ individual.first_name }} {{ individual.last_name }}
+          {% elif individual.email %}
+            {{ individual.email }}
+          {% else %}
+            Unnamed
+          {% endif %}
+        </span>
+        {% if individual.primary %}
+          <span class="text-[11px] font-semibold text-gc-theme-accent">Primary contact</span>
+        {% endif %}
+      </div>
+    </div>
+  </c-app.components.tables.table_cell>
+  <c-app.components.tables.table_cell min_width="min-w-52">
+    {% if individual.email %}
+      {{ individual.email }}
+    {% else %}
+      —
+    {% endif %}
+  </c-app.components.tables.table_cell>
+  <c-app.components.tables.table_cell min_width="min-w-40">
+    {% if individual.phone %}
+      {{ individual.formatted_phone|default:individual.phone }}
+    {% else %}
+      —
+    {% endif %}
+  </c-app.components.tables.table_cell>
+  <c-app.components.tables.table_cell min_width="min-w-64">
+    {% if individual.organization %}
+      {{ individual.organization.name }}
+    {% else %}
+      —
+    {% endif %}
+  </c-app.components.tables.table_cell>
+  <c-app.components.tables.table_cell min_width="min-w-40">
+    {% if individual.location_city %}
+      {{ individual.location_city.name }}
+    {% else %}
+      —
+    {% endif %}
+  </c-app.components.tables.table_cell>
+  <c-app.components.tables.table_cell min_width="min-w-24">
+    {% if individual.location_state %}
+      {{ individual.location_state.abbreviation|default:individual.location_state.name }}
+    {% else %}
+      —
+    {% endif %}
+  </c-app.components.tables.table_cell>
+  <c-app.components.tables.table_cell min_width="min-w-32">
+    {% if individual.primary %}
+      <c-app.components.pills.pill label="Primary" color="emerald" />
+    {% else %}
+      —
+    {% endif %}
+  </c-app.components.tables.table_cell>
+  <c-app.components.tables.table_cell min_width="min-w-84">
+    {% if individual.tags.all %}
+    <span class="inline-flex flex-wrap gap-1">
+      {% for tag in individual.tags.all %}
+        <c-app.components.pills.pill label="{{ tag.name }}" color="{{ tag.color|default:'gray' }}" />
+      {% endfor %}
+    </span>
+    {% else %}
+    <span class="text-xs text-gc-light-text-secondary dark:text-gc-dark-text-primary/70">—</span>
+    {% endif %}
+  </c-app.components.tables.table_cell>
+</c-app.components.tables.table_row>

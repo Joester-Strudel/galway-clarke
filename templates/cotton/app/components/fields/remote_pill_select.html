@@ -128,8 +128,9 @@ Props:
           }
         } else {
           this.selected = [{ value, label, color }];
-          this.open = false;
         }
+        // Close after selection to avoid blocking clicks on nearby controls.
+        this.open = false;
       },
       remove(value) {
         this.selected = this.selected.filter((i) => i.value !== value);

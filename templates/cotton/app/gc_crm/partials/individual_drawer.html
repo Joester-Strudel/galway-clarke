@@ -1,15 +1,15 @@
 <div
-  id="organization_drawer_content"
+  id="individual_drawer_content"
   class="flex h-full flex-col"
-  x-data="orgDrawer({
+  x-data="individualDrawer({
     activeTab: '{{ active_tab|default:'general'|escapejs }}',
     deleteUrl: '{{ delete_url|default:'' }}',
     listRefreshUrl: '{{ list_refresh_url|default_if_none:'' }}',
   })"
 >
   <c-app.components.drawers.drawer_header
-    title="{{ organization.name|default:'New Organization' }}"
-    close_event="close-org-drawer"
+    title="{% if individual.first_name or individual.last_name %}{{ individual.first_name }} {{ individual.last_name }}{% elif individual.email %}{{ individual.email }}{% else %}New Individual{% endif %}"
+    close_event="close-individual-drawer"
   >
     <div class="mt-3 flex items-center gap-4 text-sm font-semibold">
       <c-app.components.tabs.changeform_tab tab_id="general" label="General" />
@@ -22,31 +22,31 @@
 
   <div class="flex-1 min-h-0 overflow-y-auto divide-y divide-gc-light-bg-secondary dark:divide-gc-dark-bg-secondary">
     <form
-      id="org_form_{{ organization.id }}"
+      id="individual_form_{{ individual.id }}"
       class="space-y-4 px-4 py-4"
       hx-post="{{ save_url }}"
-      hx-target="#organization_drawer_content"
+      hx-target="#individual_drawer_content"
       hx-swap="outerHTML"
     >
       {% csrf_token %}
       <input type="hidden" name="active_tab" x-model="activeTab" />
       <div x-show="activeTab === 'general'" x-cloak class="space-y-4">
-        <c-app.gc_crm.components.organization_form_general />
+        <c-app.gc_crm.components.individual_form_general />
       </div>
 
       <div x-show="activeTab === 'address'" x-cloak class="space-y-4">
-        <c-app.gc_crm.components.organization_form_address />
+        <c-app.gc_crm.components.individual_form_address />
       </div>
 
       <div x-show="activeTab === 'notes'" x-cloak>
-        <c-app.gc_crm.components.organization_form_notes />
+        <c-app.gc_crm.components.individual_form_notes />
       </div>
     </form>
   </div>
   <c-app.components.drawers.drawer_footer>
     <c-app.components.changeforms.changeform_footer_controls
-      submit_button_form_id="org_form_{{ organization.id }}"
-      :organization="organization"
+      submit_button_form_id="individual_form_{{ individual.id }}"
+      :organization="individual"
       :is_new="is_new"
     />
   </c-app.components.drawers.drawer_footer>
@@ -56,7 +56,7 @@
 <div class="hidden" aria-hidden="true">
   <table>
     <tbody>
-      <c-app.gc_crm.partials.organization_row org="{{ organization }}" edit_url="{{ edit_url }}" oob="outerHTML" />
+      <c-app.gc_crm.partials.individual_row individual="{{ individual }}" edit_url="{{ save_url }}" oob="outerHTML" />
     </tbody>
   </table>
 </div>
@@ -81,13 +81,13 @@
 {% endif %}
 
 <script>
-  function orgDrawer({ activeTab = "general", deleteUrl = "", listRefreshUrl = "" }) {
+  function individualDrawer({ activeTab = "general", deleteUrl = "", listRefreshUrl = "" }) {
     return {
       activeTab,
       deleteConfirm: false,
       deleting: false,
       deleteRecord() {
-        if (this.deleting) return;
+        if (this.deleting || !deleteUrl) return;
         this.deleting = true;
         fetch(deleteUrl, {
           method: "POST",
@@ -95,7 +95,7 @@
         })
           .then((response) => {
             if (response.ok) {
-              window.dispatchEvent(new CustomEvent("close-org-drawer"));
+              window.dispatchEvent(new CustomEvent("close-individual-drawer"));
               htmx.ajax("GET", listRefreshUrl, {
                 target: "#crm_table_content",
                 swap: "innerHTML",

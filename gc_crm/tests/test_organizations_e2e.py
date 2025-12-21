@@ -9,6 +9,9 @@ import pytest
 # Third-Party Imports
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
+# First-Party Imports
+from gc_crm.models import Organization, Status, Tag
+
 ORGS_PATH = "/crm/organizations/"
 
 
@@ -331,3 +334,78 @@ def test_edit_created_record(auth_page, live_server, geo_seed, browser_name):
     )
     page.wait_for_selector(f"text={edited_name}", timeout=5000)
     _close_drawer(page)
+
+
+@pytest.mark.django_db
+def test_search_and_filter(auth_page, live_server, user_and_team, browser_name):
+    """
+    Verify search narrows results and filters can combine status + tag constraints.
+    """
+    _log(browser_name, "Running test_search_and_filter")
+    page = auth_page
+    _, team = user_and_team
+
+    active_status = Status.objects.filter(team=team, name="Active").first()
+    prospect_status = Status.objects.filter(team=team, name="Prospect").first()
+    volunteer_tag = Tag.objects.filter(team=team, name="Volunteer").first()
+    donor_tag = Tag.objects.filter(team=team, name="Major Donor").first()
+    assert active_status and prospect_status and volunteer_tag and donor_tag
+
+    # Seed a few organizations with different attributes to exercise search + filters.
+    search_target = Organization.objects.create(
+        team=team,
+        name="Searchable Alpha Org",
+        status=active_status,
+    )
+    search_target.tags.add(volunteer_tag)
+    filter_target = Organization.objects.create(
+        team=team,
+        name="Filtered Prospect Org",
+        status=prospect_status,
+    )
+    filter_target.tags.add(volunteer_tag)
+    background_org = Organization.objects.create(
+        team=team,
+        name="Background Org",
+        status=active_status,
+    )
+    background_org.tags.add(donor_tag)
+
+    page.goto(f"{live_server.url}{ORGS_PATH}")
+
+    # Search by name should only show the matching record.
+    search_input = page.locator("[data-table-search-input]").first
+    search_input.fill("Searchable Alpha")
+    with page.expect_response(
+        lambda r: "/crm/organizations/" in r.url and "search=Searchable" in r.url,
+        timeout=5000,
+    ):
+        search_input.press("Enter")
+    page.wait_for_selector("text=Searchable Alpha Org", timeout=5000)
+    assert page.locator("tbody tr", has_text="Searchable Alpha Org").count() >= 1
+    assert page.locator("tbody tr", has_text="Filtered Prospect Org").count() == 0
+    assert page.locator("tbody tr", has_text="Background Org").count() == 0
+
+    # Clear search, then apply filters for status + tag to isolate a different record.
+    page.get_by_role("button", name="Filters").click()
+    with page.expect_response(
+        lambda r: "/crm/organizations/" in r.url and r.request.method == "GET",
+        timeout=5000,
+    ):
+        page.get_by_role("button", name="Clear").click()
+    search_input.fill("")
+
+    page.fill('input[name="filter_status"]', "Prospect")
+    page.fill('input[name="filter_tag"]', "Volunteer")
+    with page.expect_response(
+        lambda r: "/crm/organizations/" in r.url
+        and "filter_status=Prospect" in r.url
+        and "filter_tag=Volunteer" in r.url,
+        timeout=5000,
+    ):
+        page.get_by_role("button", name="Apply Filters").click()
+
+    page.wait_for_selector("text=Filtered Prospect Org", timeout=5000)
+    assert page.locator("tbody tr", has_text="Filtered Prospect Org").count() >= 1
+    assert page.locator("tbody tr", has_text="Background Org").count() == 0
+    assert page.locator("tbody tr", has_text="Searchable Alpha Org").count() == 0

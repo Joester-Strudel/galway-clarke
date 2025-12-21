@@ -1,0 +1,12 @@
+{% comment %}
+Notes tab field for individual form.
+Expects:
+- individual
+{% endcomment %}
+<c-app.components.fields.rich_text_field
+  id="individual_notes_{{ individual.id }}"
+  name="notes"
+  label="Notes"
+  value="{{ individual.notes|default_if_none:'' }}"
+  placeholder="Add internal notes with formatting"
+/>
