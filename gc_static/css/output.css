@@ -1040,6 +1040,9 @@
       background-color: color-mix(in oklab, var(--color-amber-500) 15%, transparent);
     }
   }
+  .bg-black {
+    background-color: var(--color-black);
+  }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -2185,6 +2188,11 @@
           }
         }
       }
+    }
+  }
+  .\[data-label\=\'\{option_text\}\'\]\:visible {
+    &:is(data-label='{option text}') {
+      visibility: visible;
     }
   }
 }
