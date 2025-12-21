@@ -61,6 +61,7 @@ Use this as a recipe to build a CRUD workspace (list + drawer + tabs) for any ap
   - Drawer open/close helpers, row open by name, formatted notes filler.
 - Flows to cover:
   - List renders; drawer opens from row and add button.
+  - Search narrows rows and combined filters (e.g., status/tag/org) isolate expected records.
   - Create: fill required fields, selects, notes; save; row appears.
   - Edit: change fields; save; row updates.
   - Tab persistence: save while on a non-default tab.

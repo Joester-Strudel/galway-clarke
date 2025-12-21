@@ -9,6 +9,9 @@ import pytest
 # Third-Party Imports
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
+# First-Party Imports
+from gc_crm.models import Individual, Organization, Tag
+
 INDIVIDUALS_PATH = "/crm/individuals/"
 
 
@@ -305,3 +308,89 @@ def test_edit_created_record(auth_page, live_server, geo_seed, browser_name):
     )
     page.wait_for_selector(f"text={edited_first} {edited_last}", timeout=5000)
     _close_drawer(page)
+
+
+@pytest.mark.django_db
+def test_search_and_filter(auth_page, live_server, user_and_team, browser_name):
+    """
+    Verify search narrows results and filters can combine org + tag + primary constraints.
+    """
+    _log(browser_name, "Running test_search_and_filter")
+    page = auth_page
+    _, team = user_and_team
+
+    volunteer_tag = Tag.objects.filter(team=team, name="Volunteer").first()
+    donor_tag = Tag.objects.filter(team=team, name="Major Donor").first()
+    assert volunteer_tag and donor_tag
+
+    search_org = Organization.objects.create(team=team, name="Search Org")
+    filter_org = Organization.objects.create(team=team, name="Filter Org")
+    background_org = Organization.objects.create(team=team, name="Background Org")
+
+    Individual.objects.create(
+        team=team,
+        first_name="Searchable",
+        last_name="Person",
+        email="searchable@example.com",
+        organization=search_org,
+        primary=False,
+    )
+    filter_target = Individual.objects.create(
+        team=team,
+        first_name="Filtered",
+        last_name="Person",
+        email="filtered@example.com",
+        organization=filter_org,
+        primary=True,
+    )
+    filter_target.tags.add(volunteer_tag)
+    background = Individual.objects.create(
+        team=team,
+        first_name="Background",
+        last_name="Person",
+        email="background@example.com",
+        organization=background_org,
+        primary=False,
+    )
+    background.tags.add(donor_tag)
+
+    page.goto(f"{live_server.url}{INDIVIDUALS_PATH}")
+
+    # Search by name should only show the matching record.
+    search_input = page.locator("[data-table-search-input]").first
+    search_input.fill("Searchable")
+    with page.expect_response(
+        lambda r: "/crm/individuals/" in r.url and "search=Searchable" in r.url,
+        timeout=5000,
+    ):
+        search_input.press("Enter")
+    page.wait_for_selector("text=Searchable Person", timeout=5000)
+    assert page.locator("tbody tr", has_text="Searchable Person").count() >= 1
+    assert page.locator("tbody tr", has_text="Filtered Person").count() == 0
+    assert page.locator("tbody tr", has_text="Background Person").count() == 0
+
+    # Clear search, then apply filters for organization + tag + primary to isolate a different record.
+    page.get_by_role("button", name="Filters").click()
+    with page.expect_response(
+        lambda r: "/crm/individuals/" in r.url and r.request.method == "GET",
+        timeout=5000,
+    ):
+        page.get_by_role("button", name="Clear").click()
+    search_input.fill("")
+
+    page.fill('input[name="filter_org"]', "Filter Org")
+    page.fill('input[name="filter_tag"]', "Volunteer")
+    page.fill('input[name="filter_primary"]', "Yes")
+    with page.expect_response(
+        lambda r: "/crm/individuals/" in r.url
+        and "filter_org=Filter" in r.url
+        and "filter_tag=Volunteer" in r.url
+        and "filter_primary=Yes" in r.url,
+        timeout=5000,
+    ):
+        page.get_by_role("button", name="Apply Filters").click()
+
+    page.wait_for_selector("text=Filtered Person", timeout=5000)
+    assert page.locator("tbody tr", has_text="Filtered Person").count() >= 1
+    assert page.locator("tbody tr", has_text="Searchable Person").count() == 0
+    assert page.locator("tbody tr", has_text="Background Person").count() == 0
